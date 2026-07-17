@@ -77,6 +77,28 @@
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
 }
 
+.manual-page #title,
+.manual-cover-copy h1,
+.manual-cover-copy > p:last-child,
+.manual-page .top-title,
+.manual-page .section-title,
+.manual-page .subsection,
+.manual-page .cards p,
+.manual-page .PLL-card,
+.manual-page .OLL-card,
+.manual-3x3 .beginner-progress a,
+.bigcube-progress a,
+.term-card h3,
+.notation-card h3,
+.checkpoint-card h3,
+.trouble-card h3 {
+    line-break: strict;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    word-break: keep-all;
+    word-break: auto-phrase;
+}
+
 .manual-page .container {
     width: min(1180px, calc(100% - 36px));
     margin: 32px auto 72px;

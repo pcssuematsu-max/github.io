@@ -150,6 +150,19 @@ footer{
     color : #FFF;
     font-size : 2.0rem;
 }
+#title,
+.top-title,
+.section-title,
+.subsection,
+.card-title,
+.home-hero h1,
+.home-section-heading h2 {
+    line-break : strict;
+    overflow-wrap : anywhere;
+    text-wrap : balance;
+    word-break : keep-all;
+    word-break : auto-phrase;
+}
 .remark{
     border-bottom : dotted #77F;
     font-weight : bold;
