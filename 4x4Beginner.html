@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>4x4ルービックキューブの揃え方 | 初心者向けリダクション法</title>
+        <meta name="description" content="4x4ルービックキューブの初心者向け手順。センター、エッジペアリング、3x3化、パリティまでリダクション法で解説します。">
+        <link rel="stylesheet" href="style.css?v=20260717">
+        <link rel="stylesheet" href="manual.css?v=20260717-2">
+        <link rel="stylesheet" href="4x4Beginner.css">
+    </head>
+    <body class="manual-page manual-4x4">
+        <header>
+            <a href="index.html" class="back-to-the-home">
+                <img src="Logo.png" alt="ホームへ" class="logo">
+            </a>
+            <h1 id="title">4x4キューブを揃えよう</h1>
+        </header>
+
+        <div class="container">
+            <nav class="left-menu" aria-label="章メニュー">
+                <ul class="sticky">
+                    <li><a href="#structure">4x4の構造</a></li>
+                    <li><a href="#notation">追加の回転記号</a></li>
+                    <li><a href="#centers">センター</a></li>
+                    <li><a href="#edges">エッジペアリング</a></li>
+                    <li><a href="#three-by-three">3x3フェーズ</a></li>
+                    <li><a href="#parity">パリティ</a></li>
+                    <li><a href="#troubleshooting">困ったとき</a></li>
+                </ul>
+            </nav>
+
+            <main class="main-contents">
+                <section class="manual-cover" aria-label="4x4 Beginnerの章扉">
+                    <div class="manual-cover-number">4x4</div>
+                    <div class="manual-cover-copy">
+                        <p class="manual-kicker">BIG CUBE MANUAL</p>
+                        <h1><span>BEGINNER</span>4x4 CUBE</h1>
+                        <p>センターとエッジを揃え、3x3の形にして完成させる</p>
+                    </div>
+                    <img src="4x4Beginner.svg" alt="4x4キューブ" class="manual-cover-art">
+                </section>
+
+                <nav class="bigcube-progress" aria-label="4x4完成までの流れ">
+                    <a href="#centers"><span>STEP 01</span>センター</a>
+                    <a href="#edges"><span>STEP 02</span>エッジ</a>
+                    <a href="#three-by-three"><span>STEP 03</span>3x3化</a>
+                    <a href="#parity"><span>STEP 04</span>パリティ</a>
+                </nav>
+
+                <h1 class="top-title">4x4キューブにチャレンジしよう</h1>
+                <p class="paragraph">3x3キューブが揃えられるようになったら、次は4x4キューブに挑戦してみましょう。このマニュアルでは、センターとエッジをまとめて<span class="remark">3x3と同じように扱える状態</span>を作る「リダクション法」を使います。</p>
+
+                <div class="callout">
+                    <strong>はじめる前に</strong>
+                    <p>3x3の全手順と、R・U・Fなど外層の回転記号を理解していることを前提とします。不安な場合は<a href="3x3.html" class="link">3x3初心者向け手順</a>と<a href="Symbols.html" class="link">回転記号</a>を先に確認してください。</p>
+                </div>
+
+                <ol class="roadmap" aria-label="4x4の基本手順">
+                    <li><strong>センター</strong>4個のセンターパーツを1面にまとめます。</li>
+                    <li><strong>エッジ</strong>同じ2色のウイングを2個ずつペアにします。</li>
+                    <li><strong>3x3フェーズ</strong>センターとエッジを1つのパーツとして扱います。</li>
+                </ol>
+
+                <h2 class="section-title" id="structure">4x4の構造</h2>
+                <p class="paragraph">4x4も3x3と同じように、コーナー・エッジ・センターの3種類のパーツでできています。違いは、各1面のセンターが4個、各エッジが2個に分かれていることです。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="anatomy" data-label="4x4のコーナー、ウイング、センター">
+                    <figcaption>正面の図。黄緑がコーナー、ピンクがウイング、青がセンターパーツです。</figcaption>
+                    <div class="diagram-legend" aria-hidden="true">
+                        <span><i class="legend-reference"></i>コーナー</span>
+                        <span><i class="legend-target"></i>ウイング</span>
+                        <span><i style="background:#3791c5"></i>センター</span>
+                    </div>
+                </figure>
+
+                <div class="term-grid">
+                    <section class="term-card">
+                        <h3>センターパーツ</h3>
+                        <p>1面に4個あります。中央に固定パーツがないため、自分で正しい配色を作ります。</p>
+                    </section>
+                    <section class="term-card">
+                        <h3>ウイング</h3>
+                        <p>分割されたエッジパーツ1個の呼び名です。同じ2色のウイング2個を「エッジペア」にします。</p>
+                    </section>
+                    <section class="term-card">
+                        <h3>センターバー</h3>
+                        <p>同色のセンターパーツ2個を辺でつなげた列です。2本のバーを合体させると1面が完成します。</p>
+                    </section>
+                    <section class="term-card">
+                        <h3>リダクション</h3>
+                        <p>センター4個と1組のエッジペアを、それぞれ3x3の1パーツのようにまとめる考え方です。</p>
+                    </section>
+                </div>
+
+                <h3 class="subsection">センターの配色</h3>
+                <p class="paragraph">4x4にはど真ん中の固定センターがないため、色の位置を自分で決める必要があります。標準配色の反対色は次の3組です。</p>
+                <div class="checkpoint-grid">
+                    <section class="checkpoint-card"><h3>白 ↔ 黄</h3><p>白の反対面は黄です。</p></section>
+                    <section class="checkpoint-card"><h3>赤 ↔ オレンジ</h3><p>赤の反対面はオレンジです。</p></section>
+                    <section class="checkpoint-card"><h3>青 ↔ 緑</h3><p>青の反対面は緑です。</p></section>
+                    <section class="checkpoint-card"><h3>横並びも確認</h3><p>例えば赤を上、黄を手前にすると、緑が左、青が右になります。</p></section>
+                </div>
+
+                <h2 class="section-title" id="notation">追加の回転記号</h2>
+                <p class="paragraph">外側の1層だけを回す記号は3x3と同じです。4x4では、2層をまとめて回すワイドターンと、内側の1層だけを回す記号を追加します。</p>
+
+                <div class="notation-grid">
+                    <section class="notation-card">
+                        <div class="layer-icon layer-icon-r" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <code>R</code>
+                        <p>右の外層1層だけを回します。</p>
+                    </section>
+                    <section class="notation-card">
+                        <div class="layer-icon layer-icon-rw" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <code>Rw</code>
+                        <p>右の外側から2層を同時に回します。<code style="display:inline;font-size:inherit">2Rw</code>と同じ動きですが、本書では<code style="display:inline;font-size:inherit">Rw</code>に統一します。</p>
+                    </section>
+                    <section class="notation-card">
+                        <div class="layer-icon layer-icon-inner" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <code>r</code>
+                        <p>本書では、右の内側1層だけを回す記号として使います。</p>
+                    </section>
+                    <section class="notation-card">
+                        <div class="layer-icon layer-icon-u" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <code>u</code>
+                        <p>本書では、上の内側1層だけを回す記号として使います。エッジペアリングで使います。</p>
+                    </section>
+                    <section class="notation-card">
+                        <div class="layer-icon layer-icon-all" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                        <code>x</code>
+                        <p>キューブ全体をRと同じ方向に持ち替えます。パリティ手順で使います。</p>
+                    </section>
+                </div>
+
+                <div class="callout callout-warning">
+                    <strong>2の位置に注意</strong>
+                    <p><code>U2</code>はU面を180度回す記号です。一方、<code>2Rw</code>の先頭の2は「2層」を表します。本書では混乱を避けるため、2層同時回転を<code>Rw</code>と書きます。</p>
+                </div>
+
+                <h2 class="section-title phase-heading" id="centers" data-phase="STEP 01">センターを揃える</h2>
+                <p class="paragraph">まずは各1面にある4個のセンターパーツをまとめます。いきなり2x2を作るのではなく、同色2個の<span class="remark">センターバー</span>を2本作り、最後に合体させます。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="center-bar" data-label="2本のセンターバー">
+                    <figcaption>ピンクのバーと黄緑のバーを、内層を使って合体させます。</figcaption>
+                    <div class="diagram-legend" aria-hidden="true">
+                        <span><i class="legend-target"></i>1本目のバー</span>
+                        <span><i class="legend-reference"></i>2本目のバー</span>
+                    </div>
+                </figure>
+
+                <h3 class="subsection">1色目のセンター</h3>
+                <ol class="step-list">
+                    <li>揃える色のセンターパーツを2個見つけます。</li>
+                    <li>内層とU面を使い、2個を辺でつなげて1本のバーを作ります。</li>
+                    <li>同じ色の残り2個で、2本目のバーを作ります。</li>
+                    <li>2本のバーを別の列に置き、内層を回して同じ面に合体させます。</li>
+                </ol>
+
+                <h3 class="subsection"><code>U</code>と<code>U'</code>の使い分け</h3>
+                <p class="paragraph"><code>Rw</code>で目的のセンターをU面へ持ち上げたら、そのパーツを<span class="remark">Rwで戻る列から逃がす方向</span>にU面を回します。下の図は<code>Rw</code>を回した直後の状態を、U面とR面だけで表示しています。逃がす方向によって2ケースを使い分けます。</p>
+
+                <div class="move-case-grid">
+                    <figure class="cube-figure" data-cube-diagram data-state="center-insert-u" data-label="U方向にセンターを逃がすケース">
+                        <figcaption>
+                            <strong>U方向へ逃がすとき</strong><br>
+                            <code class="move-case-algorithm">Rw U Rw'</code><br>
+                            ピンクを持ち上げ、U方向へ逃がしてから列を戻します。
+                        </figcaption>
+                    </figure>
+                    <figure class="cube-figure" data-cube-diagram data-state="center-insert-u-prime" data-label="Uプライム方向にセンターを逃がすケース">
+                        <figcaption>
+                            <strong>U'方向へ逃がすとき</strong><br>
+                            <code class="move-case-algorithm">Rw U' Rw'</code><br>
+                            ピンクを持ち上げ、U'方向へ逃がしてから列を戻します。
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="callout">
+                    <strong>「入れる → U面で逃がす → 戻す」</strong>
+                    <p><code>Rw'</code>を行う前に、入れたセンターがRwの列から外れていることを確認します。列に残ったまま戻すと、パーツも元の位置へ戻ってしまいます。</p>
+                </div>
+
+                <h3 class="subsection">2色目以降の順番</h3>
+                <ol class="step-list">
+                    <li>1色目と反対の色を、反対面に揃えます。</li>
+                    <li>完成した2面を左右に持ち、残り4面を作業面にします。</li>
+                    <li>隣り合う2色を揃え、それぞれの反対色を正しい面に置きます。</li>
+                    <li>最後の2色は、片方を正しく揃えればもう片方も自動的に揃います。</li>
+                </ol>
+
+                <figure class="cube-figure" data-cube-diagram data-state="centers-solved" data-label="揃った4x4のセンター">
+                    <figcaption>チェックポイント：6面のセンターが2x2の同色ブロックになり、反対色と横並びも正しい状態です。</figcaption>
+                </figure>
+
+                <div class="callout callout-warning">
+                    <strong>センターは「色が揃った」だけでは不十分</strong>
+                    <p>反対色と横並びが間違っていると、後の3x3フェーズで完成しません。エッジペアリングに進む前に確認しましょう。</p>
+                </div>
+
+                <h2 class="section-title phase-heading" id="edges" data-phase="STEP 02">エッジをペアにする</h2>
+                <p class="paragraph">4x4には24個のウイングがあります。同じ2色を持つウイングを2個ずつ組み合わせ、12組のエッジペアを作ります。まずは効率より、<span class="remark">1組ずつ確実に作る</span>ことを優先します。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="wing-pair" data-label="同じ2色のウイングで作ったエッジペア">
+                    <figcaption>ピンクの2個がまとまると、3x3のエッジ1個と同じように扱えます。</figcaption>
+                    <div class="diagram-legend" aria-hidden="true">
+                        <span><i class="legend-target"></i>完成したエッジペア</span>
+                    </div>
+                </figure>
+
+                <h3 class="subsection">1組ずつペアにする</h3>
+                <ol class="step-list">
+                    <li>同じ2色を持つウイングを2個見つけます。</li>
+                    <li>2個を手前左と手前右のエッジ位置へ、<code>u'</code>を回したときにペアになる高さと向きで置きます。</li>
+                    <li>上段手前（UF）のエッジが<span class="remark">まだ揃っていないエッジ</span>であることを確認します。すでにペアなら、外層回転だけで未完成エッジと入れ替えます。</li>
+                    <li><code>u' R U R' u</code>を最後まで回します。</li>
+                </ol>
+
+                <figure class="cube-figure" data-cube-diagram data-state="edge-escape-setup" data-label="エッジペアリング前の作業位置">
+                    <figcaption>
+                        ピンクは今から作るペア、黄緑はUFに置く未完成エッジです。
+                    </figcaption>
+                    <div class="diagram-legend" aria-hidden="true">
+                        <span><i class="legend-target"></i>作るペア</span>
+                        <span><i class="legend-reference"></i>差し込む未完成エッジ</span>
+                    </div>
+                </figure>
+
+                <div class="algorithm-card">
+                    <div class="algorithm-card-header"><span>1組ずつペアにする</span><span>PAIR AND RESTORE</span></div>
+                    <div class="algorithm-card-body">
+                        <code>u' R U R' u</code>
+                        <div class="algorithm-breakdown">
+                            <span><code>u'</code>ウイングを合わせてペアを作る</span>
+                            <span><code>R U R'</code>完成ペアを退避し、UFの未完成エッジを差し込む</span>
+                            <span><code>u</code>内層を戻してセンターを復元する</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout callout-warning">
+                    <strong>UFに完成済みエッジを置かない</strong>
+                    <p><code>R U R'</code>でUFのエッジが作業スロットへ差し込まれます。ここが完成済みペアだと、最後の<code>u</code>でそのペアが崩れます。必ず未完成エッジを置いてください。</p>
+                </div>
+
+                <h3 class="subsection">ウイングの向きが合わないとき</h3>
+                <p class="paragraph">同じ2色のウイングを作業位置に置いてもペアにならない場合は、右手前のウイングを次の手順で反転させてから、もう一度並べます。</p>
+                <div class="algorithm-card">
+                    <div class="algorithm-card-header"><span>ウイングの反転</span><span>EDGE FLIP</span></div>
+                    <div class="algorithm-card-body">
+                        <code>R U R' F R' F' R</code>
+                    </div>
+                </div>
+
+                <h3 class="subsection">最後の2ペア</h3>
+                <p class="paragraph">残り2組になると、通常の「作る → 逃がす → 戻す」では退避場所が足りません。残ったウイングを手前左と手前右に置き、次の手順を使います。</p>
+                <div class="algorithm-card">
+                    <div class="algorithm-card-header"><span>最後の2エッジ</span><span>LAST TWO EDGES</span></div>
+                    <div class="algorithm-card-body">
+                        <code>Uw' (R U R' F R' F' R) Uw</code>
+                        <p>最初と最後の<code>Uw</code>はセンターを崩して戻す動き、括弧内はウイングを反転させる動きです。</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-warning">
+                    <strong>「1組だけ揃っていない」はパリティではありません</strong>
+                    <p>3x3フェーズへ進む前に、24個のウイングが12組のペアになっていることを確認してください。</p>
+                </div>
+
+                <h2 class="section-title phase-heading" id="three-by-three" data-phase="STEP 03">3x3として揃える</h2>
+                <p class="paragraph">センターと6面と12組のエッジペアが完成したら、4x4を仮想的な3x3として揃えます。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="reduced" data-label="3x3として扱える状態の4x4">
+                    <figcaption>センター4個を1センター、ウイング2個を1エッジとして見ます。コーナーは3x3と同じです。</figcaption>
+                </figure>
+
+                <div class="term-grid">
+                    <section class="term-card"><h3>センター</h3><p>2x2の同色ブロック全体を1個のセンターとみなします。</p></section>
+                    <section class="term-card"><h3>エッジ</h3><p>2個のウイングで作ったペア全体を1個のエッジとみなします。</p></section>
+                </div>
+
+                <div class="callout callout-warning">
+                    <strong>3x3フェーズでは外層だけを回す</strong>
+                    <p><code>Rw</code>・<code>Uw</code>などのワイドターンや、<code>r</code>・<code>u</code>などの内層回転を使うと、揃えたセンターやエッジペアが崩れます。R・L・U・D・F・Bの外層回転だけで、クロスから最後まで揃えましょう。</p>
+                </div>
+
+                <h2 class="section-title phase-heading" id="parity" data-phase="STEP 04">パリティを直す</h2>
+                <p class="paragraph">4x4の最後の層では、3x3には存在しない状態が現れることがあります。これを<span class="remark">パリティ</span>と呼びます。パリティはミスではなく、4x4で正常に起こる状態です。</p>
+
+                <div class="callout callout-parity">
+                    <strong>先に確認すること</strong>
+                    <p>センターが正しい配色で、12組全てのエッジがペアになっている場合に限りパリティと判断します。</p>
+                </div>
+
+                <h3 class="subsection">OLLパリティ</h3>
+                <p class="paragraph">最後の層のエッジペアが1組だけ裏返ったように見え、上向きのエッジ数が奇数になる状態です。対象のエッジペアを手前のU面に置いて手順を行います。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="oll-parity" data-label="OLLパリティのエッジ">
+                    <figcaption>ピンクのエッジペアを手前側に置いて手順を開始します。</figcaption>
+                </figure>
+
+                <div class="algorithm-card">
+                    <div class="algorithm-card-header"><span>OLLパリティ</span><span>ORIENTATION PARITY</span></div>
+                    <div class="algorithm-card-body algorithm-lines">
+                        <code>Rw U2 x</code>
+                        <code>Rw U2 Rw U2 Rw' U2</code>
+                        <code>Lw U2 Rw' U2 Rw U2</code>
+                        <code>Rw' U2 Rw'</code>
+                        <p>手順の途中でセンターと下2段が大きく崩れますが、最後まで回せば復元します。</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection">PLLパリティ</h3>
+                <p class="paragraph">最後にエッジペア2組だけが入れ替わり、3x3のPLLでは解決できない状態です。入れ替える2組を手前と奥に置きます。</p>
+
+                <figure class="cube-figure" data-cube-diagram data-state="pll-parity" data-label="PLLパリティのエッジ交換">
+                    <figcaption>交換対象のエッジペア2組を手前と奥に置きます。</figcaption>
+                </figure>
+
+                <div class="algorithm-card">
+                    <div class="algorithm-card-header"><span>PLLパリティ</span><span>EDGE SWAP</span></div>
+                    <div class="algorithm-card-body">
+                        <code>r2 U2 r2 Uw2 r2 Uw2 (U2)</code>
+                        <p><code>r</code>は右の内側1層だけの回転です。最後の<code>(U2)</code>は、上段の位置合わせが必要な場合に行います。</p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" id="troubleshooting">困ったとき</h2>
+                <div class="trouble-grid">
+                    <section class="trouble-card">
+                        <h3>センターの色が合わない</h3>
+                        <p>反対色だけでなく、横並びを確認します。間違っている場合はエッジより前に直します。</p>
+                    </section>
+                    <section class="trouble-card">
+                        <h3>エッジが1組だけ揃わない</h3>
+                        <p>パリティではありません。ほかのエッジに同色のウイングが混ざっていないか確認します。</p>
+                    </section>
+                    <section class="trouble-card">
+                        <h3>3x3の途中でペアが崩れた</h3>
+                        <p><code>Rw</code>・<code>Uw</code>・<code>r</code>・<code>u</code>を回していないか確認します。3x3フェーズでは外層だけを使います。</p>
+                    </section>
+                    <section class="trouble-card">
+                        <h3>パリティ手順で崩れた</h3>
+                        <p><code>Rw</code>と<code>r</code>を取り違えていないか、また対象エッジの持ち方が正しいかを確認します。</p>
+                    </section>
+                </div>
+
+                <h2 class="section-title">完成前のチェックリスト</h2>
+                <table class="quick-reference">
+                    <tbody>
+                        <tr><th>センター</th><td>6面が2x2の同色で、反対色と横並びが正しい。</td></tr>
+                        <tr><th>エッジ</th><td>24個のウイングが、12組の同色ペアになっている。</td></tr>
+                        <tr><th>3x3フェーズ</th><td>外層回転だけで、3x3の全手順を行う。</td></tr>
+                        <tr><th>最後の層</th><td>3x3で起こらない状態のときだけ、OLLまたはPLLパリティを使う。</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="callout">
+                    <strong>4x4完成</strong>
+                    <p>最初はセンターとエッジペアリングに時間がかかります。手順を増やすより、「入れて・避けて・戻す」と「作って・逃がして・戻す」の2つの動きを繰り返し練習しましょう。</p>
+                </div>
+            </main>
+        </div>
+
+        <script src="big-cube-diagrams.js"></script>
+        <script src="manual-print.js"></script>
+    </body>
+</html>

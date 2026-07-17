@@ -1,0 +1,16 @@
+GIMP Palette
+Name: MyCustom
+#
+0 0 0 Black
+63 63 63 1/4Gray
+127 127 127 2/4Gray
+191 191 191 3/4Gray
+255 255 255 White
+255 0 0 Red
+255 127 0 Orange
+255 255 0 Yellow
+127 255 0 Lime
+0 255 0 Green
+0 127 255 Aqua
+0 0 255 Blue
+255 0 255 Purple

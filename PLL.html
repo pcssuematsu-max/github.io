@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>PLL 21種類の手順集 | ルービックキューブ最終層の揃え方</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ルービックキューブのPLL 21種類を図で解説。最後の層の位置を入れ替える手順、分類、覚える順番を確認できます。">
+        <link rel = "stylesheet" href="style.css?v=20260717">
+        <link rel = "stylesheet" href="manual.css?v=20260717-2">
+    </head>
+    <body class="manual-page manual-pll">
+        <header>
+            <a href = "index.html" class = "back-to-the-home">
+                <img src = "Logo.png" alt = "ホームへ" class = "logo">
+            </a>
+            <h1 id = "title">PLLを覚えよう</h1>
+        </header>
+        <div class = "container">
+            <div class = "left-menu">
+            </div>
+            <div class = "main-contents">
+                <section class="manual-cover" aria-label="PLLの章扉">
+                    <div class="manual-cover-number">04</div>
+                    <div class="manual-cover-copy">
+                        <p class="manual-kicker">CUBE MANUAL</p>
+                        <h1>PLL</h1>
+                        <p>最後の層の位置を入れ替え、完成へ導く</p>
+                    </div>
+                    <img src="PLLs.svg" alt="PLLパターン一覧" class="manual-cover-art manual-cover-art-wide">
+                </section>
+                <a href = "#PLL-cards-top">
+                    <div class = "back-to-the-top"><span class = "back-to-the-top-text">一覧へ戻る</span></div>
+                </a>
+                <h1 class = "top-title">PLL 21種類を覚えよう</h1>
+                <p class = "paragraph">OLLで上面を揃えたあと、最後の層のパーツを入れ替えてキューブを完成させる手順が<span class = "remark">PLL（Permutation of Last Layer）</span>です。全部で<span class = "remark">21種類</span>あります。</p>
+                <p class = "paragraph"><a href = "3x3.html" class = "link">初心者向けマニュアル</a>では、Tパーム、Yパーム、Uパームa、Uパームb、Zパーム、Hパームの6種類を紹介しています。この章では、残りの15種類を含むすべてのPLLを扱います。</p>
+                <p class = "paragraph"><a href = "3x3.html#Section6" class = "link">初心者向けマニュアルの「上段コーナーを揃えよう」</a>では、上段コーナーの側面の色を3つのパターンに分類しました。本書では、側面で同じ色が隣り合っている部分を<span class = "remark">ブロック</span>と呼びます。</p>
+                <ol class = "border-box">
+                    <li><span class = "remark2">1つの側面のコーナーの色が揃っている</span></li>
+                    <li><span class = "remark2">すべての側面でコーナーの色が揃っていない</span></li>
+                    <li><span class = "remark2">すべての側面でコーナーの色が揃っている</span></li>
+                </ol>
+                <p class = "paragraph">この分類に当てはめると、次のようになります。</p>
+                <ol class = "border-box">
+                    <li><span class = "remark2">1つの側面のコーナーの色が揃っている</span>：Tパーム、Jパーム（a、b）、Fパーム、Rパーム（a、b）、Aパーム（a、b）、Gパーム（a、b、c、d）</li>
+                    <li><span class = "remark2">すべての側面でコーナーの色が揃っていない</span>：Yパーム、Vパーム、Nパーム（a、b）、Eパーム</li>
+                    <li><span class = "remark2">すべての側面でコーナーの色が揃っている</span>：Uパーム（a、b）、Zパーム、Hパーム</li>
+                </ol>  
+                <p class = "paragraph">おすすめの習得順は次のとおりです。</p>
+                <ol>
+                    <li><span class = "remark2">Uパーム（a、b）、Hパーム、Tパーム、Yパーム</span>：2-look PLLで完成させるために必要な手順</li>
+                    <li><span class = "remark2">Zパーム、Fパーム、Jパーム（a、b）</span>：第1段階の手順に似ていて覚えやすい</li>
+                    <li><span class = "remark2">Aパーム（a、b）、Vパーム、Rパーム（a、b）</span>：独立した動きが多く、やや覚えにくい</li>
+                    <li><span class = "remark2">Gパーム（a、b、c、d）</span>：4種類を関連づけて覚えやすい</li>
+                    <li><span class = "remark2">Nパーム（a、b）、Eパーム</span>：出現率が低く、手順も長い</li>
+                </ol>
+                <p class = "border-box">手順を始める前に、図と同じ向きになるようキューブを持ってください。「覚えやすさ」「回しやすさ」は筆者の目安で、5に近いほど覚えやすく、回しやすいことを表します。回転記号は<a href = "Symbols.html" class = "link">回転記号の章</a>で確認できます。</p>
+                <p class = "paragraph" id = "PLL-cards-top">一覧から、練習したいケースを選んでください。</p>
+                <div class = "cards">
+                    <a href = "#T-Perm">
+                        <div class = "PLL-card">
+                            <img src = "T-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Tパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#J-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "J-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Jパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#J-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "J-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Jパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#F-Perm">
+                        <div class = "PLL-card">
+                            <img src = "F-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Fパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#R-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "R-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Rパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#R-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "R-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Rパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#A-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "A-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Aパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#A-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "A-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Aパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#G-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "G-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Gパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#G-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "G-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Gパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#G-Perm-c">
+                        <div class = "PLL-card">
+                            <img src = "G-Perm-c.svg" class = "PLL-card-images">
+                            <p class = "card-text">Gパームc</p>
+                        </div>
+                    </a>
+                    <a href = "#G-Perm-d">
+                        <div class = "PLL-card">
+                            <img src = "G-Perm-d.svg" class = "PLL-card-images">
+                            <p class = "card-text">Gパームd</p>
+                        </div>
+                    </a>
+                    <a href = "#Y-Perm">
+                        <div class = "PLL-card">
+                            <img src = "Y-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Yパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#V-Perm">
+                        <div class = "PLL-card">
+                            <img src = "V-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Vパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#N-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "N-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Nパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#N-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "N-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Nパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#E-Perm">
+                        <div class = "PLL-card">
+                            <img src = "E-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Eパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#U-Perm-a">
+                        <div class = "PLL-card">
+                            <img src = "U-Perm-a.svg" class = "PLL-card-images">
+                            <p class = "card-text">Uパームa</p>
+                        </div>
+                    </a>
+                    <a href = "#U-Perm-b">
+                        <div class = "PLL-card">
+                            <img src = "U-Perm-b.svg" class = "PLL-card-images">
+                            <p class = "card-text">Uパームb</p>
+                        </div>
+                    </a>
+                    <a href = "#Z-Perm">
+                        <div class = "PLL-card">
+                            <img src = "Z-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Zパーム</p>
+                        </div>
+                    </a>
+                    <a href = "#H-Perm">
+                        <div class = "PLL-card">
+                            <img src = "H-Perm.svg" class = "PLL-card-images">
+                            <p class = "card-text">Hパーム</p>
+                        </div>
+                    </a>
+                </div>
+                <h2 class = "section-title" id = "T-Perm">Tパーム</h2>
+                <img src = "T-Perm.svg" class = "mid-images"><img src = "T-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R' U') (R' F R2) (U' R' U') (R U R' F')</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：5</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーにくっついてブロックが2つある。</p>
+                            <p>覚えるコツ：括弧で区切ったフレーズに分けて覚えましょう。回しやすいので何度も回して手の動きを覚えましょう。Tパームを覚えることで派生的にいくつかのPLLも覚えられます。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "J-Perm-a">Jパームa</h2>
+                <img src = "J-Perm-a.svg" class = "mid-images"><img src = "J-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>x (R2' F R F' R U2) (Rw' U Rw U2)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面が完全に揃っていて、その他の側面に揃っているブロックが3つある。Jパームbとの違いは、揃っているブロックが<span class = "remark">左</span>に寄っているところ。</p>
+                            <p>覚えるコツ：前半と後半に分けて覚えると覚えやすいです。<span class = "remark">最初のキューブの回転</span>と<span class = "remark">後半の2層回し</span>に注意しましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "J-Perm-b">Jパームb</h2>
+                <img src = "J-Perm-b.svg" class = "mid-images"><img src = "J-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R' F') (R U R' U') (R' F R2) (U' R' U')</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：5</p>
+                            <p>見分け方：1つの側面が完全に揃っていて、その他の側面に揃っているブロックが3つある。Jパームaとの違いは、揃っているブロックが<span class = "remark">右</span>に寄っているところ。</p>
+                            <p>覚えるコツ：Tパームと同様、4つのフレーズに分けると覚えやすいです。<span class = "remark">Tパームの最後の4手を最初に持ってきたもの</span>と覚えるとよいでしょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "F-Perm">Fパーム</h2>
+                <img src = "F-Perm.svg" class = "mid-images"><img src = "F-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R' U' F') (R U R' U') (R' F R2) (U' R' U') (R U R' U R)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：5</p>
+                            <p>見分け方：1つの側面が完全に揃っていて、その他の側面に揃っているブロックがない。</p>
+                            <p>覚えるコツ：手順が長いですが、(R' U' F')の後はTパームと同じ手順が続くので、Tパームを覚えていればそれほど難しくありません。<span class = "remark">最後のフレーズ</span>だけ注意しましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "R-Perm-a">Rパームa</h2>
+                <img src = "R-Perm-a.svg" class = "mid-images"><img src = "R-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R' F') (R U2 R' U2') (R' F R) (U R U2' R' U') </p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーにくっついてブロックが1つある。Rパームbとの違いは、揃っているコーナーを左に向けたとき、ブロックが<span class = "remark">手前</span>にあるところ。</p>
+                            <p>覚えるコツ：Jパームbとよく似ているので、違いに注意して覚えましょう。やや覚えにくくあまり回しやすくないので、T,J,Fパームを覚えてから覚えるとよいでしょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "R-Perm-b">Rパームb</h2>
+                <img src = "R-Perm-b.svg" class = "mid-images"><img src = "R-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R2' F) (R U R U') (R' F') (R U2' R' U2') (R U)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：2</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーにくっついてブロックが1つある。Rパームaとの違いは、揃っているコーナーを左に向けたとき、ブロックが<span class = "remark">奥</span>にあるところ。</p>
+                            <p>覚えるコツ：他のPLLと全く違う手順なので覚えにくく、あまり回しやすくないので、T,J,Fパームを覚えてから覚えるとよいでしょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "A-Perm-a">Aパームa</h2>
+                <img src = "A-Perm-a.svg" class = "mid-images"><img src = "A-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>x (R' U R') D2 (R U' R') D2 R2</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、<span class = "remark">角で接して</span>色が揃っているブロック(図では赤と青)が2つある。Aパームbとの違いは、揃っているコーナーを左に向けると、ブロックが<span class = "remark">右手前</span>に来るところ。</p>
+                            <p>覚えるコツ：他の1つの側面が揃っているPLLと違って、揃っているコーナーを<span class = "remark">背面</span>に持ってくることに注意しましょう。最初の<span class = "remark">キューブの回転</span>も忘れずに。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "A-Perm-b">Aパームb</h2>
+                <img src = "A-Perm-b.svg" class = "mid-images"><img src = "A-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>x' (R U' R) D2 (R' U R) D2 R2</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、<span class = "remark">角で接して</span>色が揃っているブロック（図ではオレンジと青）が2つある。Aパームaとの違いは、揃っているコーナーを左に向けると、ブロックが<span class = "remark">右奥</span>に来るところ。</p>
+                            <p>覚えるコツ：他の1つの側面が揃っているPLLと違って、揃っているコーナーを<span class = "remark">手前</span>に持ってくることに注意しましょう。最初の<span class = "remark">キューブの回転</span>も忘れずに。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "G-Perm-a">Gパームa</h2>
+                <img src = "G-Perm-a.svg" class = "mid-images"><img src = "G-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R2 U R' U R') (U' R U' R2) (D U' R' U R D') </p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーを左に向けたとき揃っているブロックが<span class = "remark">手前面右</span>にある。</p>
+                            <p>覚えるコツ：3フレーズ目のD U'は<span class = "remark">同時に</span>回すとよいでしょう。Gパームは4つセットで覚えると覚えやすいです。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "G-Perm-b">Gパームb</h2>
+                <img src = "G-Perm-b.svg" class = "mid-images"><img src = "G-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(D R' U' R D' U) (R2' U R' U) (R U' R U' R2') </p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーを左に向けたとき揃っているブロックが<span class = "remark">右面奥</span>にある。</p>
+                            <p>覚えるコツ：1フレーズ目のD' Uは<span class = "remark">同時に</span>回すとよいでしょう。<span class = "remark">Gパームaを逆に回す</span>と覚えると覚えやすいです。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "G-Perm-c">Gパームc</h2>
+                <img src = "G-Perm-c.svg" class = "mid-images"><img src = "G-Perm-c-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R2' U' R U' R) (U R' U R2') (U D' R U' R' D)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーを左に向けたとき揃っているブロックが<span class = "remark">背面右</span>にある。</p>
+                            <p>覚えるコツ：1フレーズ目のU D'は<span class = "remark">同時に</span>回すとよいでしょう。Gパームaと似ていますが、回す向きが違うので注意しましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "G-Perm-d">Gパームd</h2>
+                <img src = "G-Perm-d.svg" class = "mid-images"><img src = "G-Perm-d-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(D' R U R' D U') (R2 U' R U') (R' U R' U R2)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：1つの側面でコーナーが揃っていて、揃っているコーナーを左に向けたとき揃っているブロックが<span class = "remark">右面手前</span>にある。</p>
+                            <p>覚えるコツ：1フレーズ目のD U'は<span class = "remark">同時に</span>回すとよいでしょう。<span class = "remark">Gパームcを逆に回す</span>と覚えると覚えやすいです。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "Y-Perm">Yパーム</h2>
+                <img src = "Y-Perm.svg" class = "mid-images"><img src = "Y-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(F R U R' U') (R U R' F') (R U R' U') (R' F R F')</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：5</p>
+                            <p>見分け方：すべての側面でコーナーが揃っておらず、揃っているブロックが<span class = "remark">角で接しておらず</span>2つある。</p>
+                            <p>覚えるコツ：前半と後半を入れ替えると<span class = "remark">Tパームと同じ手順になる</span>ので、Tパームと同時に覚えましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "V-Perm">Vパーム</h2>
+                <img src = "V-Perm.svg" class = "mid-images"><img src = "V-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R' U R U') (R' Fw' U') (R U2' R' U' R U' R') (Fw R)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っておらず、揃っているブロックが<span class = "remark">角で接して</span>2つある。</p>
+                            <p>覚えるコツ：3フレーズ目は<a href = "3x3.html#Section5" class = "link">初心者向けマニュアルの「上面を揃えよう」</a>で紹介した<span class = "remark">魚型2</span>と同じです。<span class = "remark">2層回し</span>に注意しましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "N-Perm-a">Nパームa</h2>
+                <img src = "N-Perm-a.svg" class = "mid-images"><img src = "N-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R' U) (R U R' F') (R U R' U') (R' F R2) (U R' U2' R U' R')</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っておらず、揃っているブロックが4つある。Nパームbとの違いは、揃っているブロックが<span class = "remark">右</span>に寄っているところ。</p>
+                            <p>覚えるコツ：非常に長い手順ですが、(R U R' U) (Jパームb) (U' R U' R')と覚えると覚えやすいです。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "N-Perm-b">Nパームb</h2>
+                <img src = "N-Perm-b.svg" class = "mid-images"><img src = "N-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R' U R U') (R' F' U' F) (R U R') (F R' F' R) (U R)</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：2</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：すべての側面でコーナーが揃っておらず、揃っているブロックが4つある。Nパームaとの違いは、揃っているブロックが<span class = "remark">左</span>に寄っているところ。</p>
+                            <p>覚えるコツ：他に似たPLLもないため覚えにくく、出現確率も低いため、<span class = "remark">最後に覚える</span>のがおすすめです。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "E-Perm">Eパーム</h2>
+                <img src = "E-Perm.svg" class = "mid-images"><img src = "E-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>x' (R U' R' D) (R U R' D') (R U R' D) (R U' R' D')</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：3</p>
+                            <p>回しやすさ：3</p>
+                            <p>見分け方：すべての側面でコーナーが揃っておらず、揃っているブロックがない。</p>
+                            <p>覚えるコツ：<span class = "remark">持つ向き</span>と<span class = "remark">U,D面の回転の向き</span>に注意しましょう。持つ向きは<span class = "remark">左右の列に同じ色が3つ固まっている向き</span>と覚えましょう。</p>
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "U-Perm-a">Uパームa</h2>
+                <img src = "U-Perm-a.svg" class = "mid-images"><img src = "U-Perm-a-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>M2' U M U2' M' U M2'</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：5</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っており、1つの側面が完全に揃っている。Uパームbとの違いは、手前面の色のエッジが<span class = "remark">左</span>にあるところ。</p>
+                            <p>覚えるコツ：覚えやすく、揃えるのに必須な手順なので<span class = "remark">最初に</span>覚えましょう。</p>        
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "U-Perm-b">Uパームb</h2>
+                <img src = "U-Perm-b.svg" class = "mid-images"><img src = "U-Perm-b-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>M2' U' M U2' M' U' M2'</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：5</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っており、1つの側面が完全に揃っている。Uパームaとの違いは、手前面の色のエッジが<span class = "remark">右</span>にあるところ。</p>
+                            <p>覚えるコツ：覚えやすく、揃えるのに必須な手順なので<span class = "remark">最初に</span>覚えましょう。</p>        
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "Z-Perm">Zパーム</h2>
+                <img src = "Z-Perm.svg" class = "mid-images"><img src = "Z-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U M' U' M2' U' M2' U' M' U2' M2'</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：4</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っているが、完全に揃っている側面がない。Hパームとの違いは、<span class = "remark">隣接2面で2色</span>になっているところ。</p>
+                            <p>覚えるコツ：<span class = "remark">持つ向き</span>に注意しましょう。2色になっている側面が<span class = "remark">左と手前</span>になるように持ちましょう。</p>        
+                        </div>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "H-Perm">Hパーム</h2>
+                <img src = "H-Perm.svg" class = "mid-images"><img src = "H-Perm-distinguish.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>M2' U' M2' U2' M2' U' M2'</p>
+                        <div class = "border-box">
+                            <p>覚えやすさ：5</p>
+                            <p>回しやすさ：4</p>
+                            <p>見分け方：すべての側面でコーナーが揃っているが、完全に揃っている側面がない。Zパームとの違いは、<span class = "remark">対面で2色</span>になっているところ。</p>
+                            <p>覚えるコツ：Uパームと似ているので、セットで覚えましょう。出現確率は低いです。</p>        
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+        <script src = "jquery-3.7.1.min.js"></script>
+        <script src = "Script.js"></script>
+        <script src = "manual-print.js"></script>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="400"
+   height="400"
+   viewBox="0 0 105.83334 105.83334"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="Symbols.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="0.74604929"
+     inkscape:cx="169.55984"
+     inkscape:cy="166.20886"
+     inkscape:window-width="1408"
+     inkscape:window-height="847"
+     inkscape:window-x="50"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="0.26458334"
+       spacingy="0.26458334"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="true"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;white-space:pre;inline-size:116.417;display:inline;opacity:0.99;fill:#007f3f;fill-opacity:1;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;paint-order:normal"
+     x="10.583334"
+     y="42.333336"
+     id="text2"
+     transform="rotate(-12.158694,-44.889904,-236.44214)"><tspan
+       x="10.583334"
+       y="42.333336"
+       id="tspan2">F R U R' U' F'</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:8.46667px;text-align:center;text-anchor:middle;opacity:0.99;fill:#007f3f;fill-opacity:1;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;paint-order:normal"
+     x="13.864506"
+     y="79.603111"
+     id="text3"
+     transform="rotate(-31.03174)"><tspan
+       sodipodi:role="line"
+       id="tspan3"
+       style="stroke-width:1.32292"
+       x="13.864506"
+       y="79.603111">R U2 R' U' R U' R'</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:8.46674px;text-align:center;text-anchor:middle;opacity:0.99;fill:#007f3f;fill-opacity:1;stroke:#000000;stroke-width:1.32293;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;paint-order:normal"
+     x="45.077465"
+     y="93.658981"
+     id="text4"
+     transform="matrix(0.99613559,-0.08771818,0.08771988,0.99615492,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan4"
+       style="stroke-width:1.32293"
+       x="45.077469"
+       y="93.658981">M2 U' M U2 M' U' M2</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;opacity:0.99;fill:#007f3f;fill-opacity:1;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;paint-order:normal"
+     x="38.623699"
+     y="18.311834"
+     id="text5"
+     transform="rotate(28.820965)"
+     inkscape:transform-center-x="-11.171557"
+     inkscape:transform-center-y="11.038055"><tspan
+       sodipodi:role="line"
+       id="tspan5"
+       style="stroke-width:1.32292"
+       x="38.623699"
+       y="18.311834">R' F R F'</tspan></text>
+</svg>

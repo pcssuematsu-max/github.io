@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Avenir Next", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+html,
+body {
+    width: 148mm;
+    margin: 0;
+    color: #17181b;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.book-cover,
+.contents-page {
+    position: relative;
+    width: 148mm;
+    height: 210mm;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+}
+
+.book-cover {
+    padding: 15mm 12mm 12mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background:
+        radial-gradient(circle at 50% 32%, rgba(255,255,255,0.18), transparent 32%),
+        linear-gradient(180deg, #26313a 0%, #101419 72%);
+}
+
+.cover-grid {
+    position: absolute;
+    left: -18%;
+    right: -18%;
+    bottom: -14%;
+    height: 43%;
+    opacity: 0.5;
+    transform: perspective(95mm) rotateX(55deg);
+    transform-origin: bottom center;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.35) 1px, transparent 1px);
+    background-size: 14mm 14mm;
+}
+
+.cover-kicker {
+    align-self: stretch;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    padding-bottom: 3mm;
+    font-size: 2.4mm;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+}
+
+.cover-cube {
+    width: 44mm;
+    height: 50mm;
+    margin: 12mm 0 5mm;
+    filter: drop-shadow(0 7mm 7mm rgba(0,0,0,0.46));
+}
+
+.book-cover h1 {
+    position: relative;
+    z-index: 1;
+    font-size: 13mm;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    text-align: center;
+    text-shadow: 0 2mm 4mm rgba(0,0,0,0.55);
+}
+
+.book-cover h1 span {
+    display: block;
+    margin-bottom: 2mm;
+    font-size: 6.2mm;
+    letter-spacing: 0.02em;
+}
+
+.cover-subtitle {
+    position: relative;
+    z-index: 1;
+    margin-top: 5mm;
+    color: #f5dd2f;
+    font-size: 3.1mm;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.cover-edition {
+    position: absolute;
+    right: 12mm;
+    bottom: 10mm;
+    z-index: 1;
+    font-size: 2.3mm;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.contents-page {
+    padding: 15mm 12mm;
+    background: #f7f6f1;
+}
+
+.contents-heading p {
+    color: #66717b;
+    font-size: 2.5mm;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+}
+
+.contents-heading h2 {
+    margin-top: 3mm;
+    font-size: 7.5mm;
+    line-height: 1.25;
+}
+
+.contents-lead {
+    width: 120mm;
+    margin: 6mm 0 7mm;
+    font-size: 3.4mm;
+    line-height: 1.8;
+}
+
+.contents-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    list-style: none;
+}
+
+.contents-list li {
+    min-height: 35mm;
+    padding: 5mm;
+    display: grid;
+    grid-template-columns: 14mm 1fr;
+    align-items: center;
+    gap: 3mm;
+    border-radius: 7mm;
+    background: var(--soft);
+}
+
+.contents-no {
+    color: var(--accent);
+    font-size: 8mm;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.contents-list strong {
+    display: block;
+    color: var(--accent);
+    font-size: 5.2mm;
+    line-height: 1.2;
+}
+
+.contents-list small {
+    display: block;
+    margin-top: 2mm;
+    font-size: 2.8mm;
+    line-height: 1.55;
+}
+
+.theme-symbols { --accent: #6c4ce4; --soft: #eee8ff; }
+.theme-f2l { --accent: #087ab8; --soft: #e5f5ff; }
+.theme-oll { --accent: #259f40; --soft: #e9f9e2; }
+.theme-pll { --accent: #d84048; --soft: #ffeaeb; }
+
+.contents-note {
+    margin-top: 6mm;
+    padding: 5mm 6mm;
+    border-left: 3mm solid #242a30;
+    border-radius: 0 5mm 5mm 0;
+    background: #fff;
+}
+
+.contents-note strong {
+    font-size: 4.2mm;
+}
+
+.contents-note p {
+    margin-top: 2mm;
+    font-size: 3.1mm;
+    line-height: 1.75;
+}
+
+@page {
+    size: A5 portrait;
+    margin: 0;
+}
+
+@media screen {
+    body {
+        margin: 24px auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+}

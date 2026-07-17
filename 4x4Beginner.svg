@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 230" role="img" aria-labelledby="title desc">
+  <title id="title">4x4キューブ</title>
+  <desc id="desc">4分割された3面が見えるキューブの図</desc>
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#172026" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" stroke="#172026" stroke-width="3" stroke-linejoin="round">
+    <path fill="#f4dc37" d="M130 13 226 61 130 109 34 61Z"/>
+    <path fill="#ec5f65" d="M34 61 130 109 130 205 34 157Z"/>
+    <path fill="#3091c8" d="M130 109 226 61 226 157 130 205Z"/>
+    <g fill="none" stroke-width="2">
+      <path d="m58 49 96 48M82 37l96 48M106 25l96 48M202 49l-96 48M178 37 82 85M154 25 58 73"/>
+      <path d="m58 73v96M82 85v96M106 97v96M34 85l96 48M34 109l96 48M34 133l96 48"/>
+      <path d="m154 97v96M178 85v96M202 73v96M130 133l96-48M130 157l96-48M130 181l96-48"/>
+    </g>
+  </g>
+</svg>

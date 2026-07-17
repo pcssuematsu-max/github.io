@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>F2L手順集 | ルービックキューブの下2段を揃える方法</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ルービックキューブのF2Lをケース別に解説。コーナーとエッジを組にして下2段を揃える考え方と手順を図で学べます。">
+        <link rel = "stylesheet" href="style.css?v=20260717">
+        <link rel = "stylesheet" href="manual.css?v=20260717-2">
+    </head>
+    <body class="manual-page manual-f2l">
+        <header>
+            <a href = "index.html" class = "back-to-the-home">
+                <img src = "Logo.png" alt = "ホームへ" class = "logo">
+            </a>
+            <h1 id = "title">F2Lをマスターしよう</h1>
+        </header>
+        <div class = "container">
+            <div class = "left-menu">
+            </div>
+            <div class = "main-contents">
+                <section class="manual-cover" aria-label="F2Lの章扉">
+                    <div class="manual-cover-number">02</div>
+                    <div class="manual-cover-copy">
+                        <p class="manual-kicker">CUBE MANUAL</p>
+                        <h1>F2L</h1>
+                        <p>コーナーとエッジを組にして、下2段を揃える</p>
+                    </div>
+                    <img src="F2Ls.svg" alt="F2Lパターン一覧" class="manual-cover-art manual-cover-art-wide">
+                </section>
+                <h1 class = "top-title">F2Lを習得しよう</h1>
+                <p class = "paragraph">クロスを揃えたあと、コーナーとエッジを組にして下2段を完成させる方法が<span class = "remark">F2L（First Two Layers）</span>です。基本ケースは41種類ありますが、手順を丸暗記するより、パーツの動きを見て仕組みを理解することをおすすめします。</p>
+                <p class = "paragraph">はじめに、この章で使う用語を確認します。</p>
+                <img src = "F2L-Slot.svg" class = "big-images">
+                <p class = "paragraph">図の濃いグレーで示した、目的のパーツが入るべき場所のことを<span class = "remark">スロット</span>といいます。F2Lとは、このスロットに目的のコーナーとエッジを同時に入れる手順のことを指します。</p>
+                <p class="paragraph">次の順番で習得するのがおすすめです。</p>
+                <ol>
+                    <li><span class="remark2">I型、T型</span>(最も基本的な手順)</li>
+                    <li><span class="remark2">エッジ・コーナーともに上段にあり、離れているとき</span></li>
+                    <li><span class="remark2">エッジ・コーナーともに上段にあり、くっついているとき</span></li>
+                    <li><span class="remark2">エッジが中段にあるとき</span></li>
+                    <li><span class="remark2">コーナーが下段にあるとき</span></li>
+                    <li><span class="remark2">その他の手順</span></li>
+                </ol>
+                <p class="paragraph">コーナーにはクロス色が含まれているため、エッジより見つけやすい傾向があります。まず<span class="remark">上段のコーナーパーツを探す</span>と、目的のペアを見つけやすくなります。</p>
+                <h2 class = "section-title" id = "IT">基本4手順</h2>
+                <p class = "paragraph">F2Lには<span class = "remark">4つの基本手順</span>があります。多くのケースは、I型またはT型を作る「変形」と、基本手順でスロットへ入れる「挿入」の2段階に分けて考えられます。</p>
+                <p class = "border-box">本書では、途中のケースをI型またはT型に変えることを<span class = "remark">基本形に帰着させる</span>と表現します。基本形を作ったら、U面で位置を合わせ、最後にスロットへ挿入します。</p>
+                <p class = "paragraph">まずは、I型とT型の基本手順を確認します。それぞれ左右対称の2種類があります。</p>
+                <h3 class = "subsection">I型</h3>
+                <img src = "F2L-I2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R U' R'</p>
+                    </div>
+                </details>
+                <img src = "F2L-I1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>L' U L</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">T型</h3>
+                <img src = "F2L-T1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R U R'</p>
+                    </div>
+                </details>
+                <img src = "F2L-T2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>L' U' L</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">その他の基本手順</h3>
+                <p class = "paragraph">I型とT型は最もよく出てくるので、違う向きからでも揃えられるようにしておきましょう。</p>
+                <img src = "F2L-ISp1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>F R' F' R</p>
+                        <p class = "border-box">この手順を<span class = "remark">ヘッジスラマー</span>といいます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-ISp2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>F' L F L'</p>
+                    </div>
+                </details>
+                <img src = "F2L-ISp3.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R' F R F'</p>
+                        <p class = "border-box">この手順を<span class = "remark">スレッジハンマー</span>といいます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-ISp4.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>L F' L' F</p>
+                    </div>
+                </details>
+                <img src = "F2L-TSp1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>F' U' F</p>
+                        <p class = "border-box">回しにくいので、キューブを回転させても構いません。</p>
+                    </div>
+                </details>
+                <img src = "F2L-TSp2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>F U F'</p>
+                        <p class = "border-box">回しにくいので、キューブを回転させても構いません。</p>
+                    </div>
+                </details>
+                <h2 class = "section-title" id = "Upper-Separate">エッジ・コーナーともに上段にあり、離れているとき</h2>
+                <p class = "paragraph">エッジとコーナーが上段で離れているケースには、T型のほかに<span class = "remark">Q、R、S、U、V</span>の5パターンがあります。</p>
+                <p class = "paragraph">前半が<span class = "remark">I型またはT型に帰着させる手順</span>で、後半が<span class = "remark">I型またはT型</span>の手順となります。</p>
+                <h3 class = "subsection">Q型</h3>
+                <img src = "F2L-Q2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U2 (R U' R')</p>
+                        <p class = "border-box">(R U R')によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-Q1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U' L) U2 (L' U L)</p>
+                        <p class = "border-box">(L' U' L)によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">R型</h3>
+                <img src = "F2L-R1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U (R U R')</p>
+                        <p class = "border-box">(R U R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-R2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U' L) U' (L' U' L)</p>
+                        <p class = "border-box">(L' U' L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">S型</h3>
+                <img src = "F2L-S2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U2 R') U2 (R U' R')</p>
+                        <p class = "border-box">(R U2 R')によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">Q型とセットで</span>覚えましょう。</p>
+                    </div>
+                </details>
+                <img src = "F2L-S1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U2 L) U2 (L' U L)</p>
+                        <p class = "border-box">(L' U2 L)によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">Q型とセットで</span>覚えましょう。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">U型</h3>
+                <img src = "F2L-U2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U2 R') U (R U' R')</p>
+                        <p class = "border-box">(R U2 R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-U1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U2 L) U' (L' U L)</p>
+                        <p class = "border-box">(L' U2 L)によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">V型</h3>
+                <img src = "F2L-V1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U (R U' R')</p>
+                        <p class = "border-box">(R U R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">U型とセットで</span>覚えましょう。</p>
+                    </div>
+                </details>
+                <img src = "F2L-V2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U' L) U' (L' U L)</p>
+                        <p class = "border-box">(L' U' L)によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">U型とセットで</span>覚えましょう。</p>
+                    </div>
+                </details>
+                <h2 class="section-title" id="upper-connected">エッジ・コーナーともに上段にあり、くっついているとき</h2>
+                <p class="paragraph">エッジ、コーナーともに上段にあり、くっついているときはI型の他に<span class="remark">J,K,L,M,N</span>の5つがあります。</p>
+                <p class="paragraph">こちらも前半で<span class="remark">I型またはT型</span>に帰着させ、後半で<span class="remark">I型またはT型</span>の手順によってスロットに差し込みます。</p>
+                <h3 class = "subsection">J型</h3>
+                <img src = "F2L-J2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U' R U2 R') U (F' U' F)</p>
+                        <p class = "border-box">(U' R U2 R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-J1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U L' U2 L) U' (F U F')</p>
+                        <p class = "border-box">(U L' U2 L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">K型</h3>
+                <img src = "F2L-K1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U' R') U2 (F' U' F)</p>
+                        <p class = "border-box">(R U' R')によってT型に帰着され、U2でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-K2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U L) U2 (F U F')</p>
+                        <p class = "border-box">(L' U L)によってT型に帰着され、U2でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">L型</h3>
+                <img src = "F2L-L1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U' R U' R') U (R U R')</p>
+                        <p class = "border-box">(U' R U' R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-L2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U L' U L) U' (L' U' L)</p>
+                        <p class = "border-box">(U L' U L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">M型</h3>
+                <img src = "F2L-M1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U R U' R' U' R U' R') U (R U' R')</p>
+                        <p class = "border-box">(U R U' R' U' R U' R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。F2Lの中では最も覚えにくい手順の一つです。</p>
+                    </div>
+                </details>
+                <img src = "F2L-M2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(U' L' U L' U L U L') U' (L' U L)</p>
+                        <p class = "border-box">(U' L' U L' U L U L')によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。F2Lの中では最も覚えにくい手順の一つです。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">N型</h3>
+                <img src = "F2L-N2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U2 R') U' (R U R')</p>
+                        <p class = "border-box">(R U2 R')によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <img src = "F2L-N1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U2 L) U (L' U' L)</p>
+                        <p class = "border-box">(L' U2 L)によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
+                    </div>
+                </details>
+                <h2 class="section-title" id="edge-inserted">エッジが中段にあるとき</h2>
+                <p class="paragraph">エッジが中段にあるときは、<span class="remark">B,G,H</span>のタイプがあります。ここでは<span class="remark">I,Tのいずれかの基本形にする手順</span>を紹介します。</p>
+                <h3 class = "subsection">B1型</h3>
+                <img src = "F2L-B1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U R U' R' U R U' R'</p>
+                        <p class = "border-box">I型に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">B2型</h3>
+                <img src = "F2L-B2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R U' R'</p>
+                        <p class = "border-box">I型に帰着されます。組になったパーツを、そのまま上段へ取り出すイメージです。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">G型</h3>
+                <img src = "F2L-G2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U' R U' R'</p>
+                        <p class = "border-box">I型に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-G1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U L' U L</p>
+                        <p class = "border-box">I型に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">H型</h3>
+                <img src = "F2L-H2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U' R U R'</p>
+                        <p class = "border-box">T型に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-H1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>U L' U' L</p>
+                        <p class = "border-box">T型に帰着されます。</p>
+                    </div>
+                </details>
+                <h2 class="section-title" id="corner-inserted">コーナーが下段にあるとき</h2>
+                <p class="paragraph">コーナーが下段にあるときは<span class="remark">A1,A2,E,F</span>のタイプがあります。ここでも<span class="remark">I,Tの基本形にする手順</span>を紹介します。</p>
+                <h3 class = "subsection">A1型</h3>
+                <img src = "F2L-A1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U' R') U' (R U' R')</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">A2型</h3>
+                <img src = "F2L-A2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(L' U L) U (L' U L)</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">E型</h3>
+                <img src = "F2L-E2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R U' R'</p>
+                        <p class = "border-box">I型に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-E1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>L' U L</p>
+                        <p class = "border-box">I型に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class = "subsection">F型</h3>
+                <img src = "F2L-F1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>R U R'</p>
+                        <p class = "border-box">T型に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-F2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>L' U' L</p>
+                        <p class = "border-box">T型に帰着されます。</p>
+                    </div>
+                </details>
+                <h2 class="section-title" id="others">その他の手順</h2>
+                <p class="paragraph">その他の手順は、両方とも同じスロットに向きが違って入っているパターンです。<span class="remark">A0,C,D</span>のパターンがあります。ここでも<span class="remark">I,Tの基本形にする手順</span>を紹介します。</p>
+                <h3 class="subsection">A0型</h3>
+                <img src = "F2L-A0.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U2 (R U2 R')</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">J型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class="subsection">C型</h3>
+                <img src = "F2L-C1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U2 (R U' R')</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-C2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U' R') U' (R U R')</p>
+                        <p class = "border-box">I型に帰着されます。前半の3手で<span class="remark">Q型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <h3 class="subsection">D型</h3>
+                <img src = "F2L-D1.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U R') U' (R U' R')</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">K型</span>に帰着されます。</p>
+                    </div>
+                </details>
+                <img src = "F2L-D2.svg" class = "mid-images">
+                <details class = "details">
+                    <summary class = "summary">手順はこちらをクリック</summary>
+                    <div class = "content">
+                        <p>(R U' R') U' (R U' R')</p>
+                        <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">R型</span>に帰着されます。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+        <script src = "jquery-3.7.1.min.js"></script>
+        <script src = "Script.js"></script>
+        <script src = "manual-print.js"></script>
+    </body>
+</html>

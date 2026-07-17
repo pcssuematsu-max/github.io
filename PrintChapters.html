@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>ルービックキューブ マニュアル - Chapters</title>
+        <link rel="stylesheet" href="style.css?v=20260717">
+        <link rel="stylesheet" href="manual.css?v=20260717-2">
+        <style>
+            .print-chapter {
+                break-before: page;
+                page-break-before: always;
+            }
+
+            .print-chapter:first-child {
+                break-before: auto;
+                page-break-before: auto;
+            }
+
+            @media print {
+                html,
+                body.print-book {
+                    width: 148mm;
+                    margin: 0;
+                    padding: 0;
+                    background: #fff;
+                }
+            }
+        </style>
+    </head>
+    <body class="print-book">
+        <main id="manual-root"></main>
+        <script src="manual-print.js"></script>
+        <script>
+            (async function () {
+                const chapters = [
+                    ["Symbols.html", "manual-symbols"],
+                    ["F2L.html", "manual-f2l"],
+                    ["OLL.html", "manual-oll"],
+                    ["PLL.html", "manual-pll"]
+                ];
+                const root = document.getElementById("manual-root");
+
+                for (const [file, theme] of chapters) {
+                    const html = await fetch(file).then(response => response.text());
+                    const parsed = new DOMParser().parseFromString(html, "text/html");
+                    const source = parsed.querySelector(".main-contents");
+                    const article = document.createElement("article");
+                    article.className = `manual-page ${theme} print-chapter`;
+                    article.appendChild(document.importNode(source, true));
+                    window.prepareManual(article);
+                    root.appendChild(article);
+                }
+
+                document.body.dataset.ready = "true";
+            }()).catch(function (error) {
+                document.body.dataset.ready = "error";
+                document.body.textContent = error.message;
+            });
+        </script>
+    </body>
+</html>
