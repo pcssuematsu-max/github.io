@@ -17,7 +17,7 @@
 - 本名をサイト内に掲載する：Aboutに掲載する程度でいいかな
 - SNSへのリンク：Instagram https://www.instagram.com/ku1207_cube/?hl=ja
 - 顔写真：`掲載しない`
-- 代わりに使いたいもの：アイコン(このフォルダのProfilePicture.png)
+- 代わりに使いたいもの：アイコン（`assets/images/site/ProfilePicture.png`）
 
 ### 自己紹介
 

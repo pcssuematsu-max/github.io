@@ -8,7 +8,7 @@ from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 COVER = ROOT / "tmp/pdfs/generated/cover.pdf"
 CHAPTERS = ROOT / "tmp/pdfs/generated/chapters.pdf"
 OUTPUT = ROOT / "output/pdf/ルービックキューブ_マニュアル.pdf"

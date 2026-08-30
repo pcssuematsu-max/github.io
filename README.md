@@ -1,13 +1,29 @@
-# キューブ王国
+# キューブ王国と、その外側。
 
-ルービックキューブの揃え方を図で確認できる静的HTMLマニュアルです。
+ルービックキューブのマニュアルを中心に、制作物や旅の記録をまとめた静的Webサイトです。
 
-## GitHub Pagesで公開する手順
+## フォルダ構成
 
-1. このフォルダをGitHubリポジトリに push します。
-2. GitHubのリポジトリ画面で `Settings` -> `Pages` を開きます。
-3. `Build and deployment` の `Source` を `Deploy from a branch` にします。
-4. `Branch` は `main`、フォルダは `/ (root)` を選び、保存します。
-5. 表示された公開URLを確認します。
+```text
+.
+├── index.html              # トップページ
+├── *.html                  # 公開ページ（既存URLを保つため直下に配置）
+├── assets/
+│   ├── css/                # ページ共通・マニュアル用スタイル
+│   ├── js/                 # ページ共通・図版生成スクリプト
+│   ├── images/
+│   │   ├── cube/           # キューブの手順・パターン図
+│   │   └── site/           # ロゴ・プロフィール画像
+│   └── projects/           # 制作物ごとの掲載素材
+├── docs/                   # 制作メモ・デザイン元データ
+├── downloads/              # 配布用PDF
+├── tools/                  # PDF生成などの補助ツール
+├── output/                 # 生成済み成果物
+└── tmp/                    # 制作・確認用の一時ファイル
+```
 
-公開URLが決まったら、各ページに canonical URL とOGPの絶対URLを追加すると、SEOとSNS共有の精度がさらに上がります。
+## GitHub Pages
+
+`main` ブランチのリポジトリ直下をGitHub Pagesで公開します。公開ページのURLを維持するため、HTMLファイルは直下に残し、画像・CSS・JavaScriptなどの素材だけを用途別に整理しています。
+
+公開URLが決まったら、各ページにcanonical URLとOGPの絶対URLを追加すると、SEOとSNS共有の精度をさらに高められます。

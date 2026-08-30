@@ -88,6 +88,7 @@ html {
 .button,
 .project-number,
 .game-card,
+.lab-visual-label,
 .text-link,
 .coming-soon,
 .guide-tag,
@@ -587,6 +588,28 @@ html {
     box-shadow: 9px 9px 0 var(--red);
 }
 
+.project-flagship {
+    grid-column: span 12;
+    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.55fr);
+    grid-template-rows: minmax(370px, 1fr);
+    box-shadow: 9px 9px 0 var(--cyan);
+}
+
+.project-flagship .project-visual {
+    min-height: 370px;
+    border-right: 3px solid var(--ink);
+    border-bottom: 0;
+}
+
+.project-flagship .project-body {
+    min-height: 370px;
+    justify-content: center;
+}
+
+.project-flagship .text-link {
+    margin-top: 30px;
+}
+
 .project-featured,
 .project-wide {
     grid-column: span 7;
@@ -608,6 +631,65 @@ html {
     min-height: 260px;
     overflow: hidden;
     border-bottom: 3px solid var(--ink);
+}
+
+.lab-visual {
+    padding: 38px;
+    background:
+        linear-gradient(135deg, rgba(82, 184, 200, 0.18), transparent 55%),
+        #102c3b;
+}
+
+.lab-visual::before,
+.lab-visual::after {
+    position: absolute;
+    content: "";
+    border: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+.lab-visual::before {
+    inset: 18px;
+}
+
+.lab-visual::after {
+    top: 30px;
+    right: 30px;
+    width: 12px;
+    height: 12px;
+    background: var(--yellow);
+    border-color: var(--ink);
+    box-shadow: -20px 0 0 var(--red), -40px 0 0 var(--green);
+}
+
+.lab-visual img {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    max-height: 310px;
+    object-fit: cover;
+    object-position: center 15%;
+    border: 4px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--cyan);
+    transform: rotate(-1deg);
+}
+
+.lab-visual .project-number {
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.lab-visual-label {
+    position: absolute;
+    bottom: 22px;
+    left: 25px;
+    z-index: 2;
+    padding: 8px 11px;
+    color: var(--ink);
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transform: rotate(1deg);
 }
 
 .project-number {
@@ -1149,6 +1231,11 @@ html {
         grid-column: span 6;
     }
 
+    .project-flagship {
+        grid-column: span 12;
+        grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    }
+
     .guide-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -1242,8 +1329,28 @@ html {
 
     .project-card,
     .project-featured,
-    .project-wide {
+    .project-wide,
+    .project-flagship {
         grid-column: 1;
+    }
+
+    .project-flagship {
+        grid-template-columns: 1fr;
+        grid-template-rows: 280px 1fr;
+    }
+
+    .project-flagship .project-visual {
+        min-height: 280px;
+        border-right: 0;
+        border-bottom: 3px solid var(--ink);
+    }
+
+    .project-flagship .project-body {
+        min-height: 300px;
+    }
+
+    .lab-visual {
+        padding: 30px;
     }
 
     .guide-grid {

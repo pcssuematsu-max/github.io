@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local render caches and visual checks
+tmp/
+
+# Generated output (already tracked files remain tracked)
+output/
