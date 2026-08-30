@@ -41,7 +41,7 @@
 .event-board strong,
 .route-stop strong,
 .guide-link-card strong,
-.lab-process-grid strong,
+.lab-feature-copy h3,
 .story-quote {
     font-family: var(--font-display);
 }
@@ -54,10 +54,6 @@
 .route-stop time,
 .story-footer-nav,
 .story-action {
-    font-family: var(--font-label);
-}
-
-.lab-process-grid small {
     font-family: var(--font-label);
 }
 
@@ -305,6 +301,7 @@
 .fact-card {
     min-height: 180px;
     padding: 24px;
+    color: var(--ink);
     background: var(--white);
     border: 2px solid var(--ink);
     box-shadow: 6px 6px 0 var(--story-accent);
@@ -376,85 +373,103 @@
     font-weight: 500;
 }
 
-.lab-screen {
-    margin: 48px 0 0;
-    padding: 14px;
-    color: var(--ink);
-    background: var(--white);
-    border: 3px solid var(--story-accent);
-    box-shadow: 10px 10px 0 var(--story-accent);
-}
-
-.lab-screen img {
-    width: 100%;
-    max-height: 720px;
-    object-fit: contain;
-    background: #f2f3f7;
-}
-
-.lab-screen figcaption {
-    padding: 15px 7px 5px;
-    color: var(--muted);
-    font-size: 0.6rem;
+.lab-section-intro {
+    max-width: 780px;
+    margin-top: 26px !important;
+    color: #c9ccd6;
+    font-size: 0.74rem;
     font-weight: 500;
-    line-height: 1.7;
+    line-height: 1.9;
 }
 
-.lab-process-grid {
+.lab-feature-stack {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 36px;
+    gap: 34px;
+    margin-top: 52px;
 }
 
-.lab-process-grid article {
-    min-height: 190px;
-    padding: 22px;
+.lab-feature-card {
+    --feature-color: var(--blue);
+    display: grid;
+    grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.45fr);
+    overflow: hidden;
     color: var(--ink);
     background: var(--white);
+    border: 3px solid var(--ink);
+    border-top: 9px solid var(--feature-color);
+    box-shadow: 9px 9px 0 var(--feature-color);
+}
+
+.lab-feature-search {
+    --feature-color: var(--green);
+}
+
+.lab-feature-analyze {
+    --feature-color: var(--purple);
+}
+
+.lab-feature-copy {
+    align-self: center;
+    padding: clamp(28px, 4vw, 46px);
+}
+
+.lab-feature-copy small {
+    display: block;
+    color: var(--story-color);
+    font-family: var(--font-label);
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.lab-feature-copy h3 {
+    margin-top: 16px;
+    font-size: clamp(1.28rem, 2.6vw, 2rem);
+    font-weight: 800;
+    line-height: 1.42;
+}
+
+.lab-feature-copy p {
+    margin-top: 18px !important;
+    color: var(--muted);
+    font-size: 0.66rem;
+    font-weight: 500;
+    line-height: 1.85;
+}
+
+.lab-feature-media {
+    min-width: 0;
+    padding: 18px;
+    background: #e9ebef;
+    border-left: 3px solid var(--ink);
+}
+
+.lab-state-media {
+    display: grid;
+    align-content: center;
+}
+
+.lab-feature-media img {
+    width: 100%;
+    object-fit: contain;
+    background: #1a1b20;
     border: 2px solid var(--ink);
 }
 
-.lab-process-grid article:nth-child(1) {
-    box-shadow: 5px 5px 0 var(--blue);
-}
-
-.lab-process-grid article:nth-child(2) {
-    box-shadow: 5px 5px 0 var(--green);
-}
-
-.lab-process-grid article:nth-child(3) {
-    box-shadow: 5px 5px 0 var(--yellow);
-}
-
-.lab-process-grid article:nth-child(4) {
-    box-shadow: 5px 5px 0 var(--red);
-}
-
-.lab-process-grid small,
-.lab-process-grid strong {
-    display: block;
-}
-
-.lab-process-grid small {
-    color: var(--story-color);
-    font-size: 0.5rem;
+.lab-feature-media figcaption {
+    margin-top: 9px;
+    color: #5a5d68;
+    font-family: var(--font-label);
+    font-size: 0.48rem;
     font-weight: 700;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.07em;
+    line-height: 1.55;
 }
 
-.lab-process-grid strong {
-    margin-top: 13px;
-    font-size: 0.92rem;
-    font-weight: 800;
-}
-
-.lab-process-grid p {
-    margin-top: 12px !important;
-    color: var(--muted);
-    font-size: 0.62rem;
-    font-weight: 500;
-    line-height: 1.75;
+.lab-feature-gallery {
+    display: grid;
+    align-content: center;
+    gap: 18px;
 }
 
 .contribution-grid .interest-card:first-child {
@@ -730,8 +745,13 @@
         grid-template-columns: 1fr;
     }
 
-    .lab-process-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .lab-feature-card {
+        grid-template-columns: 1fr;
+    }
+
+    .lab-feature-media {
+        border-top: 3px solid var(--ink);
+        border-left: 0;
     }
 }
 
@@ -753,12 +773,14 @@
         font-size: 0.82rem;
     }
 
-    .lab-process-grid {
-        grid-template-columns: 1fr;
+    .lab-feature-stack {
+        gap: 26px;
+        margin-top: 38px;
     }
 
-    .lab-process-grid article {
-        min-height: auto;
+    .lab-feature-copy,
+    .lab-feature-media {
+        padding: 18px;
     }
 
     .story-hero-art {

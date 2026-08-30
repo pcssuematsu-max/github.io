@@ -7,7 +7,7 @@
         <meta name="description" content="ツイストパズルの探索・学習・可視化を一つのGUIで実験する、個人開発のAIプロジェクト。">
         <link rel="icon" href="assets/images/site/Logo.png">
         <link rel="stylesheet" href="assets/css/home.css?v=20260830-4">
-        <link rel="stylesheet" href="assets/css/project.css?v=20260830-3">
+        <link rel="stylesheet" href="assets/css/project.css?v=20260830-5">
     </head>
     <body class="home-page story-page theme-ai">
         <header class="site-header">
@@ -46,18 +46,78 @@
 
             <section class="story-section story-section-dark">
                 <div class="page-width">
-                    <p class="story-section-label">ONE SCREEN, FOUR QUESTIONS</p>
-                    <h2>状態を見る。候補を探す。<br>学習する。理由を読む。</h2>
-                    <figure class="lab-screen">
-                        <img src="assets/projects/twisty-puzzle-ai-lab/gui-overview.png" alt="多分割キューブの状態とAI解析を並べたTwisty Puzzle AI Labの画面">
-                        <figcaption>キューブの状態、探索候補、Policy / Value、Grad解析、実行ログを同じ画面で見比べられるようにしています。</figcaption>
-                    </figure>
-                    <div class="lab-process-grid">
-                        <article><small>01 / STATE</small><strong>状態を表す</strong><p>色の並びを、探索と学習に使える数値表現へ変換します。</p></article>
-                        <article><small>02 / SEARCH</small><strong>手順を探す</strong><p>評価の高い状態を選びながら、完成へ続く手順を探索します。</p></article>
-                        <article><small>03 / LEARN</small><strong>経験を残す</strong><p>探索結果をデータとして蓄え、次の判断へ反映します。</p></article>
-                        <article><small>04 / ANALYZE</small><strong>判断を観察する</strong><p>どの面やパーツが評価に影響したかを画面上で確認します。</p></article>
+                    <p class="story-section-label">HOW TO READ THE LAB</p>
+                    <h2>画面を三つに分けると、<br>AIの試行錯誤が見えてくる。</h2>
+                    <p class="lab-section-intro">全体画面には多くの情報がありますが、役割は大きく「状態を見る」「探索を追う」「判断を解析する」の三つです。それぞれを切り分けて見ると、AIが何を入力にし、どの手を選び、結果をどう評価したかがつながります。</p>
+
+                    <div class="lab-feature-stack">
+                        <article class="lab-feature-card lab-feature-state">
+                            <div class="lab-feature-copy">
+                                <small>01 / SEE THE STATE</small>
+                                <h3>パズルの現在地を見る</h3>
+                                <p>State Viewerは、現在のパズル状態を展開図で表示します。solveの進行に合わせて更新されるため、スクランブルから完成へ近づく変化を目で追えます。</p>
+                                <p>灰色は部分問題などで評価対象から外したステッカー。パズルごとに専用の表示へ切り替わります。</p>
+                            </div>
+                            <figure class="lab-feature-media lab-state-media">
+                                <img src="assets/projects/twisty-puzzle-ai-lab/gui-state-viewer.png" alt="5×5キューブの現在状態を展開図で示すState Viewer">
+                                <figcaption>STATE VIEWER / 状態・進行・評価対象を一つの図で確認</figcaption>
+                            </figure>
+                        </article>
+
+                        <article class="lab-feature-card lab-feature-search">
+                            <div class="lab-feature-copy">
+                                <small>02 / FOLLOW THE SEARCH</small>
+                                <h3>どの手を選び、<br>評価がどう動いたかを見る</h3>
+                                <p>Move Viewerでは採用した手順と、適用前後のValueを時系列で表示します。Policy Probabilityでは、現在の状態に対する各moveの選択確率を色と数値で比較できます。</p>
+                                <p>「候補に挙がった手」と「実際に選ばれた手」を並べることで、探索の過程を結果だけで終わらせません。</p>
+                            </div>
+                            <div class="lab-feature-media lab-feature-gallery">
+                                <figure>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-move-viewer.png" alt="探索が採用した手順と評価値の変化を示すMove Viewer">
+                                    <figcaption>MOVE VIEWER / 採用手順とValueの変化</figcaption>
+                                </figure>
+                                <figure>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-prob-success-viewer.png" alt="各手のPolicy確率とAIごとの成功状況を示す画面">
+                                    <figcaption>POLICY &amp; SUCCESS / 候補手の確率と試行結果</figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="lab-feature-card lab-feature-analyze">
+                            <div class="lab-feature-copy">
+                                <small>03 / ANALYZE THE DECISION</small>
+                                <h3>AIがどこを見たかを探る</h3>
+                                <p>Grad Viewerは、入力のどの位置が評価へ強く影響したかをパズル上に重ねます。Gradだけでなく、Integrated Gradients、Occlusion、Attention、Embeddingなどへ切り替えて比較できます。</p>
+                                <p>Log Viewerには探索結果、学習指標、データ件数、メモリ状況などを集約。見た目の変化と内部の記録を往復しながら実験します。</p>
+                            </div>
+                            <div class="lab-feature-media lab-feature-gallery">
+                                <figure>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-grad-viewer.png" alt="AIの評価に正負の影響を与えたステッカーを比較するGrad Viewer">
+                                    <figcaption>GRAD VIEWER / 判断へ影響した位置を比較</figcaption>
+                                </figure>
+                                <figure>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-log-viewer.png" alt="探索結果や学習状況、メモリ使用量を表示するLog Viewer">
+                                    <figcaption>LOG VIEWER / 探索・学習・実行状況の記録</figcaption>
+                                </figure>
+                            </div>
+                        </article>
                     </div>
+                </div>
+            </section>
+
+            <section class="story-section story-section-color">
+                <div class="page-width story-section-heading">
+                    <div><p class="story-section-label">RESULTS SO FAR</p><h2>2020年の原型から、<br>試して残したもの。</h2></div>
+                    <div class="story-prose">
+                        <p>最初の原型を作ったのは2020年。自分で設計した評価関数と探索方式Search2を中心に、少しずつ機能と対象パズルを増やしてきました。</p>
+                        <p>2×2、Skewb、Pyraminxは比較的短時間で学習が進みます。3×3以上では実験条件の工夫が必要で、多分割キューブやMegaminxは現在も試行錯誤中です。</p>
+                        <p>2-swapや3-cycleなどの部分問題では、AIが見つけた手順を多く採用しています。既知手順との組み合わせから、より短い手順が見つかれば更新する。その繰り返しも、この実験の成果です。</p>
+                    </div>
+                </div>
+                <div class="page-width fact-grid">
+                    <article class="fact-card"><small>SINCE</small><strong>2020</strong><span>原型を自作してから、細かな修正と実験を継続しています。</span></article>
+                    <article class="fact-card"><small>EXPERIMENT</small><strong>20体のAI</strong><span>複数のAIを数時間動かし、パラメータを保存しながら少しずつ強化します。</span></article>
+                    <article class="fact-card"><small>DISCOVERIES</small><strong>2-swap / 3-cycle</strong><span>AIが見つけた手順も蓄積し、より短い手順が見つかれば更新します。</span></article>
                 </div>
             </section>
 
@@ -67,11 +127,13 @@
                     <div class="story-prose">
                         <p>難しかったのは、探索に失敗した場合のフォールバックや、学習・保存・解析が互いに影響する複雑な流れを、一つのアプリとして扱うことでした。機能を増やすだけでなく、solve、learn、parameter、datasetといった責務ごとに分け、実験条件も切り替えられる構成へ整理しています。</p>
                         <p>このプロジェクトは現在も実験中です。学習済みの答えを配るのではなく、ランダムな状態からAIが何を評価し、どう変わっていくかを試せることを大切にしています。</p>
+                        <p>GitHubで公開している版は、3×3キューブ・Search2 1体・NumPyのみで起動できる軽量構成です。多分割キューブや複数AIを使う画面も、各パネルの役割は共通しています。</p>
+                        <p>今後は計算資源を広げることや、探索・学習に詳しい人と意見を交わすことが次の課題です。いつか、サイト上で挙動を試せる形にすることも目標にしています。</p>
                     </div>
                 </div>
                 <div class="page-width interest-grid contribution-grid">
-                    <article class="interest-card"><strong>自分が設計したこと</strong><p>着想、初期設計、Rubik's Cube・MegaminxのGUIと内部処理、独自探索方式Search2、初期のAI実験を組み立てました。</p></article>
-                    <article class="interest-card"><strong>AIと協働したこと</strong><p>既存設計を土台にした対応パズルの拡張、責務分割のリファクタリング、公開用の整理、自動テストの追加を支援してもらい、内容を確認して採用しています。</p></article>
+                    <article class="interest-card"><strong>自分が設計したこと</strong><p>着想、評価関数、独自探索方式Search2、初期設計、Rubik's Cube・MegaminxのGUIと内部処理、初期のAI実験を組み立てました。</p></article>
+                    <article class="interest-card"><strong>AIと協働したこと</strong><p>PUCTの考え方をもとにしたSearch3の実装補助、対応パズルの拡張、責務分割、公開用整理、自動テストにAIを利用。学習が進むことまで自分で確認して採用しています。</p></article>
                 </div>
             </section>
 
