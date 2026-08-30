@@ -1209,6 +1209,26 @@ html {
     color: #aeb0ba;
 }
 
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.footer-links a {
+    color: var(--white);
+    border-bottom: 1px solid #5f626e;
+    transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.footer-links a:hover {
+    color: var(--yellow);
+    border-color: var(--yellow);
+}
+
 @media screen and (max-width: 1020px) {
     .world-hero {
         grid-template-columns: 1fr;
@@ -1365,6 +1385,10 @@ html {
         display: grid;
         gap: 12px;
         min-height: 130px;
+    }
+
+    .footer-links {
+        grid-row: 2;
     }
 }
 
