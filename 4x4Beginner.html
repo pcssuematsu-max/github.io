@@ -7,7 +7,7 @@
         <meta name="description" content="4x4ルービックキューブの初心者向け手順。センター、エッジペアリング、3x3化、パリティまでリダクション法で解説します。">
         <link rel="stylesheet" href="style.css?v=20260717-3">
         <link rel="stylesheet" href="manual.css?v=20260717-3">
-        <link rel="stylesheet" href="4x4Beginner.css">
+        <link rel="stylesheet" href="4x4Beginner.css?v=4x4-beginner-20260830-1">
     </head>
     <body class="manual-page manual-4x4">
         <header>
@@ -158,28 +158,66 @@
                 </ol>
 
                 <h3 class="subsection"><code>U</code>と<code>U'</code>の使い分け</h3>
-                <p class="paragraph"><code>Rw</code>で目的のセンターをU面へ持ち上げたら、そのパーツを<span class="remark">Rwで戻る列から逃がす方向</span>にU面を回します。下の図は<code>Rw</code>を回した直後の状態を、U面とR面だけで表示しています。逃がす方向によって2ケースを使い分けます。</p>
+                <p class="paragraph"><code>Rw</code>で目的のセンターを作業面へ持ち上げたら、そのパーツを<span class="remark">Rwで戻る列から逃がす方向</span>にU面を回します。図はPDF案に合わせ、<span class="remark">四角い枠の中の上下2図を1セット</span>として読みます。逃がす方向によって2ケースを使い分けます。</p>
 
-                <div class="move-case-grid">
-                    <figure class="cube-figure" data-cube-diagram data-state="center-insert-u" data-label="U方向にセンターを逃がすケース">
-                        <figcaption>
-                            <strong>U方向へ逃がすとき</strong><br>
-                            <code class="move-case-algorithm">Rw U Rw'</code><br>
-                            ピンクを持ち上げ、U方向へ逃がしてから列を戻します。
-                        </figcaption>
+                <div class="manual-case-grid">
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="center-make-1" data-label="バー作りの代表例1。上下2つの4x4正面図。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
+                        </div>
+                        <figcaption>バー作りの代表例 1</figcaption>
                     </figure>
-                    <figure class="cube-figure" data-cube-diagram data-state="center-insert-u-prime" data-label="Uプライム方向にセンターを逃がすケース">
-                        <figcaption>
-                            <strong>U'方向へ逃がすとき</strong><br>
-                            <code class="move-case-algorithm">Rw U' Rw'</code><br>
-                            ピンクを持ち上げ、U'方向へ逃がしてから列を戻します。
-                        </figcaption>
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="center-make-2" data-label="バー作りの代表例2。上下2つの4x4正面図。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
+                        </div>
+                        <figcaption>バー作りの代表例 2</figcaption>
                     </figure>
                 </div>
 
                 <div class="callout">
                     <strong>「入れる → U面で逃がす → 戻す」</strong>
                     <p><code>Rw'</code>を行う前に、入れたセンターがRwの列から外れていることを確認します。列に残ったまま戻すと、パーツも元の位置へ戻ってしまいます。</p>
+                </div>
+
+                <h3 class="subsection">バー作り・バー入れの代表例</h3>
+                <p class="paragraph">PDF案の流れに合わせ、センターは「バーを作る」と「バーを入れる」に分けて考えます。下の手順は代表例です。目的のセンターが反対側にある場合は、<code>Rw</code>を<code>Rw2</code>に読み換えると同じ考え方で処理できます。</p>
+                <div class="manual-case-grid">
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="center-insert" data-label="バーを入れる例。上下2つの4x4正面図。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U2 Rw'</code></div>
+                        </div>
+                        <figcaption>バーを入れる</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="center-three-same" data-label="3つ同じ面にあるとき。上下2つの4x4正面図。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U' Rw'</code></div>
+                        </div>
+                        <figcaption>3つ同じ面にあるとき</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="center-single" data-label="センターを1個入れる例。上下2つの4x4正面図。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
+                        </div>
+                        <figcaption>単体を入れる例</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual manual-case-visual-tall" data-manual-case="center-opposite" data-label="反対面にあるとき。3つの4x4正面図。"></div>
+                            <div class="manual-case-copy">
+                                <strong>反対面にあるとき</strong>
+                                <span>手順</span>
+                                <code>Rw2 U' Rw2</code>
+                                <small>RwをRw2に読み換えます。</small>
+                            </div>
+                        </div>
+                        <figcaption>反対面にあるとき</figcaption>
+                    </figure>
                 </div>
 
                 <h3 class="subsection">2色目以降の順番</h3>
@@ -209,7 +247,76 @@
                     </div>
                 </figure>
 
-                <h3 class="subsection">1組ずつペアにする</h3>
+                <h3 class="subsection">1ペア目を左手前に固定する</h3>
+                <p class="paragraph">最初に見つけたウイングは左手前に固定します。もう片方のウイングは、できるだけ<code>U</code>・<code>D</code>・<code>B</code>で動かして、下のどれかの形に持っていきます。中段にある場合は<code>B</code>、上下段にある場合は<code>U</code>や<code>D</code>で調整すると探しやすくなります。</p>
+
+                <div class="manual-case-stack">
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-first-ru" data-label="1ペア目を右上から入れる配置。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>R U' R'</code></div>
+                        </div>
+                        <figcaption>右上から入れる</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-first-fr" data-label="1ペア目を右上の向き違いから入れる配置。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>F R' F' R</code></div>
+                        </div>
+                        <figcaption>右上の向き違い</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-first-rd" data-label="1ペア目を右下から入れる配置。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>R' D R</code></div>
+                        </div>
+                        <figcaption>右下から入れる</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-first-fprime" data-label="1ペア目を下側の向き違いから入れる配置。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>F' R F R'</code></div>
+                        </div>
+                        <figcaption>下側の向き違い</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-first-flip" data-label="1ペア目をその場で反転する配置。"></div>
+                            <div class="manual-case-copy"><span>手順</span><code>R U R' F R' F' R</code></div>
+                        </div>
+                        <figcaption>その場で反転</figcaption>
+                    </figure>
+                </div>
+
+                <h3 class="subsection">2ペア目を入れるA/B/C手順</h3>
+                <p class="paragraph">1ペア目を含むエッジを手前面の左右に固定したまま、もう1組のウイングを探します。2ペア目の前面を向いている色が<span class="remark">異なるならA</span>、<span class="remark">同じならB</span>を使います。1ペア目と2ペア目が同じエッジの組に入っているときはCです。</p>
+
+                <div class="manual-case-stack">
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-pair-a" data-label="エッジペアリングA手順の配置。"></div>
+                            <div class="manual-case-copy"><strong>A手順</strong><code>u' R U' R' u</code></div>
+                        </div>
+                        <figcaption>A手順：前面色が異なる</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-pair-b" data-label="エッジペアリングB手順の配置。"></div>
+                            <div class="manual-case-copy"><strong>B手順</strong><code>u' F R' F' R u</code></div>
+                        </div>
+                        <figcaption>B手順：前面色が同じ</figcaption>
+                    </figure>
+                    <figure class="manual-case-figure manual-edge-case">
+                        <div class="manual-case-panel">
+                            <div class="manual-case-visual" data-manual-case="edge-pair-c" data-label="エッジペアリングC手順の配置。"></div>
+                            <div class="manual-case-copy"><strong>C手順</strong><code>u' R U R' F R' F' R u</code></div>
+                        </div>
+                        <figcaption>C手順：同じエッジ組</figcaption>
+                    </figure>
+                </div>
+
+                <h3 class="subsection">基本形だけで進める場合</h3>
+                <p class="paragraph">まずは1つの流れで覚えたい場合は、下の基本形に持ち込んでから処理します。重要なのは、退避で差し込まれる上段手前（UF）のエッジを、必ず未完成エッジにしておくことです。</p>
                 <ol class="step-list">
                     <li>同じ2色を持つウイングを2個見つけます。</li>
                     <li>2個を手前左と手前右のエッジ位置へ、<code>u'</code>を回したときにペアになる高さと向きで置きます。</li>
@@ -363,7 +470,8 @@
             </main>
         </div>
 
-        <script src="big-cube-diagrams.js"></script>
+        <script src="manual-case-diagrams.js?v=4x4-beginner-20260830-1"></script>
+        <script src="big-cube-diagrams.js?v=4x4-beginner-20260830-1"></script>
         <script src="manual-print.js"></script>
     </body>
 </html>
