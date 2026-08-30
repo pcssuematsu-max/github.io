@@ -1,117 +1,234 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <title>キューブ王国 | ルービックキューブの揃え方・F2L/OLL/PLL手順集</title>
+        <title>キューブ王国と、その外側。</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="3x3ルービックキューブの初心者向け手順から、回転記号、F2L、OLL、PLL、4x4キューブの揃え方まで図で学べる日本語マニュアルです。">
-        <meta name="keywords" content="ルービックキューブ,揃え方,初心者,F2L,OLL,PLL,4x4,回転記号">
-        <meta property="og:title" content="キューブ王国 | ルービックキューブの揃え方">
-        <meta property="og:description" content="初心者向け3x3手順、回転記号、F2L、OLL、PLL、4x4を図で学べるキューブ練習マニュアル。">
+        <meta name="description" content="数学を考え、キューブを回し、ときどき遠くへ行く。スピードキューブのマニュアル、制作物、旅と思考の記録を集めた場所です。">
+        <meta name="keywords" content="ルービックキューブ,数学,スピードキューブ,制作,旅行,F2L,OLL,PLL,4x4">
+        <meta property="og:title" content="キューブ王国と、その外側。">
+        <meta property="og:description" content="博士と、キューブと、旅。少し変わった人の制作と記録の置き場です。">
         <meta property="og:type" content="website">
         <meta property="og:image" content="Logo.png">
         <meta name="twitter:card" content="summary">
         <link rel="icon" href="Logo.png">
-        <link rel="stylesheet" href="style.css?v=20260717-3">
+        <link rel="stylesheet" href="style.css?v=20260830-1">
+        <link rel="stylesheet" href="home.css?v=20260830-3">
     </head>
     <body class="home-page">
-        <header>
-            <a href = "index.html" class = "back-to-the-home">
-                <img src = "Logo.png" alt = "ホームへ" class = "logo">
+        <header class="site-header">
+            <a href="index.html" class="site-brand" aria-label="トップページへ">
+                <span class="brand-mark" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </span>
+                <span class="brand-name">CUBE KINGDOM <b>/ FIELD NOTES</b></span>
             </a>
-            <h1 id = "title">キューブ王国</h1>
+            <nav class="site-nav" aria-label="メインメニュー">
+                <a href="#about">この場所</a>
+                <a href="#projects">制作物</a>
+                <a href="#guides">キューブ</a>
+                <a href="about.html">この人</a>
+            </nav>
         </header>
-        <div class = "container">
-            <div class = "left-menu">
-            </div>
-            <main class = "main-contents">
-                <section class="home-hero" aria-labelledby="home-heading">
-                    <div class="home-hero-copy">
-                        <p class="home-kicker">RUBIK'S CUBE MANUAL</p>
-                        <h1 id="home-heading">ルービックキューブを、図で迷わず練習する</h1>
-                        <p>はじめての3x3から、回転記号、F2L、OLL、PLL、4x4まで。ケースを見比べながら、必要な手順へすぐ移動できます。</p>
-                    </div>
-                    <img src="CubeLogo.svg" alt="ルービックキューブのロゴ" class="home-hero-image">
-                </section>
 
-                <section class="home-section" aria-labelledby="manual-list-heading">
-                    <div class="home-section-heading">
-                        <p>GUIDES</p>
-                        <h2 id="manual-list-heading">学びたい章を選ぶ</h2>
+        <main>
+            <section class="world-hero" aria-labelledby="home-heading">
+                <div class="hero-copy">
+                    <p class="eyebrow">COLORFUL CURIOSITY, SINCE ALWAYS.</p>
+                    <h1 id="home-heading"><span class="hero-line">キューブ王国と、</span><br><span class="hero-accent">その外側。</span></h1>
+                    <p class="hero-lead">数学を考え、キューブを回し、ときどき遠くへ行く。ここは、そんな少し変わった人の制作と記録の置き場です。</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#projects">制作物を見る</a>
+                        <a class="button button-secondary" href="#guides">キューブを揃える</a>
                     </div>
-                <div class = "cards">
-                    <a href = "3x3.html" aria-label="3x3ルービックキューブ初心者向け手順を開く">
-                        <div class = "card">
-                            <div class = "card-top-half">
-                                <img src="Beginner.svg" class = "card-picture" alt="3x3初心者向け手順の図">
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">まずココ!</h3>
-                                <p class = "card-text">初心者向けの3x3手順で、1面から完成まで進めます。</p>
-                            </div>
+                </div>
+
+                <div class="hero-board" aria-label="数学、キューブ、旅、ものづくりの4つの興味">
+                    <div class="board-card board-math">
+                        <span>01 / THINK</span>
+                        <strong>数学</strong>
+                        <small>考えて、構造を見つける</small>
+                    </div>
+                    <div class="board-card board-cube">
+                        <span>02 / SOLVE</span>
+                        <strong>キューブ</strong>
+                        <img src="CubeLogo.svg" alt="カラフルなキューブ">
+                    </div>
+                    <div class="board-card board-trip">
+                        <span>03 / EXPLORE</span>
+                        <strong>旅</strong>
+                        <small>知らない場所へ行ってみる</small>
+                    </div>
+                    <div class="board-card board-make">
+                        <span>04 / MAKE</span>
+                        <strong>制作</strong>
+                        <small>分かる形、遊べる形にする</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="color-rule" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </section>
+
+            <section class="intro-section page-width" id="about" aria-labelledby="about-heading">
+                <p class="section-label">ABOUT THIS PLACE</p>
+                <div class="intro-grid">
+                    <h2 id="about-heading">好きなものを深く掘り、<br>分かる形にして、<br><em>みんなで楽しむ。</em></h2>
+                    <div class="intro-copy">
+                        <p>キューブの手順を図にしたり、ゲームを考えたり、イベントを開いたり、旅の記録を残したり。ばらばらに見える興味を、ひとつの場所に集めました。</p>
+                        <p>完成したものだけでなく、考えたことや試している途中のものも少しずつ置いていきます。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="projects-section" id="projects" aria-labelledby="projects-heading">
+                <div class="page-width">
+                    <div class="section-heading-row">
+                        <div>
+                            <p class="section-label">SELECTED PROJECTS</p>
+                            <h2 id="projects-heading">つくったもの、育てているもの</h2>
                         </div>
+                        <p>ひとつの色に収まらない活動を、プロジェクトごとに紹介します。</p>
+                    </div>
+
+                    <div class="project-grid">
+                        <article class="project-card project-featured">
+                            <div class="project-visual cube-visual">
+                                <img src="CubeLogo.svg" alt="キューブ王国のカラフルなキューブ">
+                                <span class="project-number">01</span>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-meta">WEB MANUAL / GROWING</p>
+                                <h3>キューブ王国</h3>
+                                <p>はじめての3x3からF2L・OLL・PLL、4x4まで。図を見ながら、自分のペースで練習できるマニュアルです。</p>
+                                <a class="text-link" href="cube-kingdom.html">このプロジェクトを見る <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+
+                        <article class="project-card">
+                            <div class="project-visual game-visual" aria-hidden="true">
+                                <span class="game-card">7</span>
+                                <span class="game-card">●</span>
+                                <span class="game-card">↔</span>
+                                <span class="project-number">02</span>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-meta">GAME DESIGN / PROTOTYPE</p>
+                                <h3>Spectrum Clash</h3>
+                                <p>色と数字、特殊効果を組み合わせて遊ぶオリジナルカードゲーム。ルールと体験を試作しています。</p>
+                                <a class="text-link" href="spectrum-clash.html">ゲームとルールを見る <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+
+                        <article class="project-card">
+                            <div class="project-visual event-visual" aria-hidden="true">
+                                <span class="orbit orbit-one"></span>
+                                <span class="orbit orbit-two"></span>
+                                <strong>1面<br>そろえて<br>みよう！</strong>
+                                <span class="project-number">03</span>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-meta">EVENT / COMMUNITY</p>
+                                <h3>キューブひろば</h3>
+                                <p>初めて触る人も、親子も、経験者も。キューブの面白さをその場で体験できる小さなひろばです。</p>
+                                <a class="text-link" href="cube-hiroba.html">ひろばについて見る <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+
+                        <article class="project-card project-wide">
+                            <div class="project-visual trip-visual" aria-hidden="true">
+                                <div class="route-line"></div>
+                                <span class="route-dot route-a"></span>
+                                <span class="route-dot route-b"></span>
+                                <span class="route-dot route-c"></span>
+                                <strong>TRAVEL<br>FIELD<br>NOTES</strong>
+                                <span class="project-number">04</span>
+                            </div>
+                            <div class="project-body">
+                                <p class="project-meta">TRAVEL / RECORDS</p>
+                                <h3>旅と考えごと</h3>
+                                <p>東北一周をはじめ、歩いた場所、見つけたもの、そのとき考えたこと。旅の記録をこれからまとめていきます。</p>
+                                <a class="text-link" href="tohoku-trip.html">7泊8日の旅を見る <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="guides-section page-width" id="guides" aria-labelledby="guides-heading">
+                <div class="section-heading-row guide-heading">
+                    <div>
+                        <p class="section-label">CUBE KINGDOM</p>
+                        <h2 id="guides-heading">今日は、何を揃える？</h2>
+                    </div>
+                    <p>ケースを見比べながら、必要な手順へすぐ移動できます。</p>
+                </div>
+
+                <div class="guide-grid">
+                    <a class="guide-card guide-yellow" href="3x3.html">
+                        <span class="guide-tag">START HERE</span>
+                        <img src="Beginner.svg" alt="3x3初心者向け手順の図">
+                        <div><strong>3x3 Beginner</strong><small>7ステップで6面完成を目指す</small></div>
                     </a>
-                    <a href = "Symbols.html" aria-label="回転記号の解説を開く">
-                        <div class = "card">
-                            <div class = "card-top-half">  
-                                <img src="Symbols.svg" class = "card-picture" alt="回転記号の一覧図">
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">回転記号</h3>
-                                <p class = "card-text">R、U、Fなどの読み方と回す向きを確認します。</p>
-                            </div>
-                        </div>
+                    <a class="guide-card guide-green" href="Symbols.html">
+                        <span class="guide-tag">BASICS</span>
+                        <img src="Symbols.svg" alt="回転記号の一覧図">
+                        <div><strong>回転記号</strong><small>R、U、Fなどの読み方を確認する</small></div>
                     </a>
-                    <a href = "4x4Beginner.html" aria-label="4x4キューブ初心者向け手順を開く">
-                        <div class = "card">
-                            <div class = "card-top-half">
-                                <img src="4x4Beginner.svg" class = "card-picture" alt="4x4キューブ">
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">4x4 Beginner</h3>
-                                <p class = "card-text">センター、エッジ、パリティまで基本の流れを学びます。</p>
-                            </div>
-                        </div>
+                    <a class="guide-card guide-blue" href="4x4Beginner.html">
+                        <span class="guide-tag">BIG CUBE</span>
+                        <img src="4x4Beginner.svg" alt="4x4キューブ">
+                        <div><strong>4x4 Beginner</strong><small>センターからパリティまで学ぶ</small></div>
                     </a>
-                    <a href = "PLL.html" aria-label="PLL 21種類の手順集を開く">
-                        <div class = "card">
-                            <div class = "card-top-half"> 
-                                <img src="PLLs.svg" class = "card-picture" alt="PLLパターン一覧">
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">PLL</h3>
-                                <p class = "card-text">最後の層の位置を揃える21種類の手順集です。</p>
-                            </div>
-                        </div>
+                    <a class="guide-card guide-red" href="F2L.html">
+                        <span class="guide-tag">SPEED</span>
+                        <img src="F2Ls.svg" alt="F2Lパターン一覧">
+                        <div><strong>F2L</strong><small>コーナーとエッジを組にする</small></div>
                     </a>
-                    <a href = "F2L.html" aria-label="F2L手順集を開く">
-                        <div class = "card">
-                            <div class = "card-top-half"> 
-                                <img src="F2Ls.svg" class = "card-picture" alt="F2Lパターン一覧"> 
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">F2L</h3>
-                                <p class = "card-text">コーナーとエッジを組にして下2段を揃えます。</p>
-                            </div>
-                        </div>
+                    <a class="guide-card guide-purple" href="OLL.html">
+                        <span class="guide-tag">57 CASES</span>
+                        <img src="OLLs.svg" alt="OLLパターン一覧">
+                        <div><strong>OLL</strong><small>最後の層の向きを揃える</small></div>
                     </a>
-                    <a href = "OLL.html" aria-label="OLL 57種類の手順集を開く">
-                        <div class = "card">
-                            <div class = "card-top-half"> 
-                                <img src="OLLs.svg" class = "card-picture" alt="OLLパターン一覧">  
-                            </div>
-                            <div class = "card-bottom-half">
-                                <h3 class = "card-title">OLL</h3>
-                                <p class = "card-text">最後の層の向きを揃える57パターンを練習します。</p>
-                            </div>
-                        </div>
+                    <a class="guide-card guide-pink" href="PLL.html">
+                        <span class="guide-tag">21 CASES</span>
+                        <img src="PLLs.svg" alt="PLLパターン一覧">
+                        <div><strong>PLL</strong><small>最後の層の位置を揃える</small></div>
                     </a>
                 </div>
-                </section>
-            </main>
-        </div>
-        <footer>
+            </section>
 
+            <section class="person-section" id="person" aria-labelledby="person-heading">
+                <div class="page-width person-grid">
+                    <figure class="person-image">
+                        <img src="ProfilePicture.png" alt="キューブ、数学、旅行を組み合わせたプロフィールイラスト">
+                        <figcaption>MATHEMATICS / CUBE / TRAVEL</figcaption>
+                    </figure>
+                    <div class="person-copy">
+                        <p class="section-label">THE PERSON BEHIND IT</p>
+                        <h2 id="person-heading">数学の博士号を持ち、<br>スピードキューブが<span class="nowrap">得意で、</span><br>旅が好きな、ちょっと変な人。</h2>
+                        <p>代数学を学び、群論や類体論を研究。2020年からスピードキューブを続け、地域でその面白さを伝えています。地方都市に一日だけ住むように旅をすることと、高校野球観戦も好きです。</p>
+                        <div class="person-tags" aria-label="興味のある分野">
+                            <span># 数学</span><span># Speedcubing</span><span># 旅行</span><span># ものづくり</span>
+                        </div>
+                        <div class="person-links">
+                            <a class="button person-button" href="about.html">もう少し詳しく</a>
+                            <a class="button person-button person-button-alt" href="https://www.instagram.com/ku1207_cube/?hl=ja" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="page-width footer-inner">
+                <p><strong>CUBE KINGDOM</strong> / FIELD NOTES</p>
+                <p>博士と、キューブと、旅。</p>
+            </div>
+            <div class="footer-colors" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
         </footer>
     </body>
 </html>
