@@ -20,8 +20,9 @@
 }
 
 .story-page.theme-about {
-    --story-color: var(--blue);
-    --story-accent: var(--yellow);
+    --story-color: var(--ink);
+    --story-accent: #d43b3b;
+    background: var(--white);
 }
 
 .story-page.theme-ai {
@@ -661,6 +662,151 @@
     object-fit: cover;
 }
 
+/* 名刺「名刺清書」の、白地に9色の水玉を並べるルールをプロフィールへ展開。 */
+.about-hero {
+    overflow: hidden;
+    color: var(--ink);
+    background: var(--white);
+    border-bottom: 0;
+}
+
+.about-hero .story-hero-inner {
+    position: relative;
+    z-index: 1;
+    min-height: 610px;
+}
+
+.about-hero .story-kicker {
+    color: #3f43b5;
+}
+
+.about-hero .story-meta span {
+    box-shadow: none;
+}
+
+.about-hero .story-meta span:nth-child(1) {
+    border-color: #d43b3b;
+}
+
+.about-hero .story-meta span:nth-child(2) {
+    border-color: #65b838;
+}
+
+.about-hero .story-meta span:nth-child(3) {
+    border-color: #3e82c4;
+}
+
+.about-hero .story-meta span:nth-child(4) {
+    border-color: #c43a78;
+}
+
+.about-spectrum-row {
+    position: absolute;
+    z-index: 2;
+    right: max(24px, calc((100% - 1180px) / 2));
+    left: max(24px, calc((100% - 1180px) / 2));
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.about-spectrum-row-top {
+    top: 31px;
+}
+
+.about-spectrum-row-bottom {
+    bottom: 31px;
+}
+
+.about-spectrum-row i {
+    display: block;
+    width: clamp(10px, 1.7vw, 20px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.about-spectrum-row i:nth-child(1) { background: #d43b3b; }
+.about-spectrum-row i:nth-child(2) { background: #c77b2a; }
+.about-spectrum-row i:nth-child(3) { background: #b8bd29; }
+.about-spectrum-row i:nth-child(4) { background: #65b838; }
+.about-spectrum-row i:nth-child(5) { background: #35b982; }
+.about-spectrum-row i:nth-child(6) { background: #3e82c4; }
+.about-spectrum-row i:nth-child(7) { background: #3f43b5; }
+.about-spectrum-row i:nth-child(8) { background: #8539bd; }
+.about-spectrum-row i:nth-child(9) { background: #c43a78; }
+
+.about-art::before,
+.about-art::after {
+    position: absolute;
+    z-index: 1;
+    width: 52px;
+    aspect-ratio: 1;
+    content: "";
+    border-radius: 50%;
+}
+
+.about-art::before {
+    top: 30px;
+    right: 2px;
+    background: #35b982;
+}
+
+.about-art::after {
+    bottom: 28px;
+    left: 4px;
+    background: #c43a78;
+}
+
+.theme-about .story-section:not(.about-spectrum-section) {
+    background: var(--white);
+}
+
+.about-spectrum-section {
+    position: relative;
+    overflow: hidden;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 11% 12%, #d43b3b 0 9px, transparent 10px),
+        radial-gradient(circle at 18% 12%, #c77b2a 0 9px, transparent 10px),
+        radial-gradient(circle at 25% 12%, #b8bd29 0 9px, transparent 10px),
+        radial-gradient(circle at 32% 12%, #65b838 0 9px, transparent 10px),
+        radial-gradient(circle at 39% 12%, #35b982 0 9px, transparent 10px),
+        radial-gradient(circle at 46% 12%, #3e82c4 0 9px, transparent 10px),
+        radial-gradient(circle at 53% 12%, #3f43b5 0 9px, transparent 10px),
+        radial-gradient(circle at 60% 12%, #8539bd 0 9px, transparent 10px),
+        radial-gradient(circle at 67% 12%, #c43a78 0 9px, transparent 10px),
+        var(--white);
+    border-block: 1px solid #e4e4e8 !important;
+}
+
+.about-spectrum-section .story-section-label {
+    color: #8539bd;
+}
+
+.about-spectrum-section .interest-grid {
+    position: relative;
+}
+
+.about-spectrum-section .interest-card {
+    min-height: 190px;
+    box-shadow: 7px 7px 0 #d43b3b;
+}
+
+.about-spectrum-section .interest-card:nth-child(2) { box-shadow: 7px 7px 0 #c77b2a; }
+.about-spectrum-section .interest-card:nth-child(3) { box-shadow: 7px 7px 0 #65b838; }
+.about-spectrum-section .interest-card:nth-child(4) { box-shadow: 7px 7px 0 #3e82c4; }
+.about-spectrum-section .interest-card:nth-child(5) { box-shadow: 7px 7px 0 #c43a78; }
+
+.theme-about .story-footer-nav {
+    color: var(--ink);
+    background: var(--white);
+    border-top: 12px solid #3f43b5;
+}
+
+.theme-about .story-footer-nav p {
+    color: var(--ink);
+}
+
 .interest-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -701,6 +847,133 @@
     font-size: 0.67rem;
     font-weight: 500;
     line-height: 1.8;
+}
+
+.event-materials {
+    position: relative;
+    overflow: hidden;
+    background: #f6f1ff;
+}
+
+.event-materials::before {
+    position: absolute;
+    top: -118px;
+    right: -100px;
+    width: 330px;
+    aspect-ratio: 1;
+    content: "";
+    border: 26px solid rgba(108, 51, 143, 0.13);
+    transform: rotate(22deg);
+}
+
+.event-material-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1fr);
+    gap: clamp(54px, 10vw, 150px);
+    align-items: center;
+    margin-top: 58px;
+}
+
+.event-material-poster {
+    position: relative;
+    margin: 0;
+}
+
+.event-material-poster::before {
+    position: absolute;
+    z-index: 0;
+    top: 34px;
+    left: -18px;
+    width: 100%;
+    height: calc(100% - 74px);
+    content: "";
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    transform: rotate(-4deg);
+}
+
+.event-material-poster-inner {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 5px solid var(--ink);
+    box-shadow: 12px 12px 0 var(--purple);
+    transform: rotate(2deg);
+}
+
+.event-material-poster img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.event-material-poster figcaption {
+    position: relative;
+    z-index: 2;
+    margin: 26px 0 0 15px;
+    color: var(--ink);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.event-material-poster figcaption span,
+.event-material-number {
+    color: var(--purple);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.event-material-notes {
+    max-width: 520px;
+}
+
+.event-material-notes h3 {
+    margin: 12px 0 22px;
+    color: var(--ink);
+    font-size: clamp(1.65rem, 3.1vw, 2.65rem);
+    font-weight: 800;
+    line-height: 1.32;
+    letter-spacing: -0.04em;
+}
+
+.event-material-notes > p:not(.event-material-number) {
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 2;
+}
+
+.event-material-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 30px 0 0;
+}
+
+.event-material-details div {
+    min-height: 76px;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 2px solid var(--ink);
+}
+
+.event-material-details dt {
+    color: var(--purple);
+    font-size: 0.53rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.event-material-details dd {
+    margin: 8px 0 0;
+    color: var(--ink);
+    font-size: 0.69rem;
+    font-weight: 800;
+    line-height: 1.25;
 }
 
 .story-footer-nav {
@@ -749,6 +1022,11 @@
         grid-template-columns: 1fr;
     }
 
+    .event-material-layout {
+        grid-template-columns: minmax(240px, 420px) 1fr;
+        gap: 54px;
+    }
+
     .lab-feature-media {
         border-top: 3px solid var(--ink);
         border-left: 0;
@@ -795,6 +1073,21 @@
     .guide-link-grid,
     .interest-grid {
         grid-template-columns: 1fr;
+    }
+
+    .event-material-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        margin-top: 42px;
+    }
+
+    .event-material-poster {
+        width: min(360px, calc(100% - 26px));
+        margin-left: 12px;
+    }
+
+    .event-material-details {
+        gap: 8px;
     }
 
     .fact-card {
