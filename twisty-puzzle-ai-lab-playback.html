@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Twisty Puzzle AI Labに登録された3-cycle手順を、3Dパズルで一手ずつ再生します。">
+    <title>AI手順を立体で再生する | Twisty Puzzle AI Lab</title>
+    <link rel="icon" href="assets/images/site/Logo.png">
+    <link rel="stylesheet" href="assets/css/home.css?v=20260901-1">
+    <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
+    <link rel="stylesheet" href="assets/css/twisty-playback.css?v=20260901-1">
+    <script src="assets/vendor/cubing/twisty.js?v=0.63.4" type="module"></script>
+</head>
+<body class="home-page story-page theme-ai playback-page">
+    <header class="site-header">
+        <a href="index.html" class="site-brand" aria-label="トップページへ"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="brand-name">CUBE KINGDOM <b>/ FIELD NOTES</b></span></a>
+        <nav class="site-nav" aria-label="メインメニュー"><a href="index.html#about">この場所</a><a href="index.html#projects">制作物</a><a href="index.html#guides">キューブ</a><a href="about.html">この人</a></nav>
+    </header>
+    <main>
+        <section class="playback-hero" aria-labelledby="page-title"><div class="page-width playback-hero-inner">
+            <p class="story-kicker">TWISTY PUZZLE AI LAB / PLAYBACK</p>
+            <h1 id="page-title">AI手順を、<br>立体で確かめる。</h1>
+            <p>Portfolioに登録された手順から、3つのパーツを巡回させる例を選びました。各パズルは完成直前の状態から始まり、手順を最後まで再生すると完成します。</p>
+            <div class="playback-hero-actions"><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る <span aria-hidden="true">←</span></a><a class="text-link" href="#players">再生例を見る <span aria-hidden="true">↓</span></a></div>
+        </div></section>
+        <section class="playback-intro"><div class="page-width playback-intro-grid">
+            <div><p class="story-section-label">HOW TO USE</p><h2>一手ずつ、変化を追う。</h2></div>
+            <div><p>「再生」を押すと、手順を一手ずつ進めます。左右のボタンで前後の状態にも戻れます。パズル本体はドラッグして自由に回転できます。</p><p class="playback-note">表示する手順は、Python版 <code>Rubiks_portfolio</code> に登録された効果名とmove列をもとにしています。</p></div>
+        </div></section>
+        <section class="playback-gallery" id="players" aria-label="立体再生例"><div class="page-width">
+            <div class="playback-gallery-heading"><p class="story-section-label">3-CYCLE EXAMPLES</p><p>再生後に完成するよう、各手順の逆手順を開始状態として設定しています。</p></div>
+            <div id="playback-grid" class="playback-grid" aria-live="polite"></div>
+        </div></section>
+        <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
+    </main>
+    <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
+    <script type="module" src="assets/js/twisty-playback.js?v=20260901-1"></script>
+</body>
+</html>
