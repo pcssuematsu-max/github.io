@@ -1,5 +1,6 @@
 const examples = [
     {
+        id: "portfolio-3x3-cycle",
         puzzle: "3x3x3",
         label: "3×3 CYCLE",
         title: "中段エッジの3-cycle",
@@ -8,6 +9,7 @@ const examples = [
         setup: "F2 E F2 E'",
     },
     {
+        id: "portfolio-7x7-cycle",
         puzzle: "7x7x7",
         label: "7×7 CYCLE",
         title: "ウイングの3-cycle",
@@ -16,12 +18,22 @@ const examples = [
         setup: "2U' R U' R' 2U R U R'",
     },
     {
+        id: "portfolio-megaminx-cycle",
         puzzle: "megaminx",
         label: "MEGAMINX CYCLE",
         title: "メガミンクスの3-cycle",
         description: "Portfolioに登録された C3[U.bR.R&gt;FLU&gt;RFU]。メガミンクスでも、同じ考え方で3つのパーツを巡回させます。",
         moves: ["F'", "L'", "F", "R'", "F'", "L", "F", "R"],
         setup: "R' F' L' F R F' L F",
+    },
+    {
+        id: "basic-sexy-move",
+        puzzle: "3x3x3",
+        label: "BASIC MOVE",
+        title: "セクシームーブ",
+        description: "R U R' U' の基本4手。完成状態から、手の動きとパーツの変化を観察できます。",
+        moves: ["R", "U", "R'", "U'"],
+        setup: "",
     },
 ];
 
@@ -36,13 +48,19 @@ function makeButton(label, className, onClick) {
     return button;
 }
 
-function createExample(example) {
+function createPlayerCard(example) {
     const card = document.createElement("article");
     card.className = "puzzle-player-card";
 
     const copy = document.createElement("div");
     copy.className = "puzzle-player-copy";
-    copy.innerHTML = `<small>${example.label}</small><h2>${example.title}</h2><p>${example.description}</p>`;
+    const label = document.createElement("small");
+    label.textContent = example.label;
+    const title = document.createElement("h2");
+    title.textContent = example.title;
+    const description = document.createElement("p");
+    description.textContent = example.description;
+    copy.append(label, title, description);
 
     const stage = document.createElement("div");
     stage.className = "puzzle-player-stage";
@@ -88,10 +106,11 @@ function createExample(example) {
         else player.setAttribute("alg", movesSoFar);
         if (typeof player.jumpToEnd === "function") player.jumpToEnd();
         moveNodes.forEach((node, index) => node.classList.toggle("is-active", index === moveIndex - 1));
+        const goal = example.setup ? "開始状態" : "完成状態";
         status.textContent = moveIndex === 0
-            ? `開始状態 / ${example.moves.length}手で完成`
+            ? `${goal} / ${example.moves.length}手`
             : moveIndex === example.moves.length
-                ? "完成"
+                ? "再生完了"
                 : `${moveIndex} / ${example.moves.length} 手目`;
     }
 
@@ -130,8 +149,72 @@ function createExample(example) {
     progress.append(status, moveList);
     card.append(copy, stage, controls, progress);
     renderPosition();
-    return card;
+    return { card, stopPlayback };
+}
+
+function normaliseMoves(value) {
+    return value.trim().split(/\s+/).filter(Boolean);
 }
 
 const grid = document.querySelector("#playback-grid");
-examples.forEach((example) => grid.appendChild(createExample(example)));
+examples.slice(0, 3).forEach((example) => grid.appendChild(createPlayerCard(example).card));
+
+const form = document.querySelector("#algorithm-form");
+const presetSelect = document.querySelector("#algorithm-preset");
+const puzzleSelect = document.querySelector("#algorithm-puzzle");
+const algorithmInput = document.querySelector("#algorithm-input");
+const setupInput = document.querySelector("#setup-input");
+const message = document.querySelector("#algorithm-message");
+const customPlayerHost = document.querySelector("#custom-player");
+let customPlayback = null;
+
+examples.forEach((example) => {
+    const option = document.createElement("option");
+    option.value = example.id;
+    option.textContent = `${example.label} — ${example.title}`;
+    presetSelect.appendChild(option);
+});
+
+function selectPreset() {
+    const example = examples.find((item) => item.id === presetSelect.value);
+    if (!example) return;
+    puzzleSelect.value = example.puzzle;
+    algorithmInput.value = example.moves.join(" ");
+    setupInput.value = example.setup;
+    message.textContent = "再生例を読み込みました。「この手順を表示する」で確認できます。";
+}
+
+function showCustomPlayer() {
+    const moves = normaliseMoves(algorithmInput.value);
+    if (!moves.length) {
+        message.textContent = "再生する手順を入力してください。例: R U R' U'";
+        algorithmInput.focus();
+        return;
+    }
+
+    if (customPlayback) customPlayback.stopPlayback();
+    customPlayerHost.replaceChildren();
+    const customExample = {
+        puzzle: puzzleSelect.value,
+        label: "YOUR ALGORITHM",
+        title: `${puzzleSelect.options[puzzleSelect.selectedIndex].text} の手順`,
+        description: setupInput.value.trim()
+            ? "指定した開始状態から、この手順を一手ずつ再生します。"
+            : "完成状態から、この手順を一手ずつ再生します。",
+        moves,
+        setup: setupInput.value.trim(),
+    };
+    customPlayback = createPlayerCard(customExample);
+    customPlayerHost.appendChild(customPlayback.card);
+    message.textContent = `${moves.length}手の再生を用意しました。パズルをドラッグして見やすい向きにできます。`;
+}
+
+presetSelect.addEventListener("change", selectPreset);
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    showCustomPlayer();
+});
+
+presetSelect.value = examples[0].id;
+selectPreset();
+showCustomPlayer();
