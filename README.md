@@ -16,6 +16,8 @@
 │   │   └── site/           # ロゴ・プロフィール画像
 │   └── projects/           # 制作物ごとの掲載素材
 ├── docs/                   # 制作メモ・デザイン元データ
+│   ├── drafts/              # 検討中の原稿・要件メモ
+│   └── references/          # 参照用の下書き・資料
 ├── downloads/              # 配布用PDF
 ├── tools/                  # PDF生成などの補助ツール
 ├── output/                 # 生成済み成果物
@@ -26,6 +28,9 @@
 
 - `docs/WORKS.md`：制作物・活動の基本情報をまとめる台帳
 - `docs/PROJECT_CASE_STUDIES.md`：ポートフォリオとして伝えるための追加質問票
+- `docs/drafts/ai-lab-playback-requirements.md`：AI Labの手順再生ページに関する要件メモ
+
+`tmp/` と `output/` は、PDF生成や表示確認で作られるローカル生成物です。公開サイトには使わず、Git管理もしません。
 
 ## GitHub Pages
 
