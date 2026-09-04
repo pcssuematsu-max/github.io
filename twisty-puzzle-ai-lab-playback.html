@@ -43,7 +43,7 @@
             <div class="playback-tool-heading"><p class="story-section-label">TRY YOUR ALGORITHM</p><h2 id="tool-title">好きな手順を、すぐ試す。</h2><p>再生例を選ぶか、手順を直接貼り付けてください。開始状態を空欄にすると、完成状態から再生します。</p></div>
             <form id="algorithm-form" class="algorithm-form">
                 <div class="algorithm-field"><label for="algorithm-preset">再生例</label><select id="algorithm-preset" name="preset"><option value="custom">自分で入力する</option></select></div>
-                <div class="algorithm-field"><label for="algorithm-puzzle">パズル</label><select id="algorithm-puzzle" name="puzzle"><option value="3x3x3">3×3×3 キューブ</option><option value="4x4x4">4×4×4 キューブ</option><option value="5x5x5">5×5×5 キューブ</option><option value="6x6x6">6×6×6 キューブ</option><option value="7x7x7">7×7×7 キューブ</option><option value="megaminx">メガミンクス</option><option value="pyraminx">ピラミンクス</option><option value="skewb">スキューブ</option><option value="square1">スクエア1</option></select></div>
+                <div class="algorithm-field"><label for="algorithm-puzzle">パズル</label><select id="algorithm-puzzle" name="puzzle"><option value="2x2x2">2×2×2 キューブ</option><option value="3x3x3">3×3×3 キューブ</option><option value="4x4x4">4×4×4 キューブ</option><option value="5x5x5">5×5×5 キューブ</option><option value="6x6x6">6×6×6 キューブ</option><option value="7x7x7">7×7×7 キューブ</option><option value="megaminx">メガミンクス</option><option value="pyraminx">ピラミンクス</option><option value="skewb">スキューブ</option><option value="square1">スクエア1</option><option value="fto">FTO</option></select></div>
                 <div class="algorithm-field algorithm-field-wide"><label for="algorithm-input">再生する手順</label><textarea id="algorithm-input" name="algorithm" rows="3" spellcheck="false" placeholder="例: R U R' U'"></textarea><p>空白で手を区切ってください。</p></div>
                 <div class="algorithm-field algorithm-field-wide"><label for="setup-input">開始状態（任意）</label><input id="setup-input" name="setup" type="text" spellcheck="false" placeholder="空欄なら完成状態から開始します"><p>この手順を再生する前に適用する手順です。</p></div>
                 <button class="algorithm-submit" type="submit">この手順を表示する</button>
@@ -58,6 +58,6 @@
         <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
-    <script type="module" src="assets/js/twisty-playback.js?v=20260903-1"></script>
+    <script type="module" src="assets/js/twisty-playback.js?v=20260904-1"></script>
 </body>
 </html>

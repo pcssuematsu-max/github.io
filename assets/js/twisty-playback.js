@@ -209,6 +209,26 @@ function showCustomPlayer() {
     message.textContent = `${moves.length}手の再生を用意しました。パズルをドラッグして見やすい向きにできます。`;
 }
 
+function loadPlaybackFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const moves = params.get("moves");
+    if (!moves || !moves.trim()) return false;
+
+    const requestedPuzzle = params.get("puzzle");
+    const hasPuzzle = Array.from(puzzleSelect.options).some(
+        (option) => option.value === requestedPuzzle
+    );
+    if (hasPuzzle) puzzleSelect.value = requestedPuzzle;
+    presetSelect.value = "custom";
+    algorithmInput.value = moves;
+    setupInput.value = params.get("setup") || "";
+    showCustomPlayer();
+    if (!hasPuzzle && requestedPuzzle) {
+        message.textContent = `「${requestedPuzzle}」はこのページで未対応のため、現在選ばれているパズルで表示しています。`;
+    }
+    return true;
+}
+
 presetSelect.addEventListener("change", selectPreset);
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -217,4 +237,4 @@ form.addEventListener("submit", (event) => {
 
 presetSelect.value = examples[0].id;
 selectPreset();
-showCustomPlayer();
+if (!loadPlaybackFromUrl()) showCustomPlayer();
