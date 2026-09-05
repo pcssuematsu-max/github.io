@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <!-- cubing.js の 12×9 スプライト。灰色以外の6マスだけが右手F2Lの対象。 -->
+  <rect width="1200" height="900" fill="#bfbfbf"/>
+  <!-- エッジ FR: 手前＝ピンク、右＝黄緑 -->
+  <rect x="500" y="400" width="100" height="100" fill="#ff00ff"/>
+  <rect x="600" y="400" width="100" height="100" fill="#7fff00"/>
+  <!-- コーナー DRF: クロス色＝水色、右＝黄緑、手前＝ピンク -->
+  <rect x="500" y="600" width="100" height="100" fill="#007fff"/>
+  <rect x="600" y="500" width="100" height="100" fill="#7fff00"/>
+  <rect x="500" y="500" width="100" height="100" fill="#ff00ff"/>
+  <!-- 位置確認用のセンター: D＝水色、F＝ピンク、R＝黄緑 -->
+  <rect x="400" y="700" width="100" height="100" fill="#007fff"/>
+  <rect x="400" y="400" width="100" height="100" fill="#ff00ff"/>
+  <rect x="700" y="400" width="100" height="100" fill="#7fff00"/>
+</svg>

@@ -19,6 +19,8 @@
         <meta name="twitter:image" content="https://pcssuematsu-max.github.io/github.io/assets/images/site/Logo.png">
         <link rel = "stylesheet" href="assets/css/style.css?v=20260717-3">
         <link rel = "stylesheet" href="assets/css/manual.css?v=20260717-3">
+        <link rel="stylesheet" href="assets/css/manual-playback.css?v=20260905-2">
+        <script defer src="assets/vendor/cubing/twisty.js?v=0.63.4-classic-1"></script>
     </head>
     <body class="manual-page manual-f2l">
         <header>
@@ -59,12 +61,14 @@
                 <p class = "paragraph">F2Lには<span class = "remark">4つの基本手順</span>があります。多くのケースは、I型またはT型を作る「変形」と、基本手順でスロットへ入れる「挿入」の2段階に分けて考えられます。</p>
                 <p class = "border-box">本書では、途中のケースをI型またはT型に変えることを<span class = "remark">基本形に帰着させる</span>と表現します。基本形を作ったら、U面で位置を合わせ、最後にスロットへ挿入します。</p>
                 <p class = "paragraph">まずは、I型とT型の基本手順を確認します。それぞれ左右対称の2種類があります。</p>
+                <p class="paragraph">まずは右手で行うI型・T型から、3D再生を試験公開しています。図と同じく、水色をクロス色、ピンクを手前のセンター色、黄緑を右のセンター色として表示します。</p>
                 <h3 class = "subsection">I型</h3>
                 <img src = "assets/images/cube/F2L-I2.svg" class = "mid-images">
                 <details class = "details">
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U' R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-i-right-player" data-alg="R U' R'" data-setup="R U R'" data-stickering="picture" data-sprite="f2lRightSlot" data-focus-note="図と同じ配色です。水色＝クロス色、ピンク＝手前、黄緑＝右。グレーは今回追わないパーツです。">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-I1.svg" class = "mid-images">
@@ -80,6 +84,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-t-right-player" data-alg="R U R'" data-setup="R U' R'" data-stickering="picture" data-sprite="f2lRightSlot" data-focus-note="図と同じ配色です。水色＝クロス色、ピンク＝手前、黄緑＝右。グレーは今回追わないパーツです。">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-T2.svg" class = "mid-images">
@@ -471,5 +476,6 @@
         <script src = "assets/js/jquery-3.7.1.min.js"></script>
         <script src = "assets/js/Script.js"></script>
         <script src = "assets/js/manual-print.js"></script>
+        <script defer src="assets/js/manual-playback.js?v=20260905-3"></script>
     </body>
 </html>
