@@ -166,6 +166,8 @@ const algorithmInput = document.querySelector("#algorithm-input");
 const setupInput = document.querySelector("#setup-input");
 const message = document.querySelector("#algorithm-message");
 const customPlayerHost = document.querySelector("#custom-player");
+const discoveriesStatus = document.querySelector("#discoveries-status");
+const discoveriesGrid = document.querySelector("#discoveries-grid");
 let customPlayback = null;
 
 examples.forEach((example) => {
@@ -229,6 +231,70 @@ function loadPlaybackFromUrl() {
     return true;
 }
 
+function displayPuzzleName(puzzle) {
+    const option = Array.from(puzzleSelect.options).find((item) => item.value === puzzle);
+    return option ? option.textContent : puzzle;
+}
+
+function loadDiscoveryIntoTool(discovery) {
+    puzzleSelect.value = discovery.puzzle;
+    presetSelect.value = "custom";
+    algorithmInput.value = discovery.moves.join(" ");
+    setupInput.value = discovery.setup.join(" ");
+    showCustomPlayer();
+    document.querySelector("#tool").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function createDiscoveryCard(discovery) {
+    const card = document.createElement("article");
+    card.className = "discovery-card";
+    const label = document.createElement("small");
+    label.textContent = "AI DISCOVERY";
+    const title = document.createElement("h3");
+    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.moves.length}手`;
+    const description = document.createElement("p");
+    description.textContent = discovery.setup.length
+        ? `開始局面: ${discovery.setup.length}手のスクランブル`
+        : "完成状態からの手順";
+    const moves = document.createElement("code");
+    moves.className = "discovery-moves";
+    moves.textContent = discovery.moves.join(" ");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "discovery-button";
+    button.textContent = "この成果を再生する";
+    button.addEventListener("click", () => loadDiscoveryIntoTool(discovery));
+    card.append(label, title, description, moves, button);
+    return card;
+}
+
+function isDiscovery(value) {
+    return value
+        && Array.isArray(value.moves)
+        && Array.isArray(value.setup)
+        && value.moves.length > 0
+        && Array.from(puzzleSelect.options).some((option) => option.value === value.puzzle)
+        && value.moves.every((move) => typeof move === "string")
+        && value.setup.every((move) => typeof move === "string");
+}
+
+async function loadDiscoveries() {
+    try {
+        const response = await fetch("assets/data/ai-discoveries.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("discovery feed unavailable");
+        const payload = await response.json();
+        const discoveries = Array.isArray(payload.discoveries)
+            ? payload.discoveries.filter(isDiscovery)
+            : [];
+        discoveriesGrid.replaceChildren(...discoveries.map(createDiscoveryCard));
+        discoveriesStatus.textContent = discoveries.length
+            ? `${discoveries.length}件のAI成果を表示しています。`
+            : "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
+    } catch (error) {
+        discoveriesStatus.textContent = "AI成果は公開後にここへ表示されます。";
+    }
+}
+
 presetSelect.addEventListener("change", selectPreset);
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -238,3 +304,4 @@ form.addEventListener("submit", (event) => {
 presetSelect.value = examples[0].id;
 selectPreset();
 if (!loadPlaybackFromUrl()) showCustomPlayer();
+loadDiscoveries();

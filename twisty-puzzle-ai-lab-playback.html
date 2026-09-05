@@ -20,7 +20,7 @@
     <link rel="icon" href="assets/images/site/Logo.png">
     <link rel="stylesheet" href="assets/css/home.css?v=20260901-1">
     <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
-    <link rel="stylesheet" href="assets/css/twisty-playback.css?v=20260903-1">
+    <link rel="stylesheet" href="assets/css/twisty-playback.css?v=20260905-1">
     <script src="assets/vendor/cubing/twisty.js?v=0.63.4" type="module"></script>
 </head>
 <body class="home-page story-page theme-ai playback-page">
@@ -51,6 +51,11 @@
             <p id="algorithm-message" class="algorithm-message" role="status" aria-live="polite"></p>
             <div id="custom-player" class="custom-player" aria-live="polite"></div>
         </div></section>
+        <section class="playback-discoveries" id="discoveries" aria-labelledby="discoveries-title"><div class="page-width">
+            <div class="playback-discoveries-heading"><p class="story-section-label">AI DISCOVERIES</p><h2 id="discoveries-title">AIが見つけた成果。</h2><p>Python版の探索で見つかった解法を、開始局面とともに記録しています。同じ局面なら、より短い解法だけを残します。</p></div>
+            <p id="discoveries-status" class="discoveries-status" role="status" aria-live="polite">AIの成果を読み込んでいます。</p>
+            <div id="discoveries-grid" class="discoveries-grid" aria-live="polite"></div>
+        </div></section>
         <section class="playback-gallery" id="players" aria-label="立体再生例"><div class="page-width">
             <div class="playback-gallery-heading"><p class="story-section-label">PORTFOLIO EXAMPLES</p><p>Portfolioから選んだ3-cycleの例です。選択欄から、このページ上部の再生ツールへ呼び出せます。</p></div>
             <div id="playback-grid" class="playback-grid" aria-live="polite"></div>
@@ -58,6 +63,6 @@
         <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
-    <script type="module" src="assets/js/twisty-playback.js?v=20260904-1"></script>
+    <script type="module" src="assets/js/twisty-playback.js?v=20260905-1"></script>
 </body>
 </html>
