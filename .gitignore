@@ -8,3 +8,7 @@ tmp/
 
 # Generated output (already tracked files remain tracked)
 output/
+
+# Local-only project notes and source material
+docs/Timeline.md
+docs/private/
