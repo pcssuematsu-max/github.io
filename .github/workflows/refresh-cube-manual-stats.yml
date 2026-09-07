@@ -1,0 +1,37 @@
+name: Refresh Cube Kingdom statistics
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cube-kingdom.html"
+      - "3x3.html"
+      - "Symbols.html"
+      - "4x4Beginner.html"
+      - "F2L.html"
+      - "OLL.html"
+      - "PLL.html"
+      - "assets/images/cube/**"
+      - "tools/update_cube_manual_stats.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update statistics
+        run: python3 tools/update_cube_manual_stats.py
+      - name: Commit refreshed statistics
+        run: |
+          if git diff --quiet -- assets/data/cube-manual-stats.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/cube-manual-stats.json
+          git commit -m "Refresh Cube Kingdom statistics"
+          git push
