@@ -26,8 +26,6 @@
 
 作品ページの原稿は、用途別に次の2ファイルへ分けています。
 
-- `docs/WORKS.md`：制作物・活動の基本情報をまとめる台帳
-- `docs/PROJECT_CASE_STUDIES.md`：ポートフォリオとして伝えるための追加質問票
 - `docs/drafts/ai-lab-playback-requirements.md`：AI Labの手順再生ページに関する要件メモ
 
 `tmp/` と `output/` は、PDF生成や表示確認で作られるローカル生成物です。公開サイトには使わず、Git管理もしません。
