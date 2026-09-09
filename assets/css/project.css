@@ -379,6 +379,49 @@
     font-weight: 500;
 }
 
+.travel-photo-intro {
+    max-width: 700px;
+    margin-top: 24px;
+    color: #50525d;
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 2.05;
+}
+
+.travel-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 46px;
+}
+
+.travel-photo-grid figure {
+    margin: 0;
+    padding: 11px;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--story-accent);
+}
+
+.travel-photo-grid figure:nth-child(2) { box-shadow: 8px 8px 0 var(--green); }
+.travel-photo-grid figure:nth-child(3) { box-shadow: 8px 8px 0 var(--red); }
+
+.travel-photo-grid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: #f2f3f7;
+}
+
+.travel-photo-grid figcaption {
+    padding: 12px 4px 3px;
+    color: var(--muted);
+    font-size: 0.58rem;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
 .lab-section-intro {
     max-width: 780px;
     margin-top: 26px !important;
@@ -1292,7 +1335,8 @@
     }
 
     .fact-grid,
-    .guide-link-grid {
+    .guide-link-grid,
+    .travel-photo-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -1380,6 +1424,7 @@
     .fact-grid,
     .shikoku-note-grid,
     .guide-link-grid,
+    .travel-photo-grid,
     .interest-grid {
         grid-template-columns: 1fr;
     }
