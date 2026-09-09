@@ -881,6 +881,12 @@ html {
     line-height: 1.85;
 }
 
+.travel-entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
 .text-link,
 .coming-soon {
     margin-top: auto;
