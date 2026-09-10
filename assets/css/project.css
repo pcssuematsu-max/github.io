@@ -762,15 +762,21 @@
 .shikoku-prefecture-key li:nth-child(3) { border-left: 7px solid #2647d6; }
 .shikoku-prefecture-key li:nth-child(4) { border-left: 7px solid #f0a400; }
 
-.shikoku-route-list::before { background: linear-gradient(#ff003f 0 25%, #00bf68 25% 50%, #2647d6 50% 75%, #f0a400 75%); }
+.shikoku-route-list::before { background: linear-gradient(#ff003f 0 14.285%, #00bf68 14.285% 28.57%, #2647d6 28.57% 42.855%, #f0a400 42.855% 57.14%, #ff003f 57.14% 71.425%, #00bf68 71.425% 85.71%, #2647d6 85.71%); }
 .shikoku-route-list .route-stop:nth-child(1)::before { border-color: #ff003f; }
 .shikoku-route-list .route-stop:nth-child(2)::before { border-color: #00bf68; }
 .shikoku-route-list .route-stop:nth-child(3)::before { border-color: #2647d6; }
 .shikoku-route-list .route-stop:nth-child(4)::before { border-color: #f0a400; }
+.shikoku-route-list .route-stop:nth-child(5)::before { border-color: #ff003f; }
+.shikoku-route-list .route-stop:nth-child(6)::before { border-color: #00bf68; }
+.shikoku-route-list .route-stop:nth-child(7)::before { border-color: #2647d6; }
 .shikoku-route-list .route-stop:nth-child(1) time { color: #ff6c90; }
 .shikoku-route-list .route-stop:nth-child(2) time { color: #62e4a0; }
 .shikoku-route-list .route-stop:nth-child(3) time { color: #91a6ff; }
 .shikoku-route-list .route-stop:nth-child(4) time { color: #ffd266; }
+.shikoku-route-list .route-stop:nth-child(5) time { color: #ff6c90; }
+.shikoku-route-list .route-stop:nth-child(6) time { color: #62e4a0; }
+.shikoku-route-list .route-stop:nth-child(7) time { color: #91a6ff; }
 
 .shikoku-note-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .shikoku-note-grid .fact-card:nth-child(1) { box-shadow: 6px 6px 0 #ff003f; }
@@ -781,6 +787,15 @@
 .shikoku-note-grid .fact-card:nth-child(2) small { color: #007c43; }
 .shikoku-note-grid .fact-card:nth-child(3) small { color: #2647d6; }
 .shikoku-note-grid .fact-card:nth-child(4) small { color: #a46a00; }
+
+.shikoku-itinerary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shikoku-itinerary-grid .fact-card:nth-child(4n + 1) { box-shadow: 6px 6px 0 #ff003f; }
+.shikoku-itinerary-grid .fact-card:nth-child(4n + 2) { box-shadow: 6px 6px 0 #00bf68; }
+.shikoku-itinerary-grid .fact-card:nth-child(4n + 3) { box-shadow: 6px 6px 0 #2647d6; }
+.shikoku-itinerary-grid .fact-card:nth-child(4n) { box-shadow: 6px 6px 0 #f0a400; }
 
 .about-art img {
     width: min(430px, 100%);
