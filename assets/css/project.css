@@ -830,6 +830,10 @@
 .shikoku-itinerary-grid .fact-card:nth-child(4n + 3) { box-shadow: 6px 6px 0 #2647d6; }
 .shikoku-itinerary-grid .fact-card:nth-child(4n) { box-shadow: 6px 6px 0 #f0a400; }
 
+.tohoku-itinerary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .about-art img {
     width: min(430px, 100%);
     aspect-ratio: 1;
