@@ -423,12 +423,23 @@
 }
 
 .travel-photo-grid figcaption strong {
+    display: block;
     color: var(--ink);
     font-weight: 800;
 }
 
+.travel-photo-grid figcaption small {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--story-color);
+    font-family: var(--font-label);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
 .travel-photo-grid-shikoku {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .lab-section-intro {
@@ -653,6 +664,28 @@
 .route-stop strong {
     font-size: 0.82rem;
     font-weight: 800;
+}
+
+.route-map {
+    max-width: 900px;
+    margin: 54px auto 0;
+    padding: 14px;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 9px 9px 0 var(--story-accent);
+}
+
+.route-map img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.route-map figcaption {
+    padding: 12px 3px 2px;
+    color: #4e5059;
+    font-size: 0.58rem;
+    font-weight: 700;
 }
 
 .event-board {
