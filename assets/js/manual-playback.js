@@ -1,4 +1,5 @@
-const playbackInterval = 760;
+const playbackInterval = 900;
+const halfTurnPlaybackInterval = 1500;
 // file:// で開いたときも追加のファイル読み込みをせず、同じ配色を使えるようにする。
 const embeddedSprites = {
     f2lRightSlot: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjkwMCIgdmlld0JveD0iMCAwIDEyMDAgOTAwIj4KICA8IS0tIGN1YmluZy5qcyDjga4gMTLDlzkg44K544OX44Op44Kk44OI44CC54Gw6Imy5Lul5aSW44GuNuODnuOCueOBoOOBkeOBjOWPs+aJi0YyTOOBruWvvuixoeOAgiAtLT4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI5MDAiIGZpbGw9IiNiZmJmYmYiLz4KICA8IS0tIOOCqOODg+OCuCBGUjog5omL5YmN77yd44OU44Oz44Kv44CB5Y+z77yd6buE57eRIC0tPgogIDxyZWN0IHg9IjUwMCIgeT0iNDAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2ZmMDBmZiIvPgogIDxyZWN0IHg9IjYwMCIgeT0iNDAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzdmZmYwMCIvPgogIDwhLS0g44Kz44O844OK44O8IERSRjog44Kv44Ot44K56Imy77yd5rC06Imy44CB5Y+z77yd6buE57eR44CB5omL5YmN77yd44OU44Oz44KvIC0tPgogIDxyZWN0IHg9IjUwMCIgeT0iMjAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwN2ZmZiIvPgogIDxyZWN0IHg9IjYwMCIgeT0iMzAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzdmZmYwMCIvPgogIDxyZWN0IHg9IjUwMCIgeT0iMzAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2ZmMDBmZiIvPgogIDwhLS0g5L2N572u56K66KqN55So44Gu44K744Oz44K/44O8OiBE77yd5rC06Imy44CBRu+8neODlOODs+OCr+OAgVLvvJ3pu4Tnt5EgLS0+CiAgPHJlY3QgeD0iNDAwIiB5PSIxMDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA3ZmZmIi8+CiAgPHJlY3QgeD0iNDAwIiB5PSI0MDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmYwMGZmIi8+CiAgPHJlY3QgeD0iNzAwIiB5PSI0MDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjN2ZmZjAwIi8+Cjwvc3ZnPgo=",
@@ -242,7 +243,7 @@ function createManualPlayer(trigger) {
     player.setAttribute("background", "none");
     player.setAttribute("hint-facelets", "none");
     player.setAttribute("control-panel", "none");
-    player.setAttribute("tempo-scale", "0.8");
+    player.setAttribute("tempo-scale", "0.65");
     player.setAttribute("experimental-drag-input", "auto");
     stage.appendChild(player);
 
@@ -318,7 +319,8 @@ function createManualPlayer(trigger) {
 
         const previousMoves = moves.slice(0, moveIndex).join(" ");
         player.setAttribute("experimental-setup-alg", [baseSetup, previousMoves].filter(Boolean).join(" "));
-        setPlayerAlgorithm(moves[moveIndex]);
+        const currentMove = moves[moveIndex];
+        setPlayerAlgorithm(currentMove);
         if (typeof player.jumpToStart === "function") player.jumpToStart();
         moveIndex += 1;
         updateProgress();
@@ -328,7 +330,7 @@ function createManualPlayer(trigger) {
             timerId = null;
             renderPosition();
             onFinished?.();
-        }, playbackInterval);
+        }, currentMove.includes("2") ? halfTurnPlaybackInterval : playbackInterval);
     }
 
     function playSequence() {
