@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キューブで「絶対にありえない配置」 | 数学の手ざわり</title>
+    <meta name="description" content="完成したルービックキューブの一部だけを変えた状態は、回転だけで作れるのでしょうか。向きと入れ替えのルールから考えます。">
+    <meta property="og:site_name" content="キューブ王国と、その外側。">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:title" content="キューブで「絶対にありえない配置」">
+    <meta property="og:description" content="キューブを回しても、絶対に作れない配置がある。向きと入れ替えの不思議を図で考える。">
+    <meta property="og:type" content="article">
+    <link rel="icon" href="../assets/images/site/Logo.png">
+    <link rel="stylesheet" href="../assets/css/home.css?v=20260909-1">
+    <link rel="stylesheet" href="../assets/css/math-article.css?v=20260912-2">
+    <script defer src="../assets/vendor/cubing/twisty.js?v=0.63.4-classic-1"></script>
+</head>
+<body class="home-page math-article-page">
+    <header class="site-header">
+        <a href="../index.html" class="site-brand" aria-label="トップページへ">
+            <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="brand-name">CUBE KINGDOM <b>/ FIELD NOTES</b></span>
+        </a>
+        <nav class="site-nav" aria-label="メインメニュー">
+            <a href="../index.html#projects">制作物</a>
+            <a href="../cube-kingdom.html">キューブ</a>
+            <a href="../about.html">この人</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="math-hero" aria-labelledby="article-title">
+            <div class="page-width math-hero-inner">
+                <div class="math-hero-copy">
+                    <p class="math-kicker">MATH FIELD NOTE / 01</p>
+                    <h1 id="article-title">キューブで<br><span>「絶対にありえない配置」</span></h1>
+                    <p class="math-hero-lead">キューブを回していると、どんな配置も作れそうに思える。でも実は、完成状態から少しだけ変えたのに、どれだけ回してもたどり着けない配置がある。</p>
+                    <div class="math-meta"><span>3×3 CUBE</span><span>INVARIANT</span><span>GROUP THEORY</span></div>
+                </div>
+                <div class="hero-cube-stage" aria-label="一つのコーナーだけ向きが変わった、不可能なキューブのイメージ図">
+                    <span class="hero-orbit orbit-a"></span><span class="hero-orbit orbit-b"></span>
+                    <img src="../assets/images/cube/CubeLogo.svg" alt="カラフルな3×3キューブ">
+                    <span class="impossible-pin">?</span>
+                    <p>回すだけでは<br>作れない状態がある</p>
+                </div>
+            </div>
+        </section>
+
+        <article class="math-article page-width">
+            <div class="article-intro">
+                <p class="article-number">01</p>
+                <div>
+                    <p>キューブを揃えられて、OLLやPLLなどある程度手順を知っている人ほど、「このキューブ、絶対揃わなくない？」という配置に出会うことがある。</p>
+                    <p>ここでは、回転だけでは作れない3つの配置を手がかりに、キューブの中に隠れている“約束”を見ていく。</p>
+                </div>
+            </div>
+
+            <section class="article-section" aria-labelledby="three-states">
+                <div class="section-title-row">
+                    <p class="section-tag">FIRST LOOK</p>
+                    <h2 id="three-states">ありそうで、ありえない<br>3つの状態</h2>
+                </div>
+                <p>完成したキューブから、次のどれか一つだけを変えた状態を想像してみよう。どれも「あと少し」に見える。しかし、分解せずに回転だけを続けても完成状態から作ることはできない。</p>
+                <div class="impossible-grid">
+                    <figure class="impossible-card corner-card">
+                        <figcaption><b>01</b><strong>コーナーを1つだけひねる</strong><small>角のパーツ1個だけの向きが違う</small></figcaption>
+                    </figure>
+                    <figure class="impossible-card edge-card">
+                        <figcaption><b>02</b><strong>エッジを1つだけ反転する</strong><small>辺のパーツ1個だけの向きが違う</small></figcaption>
+                    </figure>
+                    <figure class="impossible-card swap-card">
+                        <figcaption><b>03</b><strong>2つだけ入れ替える</strong><small>角だけ、または辺だけを交換する</small></figcaption>
+                    </figure>
+                </div>
+                <aside class="try-box"><span aria-hidden="true">✦</span><p><b>試してみよう。</b> もし手元にキューブがあれば、1つのパーツだけをそっと外して向きを変えてみる。組み直してから回すと、なぜか「最後の1個」が必ず残る。</p></aside>
+            </section>
+
+            <section class="article-section section-corner" aria-labelledby="corner-heading">
+                <div class="section-title-row">
+                    <p class="section-tag">RULE 01</p>
+                    <h2 id="corner-heading">コーナーの向きは、<br>3で割った余りが大事</h2>
+                </div>
+                <div class="split-copy">
+                    <div>
+                        <p>コーナーを全て正しい場所に置き、向きだけ違うように配置することを考える。このとき、各コーナーが正しい向きから何回転ぶんずれているかを見る。</p>
+                        <p>時計回りに120°回転していたら <b>+1</b>、反時計回りなら <b>-1</b> と数える。8つのコーナーの回転数の合計は、必ず3の倍数になる。</p>
+                    </div>
+                    <aside class="plain-note"><b>つまり</b><p>ひとつを時計回りに120°回してしまったら、どこか別のひとつを反時計回りに120°回さないと、帳尻が合わない。</p></aside>
+                </div>
+                <figure class="viewer-figure">
+                    <div class="cube-viewer" data-cube-viewer data-setup="R U R' U R U2 R'" aria-label="Suneによる有効な3×3キューブの状態を表示する立体ビューア"></div>
+                    <figcaption><span>立体で見る</span><strong>コーナーは単独では動かない</strong><em>ドラッグして角の3つ組を観察する</em></figcaption>
+                </figure>
+                <p>ひとつのコーナーだけを回転させるのは、回転数が1なので絶対に起こりえない。一方で、3つのコーナーを同じ向きに120°回転させることはある。1つのコーナーを時計回りに、別のコーナーを反時計回りに回す手順はBLD（目隠し競技）を行う人なら、知っている人も多いはず。</p>
+            </section>
+
+            <section class="article-section section-edge" aria-labelledby="edge-heading">
+                <div class="section-title-row">
+                    <p class="section-tag">RULE 02</p>
+                    <h2 id="edge-heading">エッジの反転は、<br>必ず偶数個</h2>
+                </div>
+                <div class="split-copy">
+                    <div>
+                        <p>エッジを全て正しい場所に置き、向きだけ違うように配置することも考えられる。反転しているエッジの数を数えると、こちらは必ず偶数になる。</p>
+                        <p>だから、エッジを1つだけ反転させることは不可能。OLLで、上面を向いているエッジの数が必ず偶数であることも、この性質の影響を受けている。</p>
+                    </div>
+                    <aside class="plain-note note-blue"><b>見慣れた形にも</b><p>「OLLパリティ」と呼ばれる、一本だけ反転されたような形。実は4×4などの大きいキューブでは起こりうる。</p></aside>
+                </div>
+                <figure class="viewer-figure viewer-figure-cyan">
+                    <div class="cube-viewer" data-cube-viewer data-setup="F R U R' U' F'" aria-label="有効な3×3キューブのエッジの向きを表示する立体ビューア"></div>
+                    <figcaption><span>立体で見る</span><strong>エッジの向きも、まとめて変わる</strong><em>ドラッグして上面と側面を見比べる</em></figcaption>
+                </figure>
+            </section>
+
+            <section class="article-section section-permutation" aria-labelledby="permutation-heading">
+                <div class="section-title-row">
+                    <p class="section-tag">RULE 03</p>
+                    <h2 id="permutation-heading">入れ替えにも、<br>偶奇という約束がある</h2>
+                </div>
+                <p>向きを無視しても、任意の組み合わせを実現できるわけではない。たとえば3×3では、コーナーを2つだけ位置交換することも、エッジを2つだけ位置交換することも不可能だ。</p>
+                <figure class="viewer-figure viewer-figure-dark">
+                    <div class="cube-viewer" data-cube-viewer data-setup="R U R' U' R' F R2 U' R' U' R U R' F'" aria-label="Tパーム後の有効な3×3キューブの状態を表示する立体ビューア"></div>
+                    <figcaption><span>立体で見る</span><strong>Tパームでは、角2つと辺2つが一緒に動く</strong><em>角だけ・辺だけの2交換にはならない</em></figcaption>
+                </figure>
+                <p>キューブでは、エッジの入れ替えの偶奇とコーナーの入れ替えの偶奇は必ず一致する。エッジだけを奇置換に、あるいはコーナーだけを奇置換にすることはできない。PLLでいうTパームやYパームのように、コーナー2つ・エッジ2つを入れ替える手順はどちらも奇なので可能なのだ。</p>
+            </section>
+
+            <section class="takeaway" aria-labelledby="takeaway-heading">
+                <p class="section-tag">THE POINT</p>
+                <h2 id="takeaway-heading">「何でもできる」ように見える中に、<br>変わらないものがある。</h2>
+                <p>コーナーの向きの和、エッジ反転の個数、入れ替えの偶奇。キューブをどれだけ回しても守られるこれらの量を、不変量と呼ぶ。数学は、ときどき「何ができるか」よりも「何をしても変わらないものは何か」を見る学問なのかもしれない。</p>
+                <a class="back-link" href="../index.html">← トップページへ戻る</a>
+            </section>
+        </article>
+    </main>
+    <script defer src="../assets/js/impossible-cube-viewers.js?v=20260912-1"></script>
+</body>
+</html>
