@@ -4,18 +4,18 @@
         <title>Twisty Puzzle AI Lab | プロジェクト</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="ツイストパズルの探索・学習・可視化を一つのGUIで実験する、個人開発のAIプロジェクト。">
+        <meta name="description" content="ツイストパズルの探索・学習・可視化を一つのGUIで実験し、探索成功と既知手順によるfallbackを区別して記録するAIプロジェクト。">
         <link rel="canonical" href="https://pcssuematsu-max.github.io/github.io/twisty-puzzle-ai-lab.html">
         <meta property="og:site_name" content="キューブ王国と、その外側。">
         <meta property="og:locale" content="ja_JP">
         <meta property="og:title" content="Twisty Puzzle AI Lab | キューブ王国と、その外側。">
-        <meta property="og:description" content="ツイストパズルの探索・学習・可視化を一つのGUIで実験する、個人開発のAIプロジェクト。">
+        <meta property="og:description" content="探索成功と既知手順によるfallbackを区別して記録する、ツイストパズルAIの実験環境。">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://pcssuematsu-max.github.io/github.io/twisty-puzzle-ai-lab.html">
         <meta property="og:image" content="https://pcssuematsu-max.github.io/github.io/assets/projects/twisty-puzzle-ai-lab/gui-overview.png">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Twisty Puzzle AI Lab | キューブ王国と、その外側。">
-        <meta name="twitter:description" content="ツイストパズルの探索・学習・可視化を一つのGUIで実験する、個人開発のAIプロジェクト。">
+        <meta name="twitter:description" content="探索成功と既知手順によるfallbackを区別して記録する、ツイストパズルAIの実験環境。">
         <meta name="twitter:image" content="https://pcssuematsu-max.github.io/github.io/assets/projects/twisty-puzzle-ai-lab/gui-overview.png">
         <link rel="icon" href="assets/images/site/Logo.png">
         <link rel="stylesheet" href="assets/css/home.css?v=20260830-4">
@@ -33,14 +33,14 @@
                     <div>
                         <p class="story-kicker">PROJECT 01 / AI &amp; PUZZLE</p>
                         <h1 id="story-title">Twisty Puzzle<br>AI Lab</h1>
-                        <p class="story-lead">キューブを解くAIを作り、その考え方を観察できる形にする。数学、探索、学習、可視化を一つのGUIにつないだ個人開発の実験室です。</p>
+                        <p class="story-lead">キューブを解くAIを作り、その考え方を観察できる形にする。数学、探索、学習、可視化に加え、「探索そのものが解けたのか」「既知手順のfallbackで完了したのか」まで分けて残す、個人開発の実験室です。</p>
                         <div class="story-meta"><span>PYTHON</span><span>TKINTER</span><span>NUMPY / PYTORCH</span><span>EXPERIMENTAL</span></div>
                         <div class="story-actions">
                             <a class="button story-action" href="https://github.com/pcssuematsu-max/Rubiks_portfolio" target="_blank" rel="noopener noreferrer">GitHubでコードを見る <span aria-hidden="true">↗</span></a>
                             <a class="button story-action story-action-alt" href="twisty-puzzle-ai-lab-playback.html">ブラウザで手順を再生する <span aria-hidden="true">→</span></a>
                         </div>
                     </div>
-                    <div class="story-hero-art ai-story-art"><img src="assets/projects/twisty-puzzle-ai-lab/gui-overview.png" alt="Twisty Puzzle AI LabのGUI。キューブの状態、探索候補、AIの解析結果を一画面に表示している"></div>
+                    <div class="story-hero-art ai-story-art"><img src="assets/projects/twisty-puzzle-ai-lab/gui-overview.png?v=20260912-1" alt="Twisty Puzzle AI Labの最新GUI。7×7キューブの状態、Search3の探索候補、自力成功のみを示すSuccess Viewer、実験ログを一画面に表示している"></div>
                 </div>
             </section>
 
@@ -56,7 +56,7 @@
                 <div class="page-width fact-grid">
                     <article class="fact-card"><small>PUZZLES</small><strong>複数のツイストパズル</strong><span>Rubik's Cube系だけでなく、Megaminx、Pyraminx、Skewb、Square-1、FTO、CTOなどを共通の環境で扱います。</span></article>
                     <article class="fact-card"><small>SEARCH</small><strong>Search2 / Search3</strong><span>Policy・Valueを使う独自の優先度探索と、PUCT型探索を比較しながら実験します。</span></article>
-                    <article class="fact-card"><small>ANALYSIS</small><strong>判断の理由を可視化</strong><span>Grad、Occlusion、Attention、Embeddingなどから、AIが状態のどこを見ているか探ります。</span></article>
+                    <article class="fact-card"><small>EXPERIMENT LOG</small><strong>結果の種類まで記録</strong><span>探索成功、既知手順によるfallback完了、未解決を分け、手数・時間・開始局面とともに比較します。</span></article>
                 </div>
             </section>
 
@@ -85,16 +85,16 @@
                                 <small>02 / FOLLOW THE SEARCH</small>
                                 <h3>どの手を選び、<br>評価がどう動いたかを見る</h3>
                                 <p>Move Viewerでは採用した手順と、適用前後のValueを時系列で表示します。Policy Probabilityでは、現在の状態に対する各moveの選択確率を色と数値で比較できます。</p>
-                                <p>「候補に挙がった手」と「実際に選ばれた手」を並べることで、探索の過程を結果だけで終わらせません。</p>
+                                <p>探索が目標へ届かなかった場合は、登録済みの既知手順群を使うfallbackへ移ります。その切替もログへ残し、「候補に挙がった手」と「実際に選ばれた手」を結果の種類とともに追えます。</p>
                             </div>
                             <div class="lab-feature-media lab-feature-gallery">
                                 <figure>
-                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-move-viewer.png" alt="探索が採用した手順と評価値の変化を示すMove Viewer">
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-move-viewer.png?v=20260912-1" alt="Search3の試行ごとの採用手順と評価値の変化を示すMove Viewer">
                                     <figcaption>MOVE VIEWER / 採用手順とValueの変化</figcaption>
                                 </figure>
                                 <figure>
-                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-prob-success-viewer.png" alt="各手のPolicy確率とAIごとの成功状況を示す画面">
-                                    <figcaption>POLICY &amp; SUCCESS / 候補手の確率と試行結果</figcaption>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-prob-success-viewer.png?v=20260912-1" alt="各手のPolicy確率と、自力探索で成功したAIだけを示すSuccess Viewer">
+                                    <figcaption>POLICY &amp; SUCCESS / 候補手の確率と自力探索の成功数</figcaption>
                                 </figure>
                             </div>
                         </article>
@@ -104,16 +104,16 @@
                                 <small>03 / ANALYZE THE DECISION</small>
                                 <h3>AIがどこを見たかを探る</h3>
                                 <p>Grad Viewerは、入力のどの位置が評価へ強く影響したかをパズル上に重ねます。Gradだけでなく、Integrated Gradients、Occlusion、Attention、Embeddingなどへ切り替えて比較できます。</p>
-                                <p>Log Viewerには探索結果、学習指標、データ件数、メモリ状況などを集約。見た目の変化と内部の記録を往復しながら実験します。</p>
+                                <p>Log Viewerには探索結果、学習指標、データ件数、メモリ状況に加え、実験ログの保存状況を集約。見た目の変化と内部の記録を往復しながら実験します。</p>
                             </div>
                             <div class="lab-feature-media lab-feature-gallery">
                                 <figure>
-                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-grad-viewer.png" alt="AIの評価に正負の影響を与えたステッカーを比較するGrad Viewer">
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-grad-viewer.png?v=20260912-1" alt="AIの評価に正負の影響を与えたステッカーを比較するGrad Viewer">
                                     <figcaption>GRAD VIEWER / 判断へ影響した位置を比較</figcaption>
                                 </figure>
                                 <figure>
-                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-log-viewer.png" alt="探索結果や学習状況、メモリ使用量を表示するLog Viewer">
-                                    <figcaption>LOG VIEWER / 探索・学習・実行状況の記録</figcaption>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-log-viewer.png?v=20260912-1" alt="探索結果、実験ログの保存、Web成果への記録状況を表示するLog Viewer">
+                                    <figcaption>LOG VIEWER / 探索・学習・実験ログの記録</figcaption>
                                 </figure>
                             </div>
                         </article>
@@ -123,17 +123,32 @@
 
             <section class="story-section story-section-color">
                 <div class="page-width story-section-heading">
+                    <div><p class="story-section-label">EXPERIMENT LOG</p><h2>「解けた」を、<br>一種類の成功にしない。</h2></div>
+                    <div class="story-prose">
+                        <p>探索が完成状態へ到達した結果と、途中で探索を打ち切って既知手順群から選ぶfallbackによる完了は、同じ「完成」でも意味が異なります。最新版では、この二つを同じ成功数へ混ぜずに記録します。</p>
+                        <p>各runにはパズル、Search2 / Search3などの探索モード、開始局面、採用手順、手数、実行時間、結果区分を保存します。GUIでは自力成功だけをSuccess Viewerに集計し、fallback完了・失敗は実験ログと集計画面で別途確認できます。</p>
+                    </div>
+                </div>
+                <div class="page-width fact-grid">
+                    <article class="fact-card"><small>DIRECT SEARCH</small><strong>探索成功</strong><span>Search2 / Search3が探索そのもので完成へ到達した結果。Success Viewerの「自力成功」として数えます。</span></article>
+                    <article class="fact-card"><small>FALLBACK</small><strong>既知手順で完了</strong><span>探索が進まない場合に、登録済みの既知手順群を使って完了した結果。探索成功とは別に残します。</span></article>
+                    <article class="fact-card"><small>REPRODUCIBLE</small><strong>後から比べられる</strong><span>手数や時間だけでなく、開始局面と手順も保存。条件を変えた実験同士を、再生しながら比較できます。</span></article>
+                </div>
+            </section>
+
+            <section class="story-section story-section-color">
+                <div class="page-width story-section-heading">
                     <div><p class="story-section-label">RESULTS SO FAR</p><h2>2020年の原型から、<br>試して残したもの。</h2></div>
                     <div class="story-prose">
                         <p>最初の原型を作ったのは2020年。自分で設計した評価関数と探索方式Search2を中心に、少しずつ機能と対象パズルを増やしてきました。</p>
                         <p>2×2、Skewb、Pyraminxは比較的短時間で学習が進みます。3×3以上では実験条件の工夫が必要で、多分割キューブやMegaminxは現在も試行錯誤中です。</p>
-                        <p>2-swapや3-cycleなどの部分問題では、AIが見つけた手順を多く採用しています。既知手順との組み合わせから、より短い手順が見つかれば更新する。その繰り返しも、この実験の成果です。</p>
+                        <p>2-swapや3-cycleなどの部分問題では、探索そのものが見つけた手順と、既知手順群を使ったfallbackの結果を分けて見ます。自力探索でより短い手順が見つかったときだけを「AIが見つけた成果」として残し、再生ページへ送れます。</p>
                     </div>
                 </div>
                 <div class="page-width fact-grid">
                     <article class="fact-card"><small>SINCE</small><strong>2020</strong><span>原型を自作してから、細かな修正と実験を継続しています。</span></article>
                     <article class="fact-card"><small>EXPERIMENT</small><strong>20体のAI</strong><span>複数のAIを数時間動かし、パラメータを保存しながら少しずつ強化します。</span></article>
-                    <article class="fact-card"><small>DISCOVERIES</small><strong>2-swap / 3-cycle</strong><span>AIが見つけた手順も蓄積し、より短い手順が見つかれば更新します。</span></article>
+                    <article class="fact-card"><small>DISCOVERIES</small><strong>2-swap / 3-cycle</strong><span>自力探索で見つかった手順だけを蓄積し、同じ局面でより短い解法が見つかれば更新します。</span></article>
                 </div>
             </section>
 
@@ -141,7 +156,7 @@
                 <div class="page-width story-section-heading">
                     <div><p class="story-section-label">DESIGN &amp; DEVELOPMENT</p><h2>好奇心を、実験できる<br>仕組みに変える。</h2></div>
                     <div class="story-prose">
-                        <p>難しかったのは、探索に失敗した場合のフォールバックや、学習・保存・解析が互いに影響する複雑な流れを、一つのアプリとして扱うことでした。機能を増やすだけでなく、solve、learn、parameter、datasetといった責務ごとに分け、実験条件も切り替えられる構成へ整理しています。</p>
+                        <p>難しかったのは、探索に失敗した場合のfallbackや、学習・保存・解析が互いに影響する複雑な流れを、一つのアプリとして扱うことでした。特に、fallbackで完了した結果を探索成功として数えてしまわないよう、実験ログ・Success Viewer・Web成果を役割ごとに分けています。</p>
                         <p>このプロジェクトは現在も実験中です。学習済みの答えを配るのではなく、ランダムな状態からAIが何を評価し、どう変わっていくかを試せることを大切にしています。</p>
                         <p>GitHubで公開している版は、3×3キューブ・Search2 1体・NumPyのみで起動できる軽量構成です。多分割キューブや複数AIを使う画面も、各パネルの役割は共通しています。</p>
                         <p>今後は計算資源を広げることや、探索・学習に詳しい人と意見を交わすことが次の課題です。いつか、サイト上で挙動を試せる形にすることも目標にしています。</p>
