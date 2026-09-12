@@ -611,7 +611,8 @@ html {
 }
 
 .project-featured,
-.project-wide {
+.project-wide,
+.project-math {
     grid-column: span 7;
 }
 
@@ -788,6 +789,64 @@ html {
     text-align: center;
     text-shadow: 4px 4px 0 rgba(32, 33, 42, 0.25);
 }
+
+.math-visual {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto auto;
+    align-content: center;
+    justify-content: center;
+    gap: 10px 16px;
+    color: var(--white);
+    background:
+        radial-gradient(circle at 82% 22%, rgba(246, 201, 69, 0.25), transparent 23%),
+        linear-gradient(135deg, #172b55, #3156c9);
+}
+
+.math-visual-label {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-bottom: 6px;
+    padding: 7px 9px;
+    color: var(--ink);
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    font-family: var(--font-label);
+    font-size: 0.54rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    transform: rotate(-2deg);
+}
+
+.math-equation {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.3rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.08em;
+}
+
+.math-equation b:first-child { color: var(--yellow); }
+.math-equation b:nth-of-type(2) { color: #71d7e6; }
+.math-equation b:last-child { color: #ff9995; }
+.math-equation i { color: rgba(255, 255, 255, 0.8); font-style: normal; }
+
+.math-modulo {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin-top: -4px;
+    color: rgba(255, 255, 255, 0.83);
+    font-family: var(--font-label);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.math-visual .project-number { color: rgba(255, 255, 255, 0.66); }
 
 .orbit {
     position: absolute;
@@ -1253,7 +1312,8 @@ html {
 
     .project-card,
     .project-featured,
-    .project-wide {
+    .project-wide,
+    .project-math {
         grid-column: span 6;
     }
 
@@ -1356,6 +1416,7 @@ html {
     .project-card,
     .project-featured,
     .project-wide,
+    .project-math,
     .project-flagship {
         grid-column: 1;
     }
