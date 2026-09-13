@@ -85,7 +85,7 @@
                                 <small>02 / FOLLOW THE SEARCH</small>
                                 <h3>どの手を選び、<br>評価がどう動いたかを見る</h3>
                                 <p>Move Viewerでは採用した手順と、適用前後のValueを時系列で表示します。Policy Probabilityでは、現在の状態に対する各moveの選択確率を色と数値で比較できます。</p>
-                                <p>探索が目標へ届かなかった場合は、登録済みの既知手順群を使うfallbackへ移ります。その切替もログへ残し、「候補に挙がった手」と「実際に選ばれた手」を結果の種類とともに追えます。</p>
+                                <p>Success Viewerは既定で「自力成功のみ」を表示し、Search2 / Search3が探索そのもので完成へ到達した回数だけを数えます。プルダウンでfallback・失敗を含む表示へ切り替え、「実験ログ」と「集計」から結果の内訳を確かめられます。</p>
                             </div>
                             <div class="lab-feature-media lab-feature-gallery">
                                 <figure>
@@ -93,8 +93,8 @@
                                     <figcaption>MOVE VIEWER / 採用手順とValueの変化</figcaption>
                                 </figure>
                                 <figure>
-                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-prob-success-viewer.png?v=20260912-1" alt="各手のPolicy確率と、自力探索で成功したAIだけを示すSuccess Viewer">
-                                    <figcaption>POLICY &amp; SUCCESS / 候補手の確率と自力探索の成功数</figcaption>
+                                    <img src="assets/projects/twisty-puzzle-ai-lab/gui-prob-success-viewer.png?v=20260912-1" alt="各手のPolicy確率、AI自力成功、結果フィルター、実験ログと集計ボタンを示すSuccess Viewer">
+                                    <figcaption>POLICY &amp; SUCCESS / 自力成功の集計と結果フィルター</figcaption>
                                 </figure>
                             </div>
                         </article>
@@ -126,7 +126,7 @@
                     <div><p class="story-section-label">EXPERIMENT LOG</p><h2>「解けた」を、<br>一種類の成功にしない。</h2></div>
                     <div class="story-prose">
                         <p>探索が完成状態へ到達した結果と、途中で探索を打ち切って既知手順群から選ぶfallbackによる完了は、同じ「完成」でも意味が異なります。最新版では、この二つを同じ成功数へ混ぜずに記録します。</p>
-                        <p>各runにはパズル、Search2 / Search3などの探索モード、開始局面、採用手順、手数、実行時間、結果区分を保存します。GUIでは自力成功だけをSuccess Viewerに集計し、fallback完了・失敗は実験ログと集計画面で別途確認できます。</p>
+                        <p>各runにはパズル、Search2 / Search3などの探索モード、開始局面、採用手順、手数、実行時間、結果区分を保存します。GUIでは自力成功だけをSuccess Viewerに集計し、プルダウンでfallback・失敗も表示できます。「実験ログ」の直近10件からはsetupとmovesを確認し、対応パズルならWeb再生へ送れます。</p>
                     </div>
                 </div>
                 <div class="page-width fact-grid">
