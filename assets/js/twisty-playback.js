@@ -270,7 +270,7 @@ function createDiscoveryCard(discovery) {
     const label = document.createElement("small");
     label.textContent = "AI DISCOVERY";
     const title = document.createElement("h3");
-    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectName}`;
+    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
     const metrics = document.createElement("p");
     metrics.className = "discovery-metrics";
     const orientation = discovery.orientationCount
@@ -303,6 +303,7 @@ function isDiscovery(value) {
         && value.setup.every((move) => typeof move === "string")
         && typeof value.effectName === "string"
         && typeof value.effectClass === "string"
+        && typeof value.effectLabel === "string"
         && Number.isInteger(value.effectCount)
         && value.effectCount > 0
         && Number.isInteger(value.orientationCount)
