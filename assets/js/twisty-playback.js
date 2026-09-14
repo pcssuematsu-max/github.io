@@ -247,7 +247,7 @@ function loadDiscoveryIntoTool(discovery) {
 }
 
 function discoveryScore(discovery) {
-    return discovery.effectCount * discovery.moves.length;
+    return discovery.effectCount ** 2 * discovery.moves.length;
 }
 
 function compareDiscoveries(first, second) {
@@ -258,14 +258,8 @@ function compareDiscoveries(first, second) {
 }
 
 function selectDiscoveryShowcase(discoveries) {
-    const bestByEffectClass = new Map();
-    discoveries.forEach((discovery) => {
-        const current = bestByEffectClass.get(discovery.effectClass);
-        if (!current || compareDiscoveries(discovery, current) < 0) {
-            bestByEffectClass.set(discovery.effectClass, discovery);
-        }
-    });
-    return Array.from(bestByEffectClass.values())
+    return discoveries
+        .slice()
         .sort(compareDiscoveries)
         .slice(0, DISCOVERY_SHOWCASE_LIMIT);
 }
@@ -282,7 +276,7 @@ function createDiscoveryCard(discovery) {
     const orientation = discovery.orientationCount
         ? `・向き変化 ${discovery.orientationCount}`
         : "";
-    metrics.textContent = `効果 ${discovery.effectCount} × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
+    metrics.textContent = `効果 ${discovery.effectCount}² × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
     const description = document.createElement("p");
     description.textContent = discovery.setup.length
         ? `開始局面: ${discovery.setup.length}手のスクランブル`
@@ -326,7 +320,7 @@ async function loadDiscoveries() {
         const showcase = selectDiscoveryShowcase(discoveries);
         discoveriesGrid.replaceChildren(...showcase.map(createDiscoveryCard));
         discoveriesStatus.textContent = showcase.length
-            ? `${discoveries.length}件の成果を${new Set(discoveries.map((item) => item.effectClass)).size}種類の効果へ整理し、スコアの小さい順に上位${showcase.length}件を表示しています。`
+            ? `${discoveries.length}件の成果を個別に比較し、効果数² × 手数の小さい順で上位${showcase.length}件を表示しています。`
             : "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
     } catch (error) {
         discoveriesStatus.textContent = "AI成果は公開後にここへ表示されます。";
