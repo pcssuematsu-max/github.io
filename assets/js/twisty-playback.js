@@ -168,6 +168,7 @@ const message = document.querySelector("#algorithm-message");
 const customPlayerHost = document.querySelector("#custom-player");
 const discoveriesStatus = document.querySelector("#discoveries-status");
 const discoveriesGrid = document.querySelector("#discoveries-grid");
+const DISCOVERY_SHOWCASE_LIMIT = 12;
 let customPlayback = null;
 
 examples.forEach((example) => {
@@ -245,13 +246,43 @@ function loadDiscoveryIntoTool(discovery) {
     document.querySelector("#tool").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function discoveryScore(discovery) {
+    return discovery.effectCount * discovery.moves.length;
+}
+
+function compareDiscoveries(first, second) {
+    return discoveryScore(first) - discoveryScore(second)
+        || first.moves.length - second.moves.length
+        || first.effectCount - second.effectCount
+        || String(first.updatedAt).localeCompare(String(second.updatedAt));
+}
+
+function selectDiscoveryShowcase(discoveries) {
+    const bestByEffectClass = new Map();
+    discoveries.forEach((discovery) => {
+        const current = bestByEffectClass.get(discovery.effectClass);
+        if (!current || compareDiscoveries(discovery, current) < 0) {
+            bestByEffectClass.set(discovery.effectClass, discovery);
+        }
+    });
+    return Array.from(bestByEffectClass.values())
+        .sort(compareDiscoveries)
+        .slice(0, DISCOVERY_SHOWCASE_LIMIT);
+}
+
 function createDiscoveryCard(discovery) {
     const card = document.createElement("article");
     card.className = "discovery-card";
     const label = document.createElement("small");
     label.textContent = "AI DISCOVERY";
     const title = document.createElement("h3");
-    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.moves.length}手`;
+    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectName}`;
+    const metrics = document.createElement("p");
+    metrics.className = "discovery-metrics";
+    const orientation = discovery.orientationCount
+        ? `・向き変化 ${discovery.orientationCount}`
+        : "";
+    metrics.textContent = `効果 ${discovery.effectCount} × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
     const description = document.createElement("p");
     description.textContent = discovery.setup.length
         ? `開始局面: ${discovery.setup.length}手のスクランブル`
@@ -264,7 +295,7 @@ function createDiscoveryCard(discovery) {
     button.className = "discovery-button";
     button.textContent = "この成果を再生する";
     button.addEventListener("click", () => loadDiscoveryIntoTool(discovery));
-    card.append(label, title, description, moves, button);
+    card.append(label, title, metrics, description, moves, button);
     return card;
 }
 
@@ -275,7 +306,13 @@ function isDiscovery(value) {
         && value.moves.length > 0
         && Array.from(puzzleSelect.options).some((option) => option.value === value.puzzle)
         && value.moves.every((move) => typeof move === "string")
-        && value.setup.every((move) => typeof move === "string");
+        && value.setup.every((move) => typeof move === "string")
+        && typeof value.effectName === "string"
+        && typeof value.effectClass === "string"
+        && Number.isInteger(value.effectCount)
+        && value.effectCount > 0
+        && Number.isInteger(value.orientationCount)
+        && value.orientationCount >= 0;
 }
 
 async function loadDiscoveries() {
@@ -286,9 +323,10 @@ async function loadDiscoveries() {
         const discoveries = Array.isArray(payload.discoveries)
             ? payload.discoveries.filter(isDiscovery)
             : [];
-        discoveriesGrid.replaceChildren(...discoveries.map(createDiscoveryCard));
-        discoveriesStatus.textContent = discoveries.length
-            ? `${discoveries.length}件のAI成果を表示しています。`
+        const showcase = selectDiscoveryShowcase(discoveries);
+        discoveriesGrid.replaceChildren(...showcase.map(createDiscoveryCard));
+        discoveriesStatus.textContent = showcase.length
+            ? `${discoveries.length}件の成果を${new Set(discoveries.map((item) => item.effectClass)).size}種類の効果へ整理し、スコアの小さい順に上位${showcase.length}件を表示しています。`
             : "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
     } catch (error) {
         discoveriesStatus.textContent = "AI成果は公開後にここへ表示されます。";

@@ -44,6 +44,7 @@
 .discovery-card small { color: #b4155d; font-weight: 800; letter-spacing: .1em; }
 .discovery-card h3 { margin: 10px 0 8px; font-size: 1.25rem; }
 .discovery-card p { margin: 0 0 13px; color: #61707a; font-size: .87rem; line-height: 1.7; }
+.discovery-card .discovery-metrics { margin: 0 0 8px; color: #b4155d; font-size: .82rem; font-weight: 800; letter-spacing: .02em; }
 .discovery-moves { display: block; max-height: 4.8em; overflow: hidden; margin: 0 0 18px; color: #263844; font: 700 .82rem/1.75 ui-monospace,SFMono-Regular,Menlo,monospace; word-break: break-word; }
 .discovery-button { width: 100%; margin-top: auto; border: 1px solid #cdd8de; border-radius: 9px; padding: 10px; color: #263844; background: #f3f7f8; font: inherit; font-weight: 800; cursor: pointer; }
 .discovery-button:hover, .discovery-button:focus-visible { outline: none; color: #fff; border-color: #d51f73; background: #d51f73; }
