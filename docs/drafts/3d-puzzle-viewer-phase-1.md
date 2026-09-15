@@ -11,7 +11,7 @@ Phase 1では、3D描画に **Three.js** を採用する。既存サイトはビ
 採用する最小構成は以下。
 
 - `WebGLRenderer`: Canvasへの描画
-- `OrbitControls`: ドラッグによる視点回転とズーム
+- `OrbitControls`: 将来のドラッグによる視点回転とズームの基盤（現在は直接操作を一時停止）
 - `RoundedBoxGeometry`: 控えめな丸みを持つキューブ本体
 - `MeshPhysicalMaterial`、環境光、方向光: 光沢のある面キャップを教材として色を読み取りやすい陰影で描く
 
@@ -88,9 +88,9 @@ const cube3Definition = {
   geometry: {
     kind: "cube-grid",
     layerWidths: { x: [1, 1, 1], y: [1, 1, 1], z: [1, 1, 1] },
-    cubieGap: 0.053,
-    cubieCornerRadius: 0.105, // 仮値。最終的にはGAN系らしくさらに丸める
-    faceCap: { size: 0.965, depth: 0.09, cornerRadius: 0.12, material: "glossy-color" }, // 仮値
+    cubieGap: 0.01,
+    cubieCornerRadius: 0.17, // 面を詰めつつ、コーナーカットの丸い逃げを残す
+    surfaceModel: "single-rounded-resin-shell-per-cubie",
     innerMechanismColor: "#77766f",
   },
 
@@ -115,7 +115,7 @@ const cube3Definition = {
 };
 ```
 
-3×3の基準造形は、中国製ステッカーレスキューブらしい印象を目標にする。コーナーカットを感じられる程度の角の丸め・逃がしを、描画負荷と教材としての読みやすさを損なわない範囲で実装する。各面はステッカーと縁の二層ではなく、大きく丸い面色の樹脂キャップとして描く。太い黒線や色付きの縁は使わず、ピース間の細い隙間から中性の内部機構が見えることで境界を作る。角の丸みは現行より強め、GANキューブらしい丸みを最終調整の目標にする。ただしこの追い込みは、回転機能と教材としての読みやすさが安定した後に行う。
+3×3の基準造形は、中国製ステッカーレスキューブらしい印象を目標にする。各キュービーは、面ごとに色を変えられる一体の丸い樹脂シェルとして描く。これにより、エッジの2面が接する辺、コーナーの3面が交差する頂点まで、面色が丸い立体形状の上を連続して回り込み、単に平面パネルを重ねた見た目にしない。太い黒線や色付きの縁は使わず、キュービー同士の細い隙間から中性の内部機構が見えることで境界を作る。センターのロゴは表示しない。
 
 ### 定義から生成するもの
 
@@ -146,13 +146,26 @@ const solvedState = {
 ステッカーの表示色は、`pieces[].stickers`と現在の`orientationId`を組み合わせて描画時に求める。つまり「色の配列」を状態の正本にしない。教材用の色変更やグレー化は、別の`ViewerTheme`で上書きする。
 
 ```js
+// F2Lを載せ替える際に組み直す、設定形式の仮例。
 const viewerTheme = {
   stickerColors: { U: "#f4f4f0", R: "#d51f73", F: "#2d9a75" },
   cubieColor: "#77766f", // ピース間の隙間に見える内部機構
-  emphasis: { stickerIds: [], dimOthers: false },
+  emphasis: {
+    // pieceId:face。回転しても、同じ物理ステッカーを追い続ける。
+    stickerIds: ["corner-DFR:D", "corner-DFR:F", "corner-DFR:R", "edge-FR:F", "edge-FR:R"],
+    colors: {
+      "corner-DFR:D": "#007fff", // クロス色
+      "corner-DFR:F": "#ff00ff", "edge-FR:F": "#ff00ff", // 手前
+      "corner-DFR:R": "#7fff00", "edge-FR:R": "#7fff00", // 横
+    },
+    inactiveColor: "#bfbfbf",
+    dimOthers: true,
+  },
   uiMode: "portfolio",
 };
 ```
+
+`emphasis.stickerIds`は物理ステッカーを選ぶ配列で、`emphasis.colors`にはページ固有の色を指定する。指定がないステッカーは`inactiveColor`へ寄せられる。外部ページは`createPuzzleViewer()`の`theme`へ渡すか、生成後に`viewer.setEmphasis()`で更新する。既存Web教材のF2L配色（水色＝クロス色、ピンク＝手前、黄緑＝横、グレー＝今回追わないパーツ）は、この形式が扱えることを確認するための仮例である。F2Lを独自ビューアへ移すときは、ケースごとの開始状態・注目ステッカー・配色を改めて組み直し、この仮例を引き継がない。
 
 ## 手順・再生の最小API
 
@@ -190,9 +203,9 @@ viewer.destroy();
 最小デモは [`3d-puzzle-viewer.html`](../../3d-puzzle-viewer.html) に実装した。共通の状態計算・定義・Three.js描画は [`assets/js/puzzle-viewer/cube3-viewer.js`](../../assets/js/puzzle-viewer/cube3-viewer.js)、画面固有の再生UIは [`assets/js/puzzle-viewer/demo.js`](../../assets/js/puzzle-viewer/demo.js) に分けている。
 
 - Three.js r180と必要な公式アドオンは、`assets/vendor/three/r180/`に固定配置した。
-- 3×3の26 slot / 26ピースと24通りの離散的な向きは、起動時に検証する。[`tests/puzzle-viewer-state.mjs`](../../tests/puzzle-viewer-state.mjs) は、すべての対応手の4回転・逆手、wide moveと展開表記、全体回転と展開表記を検証する。
-- 外層、中央層、wide、全体回転を含む3×3表記の再生、前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。
-- キュービーと面キャップの丸みを強め、色そのものの大きな光沢キャップと、隙間に見える中性の内部機構でステッカーレスらしい境界表現を実装した。
+- 3×3の26 slot / 26ピースと24通りの離散的な向きに加え、2×2〜7×7の表面ピース構成と各対応手の4回転・逆手を起動時に検証する。[`tests/puzzle-viewer-state.mjs`](../../tests/puzzle-viewer-state.mjs) は、wide move・全体回転を含む表記も検証する。
+- 2×2〜7×7の外層、奇数層の中央層、wide、全体回転を共通の状態遷移と描画で再生できる。3Rwなどの複数層wide moveも盤面サイズに応じて使える。4×4以上の外側列は内側列より太くし、[`Rubiks_portfolio/core/cube_constants.py`](../../../Python/Rubiks_portfolio/core/cube_constants.py)の`outside_size` / `inside_size`比を表示サイズへ正規化している。前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。ドラッグ／スワイプによる直接操作は、FRUコーナーのF面を上へ動かした際にR面が回る期待へ合わせて層選択を再設計するまで無効化している。
+- キュービーを面ごとに色を変えられる一体の丸い樹脂シェルとして描き、隙間に見える中性の内部機構でステッカーレスらしい境界表現を実装した。
 - WebGL 2が使えないブラウザでは、3D Canvasの代わりに対応環境を案内する。
 
 ## portfolio・教材から使う入口（実装済み）
@@ -215,13 +228,15 @@ viewer.seek(2);
 viewer.play();
 ```
 
-公開ページ [`3d-puzzle-viewer.html`](../../3d-puzzle-viewer.html) は次のURLを受け取る。`3x3`と`3x3x3`は既存データとの互換用の別名で、URLは正規の`cube-3x3`へ更新される。
+`teachingSteps`を渡すと、手順位置ごとの説明文と強調設定を外部ページが所有できる。実例は[`3d-puzzle-viewer-embed-example.html`](../../3d-puzzle-viewer-embed-example.html)に置く。画面固有の操作UI・色・文章を共通部品へ混ぜず、portfolioや教材ページごとに変えられるようにする。
+
+公開ページ [`3d-puzzle-viewer.html`](../../3d-puzzle-viewer.html) は次のURLを受け取る。`2x2`〜`7x7`と`2x2x2`〜`7x7x7`は既存データとの互換用の別名で、URLは正規の`cube-2x2`〜`cube-7x7`へ更新される。
 
 ```text
 ?puzzle=cube-3x3&setup=F2+D&moves=R+U+R%27+U%27&position=2&theme=focus-front&view=6.1,5.4,7.8,0,0,0
 ```
 
-- `puzzle`: 現在は`cube-3x3`のみ
+- `puzzle`: `cube-2x2`〜`cube-7x7`
 - `setup`: 解けた状態へ先に適用する手順（省略可）
 - `moves`: 再生する手順（省略可）
 - `position`: 先頭を0とする現在位置（省略時は0）
@@ -234,4 +249,4 @@ Python側は[`core/web_playback.py`](../../../Python/Rubiks_portfolio/core/web_p
 
 ## 次の設計対象
 
-次は、教材で使う説明テキストと対象ステッカーの強調を、手順の各位置に結び付けるデータ形式を決める。
+次は、NxNの見た目を実機へ寄せるための外側／内側列幅と、既存教材を独自ビューアへ載せ替えるときの開始状態・注目ステッカー・説明テキストを、手順の各位置に結び付けるデータ形式を決める。

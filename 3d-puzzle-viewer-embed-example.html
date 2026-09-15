@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="独自3Dパズルビューアを、別ページへ埋め込むための実例です。">
+    <title>3Dビューア埋め込み例 | キューブ王国と、その外側。</title>
+    <link rel="icon" href="assets/images/site/Logo.png">
+    <link rel="stylesheet" href="assets/css/home.css?v=20260901-1">
+    <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
+    <link rel="stylesheet" href="assets/css/puzzle-viewer.css?v=20260915-5">
+</head>
+<body class="home-page story-page theme-ai puzzle-viewer-page">
+    <header class="site-header">
+        <a href="index.html" class="site-brand" aria-label="トップページへ"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="brand-name">CUBE KINGDOM <b>/ FIELD NOTES</b></span></a>
+        <nav class="site-nav" aria-label="メインメニュー"><a href="3d-puzzle-viewer.html">3Dビューア試作</a><a href="twisty-puzzle-ai-lab-playback.html">AI Lab</a></nav>
+    </header>
+    <main>
+        <section class="puzzle-viewer-hero" aria-labelledby="page-title"><div class="page-width puzzle-viewer-hero-inner">
+            <p class="story-kicker">EMBED EXAMPLE / OWN 3D VIEWER</p>
+            <h1 id="page-title">ページの文脈に、<br>キューブを置く。</h1>
+            <p>このページは、パズル・開始状態・手順・テーマ・手ごとの教材情報を、外部ページから独自ビューアへ渡す最小の実例です。</p>
+        </div></section>
+        <section class="puzzle-viewer-main"><div class="page-width">
+            <div class="puzzle-viewer-heading"><div><p class="story-section-label">EMBEDDED COMPONENT</p><h2>テーマも説明も、呼び出す側が決める。</h2></div><p>見た目の配色と、各位置で注目するステッカー・説明文は、このページのデータとして定義しています。</p></div>
+            <div class="cube3-embed-shell">
+                <div id="embed-cube-stage" class="cube3-embed-stage" aria-label="埋め込み3Dキューブ。直接のドラッグとスワイプ操作は現在一時停止しています。"><p id="embed-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGL 2を利用できません。対応ブラウザで開いてください。</p></div>
+                <div class="cube3-embed-panel">
+                    <p class="cube3-embed-kicker">LESSON NOTE</p>
+                    <p id="embed-note" class="cube3-embed-note" aria-live="polite"></p>
+                    <p id="embed-status" class="cube3-status" aria-live="polite"></p>
+                    <div class="cube3-transport" aria-label="再生操作"><button id="embed-start" class="cube3-button" type="button">最初へ</button><button id="embed-previous" class="cube3-button" type="button">戻る</button><button id="embed-play" class="cube3-button cube3-play" type="button">再生</button><button id="embed-next" class="cube3-button" type="button">進む</button></div>
+                    <button id="embed-reset-view" class="cube3-button cube3-embed-reset" type="button">視点を正面へ</button>
+                </div>
+            </div>
+            <p class="puzzle-viewer-note">直接のドラッグ／スワイプ操作は、直感的な層選択を再設計するまで一時停止しています。手順の再生、前後移動、視点リセットで状態を確かめられます。</p>
+        </div></section>
+    </main>
+    <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>EMBED EXAMPLE / OWN 3D VIEWER</p><a class="button story-action" href="3d-puzzle-viewer.html">単体デモへ</a></div></footer>
+    <script type="module" src="assets/js/puzzle-viewer/embed-example.js?v=20260915-11"></script>
+</body>
+</html>

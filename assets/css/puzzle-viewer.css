@@ -46,6 +46,16 @@
 .cube3-quick-button { min-width: 42px; padding-inline: 9px; font: 800 .84rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .cube3-share-status { min-height: 1.5em; margin: 14px 0 -19px; color: #53626e; font-size: .82rem; line-height: 1.5; text-align: center; }
 .puzzle-viewer-note { max-width: 880px; margin: 32px auto 0; color: #60707d; line-height: 1.9; text-align: center; }
+.puzzle-viewer-footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.cube3-embed-shell { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); overflow: hidden; border: 1px solid rgba(22,38,50,.14); border-radius: 24px; background: #fff; box-shadow: 0 20px 52px rgba(33,48,60,.12); }
+.cube3-embed-stage { position: relative; min-height: 440px; background: radial-gradient(circle at 50% 38%, #fff 0%, #fff4f9 60%, #f2dce8 100%); touch-action: pan-y; }
+.cube3-embed-stage canvas { display: block; width: 100%; height: 100%; }
+.cube3-embed-panel { display: flex; flex-direction: column; justify-content: center; padding: 32px; border-left: 1px solid #ead9e2; background: #fffafb; }
+.cube3-embed-kicker { margin: 0 0 12px; color: #ad0d57; font-size: .75rem; font-weight: 900; letter-spacing: .13em; }
+.cube3-embed-note { min-height: 4.8em; margin: 0; color: #263844; font-size: 1.04rem; font-weight: 750; line-height: 1.8; }
+.cube3-embed-panel .cube3-status { margin-top: 17px; }
+.cube3-embed-reset { width: 100%; margin-top: 12px; }
 @media (max-width: 850px) { .puzzle-viewer-hero { padding: 116px 0 62px; } .puzzle-viewer-main { padding: 58px 0 75px; } .puzzle-viewer-heading { display: block; } .puzzle-viewer-heading > p { margin-top: 16px; } .cube3-layout { grid-template-columns: 1fr; } .cube3-stage { min-height: 350px; } .cube3-control-panel { border-top: 1px solid #dce4e8; border-left: 0; } }
-@media (max-width: 520px) { .cube3-toolbar { align-items: flex-start; flex-direction: column; } .cube3-toolbar-actions { width: 100%; justify-content: space-between; } .cube3-toolbar select { max-width: 166px; } .cube3-stage { min-height: 310px; } .cube3-control-panel { padding: 18px; } .cube3-form-row { display: grid; grid-template-columns: 1fr; } .cube3-submit { width: 100%; } .cube3-transport { gap: 5px; } .cube3-button { padding-inline: 6px; font-size: .78rem; } .cube3-settings { grid-template-columns: 1fr; gap: 12px; } }
+@media (max-width: 850px) { .cube3-embed-shell { grid-template-columns: 1fr; } .cube3-embed-stage { min-height: 350px; } .cube3-embed-panel { border-top: 1px solid #ead9e2; border-left: 0; } }
+@media (max-width: 520px) { .cube3-toolbar { align-items: flex-start; flex-direction: column; } .cube3-toolbar-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; } .cube3-toolbar select, .cube3-copy-link { grid-column: 1 / -1; max-width: none; } .cube3-stage, .cube3-embed-stage { min-height: min(54svh, 350px); } .cube3-control-panel, .cube3-embed-panel { padding: 18px; } .cube3-form-row { display: grid; grid-template-columns: 1fr; } .cube3-submit { width: 100%; } .cube3-transport { grid-template-columns: repeat(2, 1fr); gap: 7px; } .cube3-button { padding-inline: 8px; font-size: .82rem; } .cube3-settings { grid-template-columns: 1fr; gap: 12px; } .puzzle-viewer-footer-links { justify-content: flex-start; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

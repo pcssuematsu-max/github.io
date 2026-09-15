@@ -1,6 +1,8 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260915-6";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260915-17";
 
-const SUPPORTED_PUZZLE_IDS = new Set(["cube-3x3", "3x3", "3x3x3"]);
+const SUPPORTED_PUZZLE_IDS = new Set([2, 3, 4, 5, 6, 7].flatMap((size) => [
+  `cube-${size}x${size}`, `${size}x${size}`, `${size}x${size}x${size}`,
+]));
 const stage = document.querySelector("#cube3-stage");
 const status = document.querySelector("#cube3-status");
 const tokensHost = document.querySelector("#cube3-tokens");
@@ -16,20 +18,27 @@ const resetViewButton = document.querySelector("#cube3-reset-view");
 const copyLinkButton = document.querySelector("#cube3-copy-link");
 const shareStatus = document.querySelector("#cube3-share-status");
 const speedSelect = document.querySelector("#cube3-speed");
+const displaySelect = document.querySelector("#cube3-display");
 const themeSelect = document.querySelector("#cube3-theme");
 const quickMoves = document.querySelector("#cube3-quick-moves");
 const fallback = document.querySelector("#cube3-fallback");
 
 const query = new URLSearchParams(window.location.search);
 const requestedPuzzle = query.get("puzzle");
+const selectedPuzzle = normalizePuzzleId(requestedPuzzle);
 const requestedSetup = query.get("setup") || "";
 const requestedAlgorithm = query.get("moves");
 const requestedPosition = query.get("position");
-const requestedTheme = query.get("theme") === "focus-front" ? "focus-front" : "standard";
+const themeFromUrl = query.get("theme");
+const requestedTheme = ["focus-front", "f2l-right"].includes(themeFromUrl)
+  && (themeFromUrl !== "f2l-right" || selectedPuzzle === "cube-3x3") ? themeFromUrl : "standard";
 const requestedCameraState = parseCameraState(query.get("view"));
 const initialWarnings = [];
 if (requestedPuzzle && !SUPPORTED_PUZZLE_IDS.has(requestedPuzzle)) {
   initialWarnings.push(`「${requestedPuzzle}」はまだ対応していません。3×3を表示しています。`);
+}
+if (themeFromUrl === "f2l-right" && selectedPuzzle !== "cube-3x3") {
+  initialWarnings.push("F2L右スロットの配色例は3×3専用のため、標準の配色を表示しています。");
 }
 if (query.get("view") && !requestedCameraState) {
   initialWarnings.push("共有された視点を読み取れなかったため、標準の視点を表示しています。");
@@ -38,6 +47,7 @@ const initialError = initialWarnings.join(" ");
 
 if (requestedAlgorithm !== null) input.value = requestedAlgorithm;
 themeSelect.value = requestedTheme;
+displaySelect.value = selectedPuzzle;
 
 let viewer;
 let lastSnapshot = {
@@ -59,6 +69,12 @@ function parseCameraState(value) {
   return { position: [x, y, z], target: [targetX, targetY, targetZ] };
 }
 
+function normalizePuzzleId(value) {
+  const source = String(value || "cube-3x3").toLowerCase();
+  const match = /^(?:cube-)?([2-7])x\1(?:x\1)?$/.exec(source);
+  return match ? `cube-${match[1]}x${match[1]}` : "cube-3x3";
+}
+
 function serializeCameraState(cameraState) {
   if (!cameraState) return "";
   return [...cameraState.position, ...cameraState.target]
@@ -68,9 +84,25 @@ function serializeCameraState(cameraState) {
 
 function themeFor(themeId) {
   const focusFront = themeId === "focus-front";
+  const f2lRightColors = {
+    "corner-DFR:D": "#007fff",
+    "corner-DFR:F": "#ff00ff",
+    "corner-DFR:R": "#7fff00",
+    "edge-FR:F": "#ff00ff",
+    "edge-FR:R": "#7fff00",
+  };
+  const f2lRight = themeId === "f2l-right";
   return {
     ...DEFAULT_THEME,
-    emphasis: { stickerFaces: focusFront ? ["F"] : [], dimOthers: focusFront },
+    emphasis: f2lRight ? {
+      stickerIds: Object.keys(f2lRightColors),
+      colors: f2lRightColors,
+      inactiveColor: "#bfbfbf",
+      dimOthers: true,
+    } : {
+      stickerFaces: focusFront ? ["F"] : [],
+      dimOthers: focusFront,
+    },
   };
 }
 
@@ -94,7 +126,7 @@ async function copyText(value) {
 function updateAddress(snapshot) {
   const next = new URL(window.location.href);
   next.search = "";
-  next.searchParams.set("puzzle", "cube-3x3");
+  next.searchParams.set("puzzle", snapshot.puzzleId);
   if (snapshot.setup) next.searchParams.set("setup", snapshot.setup);
   if (snapshot.algorithm) next.searchParams.set("moves", snapshot.algorithm);
   if (snapshot.position) next.searchParams.set("position", String(snapshot.position));
@@ -121,6 +153,7 @@ function renderTokens(snapshot) {
 
 function render(snapshot) {
   lastSnapshot = snapshot;
+  if (document.activeElement !== input) input.value = snapshot.algorithm;
   const current = snapshot.position === 0 ? "開始状態" : `現在の手: ${snapshot.currentMove}`;
   status.textContent = `${current}。${snapshot.position}手目 / ${snapshot.totalMoves}手中。`;
   setupNote.hidden = !snapshot.setup;
@@ -136,7 +169,7 @@ function render(snapshot) {
 
 try {
   viewer = createPuzzleViewer(stage, {
-    puzzleId: "cube-3x3",
+    puzzleId: selectedPuzzle,
     algorithm: input.value,
     speed: Number(speedSelect.value),
     theme: themeFor(requestedTheme),
@@ -200,6 +233,12 @@ copyLinkButton.addEventListener("click", async () => {
   }
 });
 speedSelect.addEventListener("change", () => viewer?.setSpeed(Number(speedSelect.value)));
+displaySelect.addEventListener("change", () => {
+  const next = new URL(window.location.href);
+  next.searchParams.set("puzzle", displaySelect.value);
+  next.searchParams.delete("position");
+  window.location.assign(next);
+});
 themeSelect.addEventListener("change", () => {
   viewer?.setTheme(themeFor(themeSelect.value), themeSelect.value);
 });
