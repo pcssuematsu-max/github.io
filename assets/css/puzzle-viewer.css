@@ -1,0 +1,51 @@
+.puzzle-viewer-page { color: #172330; background: #edf2f4; }
+.puzzle-viewer-hero { padding: 145px 0 78px; color: #f6fbff; background: radial-gradient(circle at 83% 9%, rgba(87,151,255,.35), transparent 29rem), radial-gradient(circle at 15% 90%, rgba(213,31,115,.21), transparent 26rem), #162633; }
+.puzzle-viewer-hero-inner { max-width: 900px; }
+.puzzle-viewer-hero h1 { margin: 12px 0 22px; font-size: clamp(3rem, 7vw, 6.1rem); line-height: .98; letter-spacing: -.06em; }
+.puzzle-viewer-hero p:not(.story-kicker) { max-width: 680px; margin: 0; color: #c8d5df; font-size: 1.08rem; line-height: 1.9; }
+.puzzle-viewer-main { padding: 72px 0 100px; }
+.puzzle-viewer-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 24px; }
+.puzzle-viewer-heading h2 { margin: 8px 0 0; font-size: clamp(2rem,4vw,3.2rem); line-height: 1.1; letter-spacing: -.045em; }
+.puzzle-viewer-heading > p { max-width: 450px; margin: 0; color: #53626e; line-height: 1.8; }
+.cube3-shell { overflow: hidden; border: 1px solid rgba(22,38,50,.14); border-radius: 24px; background: #fff; box-shadow: 0 20px 52px rgba(33,48,60,.12); }
+.cube3-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 18px; border-bottom: 1px solid #dce4e8; background: #fbfcfc; }
+.cube3-toolbar-title { margin: 0; font-weight: 900; letter-spacing: .08em; }
+.cube3-toolbar-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 9px; }
+.cube3-toolbar select, .cube3-button, .cube3-quick-button { min-height: 42px; border: 1px solid #cbd6dc; border-radius: 9px; padding: 8px 12px; color: #172330; background: #fff; font: inherit; font-weight: 750; cursor: pointer; }
+.cube3-toolbar select { max-width: 152px; font-size: .9rem; }
+.cube3-button:hover:not(:disabled), .cube3-button:focus-visible, .cube3-quick-button:hover:not(:disabled), .cube3-quick-button:focus-visible { outline: none; border-color: #d51f73; box-shadow: 0 0 0 3px rgba(213,31,115,.17); }
+.cube3-button:disabled, .cube3-quick-button:disabled { opacity: .45; cursor: not-allowed; }
+.cube3-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, .85fr); }
+.cube3-stage { position: relative; min-height: 460px; background: radial-gradient(circle at 50% 38%, #fff 0%, #f1f5f6 58%, #d9e3e7 100%); touch-action: pan-y; }
+.cube3-stage canvas { display: block; width: 100%; height: 100%; }
+.cube3-fallback { position: absolute; inset: 0; display: grid; place-items: center; box-sizing: border-box; margin: 0; padding: 30px; color: #53626e; line-height: 1.8; text-align: center; }
+.cube3-fallback[hidden] { display: none; }
+.cube3-control-panel { padding: 24px; border-left: 1px solid #dce4e8; }
+.cube3-form label, .cube3-control-label { display: block; margin-bottom: 8px; color: #263844; font-size: .9rem; font-weight: 850; }
+.cube3-form-row { display: flex; gap: 9px; }
+.cube3-form input { min-width: 0; flex: 1; border: 1px solid #bfcdd4; border-radius: 9px; padding: 10px 11px; color: #172330; background: #fff; font: .93rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.cube3-form input:focus-visible { outline: 3px solid rgba(75,150,255,.42); outline-offset: 1px; }
+.cube3-submit { color: #fff; border-color: #d51f73; background: #d51f73; white-space: nowrap; }
+.cube3-submit:hover:not(:disabled), .cube3-submit:focus-visible { border-color: #ae0e58; background: #ae0e58; }
+.cube3-notation-note { margin: 8px 0 -2px; color: #657681; font-size: .78rem; line-height: 1.5; }
+.cube3-error { min-height: 1.45em; margin: 8px 0 0; color: #ad0d57; font-size: .85rem; line-height: 1.55; }
+.cube3-setup-note { margin: 20px 0 -15px; color: #657681; font-size: .78rem; line-height: 1.5; }
+.cube3-status { min-height: 1.45em; margin: 24px 0 10px; color: #657681; font-size: .88rem; line-height: 1.5; }
+.cube3-tokens { display: flex; flex-wrap: wrap; gap: 6px; min-height: 34px; }
+.cube3-token { border: 0; border-radius: 7px; padding: 6px 8px; color: #53626e; background: #e7ecef; font: 800 .82rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; }
+.cube3-token.is-complete { color: #8d9aa2; background: #f0f3f4; }
+.cube3-token.is-current { color: #fff; background: #d51f73; box-shadow: 0 3px 9px rgba(180,21,93,.24); }
+.cube3-transport { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 23px; }
+.cube3-play { color: #fff; border-color: #d51f73; background: #d51f73; }
+.cube3-play:hover:not(:disabled), .cube3-play:focus-visible { border-color: #ae0e58; background: #ae0e58; }
+.cube3-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+.cube3-settings select { box-sizing: border-box; width: 100%; min-height: 40px; border: 1px solid #cbd6dc; border-radius: 9px; padding: 8px; color: #263844; background: #fff; font: inherit; font-size: .88rem; }
+.cube3-quick { margin-top: 22px; padding-top: 19px; border-top: 1px solid #e0e7ea; }
+.cube3-quick p { margin: 0 0 10px; color: #53626e; font-size: .85rem; line-height: 1.6; }
+.cube3-quick-moves { display: flex; flex-wrap: wrap; gap: 7px; }
+.cube3-quick-button { min-width: 42px; padding-inline: 9px; font: 800 .84rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.cube3-share-status { min-height: 1.5em; margin: 14px 0 -19px; color: #53626e; font-size: .82rem; line-height: 1.5; text-align: center; }
+.puzzle-viewer-note { max-width: 880px; margin: 32px auto 0; color: #60707d; line-height: 1.9; text-align: center; }
+@media (max-width: 850px) { .puzzle-viewer-hero { padding: 116px 0 62px; } .puzzle-viewer-main { padding: 58px 0 75px; } .puzzle-viewer-heading { display: block; } .puzzle-viewer-heading > p { margin-top: 16px; } .cube3-layout { grid-template-columns: 1fr; } .cube3-stage { min-height: 350px; } .cube3-control-panel { border-top: 1px solid #dce4e8; border-left: 0; } }
+@media (max-width: 520px) { .cube3-toolbar { align-items: flex-start; flex-direction: column; } .cube3-toolbar-actions { width: 100%; justify-content: space-between; } .cube3-toolbar select { max-width: 166px; } .cube3-stage { min-height: 310px; } .cube3-control-panel { padding: 18px; } .cube3-form-row { display: grid; grid-template-columns: 1fr; } .cube3-submit { width: 100%; } .cube3-transport { gap: 5px; } .cube3-button { padding-inline: 6px; font-size: .78rem; } .cube3-settings { grid-template-columns: 1fr; gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

@@ -27,8 +27,17 @@
 作品ページの原稿は、用途別に次の2ファイルへ分けています。
 
 - `docs/drafts/ai-lab-playback-requirements.md`：AI Labの手順再生ページに関する要件メモ
+- `docs/drafts/3d-puzzle-viewer-spec.md`：独自3Dパズルビューアの仕様窓口。Google Docsの正本リンク、同期情報、設計原則、段階的な開発計画を記録
+- `docs/drafts/3d-puzzle-viewer-phase-1.md`：Three.js採用、状態とアニメーションの分離、`PuzzleDefinition` / `PuzzleState`の初期設計
+- `docs/drafts/3d-puzzle-viewer-phase-1-ui-and-cube.md`：PC・スマホのUIワイヤー、操作規約、3×3のslot・ピース・面回転の生成規約
+
+3Dパズルビューアに触れる作業では、リポジトリ直下の `AGENTS.md` と上記の仕様窓口を先に確認します。仕様の正本は、仕様窓口からリンクしているGoogle Docsです。
 
 `tmp/` と `output/` は、PDF生成や表示確認で作られるローカル生成物です。公開サイトには使わず、Git管理もしません。
+
+## 3Dパズルビューア試作
+
+[`3d-puzzle-viewer.html`](3d-puzzle-viewer.html) は、独自3Dビューアの3×3最小デモです。外層・中央層・wide move・全体回転を含む手順の入力、再生、一手送り・戻し、視点操作、速度変更、教材向けのF面強調を確認できます。開始状態・手順・現在位置・視点・テーマはURLで再現でき、「この状態をコピー」で共有リンクを作れます。既存の [`twisty-puzzle-ai-lab-playback.html`](twisty-puzzle-ai-lab-playback.html) は`cubing.js`版として維持しています。
 
 ## GitHub Pages
 
