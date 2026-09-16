@@ -9,7 +9,7 @@
     <link rel="icon" href="assets/images/site/Logo.png">
     <link rel="stylesheet" href="assets/css/home.css?v=20260901-1">
     <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
-    <link rel="stylesheet" href="assets/css/puzzle-viewer.css?v=20260915-5">
+    <link rel="stylesheet" href="assets/css/puzzle-viewer.css?v=20260916-1">
     <script type="importmap">
     {
       "imports": {
@@ -31,11 +31,11 @@
             <p>教材・portfolio・AI探索結果で共通利用するための、独自3Dパズルビューアの最小デモです。2×2〜7×7を、手順と現在手を迷わず追える形で作っています。</p>
         </div></section>
         <section class="puzzle-viewer-main" aria-labelledby="demo-title"><div class="page-width">
-            <div class="puzzle-viewer-heading"><div><p class="story-section-label">PHASE 1 / NxN FOUNDATION</p><h2 id="demo-title">一手ずつ、状態を確かめる。</h2></div><p>2×2〜7×7の手順入力と再生に対応しています。直接のドラッグ／スワイプ操作は、層選択の見直しまで一時停止中です。</p></div>
+            <div class="puzzle-viewer-heading"><div><p class="story-section-label">PHASE 1 / NxN FOUNDATION</p><h2 id="demo-title">一手ずつ、状態を確かめる。</h2></div><p>2×2〜7×7の手順入力と再生に対応しています。ドラッグでは視点を回せます。ステッカー上のスワイプ回転は、層選択の見直しまで一時停止中です。</p></div>
             <div class="cube3-shell">
                 <div class="cube3-toolbar"><p class="cube3-toolbar-title">NxN CUBE</p><div class="cube3-toolbar-actions"><select id="cube3-theme" aria-label="ステッカー表示"><option value="standard">標準の配色</option><option value="focus-front">F色を強調</option><option value="f2l-right">F2L右スロットの配色例（3×3）</option></select><button id="cube3-reset-view" class="cube3-button" type="button">視点を正面へ</button><button id="cube3-copy-link" class="cube3-button cube3-copy-link" type="button">この状態をコピー</button></div></div>
                 <div class="cube3-layout">
-                <div id="cube3-stage" class="cube3-stage" aria-label="NxN 3Dキューブ。直接のドラッグとスワイプ操作は現在一時停止しています。"><p id="cube3-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGL 2を利用できません。手順の確認には、対応ブラウザで開いてください。</p></div>
+                <div id="cube3-stage" class="cube3-stage" aria-label="NxN 3Dキューブ。ドラッグで視点を回せます。ステッカー上のスワイプ回転は現在一時停止しています。"><p id="cube3-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGL 2を利用できません。手順の確認には、対応ブラウザで開いてください。</p></div>
                     <div class="cube3-control-panel">
                         <form id="cube3-form" class="cube3-form"><label for="cube3-algorithm">手順</label><div class="cube3-form-row"><input id="cube3-algorithm" value="R U R' U'" autocomplete="off" spellcheck="false" aria-describedby="cube3-notation-note cube3-error"><button class="cube3-button cube3-submit" type="submit">表示する</button></div><p id="cube3-notation-note" class="cube3-notation-note">外層、x / y / z、Rw（またはr）、3Rwなどのwide moveを使えます。M / E / Sは奇数層のみです。</p><p id="cube3-error" class="cube3-error" role="alert"></p></form>
                         <p id="cube3-setup-note" class="cube3-setup-note" hidden></p>
@@ -48,10 +48,10 @@
                 </div>
             </div>
             <p id="cube3-share-status" class="cube3-share-status" role="status" aria-live="polite"></p>
-            <p class="puzzle-viewer-note">直接のドラッグ／スワイプ操作は、FRUコーナーのF面を上へ動かしたときにR面が回るような、直感的な層選択へ組み直すまで一時停止しています。注目ステッカーの色とグレー化は、呼び出すページごとに渡せます。F2Lの配色例は既存Web教材と同じく、水色＝クロス色、ピンク＝手前、黄緑＝横、グレー＝今回追わないパーツです。キーボードでは、入力欄の外で <kbd>Space</kbd> を押すと再生・停止、<kbd>←</kbd> / <kbd>→</kbd> で前後移動できます。</p>
+            <p class="puzzle-viewer-note">背景をドラッグすると視点を回せます。ステッカー上のスワイプ回転は、FRUコーナーのF面を上へ動かしたときにR面が回るような、直感的な層選択へ組み直すまで一時停止しています。注目ステッカーの色とグレー化は、呼び出すページごとに渡せます。F2Lの配色例は既存Web教材と同じく、水色＝クロス色、ピンク＝手前、黄緑＝横、グレー＝今回追わないパーツです。キーボードでは、入力欄の外で <kbd>Space</kbd> を押すと再生・停止、<kbd>←</kbd> / <kbd>→</kbd> で前後移動できます。</p>
         </div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>EXPERIMENT / 3D PUZZLE VIEWER</p><div class="puzzle-viewer-footer-links"><a class="button story-action" href="3d-puzzle-viewer-embed-example.html">埋め込み例を見る</a><a class="button story-action" href="twisty-puzzle-ai-lab-playback.html">cubing.js版の再生ページへ</a></div></div></footer>
-    <script type="module" src="assets/js/puzzle-viewer/demo.js?v=20260915-18"></script>
+    <script type="module" src="assets/js/puzzle-viewer/demo.js?v=20260916-1"></script>
 </body>
 </html>

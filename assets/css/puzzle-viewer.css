@@ -16,7 +16,7 @@
 .cube3-button:hover:not(:disabled), .cube3-button:focus-visible, .cube3-quick-button:hover:not(:disabled), .cube3-quick-button:focus-visible { outline: none; border-color: #d51f73; box-shadow: 0 0 0 3px rgba(213,31,115,.17); }
 .cube3-button:disabled, .cube3-quick-button:disabled { opacity: .45; cursor: not-allowed; }
 .cube3-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, .85fr); }
-.cube3-stage { position: relative; min-height: 460px; background: radial-gradient(circle at 50% 38%, #fff 0%, #f1f5f6 58%, #d9e3e7 100%); touch-action: pan-y; }
+.cube3-stage { position: relative; min-height: 460px; background: radial-gradient(circle at 50% 38%, #fff 0%, #f1f5f6 58%, #d9e3e7 100%); touch-action: none; }
 .cube3-stage canvas { display: block; width: 100%; height: 100%; }
 .cube3-fallback { position: absolute; inset: 0; display: grid; place-items: center; box-sizing: border-box; margin: 0; padding: 30px; color: #53626e; line-height: 1.8; text-align: center; }
 .cube3-fallback[hidden] { display: none; }
@@ -48,7 +48,7 @@
 .puzzle-viewer-note { max-width: 880px; margin: 32px auto 0; color: #60707d; line-height: 1.9; text-align: center; }
 .puzzle-viewer-footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 .cube3-embed-shell { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); overflow: hidden; border: 1px solid rgba(22,38,50,.14); border-radius: 24px; background: #fff; box-shadow: 0 20px 52px rgba(33,48,60,.12); }
-.cube3-embed-stage { position: relative; min-height: 440px; background: radial-gradient(circle at 50% 38%, #fff 0%, #fff4f9 60%, #f2dce8 100%); touch-action: pan-y; }
+.cube3-embed-stage { position: relative; min-height: 440px; background: radial-gradient(circle at 50% 38%, #fff 0%, #fff4f9 60%, #f2dce8 100%); touch-action: none; }
 .cube3-embed-stage canvas { display: block; width: 100%; height: 100%; }
 .cube3-embed-panel { display: flex; flex-direction: column; justify-content: center; padding: 32px; border-left: 1px solid #ead9e2; background: #fffafb; }
 .cube3-embed-kicker { margin: 0 0 12px; color: #ad0d57; font-size: .75rem; font-weight: 900; letter-spacing: .13em; }

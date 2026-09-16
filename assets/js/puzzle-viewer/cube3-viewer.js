@@ -8,9 +8,10 @@ const FACE_NORMALS = {
 };
 // RoundedBoxGeometry inherits BoxGeometry's material-group order.
 const BOX_GROUP_FACES = ["R", "L", "U", "D", "F", "B"];
-// Direct manipulation is deliberately paused until swipe direction can choose
-// the neighbouring layer users expect (for example F-panel upward → R turn).
-const DIRECT_MANIPULATION_ENABLED = false;
+// Sticker swiping is deliberately paused until its direction can choose the
+// neighbouring layer users expect (for example F-panel upward → R turn).
+// OrbitControls remains available for looking around the whole cube.
+const STICKER_SWIPE_ENABLED = false;
 
 const IDENTITY = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const AXIS_INDEX = { x: 0, y: 1, z: 2 };
@@ -499,7 +500,7 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
   controls.maxDistance = 12;
   controls.target.set(0, 0, 0);
   controls.update();
-  controls.enabled = DIRECT_MANIPULATION_ENABLED;
+  controls.enabled = true;
 
   // Each cubie is one rounded, multi-colour resin shell. This lets the colour
   // of an edge or corner flow over the curved edge into its adjacent panels.
@@ -784,7 +785,7 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
     controls.enabled = true;
   }
 
-  if (DIRECT_MANIPULATION_ENABLED) {
+  if (STICKER_SWIPE_ENABLED) {
     renderer.domElement.addEventListener("pointerdown", handlePointerDown, { capture: true });
     renderer.domElement.addEventListener("pointermove", handlePointerMove, { capture: true });
     renderer.domElement.addEventListener("pointerup", handlePointerUp, { capture: true });
@@ -814,7 +815,7 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
     },
     destroy() {
       resizeObserver.disconnect();
-      if (DIRECT_MANIPULATION_ENABLED) {
+      if (STICKER_SWIPE_ENABLED) {
         renderer.domElement.removeEventListener("pointerdown", handlePointerDown, { capture: true });
         renderer.domElement.removeEventListener("pointermove", handlePointerMove, { capture: true });
         renderer.domElement.removeEventListener("pointerup", handlePointerUp, { capture: true });

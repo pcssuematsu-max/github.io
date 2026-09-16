@@ -11,7 +11,7 @@ Phase 1では、3D描画に **Three.js** を採用する。既存サイトはビ
 採用する最小構成は以下。
 
 - `WebGLRenderer`: Canvasへの描画
-- `OrbitControls`: 将来のドラッグによる視点回転とズームの基盤（現在は直接操作を一時停止）
+- `OrbitControls`: ドラッグによる視点回転とズーム
 - `RoundedBoxGeometry`: 控えめな丸みを持つキューブ本体
 - `MeshPhysicalMaterial`、環境光、方向光: 光沢のある面キャップを教材として色を読み取りやすい陰影で描く
 
@@ -204,7 +204,7 @@ viewer.destroy();
 
 - Three.js r180と必要な公式アドオンは、`assets/vendor/three/r180/`に固定配置した。
 - 3×3の26 slot / 26ピースと24通りの離散的な向きに加え、2×2〜7×7の表面ピース構成と各対応手の4回転・逆手を起動時に検証する。[`tests/puzzle-viewer-state.mjs`](../../tests/puzzle-viewer-state.mjs) は、wide move・全体回転を含む表記も検証する。
-- 2×2〜7×7の外層、奇数層の中央層、wide、全体回転を共通の状態遷移と描画で再生できる。3Rwなどの複数層wide moveも盤面サイズに応じて使える。4×4以上の外側列は内側列より太くし、[`Rubiks_portfolio/core/cube_constants.py`](../../../Python/Rubiks_portfolio/core/cube_constants.py)の`outside_size` / `inside_size`比を表示サイズへ正規化している。前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。ドラッグ／スワイプによる直接操作は、FRUコーナーのF面を上へ動かした際にR面が回る期待へ合わせて層選択を再設計するまで無効化している。
+- 2×2〜7×7の外層、奇数層の中央層、wide、全体回転を共通の状態遷移と描画で再生できる。3Rwなどの複数層wide moveも盤面サイズに応じて使える。4×4以上の外側列は内側列より太くし、[`Rubiks_portfolio/core/cube_constants.py`](../../../Python/Rubiks_portfolio/core/cube_constants.py)の`outside_size` / `inside_size`比を表示サイズへ正規化している。前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。背景ドラッグによる視点回転は有効で、ステッカー上のスワイプ回転だけは、FRUコーナーのF面を上へ動かした際にR面が回る期待へ合わせて層選択を再設計するまで無効化している。
 - キュービーを面ごとに色を変えられる一体の丸い樹脂シェルとして描き、隙間に見える中性の内部機構でステッカーレスらしい境界表現を実装した。
 - WebGL 2が使えないブラウザでは、3D Canvasの代わりに対応環境を案内する。
 

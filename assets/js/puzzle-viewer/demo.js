@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260915-17";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-1";
 
 const SUPPORTED_PUZZLE_IDS = new Set([2, 3, 4, 5, 6, 7].flatMap((size) => [
   `cube-${size}x${size}`, `${size}x${size}`, `${size}x${size}x${size}`,
