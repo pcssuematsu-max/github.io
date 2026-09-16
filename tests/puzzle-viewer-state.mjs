@@ -48,6 +48,11 @@ if (tokens !== "Rw Uw' Fw2 Rw Lw Uw Dw Fw Bw M E S x y z") {
   throw new Error(`wide notation normalization failed: ${tokens}`);
 }
 
+const aiLabWideTokens = parseAlgorithm("2U 3F' 3R2").map((move) => move.token).join(" ");
+if (aiLabWideTokens !== "2U 3F' 3R2") {
+  throw new Error(`AI Lab slice notation normalization failed: ${aiLabWideTokens}`);
+}
+
 [
   "R L U D F B M E S Rw Lw Uw Dw Fw Bw x y z",
   "R U R' U' F2 M E' S2 Rw U2 r' x y' z2",

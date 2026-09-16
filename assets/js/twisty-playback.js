@@ -1,3 +1,5 @@
+import { DEFAULT_THEME, createPuzzleViewer } from "./puzzle-viewer/cube3-viewer.js?v=20260916-11";
+
 const examples = [
     {
         id: "portfolio-3x3-cycle",
@@ -168,8 +170,23 @@ const message = document.querySelector("#algorithm-message");
 const customPlayerHost = document.querySelector("#custom-player");
 const discoveriesStatus = document.querySelector("#discoveries-status");
 const discoveriesGrid = document.querySelector("#discoveries-grid");
+const aiDiscoveryHost = document.querySelector("#ai-discovery-viewer");
+const aiDiscoveryStage = document.querySelector("#ai-discovery-stage");
+const aiDiscoveryFallback = document.querySelector("#ai-discovery-fallback");
+const aiDiscoveryTitle = document.querySelector("#ai-discovery-viewer-title");
+const aiDiscoveryDescription = document.querySelector("#ai-discovery-viewer-description");
+const aiDiscoveryStatus = document.querySelector("#ai-discovery-status");
+const aiDiscoveryTokens = document.querySelector("#ai-discovery-tokens");
+const aiDiscoveryControls = {
+    start: document.querySelector("#ai-discovery-start"),
+    previous: document.querySelector("#ai-discovery-previous"),
+    play: document.querySelector("#ai-discovery-play"),
+    next: document.querySelector("#ai-discovery-next"),
+    resetView: document.querySelector("#ai-discovery-reset-view"),
+};
 const DISCOVERY_SHOWCASE_LIMIT = 12;
 let customPlayback = null;
+let aiDiscoveryViewer = null;
 
 examples.forEach((example) => {
     const option = document.createElement("option");
@@ -237,13 +254,70 @@ function displayPuzzleName(puzzle) {
     return option ? option.textContent : puzzle;
 }
 
+function renderAiDiscovery(snapshot) {
+    const current = snapshot.position === 0 ? "開始状態" : `現在の手: ${snapshot.currentMove}`;
+    aiDiscoveryStatus.textContent = `${current}。${snapshot.position}手目 / ${snapshot.totalMoves}手中。`;
+    aiDiscoveryControls.start.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
+    aiDiscoveryControls.previous.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
+    aiDiscoveryControls.next.disabled = !snapshot.available || snapshot.isBusy || snapshot.position >= snapshot.totalMoves;
+    aiDiscoveryControls.play.disabled = !snapshot.available || snapshot.isBusy || snapshot.totalMoves === 0;
+    aiDiscoveryControls.play.textContent = snapshot.isPlaying ? "停止" : "再生";
+    aiDiscoveryTokens.replaceChildren(...snapshot.algorithm.split(" ").filter(Boolean).map((move, index) => {
+        const token = document.createElement("button");
+        token.type = "button";
+        token.className = "cube3-token";
+        token.textContent = move;
+        token.disabled = snapshot.isBusy;
+        token.classList.toggle("is-complete", index < snapshot.position);
+        token.classList.toggle("is-current", index === snapshot.position - 1);
+        token.addEventListener("click", () => aiDiscoveryViewer?.seek(index + 1));
+        return token;
+    }));
+}
+
+function showAiDiscovery(discovery) {
+    aiDiscoveryViewer?.destroy();
+    aiDiscoveryViewer = null;
+    aiDiscoveryHost.hidden = false;
+    aiDiscoveryTitle.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
+    aiDiscoveryDescription.textContent = discovery.setup.length
+        ? `${discovery.setup.length}手の開始局面から、AIが発見した${discovery.moves.length}手を再生します。`
+        : `完成状態から、AIが発見した${discovery.moves.length}手を再生します。`;
+    aiDiscoveryFallback.hidden = true;
+    aiDiscoveryStage.replaceChildren(aiDiscoveryFallback);
+    try {
+        aiDiscoveryViewer = createPuzzleViewer(aiDiscoveryStage, {
+            puzzleId: discovery.puzzle,
+            setupAlgorithm: discovery.setup.join(" "),
+            algorithm: discovery.moves.join(" "),
+            theme: {
+                ...DEFAULT_THEME,
+                canvasBackground: "#f4f8fa",
+                cubieColor: "#77766f",
+            },
+            themeId: "ai-discovery",
+            onChange: renderAiDiscovery,
+        });
+        renderAiDiscovery(aiDiscoveryViewer.getSnapshot());
+    } catch (caught) {
+        aiDiscoveryFallback.textContent = `3Dビューアを起動できませんでした: ${caught.message}`;
+        aiDiscoveryFallback.hidden = false;
+        aiDiscoveryStage.replaceChildren(aiDiscoveryFallback);
+        aiDiscoveryControls.play.disabled = true;
+        aiDiscoveryControls.start.disabled = true;
+        aiDiscoveryControls.previous.disabled = true;
+        aiDiscoveryControls.next.disabled = true;
+        aiDiscoveryTokens.replaceChildren();
+    }
+}
+
 function loadDiscoveryIntoTool(discovery) {
     puzzleSelect.value = discovery.puzzle;
     presetSelect.value = "custom";
     algorithmInput.value = discovery.moves.join(" ");
     setupInput.value = discovery.setup.join(" ");
-    showCustomPlayer();
-    document.querySelector("#tool").scrollIntoView({ behavior: "smooth", block: "start" });
+    showAiDiscovery(discovery);
+    aiDiscoveryHost.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function discoveryScore(discovery) {
@@ -287,7 +361,7 @@ function createDiscoveryCard(discovery) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "discovery-button";
-    button.textContent = "この成果を再生する";
+    button.textContent = "新ビューアで再生する";
     button.addEventListener("click", () => loadDiscoveryIntoTool(discovery));
     card.append(label, title, metrics, description, moves, button);
     return card;
@@ -323,6 +397,7 @@ async function loadDiscoveries() {
         discoveriesStatus.textContent = showcase.length
             ? `${discoveries.length}件の成果を個別に比較し、効果数² × 手数の小さい順で上位${showcase.length}件を表示しています。`
             : "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
+        if (showcase.length) showAiDiscovery(showcase[0]);
     } catch (error) {
         discoveriesStatus.textContent = "AI成果は公開後にここへ表示されます。";
     }
@@ -333,6 +408,11 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
     showCustomPlayer();
 });
+aiDiscoveryControls.start.addEventListener("click", () => aiDiscoveryViewer?.seek(0));
+aiDiscoveryControls.previous.addEventListener("click", () => aiDiscoveryViewer?.stepPrevious());
+aiDiscoveryControls.play.addEventListener("click", () => aiDiscoveryViewer?.play());
+aiDiscoveryControls.next.addEventListener("click", () => aiDiscoveryViewer?.stepNext());
+aiDiscoveryControls.resetView.addEventListener("click", () => aiDiscoveryViewer?.resetCamera());
 
 presetSelect.value = examples[0].id;
 selectPreset();

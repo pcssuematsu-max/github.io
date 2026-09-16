@@ -204,7 +204,7 @@ viewer.destroy();
 
 - Three.js r180と必要な公式アドオンは、`assets/vendor/three/r180/`に固定配置した。
 - 3×3の26 slot / 26ピースと24通りの離散的な向きに加え、2×2〜7×7の表面ピース構成と各対応手の4回転・逆手を起動時に検証する。[`tests/puzzle-viewer-state.mjs`](../../tests/puzzle-viewer-state.mjs) は、wide move・全体回転を含む表記も検証する。
-- 2×2〜7×7の外層、奇数層の中央層、wide、全体回転を共通の状態遷移と描画で再生できる。3Rwなどの複数層wide moveも盤面サイズに応じて使える。4×4以上の外側列は内側列より太くし、[`Rubiks_portfolio/core/cube_constants.py`](../../../Python/Rubiks_portfolio/core/cube_constants.py)の`outside_size` / `inside_size`比を表示サイズへ正規化している。前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。背景ドラッグによる視点回転は有効で、ステッカー上のスワイプ回転だけは、FRUコーナーのF面を上へ動かした際にR面が回る期待へ合わせて層選択を再設計するまで無効化している。
+- 2×2〜7×7の外層、番号付き内側スライス、奇数層の中央層、wide、全体回転を共通の状態遷移と描画で再生できる。`3F`は手前から3層目だけを回す内側スライス、`3Fw`は手前から3層をまとめて回すwide moveとして区別する。4×4以上の外側列は内側列より太くし、[`Rubiks_portfolio/core/cube_constants.py`](../../../Python/Rubiks_portfolio/core/cube_constants.py)の`outside_size` / `inside_size`比を表示サイズへ正規化している。前後移動、速度、視点リセット、F面の強調、基本手ボタンを実装した。背景ドラッグによる視点回転は有効で、ステッカー上のスワイプ回転だけは、FRUコーナーのF面を上へ動かした際にR面が回る期待へ合わせて層選択を再設計するまで無効化している。
 - キュービーを面ごとに色を変えられる一体の丸い樹脂シェルとして描き、隙間に見える中性の内部機構でステッカーレスらしい境界表現を実装した。
 - WebGL 2が使えないブラウザでは、3D Canvasの代わりに対応環境を案内する。
 
@@ -229,6 +229,8 @@ viewer.play();
 ```
 
 `teachingSteps`を渡すと、手順位置ごとの説明文と強調設定を外部ページが所有できる。実例は[`3d-puzzle-viewer-embed-example.html`](../../3d-puzzle-viewer-embed-example.html)に置く。画面固有の操作UI・色・文章を共通部品へ混ぜず、portfolioや教材ページごとに変えられるようにする。
+
+最初の実ページ導入先は[`twisty-puzzle-ai-lab-playback.html`](../../twisty-puzzle-ai-lab-playback.html)の「AIが見つけた成果」とする。成果カードが持つパズル種別・開始手順・AIが発見した手順をそのまま`createPuzzleViewer()`へ渡し、成果ごとの再生UIはページ側で持つ。自由入力ツールと、独自ビューアが未対応のパズルを含む既存再生例は`cubing.js`版を維持する。
 
 公開ページ [`3d-puzzle-viewer.html`](../../3d-puzzle-viewer.html) は次のURLを受け取る。`2x2`〜`7x7`と`2x2x2`〜`7x7x7`は既存データとの互換用の別名で、URLは正規の`cube-2x2`〜`cube-7x7`へ更新される。
 

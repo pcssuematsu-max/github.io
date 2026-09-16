@@ -37,7 +37,7 @@
 
 ## 3Dパズルビューア試作
 
-[`3d-puzzle-viewer.html`](3d-puzzle-viewer.html) は、独自3Dビューアの2×2〜7×7デモです。外層・中央層・wide move・全体回転を含む手順の入力、再生、一手送り・戻し、視点操作、速度変更、教材向けのF面強調を確認できます。開始状態・手順・現在位置・視点・テーマはURLで再現でき、「この状態をコピー」で共有リンクを作れます。既存の [`twisty-puzzle-ai-lab-playback.html`](twisty-puzzle-ai-lab-playback.html) は`cubing.js`版として維持しています。
+[`3d-puzzle-viewer.html`](3d-puzzle-viewer.html) は、独自3Dビューアの2×2〜7×7デモです。外層・中央層・wide move・全体回転を含む手順の入力、再生、一手送り・戻し、視点操作、速度変更、教材向けのF面強調を確認できます。開始状態・手順・現在位置・視点・テーマはURLで再現でき、「この状態をコピー」で共有リンクを作れます。[`twisty-puzzle-ai-lab-playback.html`](twisty-puzzle-ai-lab-playback.html)のAI成果はこのビューアで再生し、自由入力ツールと未対応パズルを含む既存例は`cubing.js`版を維持しています。
 
 ### なぜ自前で作るのか
 

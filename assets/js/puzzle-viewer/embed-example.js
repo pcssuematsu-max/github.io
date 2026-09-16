@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-9";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-11";
 
 const stage = document.querySelector("#embed-cube-stage");
 const fallback = document.querySelector("#embed-fallback");

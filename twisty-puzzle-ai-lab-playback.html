@@ -20,7 +20,8 @@
     <link rel="icon" href="assets/images/site/Logo.png">
     <link rel="stylesheet" href="assets/css/home.css?v=20260901-1">
     <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
-    <link rel="stylesheet" href="assets/css/twisty-playback.css?v=20260914-1">
+    <link rel="stylesheet" href="assets/css/puzzle-viewer.css?v=20260916-1">
+    <link rel="stylesheet" href="assets/css/twisty-playback.css?v=20260916-1">
     <script defer src="assets/vendor/cubing/twisty.js?v=0.63.4-classic-1"></script>
 </head>
 <body class="home-page story-page theme-ai playback-page">
@@ -55,6 +56,18 @@
             <div class="playback-discoveries-heading"><p class="story-section-label">AI DISCOVERIES</p><h2 id="discoveries-title">AIが見つけた成果。</h2><p>成果を効果型だけでまとめず、個別に比較します。効果は「第2ウイング：3巡回」のような日本語ラベルで示し、動いたパーツ数² × 手数が小さい順に並べます。</p></div>
             <p id="discoveries-status" class="discoveries-status" role="status" aria-live="polite">AIの成果を読み込んでいます。</p>
             <div id="discoveries-grid" class="discoveries-grid" aria-live="polite"></div>
+            <section id="ai-discovery-viewer" class="ai-discovery-viewer cube3-shell" aria-labelledby="ai-discovery-viewer-title" hidden>
+                <div class="ai-discovery-viewer-heading"><div><p class="story-section-label">OWN 3D VIEWER</p><h3 id="ai-discovery-viewer-title">選択したAIの手順</h3><p id="ai-discovery-viewer-description">成果カードを選ぶと、AIが発見した開始局面と手順をここで再生できます。</p></div></div>
+                <div class="ai-discovery-viewer-layout">
+                    <div id="ai-discovery-stage" class="cube3-stage ai-discovery-stage" aria-label="AIが発見した手順を再生する3Dキューブ。ドラッグで視点を回せます。"><p id="ai-discovery-fallback" class="cube3-fallback" hidden></p></div>
+                    <div class="ai-discovery-control-panel">
+                        <p id="ai-discovery-status" class="cube3-status" aria-live="polite"></p>
+                        <div id="ai-discovery-tokens" class="cube3-tokens" aria-label="AIが発見した手順"></div>
+                        <div class="cube3-transport" aria-label="AI手順の再生操作"><button id="ai-discovery-start" class="cube3-button" type="button">最初へ</button><button id="ai-discovery-previous" class="cube3-button" type="button">戻る</button><button id="ai-discovery-play" class="cube3-button cube3-play" type="button">再生</button><button id="ai-discovery-next" class="cube3-button" type="button">進む</button></div>
+                        <button id="ai-discovery-reset-view" class="cube3-button ai-discovery-reset" type="button">視点を正面へ</button>
+                    </div>
+                </div>
+            </section>
         </div></section>
         <section class="playback-gallery" id="players" aria-label="立体再生例"><div class="page-width">
             <div class="playback-gallery-heading"><p class="story-section-label">PORTFOLIO EXAMPLES</p><p>Portfolioから選んだ3-cycleの例です。選択欄から、このページ上部の再生ツールへ呼び出せます。</p></div>
@@ -63,6 +76,6 @@
         <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
-    <script defer src="assets/js/twisty-playback.js?v=20260914-3"></script>
+    <script type="module" src="assets/js/twisty-playback.js?v=20260916-3"></script>
 </body>
 </html>

@@ -40,6 +40,16 @@
 .playback-discoveries-heading > p:last-child { grid-column: 2; grid-row: 1 / span 2; margin: 0; color: #53626e; line-height: 1.9; }
 .discoveries-status { min-height: 1.5em; margin: 25px 0 12px; color: #657681; font-size: .9rem; }
 .discoveries-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+.ai-discovery-viewer { margin-top: 28px; overflow: hidden; background: #fff; }
+.ai-discovery-viewer-heading { padding: 25px 28px 20px; border-bottom: 1px solid #dce4e8; background: #fbfcfc; }
+.ai-discovery-viewer-heading .story-section-label { margin: 0 0 7px; color: #b4155d; }
+.ai-discovery-viewer-heading h3 { margin: 0 0 9px; font-size: clamp(1.35rem,3vw,2rem); line-height: 1.3; }
+.ai-discovery-viewer-heading p:last-child { max-width: 680px; margin: 0; color: #60707d; line-height: 1.7; }
+.ai-discovery-viewer-layout { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(300px,.8fr); }
+.ai-discovery-stage { min-height: 470px; }
+.ai-discovery-control-panel { padding: 25px; border-left: 1px solid #dce4e8; background: #fff; }
+.ai-discovery-control-panel .cube3-status { margin-top: 0; }
+.ai-discovery-reset { width: 100%; margin-top: 12px; }
 .discovery-card { display: flex; flex-direction: column; padding: 22px; border: 1px solid rgba(22,38,50,.1); border-radius: 18px; background: #fff; box-shadow: 0 12px 30px rgba(33,48,60,.07); }
 .discovery-card small { color: #b4155d; font-weight: 800; letter-spacing: .1em; }
 .discovery-card h3 { margin: 10px 0 8px; font-size: 1.25rem; }
@@ -71,5 +81,5 @@
 .puzzle-player-move.is-active { color: #fff; background: #d51f73; }
 .playback-next { background: #fff; }
 .playback-next-inner { max-width: 760px; }
-@media (max-width: 980px) { .playback-grid, .discoveries-grid { grid-template-columns: 1fr; max-width: 620px; } .playback-discoveries-heading { grid-template-columns: 1fr; gap: 14px; } .playback-discoveries-heading > p:last-child { grid-column: 1; grid-row: auto; } .puzzle-player-copy p { min-height: 0; } .puzzle-player-stage, .puzzle-player-stage twisty-player { min-height: 330px; height: 330px; } }
-@media (max-width: 700px) { .playback-hero { padding: 116px 0 65px; } .playback-intro, .playback-tool, .playback-discoveries, .playback-next, .playback-gallery { padding: 62px 0; } .playback-intro-grid { grid-template-columns: 1fr; gap: 28px; } .algorithm-form { grid-template-columns: 1fr; gap: 16px; padding: 18px; } .algorithm-field-wide { grid-column: auto; } .algorithm-submit { width: 100%; } .custom-player .puzzle-player-stage, .custom-player .puzzle-player-stage twisty-player { min-height: 300px; height: 300px; } .playback-gallery-heading { display: block; } .playback-gallery-heading p:last-child { margin-top: 13px; } .puzzle-player-controls { padding-inline: 14px; gap: 5px; } .puzzle-player-button { padding: 7px 4px; font-size: .77rem; } .puzzle-player-progress { padding-inline: 14px; } }
+@media (max-width: 980px) { .playback-grid, .discoveries-grid { grid-template-columns: 1fr; max-width: 620px; } .playback-discoveries-heading { grid-template-columns: 1fr; gap: 14px; } .playback-discoveries-heading > p:last-child { grid-column: 1; grid-row: auto; } .puzzle-player-copy p { min-height: 0; } .puzzle-player-stage, .puzzle-player-stage twisty-player { min-height: 330px; height: 330px; } .ai-discovery-viewer-layout { grid-template-columns: 1fr; } .ai-discovery-stage { min-height: 390px; } .ai-discovery-control-panel { border-top: 1px solid #dce4e8; border-left: 0; } }
+@media (max-width: 700px) { .playback-hero { padding: 116px 0 65px; } .playback-intro, .playback-tool, .playback-discoveries, .playback-next, .playback-gallery { padding: 62px 0; } .playback-intro-grid { grid-template-columns: 1fr; gap: 28px; } .algorithm-form { grid-template-columns: 1fr; gap: 16px; padding: 18px; } .algorithm-field-wide { grid-column: auto; } .algorithm-submit { width: 100%; } .custom-player .puzzle-player-stage, .custom-player .puzzle-player-stage twisty-player { min-height: 300px; height: 300px; } .playback-gallery-heading { display: block; } .playback-gallery-heading p:last-child { margin-top: 13px; } .puzzle-player-controls { padding-inline: 14px; gap: 5px; } .puzzle-player-button { padding: 7px 4px; font-size: .77rem; } .puzzle-player-progress { padding-inline: 14px; } .ai-discovery-viewer-heading, .ai-discovery-control-panel { padding: 19px; } .ai-discovery-stage { min-height: min(52svh,350px); } }

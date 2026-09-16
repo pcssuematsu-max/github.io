@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-9";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-12";
 
 const SUPPORTED_PUZZLE_IDS = new Set([2, 3, 4, 5, 6, 7].flatMap((size) => [
   `cube-${size}x${size}`, `${size}x${size}`, `${size}x${size}x${size}`,
@@ -31,7 +31,7 @@ const requestedSetup = query.get("setup") || "";
 const requestedAlgorithm = query.get("moves");
 const requestedPosition = query.get("position");
 const themeFromUrl = query.get("theme");
-const requestedTheme = ["focus-front", "f2l-right"].includes(themeFromUrl)
+const requestedTheme = ["portfolio", "focus-front", "f2l-right"].includes(themeFromUrl)
   && (themeFromUrl !== "f2l-right" || selectedPuzzle === "cube-3x3") ? themeFromUrl : "standard";
 const requestedCameraState = parseCameraState(query.get("view"));
 const initialWarnings = [];
@@ -96,6 +96,17 @@ function serializeCameraState(cameraState) {
 
 function themeFor(themeId) {
   const focusFront = themeId === "focus-front";
+  const portfolio = themeId === "portfolio";
+  // Rubiks_portfolio has its own solved-state convention. Keep this mapping
+  // as a named page theme so it never changes the viewer's WCA-like default.
+  const portfolioStickerColors = {
+    U: "#ee1730", // Red
+    D: "#ff7a1a", // Orange
+    F: "#e8ee00", // Yellow
+    B: "#f7f4ed", // White
+    L: "#00c83c", // Green
+    R: "#1468cf", // Blue
+  };
   const f2lRightColors = {
     "corner-DFR:D": "#007fff",
     "corner-DFR:F": "#ff00ff",
@@ -106,6 +117,10 @@ function themeFor(themeId) {
   const f2lRight = themeId === "f2l-right";
   return {
     ...DEFAULT_THEME,
+    stickerColors: portfolio ? {
+      ...DEFAULT_THEME.stickerColors,
+      ...portfolioStickerColors,
+    } : DEFAULT_THEME.stickerColors,
     emphasis: f2lRight ? {
       stickerIds: Object.keys(f2lRightColors),
       colors: f2lRightColors,

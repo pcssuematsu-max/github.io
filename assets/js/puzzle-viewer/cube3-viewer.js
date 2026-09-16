@@ -256,6 +256,13 @@ function createCubeNBaseMoves(size, values) {
     const layerValues = metadata.direction > 0 ? [...values].reverse() : [...values];
     baseMoves[face] = genericMoveDefinition(metadata, [layerValues[0]]);
 
+    // Portfolio's NxN notation uses `2R`, `3F`, … for one numbered inner
+    // slice. It is deliberately distinct from `2Rw`, `3Fw`, … which turn
+    // every layer from the face through that depth as a single wide block.
+    for (let depth = 2; depth < size; depth += 1) {
+      baseMoves[`${depth}${face}`] = genericMoveDefinition(metadata, [layerValues[depth - 1]]);
+    }
+
     // Standard wide notation starts at two layers (Rw). Keep every partial
     // width available so the same definition can express 3Rw, 4Rw, … when a
     // page needs a deeper block turn.
@@ -353,7 +360,7 @@ export function parseAlgorithm(value) {
   const source = String(value || "").trim();
   if (!source) return [];
   return source.split(/\s+/).map((token) => {
-    const match = /^((?:[2-6])?[UDRLFB]w|[UDRLFBMESxyz]|[udrlfb])(2|')?$/.exec(token);
+    const match = /^((?:[2-6])?[UDRLFB]w|[2-6][UDRLFB]|[UDRLFBMESxyz]|[udrlfb])(2|')?$/.exec(token);
     if (!match) {
       throw new Error(`「${token}」は扱えない手です。外層、M/E/S、x/y/z、Rw（またはr）、3Rwなどのwide moveと ' / 2 を使ってください。`);
     }
