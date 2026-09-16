@@ -1,7 +1,8 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-1";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-9";
 
 const stage = document.querySelector("#embed-cube-stage");
 const fallback = document.querySelector("#embed-fallback");
+const fallbackMessage = fallback.textContent;
 const note = document.querySelector("#embed-note");
 const status = document.querySelector("#embed-status");
 const controls = {
@@ -39,19 +40,28 @@ const teachingSteps = [
   { position: 4, text: "U'で完了です。教材データは手順の位置ごとに差し替えられます。", emphasis: focusedCorner },
 ];
 
-const viewer = createPuzzleViewer(stage, {
-  puzzleId: "cube-3x3",
-  setupAlgorithm: "F R U",
-  algorithm: "R U R' U'",
-  theme: {
-    ...DEFAULT_THEME,
-    canvasBackground: "#fff6fb",
-    cubieColor: "#79726f",
-  },
-  themeId: "embed-example",
-  teachingSteps,
-  onChange: render,
-});
+let viewer;
+try {
+  viewer = createPuzzleViewer(stage, {
+    puzzleId: "cube-3x3",
+    setupAlgorithm: "F R U",
+    algorithm: "R U R' U'",
+    theme: {
+      ...DEFAULT_THEME,
+      canvasBackground: "#fff6fb",
+      cubieColor: "#79726f",
+    },
+    themeId: "embed-example",
+    teachingSteps,
+    onChange: render,
+  });
+} catch (caught) {
+  stage.replaceChildren(fallback);
+  fallback.hidden = false;
+  fallback.textContent = `3Dビューアを起動できませんでした: ${caught.message}`;
+  note.textContent = fallbackMessage;
+  Object.values(controls).forEach((control) => { control.disabled = true; });
+}
 
 function render(snapshot) {
   const current = snapshot.position === 0 ? "開始状態" : `現在の手: ${snapshot.currentMove}`;
@@ -64,7 +74,10 @@ function render(snapshot) {
   controls.play.disabled = !snapshot.available || snapshot.isBusy || snapshot.totalMoves === 0;
 }
 
-if (!viewer.available) fallback.hidden = false;
+if (!viewer?.available) {
+  stage.replaceChildren(fallback);
+  fallback.hidden = false;
+}
 controls.start.addEventListener("click", () => viewer.seek(0));
 controls.previous.addEventListener("click", () => viewer.stepPrevious());
 controls.play.addEventListener("click", () => viewer.play());

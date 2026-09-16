@@ -13,8 +13,8 @@
     <script type="importmap">
     {
       "imports": {
-        "three": "./assets/vendor/three/r180/three.module.js",
-        "three/addons/": "./assets/vendor/three/r180/addons/"
+        "three": "./assets/vendor/three/r162/three.module.js",
+        "three/addons/": "./assets/vendor/three/r162/addons/"
       }
     }
     </script>
@@ -35,7 +35,7 @@
             <div class="cube3-shell">
                 <div class="cube3-toolbar"><p class="cube3-toolbar-title">NxN CUBE</p><div class="cube3-toolbar-actions"><select id="cube3-theme" aria-label="ステッカー表示"><option value="standard">標準の配色</option><option value="focus-front">F色を強調</option><option value="f2l-right">F2L右スロットの配色例（3×3）</option></select><button id="cube3-reset-view" class="cube3-button" type="button">視点を正面へ</button><button id="cube3-copy-link" class="cube3-button cube3-copy-link" type="button">この状態をコピー</button></div></div>
                 <div class="cube3-layout">
-                <div id="cube3-stage" class="cube3-stage" aria-label="NxN 3Dキューブ。ドラッグで視点を回せます。ステッカー上のスワイプ回転は現在一時停止しています。"><p id="cube3-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGL 2を利用できません。手順の確認には、対応ブラウザで開いてください。</p></div>
+                <div id="cube3-stage" class="cube3-stage" aria-label="NxN 3Dキューブ。ドラッグで視点を回せます。ステッカー上のスワイプ回転は現在一時停止しています。"><p id="cube3-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGLを利用できません。手順の確認には、対応ブラウザで開いてください。</p></div>
                     <div class="cube3-control-panel">
                         <form id="cube3-form" class="cube3-form"><label for="cube3-algorithm">手順</label><div class="cube3-form-row"><input id="cube3-algorithm" value="R U R' U'" autocomplete="off" spellcheck="false" aria-describedby="cube3-notation-note cube3-error"><button class="cube3-button cube3-submit" type="submit">表示する</button></div><p id="cube3-notation-note" class="cube3-notation-note">外層、x / y / z、Rw（またはr）、3Rwなどのwide moveを使えます。M / E / Sは奇数層のみです。</p><p id="cube3-error" class="cube3-error" role="alert"></p></form>
                         <p id="cube3-setup-note" class="cube3-setup-note" hidden></p>
@@ -52,6 +52,6 @@
         </div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>EXPERIMENT / 3D PUZZLE VIEWER</p><div class="puzzle-viewer-footer-links"><a class="button story-action" href="3d-puzzle-viewer-embed-example.html">埋め込み例を見る</a><a class="button story-action" href="twisty-puzzle-ai-lab-playback.html">cubing.js版の再生ページへ</a></div></div></footer>
-    <script type="module" src="assets/js/puzzle-viewer/demo.js?v=20260916-1"></script>
+    <script type="module" src="assets/js/puzzle-viewer/demo.js?v=20260916-9"></script>
 </body>
 </html>

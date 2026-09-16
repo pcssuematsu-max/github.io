@@ -1,6 +1,6 @@
-import * as THREE from "../../vendor/three/r180/three.module.js";
-import { OrbitControls } from "../../vendor/three/r180/addons/controls/OrbitControls.js";
-import { RoundedBoxGeometry } from "../../vendor/three/r180/addons/geometries/RoundedBoxGeometry.js";
+import * as THREE from "../../vendor/three/r162/three.module.js";
+import { OrbitControls } from "../../vendor/three/r162/addons/controls/OrbitControls.js";
+import { RoundedBoxGeometry } from "../../vendor/three/r162/addons/geometries/RoundedBoxGeometry.js";
 
 const FACE_NORMALS = {
   U: [0, 1, 0], D: [0, -1, 0], R: [1, 0, 0],
@@ -12,6 +12,19 @@ const BOX_GROUP_FACES = ["R", "L", "U", "D", "F", "B"];
 // neighbouring layer users expect (for example F-panel upward → R turn).
 // OrbitControls remains available for looking around the whole cube.
 const STICKER_SWIPE_ENABLED = false;
+
+// A modern stickerless cube needs three different treatments. The long panel
+// edges are nearly square (A), grid-intersection corners open up broadly (B),
+// and the outer silhouette corners stay restrained (C). A single rounded-box
+// radius cannot express that distinction, so the neutral core and coloured
+// face shells are built separately below.
+const CUBIE_CORE_EDGE_RADIUS_RATIO = 0.055;
+const CUBIE_GAP_RATIO = 0.002;
+const THREE_BY_THREE_SLOT_SPACING = 1.002;
+const PANEL_EDGE_BEVEL_RATIO = 0.01;
+const PANEL_INNER_CORNER_RADIUS_RATIO = 0.16;
+const PANEL_OUTER_CORNER_RADIUS_RATIO = 0.065;
+const PANEL_INSET_RATIO = 0.002;
 
 const IDENTITY = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const AXIS_INDEX = { x: 0, y: 1, z: 2 };
@@ -181,7 +194,7 @@ export function createCube3Definition() {
   const slotsById = Object.fromEntries(slots.map((slot) => [slot.id, slot]));
   const slotByPosition = new Map(slots.map((slot) => [slot.position.join(","), slot.id]));
   return {
-    id: "cube-3x3", dimension: 3, cubieSize: 1, renderScale: 1.01,
+    id: "cube-3x3", dimension: 3, cubieSize: 1, renderScale: THREE_BY_THREE_SLOT_SPACING,
     columnWidths: columnWidthsFor(3), columnSizeReference: CUBE_COLUMN_SIZE_REFERENCE[3],
     slots, slotsById, slotByPosition, pieces, orientations, baseMoves: BASE_MOVES,
   };
@@ -209,7 +222,7 @@ function createAxisLayout(size) {
     cursor += width;
     return center;
   });
-  const gap = Math.min(...columnWidths) * 0.012;
+  const gap = Math.min(...columnWidths) * CUBIE_GAP_RATIO;
   return {
     columnWidths,
     centers,
@@ -456,13 +469,35 @@ function threeMatrix(matrix) {
   );
 }
 
-export function isWebGL2Available() {
+export function isWebGLAvailable() {
   const canvas = document.createElement("canvas");
-  return Boolean(canvas.getContext("webgl2"));
+  return Boolean(
+    canvas.getContext("webgl2")
+    || canvas.getContext("webgl")
+    || canvas.getContext("experimental-webgl")
+  );
+}
+
+function panelShape(width, height, radii) {
+  const left = -width / 2;
+  const right = width / 2;
+  const bottom = -height / 2;
+  const top = height / 2;
+  const { bottomLeft, bottomRight, topRight, topLeft } = radii;
+  const shape = new THREE.Shape();
+  shape.moveTo(left + bottomLeft, bottom);
+  shape.lineTo(right - bottomRight, bottom);
+  shape.quadraticCurveTo(right, bottom, right, bottom + bottomRight);
+  shape.lineTo(right, top - topRight);
+  shape.quadraticCurveTo(right, top, right - topRight, top);
+  shape.lineTo(left + topLeft, top);
+  shape.quadraticCurveTo(left, top, left, top - topLeft);
+  shape.lineTo(left, bottom + bottomLeft);
+  shape.quadraticCurveTo(left, bottom, left + bottomLeft, bottom);
+  return shape;
 }
 
 export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THEME) {
-  if (!isWebGL2Available()) return null;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -502,53 +537,125 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
   controls.update();
   controls.enabled = true;
 
-  // Each cubie is one rounded, multi-colour resin shell. This lets the colour
-  // of an edge or corner flow over the curved edge into its adjacent panels.
-  // The narrow gaps still expose only the neutral internal mechanism.
-  // Keep only a hairline gap between cubies; the large radius leaves the
-  // rounded corner-cut openings instead of making the full face look sparse.
+  // A neutral core lies immediately behind thin coloured shells. This lets the
+  // straight seam stay almost closed while the deliberately wider inner panel
+  // corners make the small star-shaped grid openings visible.
   const cornerSegments = (definition.dimension || 3) > 5 ? 4 : 8;
   const cubieGeometries = new Map();
+  const panelGeometries = new Map();
+  const coordinateExtents = [0, 1, 2].map((axis) => Math.max(
+    ...definition.slots.map((slot) => Math.abs(slot.position[axis]))
+  ));
+  const facePanelAxes = {
+    F: { uAxis: 0, vAxis: 1, uDirection: 1, vDirection: 1, rotation: [0, 0, 0], positionAxis: 2, positionDirection: 1 },
+    B: { uAxis: 0, vAxis: 1, uDirection: -1, vDirection: 1, rotation: [0, Math.PI, 0], positionAxis: 2, positionDirection: -1 },
+    U: { uAxis: 0, vAxis: 2, uDirection: 1, vDirection: -1, rotation: [-Math.PI / 2, 0, 0], positionAxis: 1, positionDirection: 1 },
+    D: { uAxis: 0, vAxis: 2, uDirection: 1, vDirection: 1, rotation: [Math.PI / 2, 0, 0], positionAxis: 1, positionDirection: -1 },
+    R: { uAxis: 2, vAxis: 1, uDirection: -1, vDirection: 1, rotation: [0, Math.PI / 2, 0], positionAxis: 0, positionDirection: 1 },
+    L: { uAxis: 2, vAxis: 1, uDirection: 1, vDirection: 1, rotation: [0, -Math.PI / 2, 0], positionAxis: 0, positionDirection: -1 },
+  };
 
   function geometryFor(piece) {
     const dimensions = piece.dimensions || [definition.cubieSize || 1, definition.cubieSize || 1, definition.cubieSize || 1];
     const key = dimensions.map((value) => value.toFixed(6)).join(",");
     if (!cubieGeometries.has(key)) {
       cubieGeometries.set(key, new RoundedBoxGeometry(
-        dimensions[0], dimensions[1], dimensions[2], cornerSegments, Math.min(...dimensions) * 0.17,
+        dimensions[0], dimensions[1], dimensions[2], cornerSegments,
+        Math.min(...dimensions) * CUBIE_CORE_EDGE_RADIUS_RATIO,
       ));
     }
     return cubieGeometries.get(key);
   }
 
+  function panelDimensions(dimensions, face) {
+    if (face === "F" || face === "B") return [dimensions[0], dimensions[1]];
+    if (face === "U" || face === "D") return [dimensions[0], dimensions[2]];
+    return [dimensions[2], dimensions[1]];
+  }
+
+  function panelCornerRadius(piece, face, uSign, vSign, smallestPanelSide) {
+    const slot = definition.slotsById[piece.homeSlotId];
+    const axes = facePanelAxes[face];
+    const isOnBoundary = (axis, direction) => (
+      slot.position[axis] * direction === coordinateExtents[axis]
+    );
+    const outerU = isOnBoundary(axes.uAxis, axes.uDirection * uSign);
+    const outerV = isOnBoundary(axes.vAxis, axes.vDirection * vSign);
+    if (outerU && outerV) return smallestPanelSide * PANEL_OUTER_CORNER_RADIUS_RATIO;
+    if (outerU || outerV) return smallestPanelSide * PANEL_OUTER_CORNER_RADIUS_RATIO;
+    return smallestPanelSide * PANEL_INNER_CORNER_RADIUS_RATIO;
+  }
+
+  function panelGeometryFor(piece, face) {
+    const dimensions = piece.dimensions || [definition.cubieSize || 1, definition.cubieSize || 1, definition.cubieSize || 1];
+    const [sourceWidth, sourceHeight] = panelDimensions(dimensions, face);
+    const inset = Math.min(sourceWidth, sourceHeight) * PANEL_INSET_RATIO;
+    const width = sourceWidth - inset * 2;
+    const height = sourceHeight - inset * 2;
+    const smallestPanelSide = Math.min(width, height);
+    const depth = smallestPanelSide * PANEL_EDGE_BEVEL_RATIO;
+    const radii = {
+      bottomLeft: panelCornerRadius(piece, face, -1, -1, smallestPanelSide),
+      bottomRight: panelCornerRadius(piece, face, 1, -1, smallestPanelSide),
+      topRight: panelCornerRadius(piece, face, 1, 1, smallestPanelSide),
+      topLeft: panelCornerRadius(piece, face, -1, 1, smallestPanelSide),
+    };
+    const key = [width, height, ...Object.values(radii)].map((value) => value.toFixed(6)).join(",");
+    if (!panelGeometries.has(key)) {
+      panelGeometries.set(key, new THREE.ExtrudeGeometry(panelShape(width, height, radii), {
+        depth,
+        bevelEnabled: true,
+        bevelSegments: 2,
+        bevelSize: depth * 0.7,
+        bevelThickness: depth * 0.7,
+        curveSegments: cornerSegments,
+      }));
+    }
+    return { geometry: panelGeometries.get(key), depth };
+  }
+
   definition.pieces.forEach((piece) => {
     const node = new THREE.Group();
     node.name = piece.id;
-    const materials = BOX_GROUP_FACES.map((face) => {
-      const colorKey = piece.stickers[face];
-      const isSurface = Boolean(colorKey);
-      const material = new THREE.MeshPhysicalMaterial({
-        color: isSurface ? currentTheme.stickerColors[colorKey] : currentTheme.cubieColor,
-        roughness: isSurface ? 0.24 : 0.62,
+    const coreMaterial = new THREE.MeshPhysicalMaterial({
+        color: currentTheme.cubieColor,
+        roughness: 0.62,
         metalness: 0,
-        clearcoat: isSurface ? 0.3 : 0,
+        clearcoat: 0,
         clearcoatRoughness: 0.18,
       });
-      if (isSurface) {
+    innerMaterials.push(coreMaterial);
+    const cubie = new THREE.Mesh(geometryFor(piece), coreMaterial);
+    cubie.userData.pieceId = piece.id;
+    node.add(cubie);
+
+    Object.entries(piece.stickers).forEach(([face, colorKey]) => {
+      const material = new THREE.MeshPhysicalMaterial({
+        color: currentTheme.stickerColors[colorKey],
+        roughness: 0.24,
+        metalness: 0,
+        clearcoat: 0.3,
+        clearcoatRoughness: 0.18,
+      });
+      const { geometry } = panelGeometryFor(piece, face);
+      const panel = new THREE.Mesh(geometry, material);
+      const axes = facePanelAxes[face];
+      const dimensions = piece.dimensions || [definition.cubieSize || 1, definition.cubieSize || 1, definition.cubieSize || 1];
+      panel.rotation.set(...axes.rotation);
+      panel.position.setComponent(
+        axes.positionAxis,
+        axes.positionDirection * (dimensions[axes.positionAxis] / 2 - Math.min(...dimensions) * PANEL_INSET_RATIO)
+      );
+      panel.userData.pieceId = piece.id;
+      panel.userData.homeFace = face;
+      node.add(panel);
         stickerSurfaces.push({
           material,
           stickerId: stickerIdFor(piece.id, face),
           stickerFace: face,
           colorKey,
         });
-      } else {
-        innerMaterials.push(material);
-      }
-      return material;
     });
-    const cubie = new THREE.Mesh(geometryFor(piece), materials);
-    cubie.userData.pieceId = piece.id;
-    node.add(cubie);
     piecesRoot.add(node);
     pieceNodes.set(piece.id, node);
   });
@@ -703,7 +810,7 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
     const hits = raycaster.intersectObjects([...pieceNodes.values()], true);
     for (const hit of hits) {
       const materialIndex = materialIndexForHit(hit);
-      const homeFace = BOX_GROUP_FACES[materialIndex];
+      const homeFace = hit.object.userData.homeFace || BOX_GROUP_FACES[materialIndex];
       const pieceId = hit.object.userData.pieceId;
       if (!pieceId || !homeFace) continue;
       const node = pieceNodes.get(pieceId);
@@ -824,6 +931,7 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
       controls.dispose();
       renderer.setAnimationLoop(null);
       cubieGeometries.forEach((geometry) => geometry.dispose());
+      panelGeometries.forEach((geometry) => geometry.dispose());
       [...innerMaterials, ...stickerSurfaces.map((surface) => surface.material)].forEach((material) => material.dispose());
       renderer.dispose();
       host.replaceChildren();

@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-1";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-9";
 
 const SUPPORTED_PUZZLE_IDS = new Set([2, 3, 4, 5, 6, 7].flatMap((size) => [
   `cube-${size}x${size}`, `${size}x${size}`, `${size}x${size}x${size}`,
@@ -22,6 +22,7 @@ const displaySelect = document.querySelector("#cube3-display");
 const themeSelect = document.querySelector("#cube3-theme");
 const quickMoves = document.querySelector("#cube3-quick-moves");
 const fallback = document.querySelector("#cube3-fallback");
+const fallbackMessage = fallback.textContent;
 
 const query = new URLSearchParams(window.location.search);
 const requestedPuzzle = query.get("puzzle");
@@ -57,6 +58,17 @@ let lastSnapshot = {
 
 function setError(message = "") {
   error.textContent = message;
+}
+
+function showFallback(message = "") {
+  // Renderer setup can fail after it has replaced the fallback node with a
+  // canvas. Put the original explanation back so a blank stage is never the
+  // only outcome.
+  stage.replaceChildren(fallback);
+  fallback.hidden = false;
+  fallback.textContent = message || fallbackMessage;
+  if (message) setError(message);
+  quickMoves.querySelectorAll("button").forEach((button) => { button.disabled = true; });
 }
 
 function parseCameraState(value) {
@@ -180,19 +192,16 @@ try {
   if (requestedSetup) viewer.setSetupAlgorithm(requestedSetup);
   if (requestedPosition !== null) viewer.seek(Number(requestedPosition));
   if (!viewer.available) {
-    fallback.hidden = false;
-    quickMoves.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+    showFallback();
   }
   render(viewer.getSnapshot());
   setError(initialError);
 } catch (caught) {
-  fallback.hidden = false;
-  setError(caught.message);
+  showFallback(`3Dビューアを起動できませんでした: ${caught.message}`);
   playButton.disabled = true;
   previousButton.disabled = true;
   nextButton.disabled = true;
   startButton.disabled = true;
-  quickMoves.querySelectorAll("button").forEach((button) => { button.disabled = true; });
 }
 
 function loadAlgorithm(value) {
