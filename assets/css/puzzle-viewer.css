@@ -29,13 +29,20 @@
 .cube3-submit:hover:not(:disabled), .cube3-submit:focus-visible { border-color: #ae0e58; background: #ae0e58; }
 .cube3-notation-note { margin: 8px 0 -2px; color: #657681; font-size: .78rem; line-height: 1.5; }
 .cube3-error { min-height: 1.45em; margin: 8px 0 0; color: #ad0d57; font-size: .85rem; line-height: 1.55; }
-.cube3-setup-note { margin: 20px 0 -15px; color: #657681; font-size: .78rem; line-height: 1.5; }
-.cube3-status { min-height: 1.45em; margin: 24px 0 10px; color: #657681; font-size: .88rem; line-height: 1.5; }
-.cube3-tokens { display: flex; flex-wrap: wrap; gap: 6px; min-height: 34px; }
+.cube3-setup-panel { margin: 20px 0 0; padding: 12px 13px; border: 1px solid #d9e5eb; border-radius: 10px; background: #f7fafb; }
+.cube3-sequence-kicker { margin: 0; color: #607582; font-size: .7rem; font-weight: 900; letter-spacing: .1em; line-height: 1.4; }
+.cube3-setup-summary { margin: 5px 0 0; color: #354a57; font-size: .84rem; font-weight: 750; line-height: 1.55; }
+.cube3-setup-details { margin-top: 7px; color: #607582; font-size: .78rem; line-height: 1.5; }
+.cube3-setup-details summary { width: max-content; cursor: pointer; }
+.cube3-setup-moves { display: block; max-height: 100px; margin-top: 8px; overflow: auto; color: #415661; font: .76rem/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; white-space: pre-wrap; }
+.cube3-status { min-height: 1.45em; margin: 20px 0 8px; color: #657681; font-size: .88rem; line-height: 1.5; }
+.cube3-playback-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.cube3-remaining { margin: 0; color: #657681; font-size: .76rem; font-weight: 750; }
+.cube3-tokens { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; max-height: 156px; min-height: 34px; overflow: auto; padding: 1px 4px 2px 1px; scroll-behavior: smooth; }
 .cube3-token { border: 0; border-radius: 7px; padding: 6px 8px; color: #53626e; background: #e7ecef; font: 800 .82rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; cursor: pointer; }
 .cube3-token.is-complete { color: #8d9aa2; background: #f0f3f4; }
 .cube3-token.is-current { color: #fff; background: #d51f73; box-shadow: 0 3px 9px rgba(180,21,93,.24); }
-.cube3-transport { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 23px; }
+.cube3-transport { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 18px; }
 .cube3-play { color: #fff; border-color: #d51f73; background: #d51f73; }
 .cube3-play:hover:not(:disabled), .cube3-play:focus-visible { border-color: #ae0e58; background: #ae0e58; }
 .cube3-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
@@ -57,5 +64,5 @@
 .cube3-embed-reset { width: 100%; margin-top: 12px; }
 @media (max-width: 850px) { .puzzle-viewer-hero { padding: 116px 0 62px; } .puzzle-viewer-main { padding: 58px 0 75px; } .puzzle-viewer-heading { display: block; } .puzzle-viewer-heading > p { margin-top: 16px; } .cube3-layout { grid-template-columns: 1fr; } .cube3-stage { min-height: 350px; } .cube3-control-panel { border-top: 1px solid #dce4e8; border-left: 0; } }
 @media (max-width: 850px) { .cube3-embed-shell { grid-template-columns: 1fr; } .cube3-embed-stage { min-height: 350px; } .cube3-embed-panel { border-top: 1px solid #ead9e2; border-left: 0; } }
-@media (max-width: 520px) { .cube3-toolbar { align-items: flex-start; flex-direction: column; } .cube3-toolbar-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; } .cube3-toolbar select, .cube3-copy-link { grid-column: 1 / -1; max-width: none; } .cube3-stage, .cube3-embed-stage { min-height: min(54svh, 350px); } .cube3-control-panel, .cube3-embed-panel { padding: 18px; } .cube3-form-row { display: grid; grid-template-columns: 1fr; } .cube3-submit { width: 100%; } .cube3-transport { grid-template-columns: repeat(2, 1fr); gap: 7px; } .cube3-button { padding-inline: 8px; font-size: .82rem; } .cube3-settings { grid-template-columns: 1fr; gap: 12px; } .puzzle-viewer-footer-links { justify-content: flex-start; } }
+@media (max-width: 520px) { .cube3-toolbar { align-items: flex-start; flex-direction: column; } .cube3-toolbar-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; } .cube3-toolbar select, .cube3-copy-link { grid-column: 1 / -1; max-width: none; } .cube3-stage, .cube3-embed-stage { min-height: min(54svh, 350px); } .cube3-control-panel, .cube3-embed-panel { padding: 18px; } .cube3-form-row { display: grid; grid-template-columns: 1fr; } .cube3-submit { width: 100%; } .cube3-transport { grid-template-columns: repeat(2, 1fr); gap: 7px; } .cube3-playback-heading { align-items: flex-start; flex-direction: column; gap: 2px; } .cube3-button { padding-inline: 8px; font-size: .82rem; } .cube3-settings { grid-template-columns: 1fr; gap: 12px; } .puzzle-viewer-footer-links { justify-content: flex-start; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

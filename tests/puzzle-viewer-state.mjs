@@ -53,6 +53,19 @@ if (aiLabWideTokens !== "2U 3F' 3R2") {
   throw new Error(`AI Lab slice notation normalization failed: ${aiLabWideTokens}`);
 }
 
+const portfolioSetup = "U' L' 3F2 2F2 R2 U2 3F2 2F2 U2 R2 3F2 2F2 U2 F U2 F' U2 D2 R F R' D2 L B' L B L' U 2U F 3D' F' 2U' F 3D F'";
+const portfolioDefinition = createCubeNDefinition(7);
+const portfolioSolved = createSolvedState(portfolioDefinition);
+const portfolioScrambled = stateAt(
+  portfolioSolved,
+  parseAlgorithm(portfolioSetup),
+  parseAlgorithm(portfolioSetup).length,
+  portfolioDefinition,
+);
+if (JSON.stringify(portfolioScrambled) === JSON.stringify(portfolioSolved)) {
+  throw new Error("Portfolio の開始スクランブルが7×7の状態へ反映されません。");
+}
+
 [
   "R L U D F B M E S Rw Lw Uw Dw Fw Bw x y z",
   "R U R' U' F2 M E' S2 Rw U2 r' x y' z2",

@@ -9,11 +9,17 @@ const tokensHost = document.querySelector("#cube3-tokens");
 const input = document.querySelector("#cube3-algorithm");
 const form = document.querySelector("#cube3-form");
 const error = document.querySelector("#cube3-error");
-const setupNote = document.querySelector("#cube3-setup-note");
+const setupPanel = document.querySelector("#cube3-setup-panel");
+const setupSummary = document.querySelector("#cube3-setup-summary");
+const setupMoves = document.querySelector("#cube3-setup-moves");
 const playButton = document.querySelector("#cube3-play");
 const startButton = document.querySelector("#cube3-start");
+const backTenButton = document.querySelector("#cube3-back-ten");
 const previousButton = document.querySelector("#cube3-previous");
 const nextButton = document.querySelector("#cube3-next");
+const forwardTenButton = document.querySelector("#cube3-forward-ten");
+const sequenceLabel = document.querySelector("#cube3-sequence-label");
+const remaining = document.querySelector("#cube3-remaining");
 const resetViewButton = document.querySelector("#cube3-reset-view");
 const copyLinkButton = document.querySelector("#cube3-copy-link");
 const shareStatus = document.querySelector("#cube3-share-status");
@@ -165,30 +171,47 @@ function updateAddress(snapshot) {
 
 function renderTokens(snapshot) {
   const moves = snapshot.algorithm ? snapshot.algorithm.split(" ") : [];
+  let currentToken = null;
   tokensHost.replaceChildren(...moves.map((token, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "cube3-token";
     if (index < snapshot.position) button.classList.add("is-complete");
-    if (index === snapshot.position - 1) button.classList.add("is-current");
+    if (index === snapshot.position - 1) {
+      button.classList.add("is-current");
+      currentToken = button;
+    }
     button.textContent = token;
     button.disabled = snapshot.isBusy;
     button.addEventListener("click", () => viewer.seek(index + 1));
     return button;
   }));
+  if (currentToken) requestAnimationFrame(() => {
+    currentToken.scrollIntoView({ block: "nearest", inline: "nearest" });
+  });
 }
 
 function render(snapshot) {
   lastSnapshot = snapshot;
   if (document.activeElement !== input) input.value = snapshot.algorithm;
   const current = snapshot.position === 0 ? "開始状態" : `現在の手: ${snapshot.currentMove}`;
-  status.textContent = `${current}。${snapshot.position}手目 / ${snapshot.totalMoves}手中。`;
-  setupNote.hidden = !snapshot.setup;
-  setupNote.textContent = snapshot.setup ? `開始状態に適用済み: ${snapshot.setup}` : "";
+  const remainingMoves = Math.max(0, snapshot.totalMoves - snapshot.position);
+  status.textContent = `${current}。解法 ${snapshot.position}手目 / ${snapshot.totalMoves}手中。`;
+  setupPanel.hidden = !snapshot.setup;
+  if (snapshot.setup) {
+    const setupMoveCount = snapshot.setup.split(" ").filter(Boolean).length;
+    setupSummary.textContent = `解かれた状態から ${setupMoveCount} 手を適用済みです。`;
+    setupMoves.textContent = snapshot.setup;
+  }
+  sequenceLabel.textContent = `SOLUTION / ${snapshot.totalMoves} MOVES`;
+  remaining.textContent = `残り ${remainingMoves} 手`;
+  tokensHost.setAttribute("aria-label", `解法 ${snapshot.position}手目 / ${snapshot.totalMoves}手中`);
   playButton.textContent = snapshot.isPlaying ? "停止" : "再生";
   playButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.totalMoves === 0;
   previousButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
   nextButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.position >= snapshot.totalMoves;
+  backTenButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
+  forwardTenButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.position >= snapshot.totalMoves;
   startButton.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
   renderTokens(snapshot);
   updateAddress(snapshot);
@@ -197,6 +220,10 @@ function render(snapshot) {
 try {
   viewer = createPuzzleViewer(stage, {
     puzzleId: selectedPuzzle,
+    // Pass the setup before the first render. Applying it afterwards briefly
+    // showed the solved cube and could leave an embedded launch looking as if
+    // its initial scramble had been ignored.
+    setupAlgorithm: requestedSetup,
     algorithm: input.value,
     speed: Number(speedSelect.value),
     theme: themeFor(requestedTheme),
@@ -204,7 +231,6 @@ try {
     cameraState: requestedCameraState,
     onChange: render,
   });
-  if (requestedSetup) viewer.setSetupAlgorithm(requestedSetup);
   if (requestedPosition !== null) viewer.seek(Number(requestedPosition));
   if (!viewer.available) {
     showFallback();
@@ -245,6 +271,8 @@ playButton.addEventListener("click", () => viewer?.play());
 previousButton.addEventListener("click", () => viewer?.stepPrevious());
 nextButton.addEventListener("click", () => viewer?.stepNext());
 startButton.addEventListener("click", () => viewer?.seek(0));
+backTenButton.addEventListener("click", () => viewer?.seek(lastSnapshot.position - 10));
+forwardTenButton.addEventListener("click", () => viewer?.seek(lastSnapshot.position + 10));
 resetViewButton.addEventListener("click", () => viewer?.resetCamera());
 copyLinkButton.addEventListener("click", async () => {
   if (viewer) updateAddress(viewer.getSnapshot());

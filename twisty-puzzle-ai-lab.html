@@ -33,7 +33,7 @@
                     <div>
                         <p class="story-kicker">PROJECT 01 / AI &amp; PUZZLE</p>
                         <h1 id="story-title">Twisty Puzzle<br>AI Lab</h1>
-                        <p class="story-lead">キューブを解くAIを作り、その考え方を観察できる形にする。数学、探索、学習、可視化に加え、「探索そのものが解けたのか」「既知手順のfallbackで完了したのか」まで分けて残す、個人開発の実験室です。</p>
+                        <p class="story-lead">キューブを解こうとするAIを作っています。正解を出せたかだけでなく、どの手を選び、どこで迷ったのかまで画面で追えるようにしています。</p>
                         <div class="story-meta"><span>PYTHON</span><span>TKINTER</span><span>NUMPY / PYTORCH</span><span>EXPERIMENTAL</span></div>
                         <div class="story-actions">
                             <a class="button story-action" href="https://github.com/pcssuematsu-max/Rubiks_portfolio" target="_blank" rel="noopener noreferrer">GitHubでコードを見る <span aria-hidden="true">↗</span></a>
@@ -55,8 +55,8 @@
                 </div>
                 <div class="page-width fact-grid">
                     <article class="fact-card"><small>PUZZLES</small><strong>複数のツイストパズル</strong><span>Rubik's Cube系だけでなく、Megaminx、Pyraminx、Skewb、Square-1、FTO、CTOなどを共通の環境で扱います。</span></article>
-                    <article class="fact-card"><small>SEARCH</small><strong>Search2 / Search3</strong><span>Policy・Valueを使う独自の優先度探索と、PUCT型探索を比較しながら実験します。</span></article>
-                    <article class="fact-card"><small>EXPERIMENT LOG</small><strong>結果の種類まで記録</strong><span>探索成功、既知手順によるfallback完了、未解決を分け、手数・時間・開始局面とともに比較します。</span></article>
+                    <article class="fact-card"><small>SEARCH</small><strong>Search2 / Search3</strong><span>「次にどの手を試すか」を決める、二つの方法を比べています。</span></article>
+                    <article class="fact-card"><small>EXPERIMENT LOG</small><strong>結果の種類まで記録</strong><span>AIだけで解けた結果、登録済みの手順で最後を整えた結果、まだ解けなかった結果を分けて残します。</span></article>
                 </div>
             </section>
 
@@ -64,7 +64,7 @@
                 <div class="page-width">
                     <p class="story-section-label">HOW TO READ THE LAB</p>
                     <h2>画面を三つに分けると、<br>AIの試行錯誤が見えてくる。</h2>
-                    <p class="lab-section-intro">全体画面には多くの情報がありますが、役割は大きく「状態を見る」「探索を追う」「判断を解析する」の三つです。それぞれを切り分けて見ると、AIが何を入力にし、どの手を選び、結果をどう評価したかがつながります。</p>
+                    <p class="lab-section-intro">まずキューブの状態を見る。次に、AIが選んだ手を追う。最後に、なぜその手を選んだのかを見てみる。画面の情報が多いので、この順で見ると分かりやすいです。</p>
 
                     <div class="lab-feature-stack">
                         <article class="lab-feature-card lab-feature-state">
