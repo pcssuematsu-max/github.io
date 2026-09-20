@@ -201,7 +201,7 @@ function addPlaybackButtons() {
             : slot === "left" ? "f2lLeftSlotNoCenters" : "f2lRightSlotNoCenters";
         trigger.dataset.diagramMatched = diagramSetup ? "true" : "false";
         trigger.dataset.focusNote = content.textContent.includes("I型に帰着") || content.textContent.includes("T型に帰着")
-            ? `${paletteNote} ${diagramSetup ? "開始位置は図の配置です。" : "このケースの開始位置は、現在は手順の逆回転から作っています。"} この再生は基本形へ帰着するところまでです。続きの位置・向きは、確認でき次第追加します。`
+            ? `${paletteNote} ${diagramSetup ? "開始位置は図の配置です。" : "図の状態と開始位置が異なる場合があります。"} この再生では、基本形に帰着するまでの動きを確認できます。`
             : diagramSetup ? `${paletteNote} 開始位置は図の配置です。` : paletteNote;
     });
 }

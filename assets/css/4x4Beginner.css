@@ -349,6 +349,20 @@
     width: min(100%, 240px);
 }
 
+.manual-basic-setup {
+    max-width: 440px;
+    margin-inline: auto;
+}
+
+.manual-basic-setup .manual-case-visual {
+    border: 2px solid #111;
+    border-radius: 11px;
+}
+
+.manual-basic-setup .manual-case-visual svg {
+    width: min(100%, 280px);
+}
+
 .move-case-algorithm {
     display: inline-block;
     margin: 10px 0 4px;

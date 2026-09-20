@@ -7,8 +7,8 @@
     </filter>
   </defs>
   <g filter="url(#shadow)" stroke="#172026" stroke-width="3" stroke-linejoin="round">
-    <path fill="#f4dc37" d="M130 13 226 61 130 109 34 61Z"/>
-    <path fill="#ec5f65" d="M34 61 130 109 130 205 34 157Z"/>
+    <path fill="#ec5f65" d="M130 13 226 61 130 109 34 61Z"/>
+    <path fill="#f4dc37" d="M34 61 130 109 130 205 34 157Z"/>
     <path fill="#3091c8" d="M130 109 226 61 226 157 130 205Z"/>
     <g fill="none" stroke-width="2">
       <path d="m58 49 96 48M82 37l96 48M106 25l96 48M202 49l-96 48M178 37 82 85M154 25 58 73"/>

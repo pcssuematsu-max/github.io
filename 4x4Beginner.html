@@ -19,7 +19,7 @@
         <meta name="twitter:image" content="https://pcssuematsu-max.github.io/github.io/assets/images/site/Logo.png">
         <link rel="stylesheet" href="assets/css/style.css?v=20260717-3">
         <link rel="stylesheet" href="assets/css/manual.css?v=20260717-3">
-        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20260830-1">
+        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20260920-1">
     </head>
     <body class="manual-page manual-4x4">
         <header>
@@ -170,7 +170,7 @@
                 </ol>
 
                 <h3 class="subsection"><code>U</code>と<code>U'</code>の使い分け</h3>
-                <p class="paragraph"><code>Rw</code>で目的のセンターを作業面へ持ち上げたら、そのパーツを<span class="remark">Rwで戻る列から逃がす方向</span>にU面を回します。図はPDF案に合わせ、<span class="remark">四角い枠の中の上下2図を1セット</span>として読みます。逃がす方向によって2ケースを使い分けます。</p>
+                <p class="paragraph">図では上面（U面）と手前面（F面）を見ています。上面（U面）に同じ色のセンターでバーを作ることが目標です。<code>Rw</code>で目的のセンターを作業面へ持ち上げたら、そのパーツを<span class="remark">Rwで戻る列から逃がす方向</span>にU面を回します。<span class="remark">四角い枠の中の上下2図を1セット</span>として読みます。逃がす方向によって2ケースを使い分けます。</p>
 
                 <div class="manual-case-grid">
                     <figure class="manual-case-figure">
@@ -183,7 +183,7 @@
                     <figure class="manual-case-figure">
                         <div class="manual-case-panel">
                             <div class="manual-case-visual" data-manual-case="center-make-2" data-label="バー作りの代表例2。上下2つの4x4正面図。"></div>
-                            <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
+                            <div class="manual-case-copy"><span>手順</span><code>Rw U' Rw'</code></div>
                         </div>
                         <figcaption>バー作りの代表例 2</figcaption>
                     </figure>
@@ -195,7 +195,7 @@
                 </div>
 
                 <h3 class="subsection">バー作り・バー入れの代表例</h3>
-                <p class="paragraph">PDF案の流れに合わせ、センターは「バーを作る」と「バーを入れる」に分けて考えます。下の手順は代表例です。目的のセンターが反対側にある場合は、<code>Rw</code>を<code>Rw2</code>に読み換えると同じ考え方で処理できます。</p>
+                <p class="paragraph">センターは「バーを作る」と「バーを入れる」に分けて考えます。下の手順は代表例です。目的のセンターが反対側にある場合は、<code>Rw</code>を<code>Rw2</code>に読み換えると同じ考え方で処理できます。</p>
                 <div class="manual-case-grid">
                     <figure class="manual-case-figure">
                         <div class="manual-case-panel">
@@ -251,6 +251,7 @@
 
                 <h2 class="section-title phase-heading" id="edges" data-phase="STEP 02">エッジをペアにする</h2>
                 <p class="paragraph">4x4には24個のウイングがあります。同じ2色を持つウイングを2個ずつ組み合わせ、12組のエッジペアを作ります。まずは効率より、<span class="remark">1組ずつ確実に作る</span>ことを優先します。</p>
+                <p class="paragraph">この章の平面図では、F面を正面から見ています。図の上・右・下・左は、それぞれ<code>U</code>面・<code>R</code>面・<code>D</code>面・<code>L</code>面です。</p>
 
                 <figure class="cube-figure" data-cube-diagram data-state="wing-pair" data-label="同じ2色のウイングで作ったエッジペア">
                     <figcaption>ピンクの2個がまとまると、3x3のエッジ1個と同じように扱えます。</figcaption>
@@ -333,26 +334,25 @@
                     <li>同じ2色を持つウイングを2個見つけます。</li>
                     <li>2個を手前左と手前右のエッジ位置へ、<code>u'</code>を回したときにペアになる高さと向きで置きます。</li>
                     <li>上段手前（UF）のエッジが<span class="remark">まだ揃っていないエッジ</span>であることを確認します。すでにペアなら、外層回転だけで未完成エッジと入れ替えます。</li>
-                    <li><code>u' R U R' u</code>を最後まで回します。</li>
+                    <li><code>u' R U' R' u</code>を最後まで回します。</li>
                 </ol>
 
-                <figure class="cube-figure" data-cube-diagram data-state="edge-escape-setup" data-label="エッジペアリング前の作業位置">
-                    <figcaption>
-                        ピンクは今から作るペア、黄緑はUFに置く未完成エッジです。
-                    </figcaption>
+                <figure class="manual-case-figure manual-edge-case manual-basic-setup">
+                    <div class="manual-case-visual" data-manual-case="edge-basic-setup" data-label="F面を正面に見たエッジペアリングの基本形。ピンクのウイングはFLとFR、黄緑の未完成エッジはUFにある。"></div>
+                    <figcaption>F面を正面にした基本形。ピンクの2個をFLとFRに置き、黄緑のUFエッジは未完成のままにします。</figcaption>
                     <div class="diagram-legend" aria-hidden="true">
-                        <span><i class="legend-target"></i>作るペア</span>
-                        <span><i class="legend-reference"></i>差し込む未完成エッジ</span>
+                        <span><i class="legend-target"></i>ペアにするウイング</span>
+                        <span><i class="legend-reference"></i>未完成のUFエッジ</span>
                     </div>
                 </figure>
 
                 <div class="algorithm-card">
                     <div class="algorithm-card-header"><span>1組ずつペアにする</span><span>PAIR AND RESTORE</span></div>
                     <div class="algorithm-card-body">
-                        <code>u' R U R' u</code>
+                        <code>u' R U' R' u</code>
                         <div class="algorithm-breakdown">
                             <span><code>u'</code>ウイングを合わせてペアを作る</span>
-                            <span><code>R U R'</code>完成ペアを退避し、UFの未完成エッジを差し込む</span>
+                            <span><code>R U' R'</code>完成ペアを退避し、UFの未完成エッジを差し込む</span>
                             <span><code>u</code>内層を戻してセンターを復元する</span>
                         </div>
                     </div>
@@ -360,7 +360,7 @@
 
                 <div class="callout callout-warning">
                     <strong>UFに完成済みエッジを置かない</strong>
-                    <p><code>R U R'</code>でUFのエッジが作業スロットへ差し込まれます。ここが完成済みペアだと、最後の<code>u</code>でそのペアが崩れます。必ず未完成エッジを置いてください。</p>
+                    <p><code>R U' R'</code>でUFのエッジが作業スロットへ差し込まれます。ここが完成済みペアだと、最後の<code>u</code>でそのペアが崩れます。必ず未完成エッジを置いてください。</p>
                 </div>
 
                 <h3 class="subsection">ウイングの向きが合わないとき</h3>
@@ -482,8 +482,8 @@
             </main>
         </div>
 
-        <script src="assets/js/manual-case-diagrams.js?v=4x4-beginner-20260830-1"></script>
-        <script src="assets/js/big-cube-diagrams.js?v=4x4-beginner-20260830-1"></script>
+        <script src="assets/js/manual-case-diagrams.js?v=4x4-beginner-20260920-2"></script>
+        <script src="assets/js/big-cube-diagrams.js?v=4x4-beginner-20260920-1"></script>
         <script src="assets/js/manual-print.js"></script>
     </body>
 </html>

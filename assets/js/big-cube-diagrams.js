@@ -29,8 +29,8 @@
 
     function stateFor(name) {
         var state = {
-            top: faceFill("yellow"),
-            front: faceFill("red"),
+            top: faceFill("red"),
+            front: faceFill("yellow"),
             right: faceFill("blue")
         };
 
@@ -69,7 +69,7 @@
             state.front = faceFill("neutral");
             state.right = faceFill("neutral");
             [5, 6, 9, 10].forEach(function (index) {
-                state.front[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
             if (name === "center-insert-u") {
@@ -86,8 +86,8 @@
             state.front = faceFill("neutral");
             state.right = faceFill("neutral");
             [5, 6, 9, 10].forEach(function (index) {
-                state.top[index] = "yellow";
-                state.front[index] = "red";
+                state.top[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
         }
@@ -97,8 +97,8 @@
             state.front = faceFill("neutral");
             state.right = faceFill("neutral");
             [5, 6, 9, 10].forEach(function (index) {
-                state.top[index] = "yellow";
-                state.front[index] = "red";
+                state.top[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
             state.front[1] = "target";
@@ -112,8 +112,8 @@
             state.front = faceFill("neutral");
             state.right = faceFill("neutral");
             [5, 6, 9, 10].forEach(function (index) {
-                state.top[index] = "yellow";
-                state.front[index] = "red";
+                state.top[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
             state.front[1] = "target";
@@ -127,13 +127,13 @@
             state.front = faceFill("neutral");
             state.right = faceFill("neutral");
             [5, 6, 9, 10].forEach(function (index) {
-                state.top[index] = "yellow";
-                state.front[index] = "red";
+                state.top[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
             [1, 2, 4, 7, 8, 11, 13, 14].forEach(function (index) {
-                state.top[index] = "yellow";
-                state.front[index] = "red";
+                state.top[index] = "red";
+                state.front[index] = "yellow";
                 state.right[index] = "blue";
             });
         }

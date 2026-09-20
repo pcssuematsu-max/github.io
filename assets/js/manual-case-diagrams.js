@@ -34,11 +34,17 @@
         },
         "edge-first-fprime": {
             "left:1": ["magenta", "lime"],
-            "bottom:2": ["lime", "magenta"]
+            "bottom:1": ["lime", "magenta"]
         },
         "edge-first-flip": {
             "left:1": ["magenta", "lime"],
             "right:1": ["magenta", "lime"]
+        },
+        "edge-basic-setup": {
+            "left:1": ["magenta", "magenta"],
+            "right:2": ["magenta", "magenta"],
+            "top:1": ["lime", "lime"],
+            "top:2": ["lime", "lime"]
         },
         "edge-pair-a": {
             "left:1": ["magenta", "lime"],
