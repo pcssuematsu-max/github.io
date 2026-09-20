@@ -169,6 +169,9 @@ const setupInput = document.querySelector("#setup-input");
 const message = document.querySelector("#algorithm-message");
 const customPlayerHost = document.querySelector("#custom-player");
 const discoveriesStatus = document.querySelector("#discoveries-status");
+const discoveriesPicker = document.querySelector("#discoveries-picker");
+const discoveryEffectTypeSelect = document.querySelector("#discovery-effect-type");
+const discoveryEffectNameSelect = document.querySelector("#discovery-effect-name");
 const discoveriesGrid = document.querySelector("#discoveries-grid");
 const aiDiscoveryHost = document.querySelector("#ai-discovery-viewer");
 const aiDiscoveryStage = document.querySelector("#ai-discovery-stage");
@@ -184,7 +187,7 @@ const aiDiscoveryControls = {
     next: document.querySelector("#ai-discovery-next"),
     resetView: document.querySelector("#ai-discovery-reset-view"),
 };
-const DISCOVERY_SHOWCASE_LIMIT = 12;
+const DISCOVERIES_PER_EFFECT_LIMIT = 3;
 let customPlayback = null;
 let aiDiscoveryViewer = null;
 
@@ -335,7 +338,52 @@ function selectDiscoveryShowcase(discoveries) {
     return discoveries
         .slice()
         .sort(compareDiscoveries)
-        .slice(0, DISCOVERY_SHOWCASE_LIMIT);
+        .slice(0, DISCOVERIES_PER_EFFECT_LIMIT);
+}
+
+function createOption(value, label) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    return option;
+}
+
+function groupDiscoveriesByEffectType(discoveries) {
+    const types = new Map();
+    discoveries.forEach((discovery) => {
+        const type = discovery.effectLabel;
+        if (!types.has(type)) types.set(type, []);
+        types.get(type).push(discovery);
+    });
+    return types;
+}
+
+function groupDiscoveriesByEffectName(discoveries) {
+    const names = new Map();
+    discoveries.forEach((discovery) => {
+        if (!names.has(discovery.effectName)) names.set(discovery.effectName, []);
+        names.get(discovery.effectName).push(discovery);
+    });
+    return names;
+}
+
+function smallestDiscoveryScore(discoveries) {
+    const smallest = selectDiscoveryShowcase(discoveries)[0];
+    return smallest ? discoveryScore(smallest) : 0;
+}
+
+function sortedGroups(groups) {
+    return Array.from(groups.entries()).sort(([, first], [, second]) =>
+        smallestDiscoveryScore(first) - smallestDiscoveryScore(second)
+        || first.length - second.length
+    );
+}
+
+function sortedEffectTypes(groups) {
+    return Array.from(groups.entries()).sort(([, first], [, second]) =>
+        second.length - first.length
+        || smallestDiscoveryScore(first) - smallestDiscoveryScore(second)
+    );
 }
 
 function createDiscoveryCard(discovery) {
@@ -392,13 +440,51 @@ async function loadDiscoveries() {
         const discoveries = Array.isArray(payload.discoveries)
             ? payload.discoveries.filter(isDiscovery)
             : [];
-        const showcase = selectDiscoveryShowcase(discoveries);
-        discoveriesGrid.replaceChildren(...showcase.map(createDiscoveryCard));
-        discoveriesStatus.textContent = showcase.length
-            ? `${discoveries.length}件の成果を個別に比較し、効果数² × 手数の小さい順で上位${showcase.length}件を表示しています。`
-            : "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
-        if (showcase.length) showAiDiscovery(showcase[0]);
+        const effectTypes = groupDiscoveriesByEffectType(discoveries);
+        const typeGroups = sortedEffectTypes(effectTypes);
+
+        function renderSelectedEffect() {
+            const selectedType = effectTypes.get(discoveryEffectTypeSelect.value) || [];
+            const effectNames = groupDiscoveriesByEffectName(selectedType);
+            const isAllNames = discoveryEffectNameSelect.value === "__all__";
+            const selectedName = isAllNames
+                ? selectedType
+                : effectNames.get(discoveryEffectNameSelect.value) || [];
+            const showcase = selectDiscoveryShowcase(selectedName);
+            discoveriesGrid.replaceChildren(...showcase.map(createDiscoveryCard));
+            const selectedScope = isAllNames
+                ? `選択中の効果タイプには${selectedName.length}件あり`
+                : `選択中の EffectName には${selectedName.length}件あり`;
+            discoveriesStatus.textContent = `${effectTypes.size}種類の効果タイプ・${discoveries.length}件の成果から選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
+            if (showcase.length) showAiDiscovery(showcase[0]);
+        }
+
+        function populateEffectNames() {
+            const selectedType = effectTypes.get(discoveryEffectTypeSelect.value) || [];
+            const effectNames = sortedGroups(groupDiscoveriesByEffectName(selectedType));
+            discoveryEffectNameSelect.replaceChildren(
+                createOption("__all__", `この効果タイプの手順をまとめて比較 — ${selectedType.length}件`),
+                ...effectNames.map(([name, items]) =>
+                    createOption(name, `${name} — 最小値 ${smallestDiscoveryScore(items)} / ${items.length}件`)
+                )
+            );
+            renderSelectedEffect();
+        }
+
+        discoveryEffectTypeSelect.replaceChildren(...typeGroups.map(([type, items]) => {
+            const effectNameCount = groupDiscoveriesByEffectName(items).size;
+            return createOption(type, `${type} — ${effectNameCount}種類 / ${items.length}件`);
+        }));
+        discoveryEffectTypeSelect.addEventListener("change", populateEffectNames);
+        discoveryEffectNameSelect.addEventListener("change", renderSelectedEffect);
+        discoveriesPicker.hidden = !typeGroups.length;
+        if (typeGroups.length) populateEffectNames();
+        else {
+            discoveriesGrid.replaceChildren();
+            discoveriesStatus.textContent = "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
+        }
     } catch (error) {
+        discoveriesPicker.hidden = true;
         discoveriesStatus.textContent = "AI成果は公開後にここへ表示されます。";
     }
 }

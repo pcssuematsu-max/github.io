@@ -53,8 +53,12 @@
             <div id="custom-player" class="custom-player" aria-live="polite"></div>
         </div></section>
         <section class="playback-discoveries" id="discoveries" aria-labelledby="discoveries-title"><div class="page-width">
-            <div class="playback-discoveries-heading"><p class="story-section-label">AI DISCOVERIES</p><h2 id="discoveries-title">AIが見つけた手順を、動かして見る。</h2><p>まずは一手ずつ動きを見てみてください。細かく比べたい人のために、動いたパーツや手数も載せています。</p></div>
+            <div class="playback-discoveries-heading"><p class="story-section-label">AI DISCOVERIES</p><h2 id="discoveries-title">AIが見つけた手順を、動かして見る。</h2><p>効果タイプから気になる変化を選び、同じ効果を起こす短い手順を比べられます。</p></div>
             <p id="discoveries-status" class="discoveries-status" role="status" aria-live="polite">AIの成果を読み込んでいます。</p>
+            <div id="discoveries-picker" class="discoveries-picker" hidden>
+                <div class="discovery-filter"><label for="discovery-effect-type">効果タイプ</label><select id="discovery-effect-type" aria-describedby="discoveries-status"></select></div>
+                <div class="discovery-filter"><label for="discovery-effect-name">詳しい効果（EffectName）</label><select id="discovery-effect-name" aria-describedby="discoveries-status"></select></div>
+            </div>
             <div id="discoveries-grid" class="discoveries-grid" aria-live="polite"></div>
             <section id="ai-discovery-viewer" class="ai-discovery-viewer cube3-shell" aria-labelledby="ai-discovery-viewer-title" hidden>
                 <div class="ai-discovery-viewer-heading"><div><p class="story-section-label">OWN 3D VIEWER</p><h3 id="ai-discovery-viewer-title">選択したAIの手順</h3><p id="ai-discovery-viewer-description">成果カードを選ぶと、AIが発見した開始局面と手順をここで再生できます。</p></div></div>
@@ -76,6 +80,6 @@
         <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
-    <script type="module" src="assets/js/twisty-playback.js?v=20260916-3"></script>
+    <script type="module" src="assets/js/twisty-playback.js?v=20260920-1"></script>
 </body>
 </html>
