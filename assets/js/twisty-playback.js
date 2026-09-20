@@ -188,6 +188,7 @@ const aiDiscoveryControls = {
     resetView: document.querySelector("#ai-discovery-reset-view"),
 };
 const DISCOVERIES_PER_EFFECT_LIMIT = 3;
+const DISCOVERY_EFFECT_COUNT_LIMIT = 5;
 let customPlayback = null;
 let aiDiscoveryViewer = null;
 
@@ -437,9 +438,12 @@ async function loadDiscoveries() {
         const response = await fetch("assets/data/ai-discoveries.json", { cache: "no-store" });
         if (!response.ok) throw new Error("discovery feed unavailable");
         const payload = await response.json();
-        const discoveries = Array.isArray(payload.discoveries)
+        const allDiscoveries = Array.isArray(payload.discoveries)
             ? payload.discoveries.filter(isDiscovery)
             : [];
+        const discoveries = allDiscoveries.filter(
+            (discovery) => discovery.effectCount <= DISCOVERY_EFFECT_COUNT_LIMIT
+        );
         const effectTypes = groupDiscoveriesByEffectType(discoveries);
         const typeGroups = sortedEffectTypes(effectTypes);
 
@@ -455,7 +459,7 @@ async function loadDiscoveries() {
             const selectedScope = isAllNames
                 ? `選択中の効果タイプには${selectedName.length}件あり`
                 : `選択中の EffectName には${selectedName.length}件あり`;
-            discoveriesStatus.textContent = `${effectTypes.size}種類の効果タイプ・${discoveries.length}件の成果から選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
+            discoveriesStatus.textContent = `${allDiscoveries.length}件の成果から、EffectNumber ${DISCOVERY_EFFECT_COUNT_LIMIT}以下の${discoveries.length}件・${effectTypes.size}種類を選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
             if (showcase.length) showAiDiscovery(showcase[0]);
         }
 
