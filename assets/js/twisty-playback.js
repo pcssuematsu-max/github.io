@@ -408,9 +408,8 @@ function sortedGroups(groups) {
 }
 
 function sortedEffectTypes(groups) {
-    return Array.from(groups.entries()).sort(([, first], [, second]) =>
-        second.length - first.length
-        || smallestDiscoveryScore(first) - smallestDiscoveryScore(second)
+    return Array.from(groups.entries()).sort(([first], [second]) =>
+        first.localeCompare(second, "ja", { numeric: true })
     );
 }
 
