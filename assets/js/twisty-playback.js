@@ -189,6 +189,12 @@ const aiDiscoveryControls = {
 };
 const DISCOVERIES_PER_EFFECT_LIMIT = 3;
 const DISCOVERY_EFFECT_COUNT_LIMIT = 5;
+const FEATURED_EFFECT_COMPONENT_PATTERNS = [
+    ["C2", "CtrCore4", "ME2"],
+    ["C2", "CtrCore6", "ME2"],
+    ["C2", "CtrCore4"],
+    ["C2", "CtrCore6"],
+].map((parts) => parts.slice().sort().join("+"));
 let customPlayback = null;
 let aiDiscoveryViewer = null;
 
@@ -342,6 +348,27 @@ function selectDiscoveryShowcase(discoveries) {
         .slice(0, DISCOVERIES_PER_EFFECT_LIMIT);
 }
 
+function effectComponentType(effectPart) {
+    if (effectPart.startsWith("C2")) return "C2";
+    if (effectPart.startsWith("CtrCore4")) return "CtrCore4";
+    if (effectPart.startsWith("CtrCore6")) return "CtrCore6";
+    if (effectPart.startsWith("ME2")) return "ME2";
+    return effectPart;
+}
+
+function isFeaturedEffect(discovery) {
+    const pattern = discovery.effectClass
+        .split("+")
+        .map(effectComponentType)
+        .sort()
+        .join("+");
+    return FEATURED_EFFECT_COMPONENT_PATTERNS.includes(pattern);
+}
+
+function isDisplayableDiscovery(discovery) {
+    return discovery.effectCount <= DISCOVERY_EFFECT_COUNT_LIMIT || isFeaturedEffect(discovery);
+}
+
 function createOption(value, label) {
     const option = document.createElement("option");
     option.value = value;
@@ -391,7 +418,9 @@ function createDiscoveryCard(discovery) {
     const card = document.createElement("article");
     card.className = "discovery-card";
     const label = document.createElement("small");
-    label.textContent = "AI DISCOVERY";
+    label.textContent = isFeaturedEffect(discovery)
+        ? "AI DISCOVERY / FEATURED"
+        : "AI DISCOVERY";
     const title = document.createElement("h3");
     title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
     const metrics = document.createElement("p");
@@ -399,7 +428,8 @@ function createDiscoveryCard(discovery) {
     const orientation = discovery.orientationCount
         ? `・向き変化 ${discovery.orientationCount}`
         : "";
-    metrics.textContent = `効果 ${discovery.effectCount}² × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
+    const featuredPrefix = isFeaturedEffect(discovery) ? "注目型 / " : "";
+    metrics.textContent = `${featuredPrefix}効果 ${discovery.effectCount}² × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
     const description = document.createElement("p");
     description.textContent = discovery.setup.length
         ? `開始局面: ${discovery.setup.length}手のスクランブル`
@@ -441,9 +471,10 @@ async function loadDiscoveries() {
         const allDiscoveries = Array.isArray(payload.discoveries)
             ? payload.discoveries.filter(isDiscovery)
             : [];
-        const discoveries = allDiscoveries.filter(
-            (discovery) => discovery.effectCount <= DISCOVERY_EFFECT_COUNT_LIMIT
-        );
+        const discoveries = allDiscoveries.filter(isDisplayableDiscovery);
+        const featuredCount = discoveries.filter(
+            (discovery) => discovery.effectCount > DISCOVERY_EFFECT_COUNT_LIMIT
+        ).length;
         const effectTypes = groupDiscoveriesByEffectType(discoveries);
         const typeGroups = sortedEffectTypes(effectTypes);
 
@@ -459,7 +490,7 @@ async function loadDiscoveries() {
             const selectedScope = isAllNames
                 ? `選択中の効果タイプには${selectedName.length}件あり`
                 : `選択中の EffectName には${selectedName.length}件あり`;
-            discoveriesStatus.textContent = `${allDiscoveries.length}件の成果から、EffectNumber ${DISCOVERY_EFFECT_COUNT_LIMIT}以下の${discoveries.length}件・${effectTypes.size}種類を選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
+            discoveriesStatus.textContent = `${allDiscoveries.length}件の成果から、EffectNumber ${DISCOVERY_EFFECT_COUNT_LIMIT}以下と中心センター注目型${featuredCount}件を合わせた${discoveries.length}件・${effectTypes.size}種類を選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
             if (showcase.length) showAiDiscovery(showcase[0]);
         }
 
