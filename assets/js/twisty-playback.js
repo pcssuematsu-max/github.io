@@ -365,10 +365,32 @@ function compareDiscoveries(first, second) {
         || String(first.updatedAt).localeCompare(String(second.updatedAt));
 }
 
+function discoveryProcedureKey(discovery) {
+    return [discovery.puzzle, discovery.moves.join("\u0000")].join("\u0000");
+}
+
+function compareDiscoveryRepresentatives(first, second) {
+    return compareDiscoveries(first, second)
+        || first.setup.length - second.setup.length
+        || Number(isTerminalDiscovery(first)) - Number(isTerminalDiscovery(second))
+        || String(first.id).localeCompare(String(second.id));
+}
+
+function uniqueDiscoveryProcedures(discoveries) {
+    const representatives = new Map();
+    discoveries.forEach((discovery) => {
+        const key = discoveryProcedureKey(discovery);
+        const current = representatives.get(key);
+        if (!current || compareDiscoveryRepresentatives(discovery, current) < 0) {
+            representatives.set(key, discovery);
+        }
+    });
+    return Array.from(representatives.values());
+}
+
 function selectDiscoveryShowcase(discoveries) {
-    return discoveries
-        .slice()
-        .sort(compareDiscoveries)
+    return uniqueDiscoveryProcedures(discoveries)
+        .sort(compareDiscoveryRepresentatives)
         .slice(0, DISCOVERIES_PER_EFFECT_LIMIT);
 }
 
