@@ -289,14 +289,34 @@ function renderAiDiscovery(snapshot) {
     }));
 }
 
+function isTerminalDiscovery(discovery) {
+    return discovery.discoveryKind === "terminal-last-perm";
+}
+
+function discoveryReplayDescription(discovery) {
+    if (isTerminalDiscovery(discovery)) {
+        return `途中局面から、AIが見つけた${discovery.moves.length}手の局面解消を再生します。`;
+    }
+    return discovery.setup.length
+        ? `${discovery.setup.length}手の開始局面から、AIが発見した${discovery.moves.length}手を再生します。`
+        : `完成状態から、AIが発見した${discovery.moves.length}手を再生します。`;
+}
+
+function discoveryCardDescription(discovery) {
+    if (isTerminalDiscovery(discovery)) {
+        return `途中局面: ${discovery.setup.length}手分の状態から解消`;
+    }
+    return discovery.setup.length
+        ? `開始局面: ${discovery.setup.length}手のスクランブル`
+        : "完成状態からの手順";
+}
+
 function showAiDiscovery(discovery) {
     aiDiscoveryViewer?.destroy();
     aiDiscoveryViewer = null;
     aiDiscoveryHost.hidden = false;
     aiDiscoveryTitle.textContent = `${displayPuzzleName(discovery.puzzle)} / ${displayEffectLabel(discovery.effectLabel)}`;
-    aiDiscoveryDescription.textContent = discovery.setup.length
-        ? `${discovery.setup.length}手の開始局面から、AIが発見した${discovery.moves.length}手を再生します。`
-        : `完成状態から、AIが発見した${discovery.moves.length}手を再生します。`;
+    aiDiscoveryDescription.textContent = discoveryReplayDescription(discovery);
     aiDiscoveryFallback.hidden = true;
     aiDiscoveryStage.replaceChildren(aiDiscoveryFallback);
     try {
@@ -423,7 +443,9 @@ function createDiscoveryCard(discovery) {
     const label = document.createElement("small");
     label.textContent = isFeaturedEffect(discovery)
         ? "注目の組み合わせ"
-        : "AIが見つけた手順";
+        : isTerminalDiscovery(discovery)
+            ? "AIが見つけた局面解消"
+            : "AIが見つけた手順";
     const title = document.createElement("h3");
     title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${displayEffectLabel(discovery.effectLabel)}`;
     const metrics = document.createElement("p");
@@ -431,9 +453,7 @@ function createDiscoveryCard(discovery) {
     const featuredPrefix = isFeaturedEffect(discovery) ? "注目の組み合わせ / " : "";
     metrics.textContent = `${featuredPrefix}動かしたパーツ: ${discovery.effectCount}個 / 手数: ${discovery.moves.length}手`;
     const description = document.createElement("p");
-    description.textContent = discovery.setup.length
-        ? `開始局面: ${discovery.setup.length}手のスクランブル`
-        : "完成状態からの手順";
+    description.textContent = discoveryCardDescription(discovery);
     const moves = document.createElement("code");
     moves.className = "discovery-moves";
     moves.textContent = discovery.moves.join(" ");
