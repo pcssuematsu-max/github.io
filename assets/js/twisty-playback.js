@@ -418,17 +418,17 @@ function createDiscoveryCard(discovery) {
     card.className = "discovery-card";
     const label = document.createElement("small");
     label.textContent = isFeaturedEffect(discovery)
-        ? "AI DISCOVERY / FEATURED"
-        : "AI DISCOVERY";
+        ? "注目の組み合わせ"
+        : "AIが見つけた手順";
     const title = document.createElement("h3");
     title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
     const metrics = document.createElement("p");
     metrics.className = "discovery-metrics";
     const orientation = discovery.orientationCount
-        ? `・向き変化 ${discovery.orientationCount}`
+        ? ` / 向きが変わるパーツ: ${discovery.orientationCount}個`
         : "";
-    const featuredPrefix = isFeaturedEffect(discovery) ? "注目型 / " : "";
-    metrics.textContent = `${featuredPrefix}効果 ${discovery.effectCount}² × ${discovery.moves.length}手 = ${discoveryScore(discovery)}${orientation}`;
+    const featuredPrefix = isFeaturedEffect(discovery) ? "注目の組み合わせ / " : "";
+    metrics.textContent = `${featuredPrefix}動かしたパーツ: ${discovery.effectCount}個 / 手数: ${discovery.moves.length}手${orientation}`;
     const description = document.createElement("p");
     description.textContent = discovery.setup.length
         ? `開始局面: ${discovery.setup.length}手のスクランブル`
@@ -487,9 +487,9 @@ async function loadDiscoveries() {
             const showcase = selectDiscoveryShowcase(selectedName);
             discoveriesGrid.replaceChildren(...showcase.map(createDiscoveryCard));
             const selectedScope = isAllNames
-                ? `選択中の効果タイプには${selectedName.length}件あり`
-                : `選択中の EffectName には${selectedName.length}件あり`;
-            discoveriesStatus.textContent = `${allDiscoveries.length}件の成果から、EffectNumber ${DISCOVERY_EFFECT_COUNT_LIMIT}以下と中心センター注目型${featuredCount}件を合わせた${discoveries.length}件・${effectTypes.size}種類を選べます。${selectedScope}、効果数² × 手数が小さい順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
+                ? `選んだ変化には${selectedName.length}件あり`
+                : `選んだパターンには${selectedName.length}件あり`;
+            discoveriesStatus.textContent = `${effectTypes.size}種類・${discoveries.length}件の手順から選べます。${selectedScope}、動かしたパーツ数と手数が少ない順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
             if (showcase.length) showAiDiscovery(showcase[0]);
         }
 
@@ -497,17 +497,21 @@ async function loadDiscoveries() {
             const selectedType = effectTypes.get(discoveryEffectTypeSelect.value) || [];
             const effectNames = sortedGroups(groupDiscoveriesByEffectName(selectedType));
             discoveryEffectNameSelect.replaceChildren(
-                createOption("__all__", `この効果タイプの手順をまとめて比較 — ${selectedType.length}件`),
-                ...effectNames.map(([name, items]) =>
-                    createOption(name, `${name} — 最小値 ${smallestDiscoveryScore(items)} / ${items.length}件`)
-                )
+                createOption("__all__", `この変化をまとめて比べる — ${selectedType.length}件`),
+                ...effectNames.map(([name, items], index) => {
+                    const shortest = selectDiscoveryShowcase(items)[0];
+                    return createOption(
+                        name,
+                        `パターン ${index + 1} — 最短${shortest.moves.length}手 / ${items.length}件`
+                    );
+                })
             );
             renderSelectedEffect();
         }
 
         discoveryEffectTypeSelect.replaceChildren(...typeGroups.map(([type, items]) => {
             const effectNameCount = groupDiscoveriesByEffectName(items).size;
-            return createOption(type, `${type} — ${effectNameCount}種類 / ${items.length}件`);
+            return createOption(type, `${type} — ${effectNameCount}通り / ${items.length}件`);
         }));
         discoveryEffectTypeSelect.addEventListener("change", populateEffectNames);
         discoveryEffectNameSelect.addEventListener("change", renderSelectedEffect);
