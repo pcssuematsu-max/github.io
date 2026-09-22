@@ -264,6 +264,10 @@ function displayPuzzleName(puzzle) {
     return option ? option.textContent : puzzle;
 }
 
+function displayEffectLabel(effectLabel) {
+    return effectLabel.replace(/・向き変化\d+/g, "");
+}
+
 function renderAiDiscovery(snapshot) {
     const current = snapshot.position === 0 ? "開始状態" : `現在の手: ${snapshot.currentMove}`;
     aiDiscoveryStatus.textContent = `${current}。${snapshot.position}手目 / ${snapshot.totalMoves}手中。`;
@@ -289,7 +293,7 @@ function showAiDiscovery(discovery) {
     aiDiscoveryViewer?.destroy();
     aiDiscoveryViewer = null;
     aiDiscoveryHost.hidden = false;
-    aiDiscoveryTitle.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
+    aiDiscoveryTitle.textContent = `${displayPuzzleName(discovery.puzzle)} / ${displayEffectLabel(discovery.effectLabel)}`;
     aiDiscoveryDescription.textContent = discovery.setup.length
         ? `${discovery.setup.length}手の開始局面から、AIが発見した${discovery.moves.length}手を再生します。`
         : `完成状態から、AIが発見した${discovery.moves.length}手を再生します。`;
@@ -379,7 +383,7 @@ function createOption(value, label) {
 function groupDiscoveriesByEffectType(discoveries) {
     const types = new Map();
     discoveries.forEach((discovery) => {
-        const type = discovery.effectLabel;
+        const type = displayEffectLabel(discovery.effectLabel);
         if (!types.has(type)) types.set(type, []);
         types.get(type).push(discovery);
     });
@@ -421,14 +425,11 @@ function createDiscoveryCard(discovery) {
         ? "注目の組み合わせ"
         : "AIが見つけた手順";
     const title = document.createElement("h3");
-    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${discovery.effectLabel}`;
+    title.textContent = `${displayPuzzleName(discovery.puzzle)} / ${displayEffectLabel(discovery.effectLabel)}`;
     const metrics = document.createElement("p");
     metrics.className = "discovery-metrics";
-    const orientation = discovery.orientationCount
-        ? ` / 向きが変わるパーツ: ${discovery.orientationCount}個`
-        : "";
     const featuredPrefix = isFeaturedEffect(discovery) ? "注目の組み合わせ / " : "";
-    metrics.textContent = `${featuredPrefix}動かしたパーツ: ${discovery.effectCount}個 / 手数: ${discovery.moves.length}手${orientation}`;
+    metrics.textContent = `${featuredPrefix}動かしたパーツ: ${discovery.effectCount}個 / 手数: ${discovery.moves.length}手`;
     const description = document.createElement("p");
     description.textContent = discovery.setup.length
         ? `開始局面: ${discovery.setup.length}手のスクランブル`
