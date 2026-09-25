@@ -541,6 +541,154 @@
     color: #a9274c;
 }
 
+.manual-3d-example {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(310px, 1.1fr);
+    overflow: hidden;
+    border: 1px solid rgba(17, 135, 127, 0.25);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(20, 72, 69, 0.1);
+    break-inside: avoid;
+}
+
+.manual-3d-example-copy {
+    padding: 28px;
+    background: linear-gradient(145deg, var(--accent-soft), #f9fffd);
+}
+
+.manual-3d-kicker {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+}
+
+.manual-3d-example h3 {
+    margin: 0 0 12px;
+    color: var(--accent-dark);
+    font-size: clamp(1.22rem, 2.4vw, 1.55rem);
+    line-height: 1.4;
+}
+
+.manual-3d-example-copy p:not(.manual-3d-kicker) {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.75;
+}
+
+.manual-3d-note {
+    margin-top: 13px !important;
+    color: #4e6260;
+    font-size: 0.78rem !important;
+}
+
+.manual-3d-example-viewer {
+    min-width: 0;
+    padding: 12px;
+    background: #edf8f5;
+}
+
+.manual-3d-stage {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #edf8f5;
+}
+
+.manual-3d-stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.manual-3d-stage .cube3-fallback {
+    margin: 0;
+    padding: 34px 20px;
+    color: #4e6260;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    text-align: center;
+}
+
+.manual-3d-controls {
+    padding: 11px 2px 2px;
+    color: #385b57;
+}
+
+.manual-3d-status {
+    min-height: 1.5em;
+    margin: 0 0 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.manual-3d-controls > div {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.manual-3d-controls button {
+    min-height: 34px;
+    padding: 6px 7px;
+    border: 1px solid rgba(13, 97, 93, 0.34);
+    border-radius: 9px;
+    color: var(--accent-dark);
+    background: #fff;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.manual-3d-controls button:hover:not(:disabled) {
+    color: #fff;
+    background: var(--accent);
+}
+
+.manual-3d-controls button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.manual-3d-controls .manual-3d-reset {
+    width: 100%;
+    margin-top: 7px;
+}
+
+.manual-case-3d {
+    margin-top: 16px;
+    padding: 10px;
+    border: 1px solid rgba(17, 135, 127, 0.24);
+    border-radius: 13px;
+    background: #edf8f5;
+}
+
+.manual-case-3d-kicker {
+    margin: 0 0 7px;
+    color: var(--accent-dark);
+    font-size: 0.76rem;
+    font-weight: 800;
+}
+
+.manual-case-3d .manual-3d-example-viewer {
+    padding: 0;
+    background: transparent;
+}
+
+.manual-case-3d .manual-3d-stage {
+    min-height: 245px;
+}
+
+.manual-case-3d .manual-3d-controls {
+    padding-top: 8px;
+}
+
 .phase-heading {
     display: flex;
     align-items: center;
@@ -611,12 +759,28 @@
         grid-template-columns: minmax(180px, 0.95fr) minmax(0, 1.05fr);
     }
 
+    .manual-3d-example {
+        grid-template-columns: 1fr;
+    }
+
+    .manual-3d-stage {
+        min-height: 280px;
+    }
+
+    .manual-case-3d .manual-3d-stage {
+        min-height: 245px;
+    }
+
     .roadmap li {
         min-height: 0;
     }
 }
 
 @media print {
+    .manual-3d-example {
+        display: none;
+    }
+
     .manual-4x4 .manual-cover-copy h1 {
         font-size: 12mm;
     }

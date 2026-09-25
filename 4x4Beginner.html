@@ -19,7 +19,15 @@
         <meta name="twitter:image" content="https://pcssuematsu-max.github.io/github.io/assets/images/site/Logo.png">
         <link rel="stylesheet" href="assets/css/style.css?v=20260717-3">
         <link rel="stylesheet" href="assets/css/manual.css?v=20260717-3">
-        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20260920-1">
+        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20260925-1">
+        <script type="importmap">
+        {
+          "imports": {
+            "three": "./assets/vendor/three/r162/three.module.js",
+            "three/addons/": "./assets/vendor/three/r162/addons/"
+          }
+        }
+        </script>
     </head>
     <body class="manual-page manual-4x4">
         <header>
@@ -150,6 +158,23 @@
                     <p><code>U2</code>はU面を180度回す記号です。一方、<code>2Rw</code>の先頭の2は「2層」を表します。本書では混乱を避けるため、2層同時回転を<code>Rw</code>と書きます。</p>
                 </div>
 
+                <section class="manual-3d-example" data-4x4-viewer="notation" aria-labelledby="notation-viewer-title">
+                    <div class="manual-3d-example-copy">
+                        <p class="manual-3d-kicker">3D SAMPLE / NOTATION</p>
+                        <h3 id="notation-viewer-title">外層・ワイド・内層を、動きで見比べる</h3>
+                        <p>本文の <code>R → Rw → r</code> を順に再生します。着色はせず、回す層そのものの違いを立体で確認できます。</p>
+                        <p class="manual-3d-note">背景をドラッグすると視点を動かせます。ステッカー上のスワイプ回転は現在停止中です。</p>
+                    </div>
+                    <div class="manual-3d-example-viewer">
+                        <div class="manual-3d-stage" data-viewer-stage aria-label="4x4の回転記号を示す3Dキューブ"></div>
+                        <div class="manual-3d-controls" aria-label="3D見本の再生操作">
+                            <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                            <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                            <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                        </div>
+                    </div>
+                </section>
+
                 <h2 class="section-title phase-heading" id="centers" data-phase="STEP 01">センターを揃える</h2>
                 <p class="paragraph">まずは各1面にある4個のセンターパーツをまとめます。いきなり2x2を作るのではなく、同色2個の<span class="remark">センターバー</span>を2本作り、最後に合体させます。</p>
 
@@ -178,12 +203,34 @@
                             <div class="manual-case-visual" data-manual-case="center-make-1" data-label="バー作りの代表例1。上下2つの4x4正面図。"></div>
                             <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
                         </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-make-1">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="Rw U Rw'の3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="Rw U Rw'の再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
+                        </div>
                         <figcaption>バー作りの代表例 1</figcaption>
                     </figure>
                     <figure class="manual-case-figure">
                         <div class="manual-case-panel">
                             <div class="manual-case-visual" data-manual-case="center-make-2" data-label="バー作りの代表例2。上下2つの4x4正面図。"></div>
                             <div class="manual-case-copy"><span>手順</span><code>Rw U' Rw'</code></div>
+                        </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-make-2">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="Rw U' Rw'の3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="Rw U' Rw'の再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
                         </div>
                         <figcaption>バー作りの代表例 2</figcaption>
                     </figure>
@@ -202,6 +249,17 @@
                             <div class="manual-case-visual" data-manual-case="center-insert" data-label="バーを入れる例。上下2つの4x4正面図。"></div>
                             <div class="manual-case-copy"><span>手順</span><code>Rw U2 Rw'</code></div>
                         </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-insert">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="Rw U2 Rw'の3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="バーを入れる手順の再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
+                        </div>
                         <figcaption>バーを入れる</figcaption>
                     </figure>
                     <figure class="manual-case-figure">
@@ -209,12 +267,34 @@
                             <div class="manual-case-visual" data-manual-case="center-three-same" data-label="3つ同じ面にあるとき。上下2つの4x4正面図。"></div>
                             <div class="manual-case-copy"><span>手順</span><code>Rw U' Rw'</code></div>
                         </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-three-same">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="3つ同じ面にあるときの3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="3つ同じ面にあるときの再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
+                        </div>
                         <figcaption>3つ同じ面にあるとき</figcaption>
                     </figure>
                     <figure class="manual-case-figure">
                         <div class="manual-case-panel">
                             <div class="manual-case-visual" data-manual-case="center-single" data-label="センターを1個入れる例。上下2つの4x4正面図。"></div>
                             <div class="manual-case-copy"><span>手順</span><code>Rw U Rw'</code></div>
+                        </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-single">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="センターを1個入れる3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="センターを1個入れる手順の再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
                         </div>
                         <figcaption>単体を入れる例</figcaption>
                     </figure>
@@ -226,6 +306,17 @@
                                 <span>手順</span>
                                 <code>Rw2 U' Rw2</code>
                                 <small>RwをRw2に読み換えます。</small>
+                            </div>
+                        </div>
+                        <div class="manual-case-3d" data-4x4-viewer="center-opposite">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="反対面にあるときの3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="反対面にあるときの再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
                             </div>
                         </div>
                         <figcaption>反対面にあるとき</figcaption>
@@ -309,6 +400,17 @@
                         <div class="manual-case-panel">
                             <div class="manual-case-visual" data-manual-case="edge-pair-a" data-label="エッジペアリングA手順の配置。"></div>
                             <div class="manual-case-copy"><strong>A手順</strong><code>u' R U' R' u</code></div>
+                        </div>
+                        <div class="manual-case-3d" data-4x4-viewer="edge-pair-a">
+                            <p class="manual-case-3d-kicker">3Dで動きを確認</p>
+                            <div class="manual-3d-example-viewer">
+                                <div class="manual-3d-stage" data-viewer-stage aria-label="u' R U' R' uの3D見本"></div>
+                                <div class="manual-3d-controls" aria-label="A手順の再生操作">
+                                    <p class="manual-3d-status" data-viewer-status aria-live="polite"></p>
+                                    <div><button type="button" data-viewer-action="start">最初へ</button><button type="button" data-viewer-action="previous">戻る</button><button type="button" data-viewer-action="play">再生</button><button type="button" data-viewer-action="next">進む</button></div>
+                                    <button type="button" class="manual-3d-reset" data-viewer-action="reset">視点を戻す</button>
+                                </div>
+                            </div>
                         </div>
                         <figcaption>A手順：前面色が異なる</figcaption>
                     </figure>
@@ -485,5 +587,6 @@
         <script src="assets/js/manual-case-diagrams.js?v=4x4-beginner-20260920-2"></script>
         <script src="assets/js/big-cube-diagrams.js?v=4x4-beginner-20260920-1"></script>
         <script src="assets/js/manual-print.js"></script>
+        <script type="module" src="assets/js/puzzle-viewer/4x4-beginner.js?v=20260925-8"></script>
     </body>
 </html>

@@ -28,6 +28,13 @@ const PANEL_INSET_RATIO = 0.002;
 
 const IDENTITY = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const AXIS_INDEX = { x: 0, y: 1, z: 2 };
+const STICKER_COORDINATE_FACES = {
+  U: { axis: "y", direction: 1 }, D: { axis: "y", direction: -1 },
+  R: { axis: "x", direction: 1 }, L: { axis: "x", direction: -1 },
+  F: { axis: "z", direction: 1 }, B: { axis: "z", direction: -1 },
+};
+const STICKER_COORDINATE_AXIS_ORDER = ["y", "x", "z"];
+const CENTRAL_AXIS_FACE = { y: "U", x: "R", z: "F" };
 
 // Keep the visual proportions aligned with Rubiks_portfolio/core/cube_constants.py.
 // The Python values are pixel-oriented; here only their relative size matters.
@@ -48,6 +55,9 @@ export const DEFAULT_THEME = {
   // The only dark material is the neutral inner mechanism seen through gaps.
   cubieColor: "#77766f",
   canvasBackground: "#eef3f5",
+  // Keys may be stable physical IDs (`pieceId:face`) or public solved-state
+  // coordinates (`U/2R/3F@U`). The latter are resolved per PuzzleDefinition.
+  stickerOverrides: {},
   emphasis: {
     // `pieceId:face` keeps a highlight attached to the physical sticker while it moves.
     stickerIds: [],
@@ -139,6 +149,165 @@ export function stickerIdFor(pieceId, face) {
   return `${pieceId}:${face}`;
 }
 
+function coordinateValuesForDefinition(definition) {
+  if (Array.isArray(definition.coordinateValues)) return definition.coordinateValues;
+  return [...new Set(definition.slots.flatMap((slot) => slot.position))]
+    .sort((left, right) => left - right);
+}
+
+function parseCoordinateLayer(value, dimension) {
+  const source = String(value || "").trim().toUpperCase();
+  const match = /^(\d+)?([UDRLFB])$/.exec(source);
+  if (!match) {
+    throw new Error(`「${value}」は座標層として読めません。U、2R、3Fのように指定してください。`);
+  }
+  const depth = Number(match[1] || 1);
+  const face = match[2];
+  const metadata = STICKER_COORDINATE_FACES[face];
+  const maximumDepth = Math.ceil(dimension / 2);
+  if (!Number.isInteger(depth) || depth < 1 || depth > maximumDepth) {
+    throw new Error(`${dimension}×${dimension}では「${source}」を座標層として指定できません。`);
+  }
+  // The middle layer of an odd cube is reachable from both opposing faces.
+  // Only one spelling is accepted so every physical cubie has one public
+  // solved-state coordinate: 2U/2R/2F on 3×3, 4U/4R/4F on 7×7, and so on.
+  if (dimension % 2 === 1 && depth === maximumDepth
+    && face !== CENTRAL_AXIS_FACE[metadata.axis]) {
+    throw new Error(
+      `${dimension}×${dimension}の中央層は「${depth}${CENTRAL_AXIS_FACE[metadata.axis]}」と指定してください。`
+    );
+  }
+  return { ...metadata, face, depth, token: depth === 1 ? face : `${depth}${face}` };
+}
+
+/**
+ * Parse a public solved-state sticker coordinate.
+ *
+ * The three axis layers identify a cubie in fixed UD / RL / FB order; `@`
+ * selects one of that cubie's physical stickers. For example, `U/R/2B@U`
+ * is the U sticker of the UR wing on the second layer from B.
+ */
+export function parseStickerCoordinate(input, dimension) {
+  const source = typeof input === "string" ? { value: input } : (input || {});
+  const rawPosition = source.solvedAt || source.position || source.value;
+  const rawStickerFace = source.stickerFace || source.face || (
+    typeof rawPosition === "string" ? rawPosition.split("@")[1] : ""
+  );
+  const locationText = typeof rawPosition === "string" ? rawPosition.split("@")[0] : rawPosition;
+  const layers = Array.isArray(locationText)
+    ? locationText
+    : String(locationText || "").split("/").map((value) => value.trim()).filter(Boolean);
+  if (layers.length !== 3) {
+    throw new Error("ステッカー座標はUD / RL / FBの3軸を、U/2R/3F@Uの形で指定してください。");
+  }
+  const parsedLayers = layers.map((layer) => parseCoordinateLayer(layer, dimension));
+  const axes = parsedLayers.map((layer) => layer.axis);
+  if (axes.join(",") !== STICKER_COORDINATE_AXIS_ORDER.join(",")) {
+    throw new Error("ステッカー座標の軸順はUD / RL / FBです。例: U/2R/3F@U");
+  }
+  const stickerFace = String(rawStickerFace || "").trim().toUpperCase();
+  if (!FACE_NORMALS[stickerFace]) {
+    throw new Error("ステッカー面は@U、@D、@R、@L、@F、@Bのいずれかで指定してください。");
+  }
+  return {
+    layers: parsedLayers.map((layer) => layer.token),
+    stickerFace,
+  };
+}
+
+/**
+ * Resolve a public solved-state coordinate to the stable `pieceId:face`
+ * identifier used by renderer themes. The resulting ID follows the physical
+ * sticker through all later turns.
+ */
+export function resolveStickerCoordinate(definition, input) {
+  const parsed = parseStickerCoordinate(input, definition.dimension);
+  const coordinateValues = coordinateValuesForDefinition(definition);
+  const position = Array(3);
+  parsed.layers.forEach((token) => {
+    const layer = parseCoordinateLayer(token, definition.dimension);
+    const axisIndex = AXIS_INDEX[layer.axis];
+    position[axisIndex] = layer.direction > 0
+      ? coordinateValues.at(-layer.depth)
+      : coordinateValues[layer.depth - 1];
+  });
+  const slotId = definition.slotByPosition.get(position.join(","));
+  if (!slotId) {
+    throw new Error(`「${parsed.layers.join("/")}」は${definition.dimension}×${definition.dimension}の表面キュービーではありません。`);
+  }
+  const piece = definition.pieces.find((candidate) => candidate.homeSlotId === slotId);
+  if (!piece?.stickers[parsed.stickerFace]) {
+    throw new Error(`「${parsed.layers.join("/")}」には${parsed.stickerFace}面ステッカーがありません。`);
+  }
+  return {
+    stickerId: stickerIdFor(piece.id, parsed.stickerFace),
+    pieceId: piece.id,
+    stickerFace: parsed.stickerFace,
+    solvedAt: parsed.layers,
+  };
+}
+
+/**
+ * Resolve a theme's explicit sticker colors to physical IDs. Public
+ * coordinates keep calling pages independent of generated piece IDs, while
+ * direct `pieceId:face` keys remain available for existing lesson themes.
+ */
+export function resolveStickerOverrides(definition, overrides = {}) {
+  const knownStickerIds = new Set(definition.pieces.flatMap((piece) => (
+    Object.keys(piece.stickers).map((face) => stickerIdFor(piece.id, face))
+  )));
+  const entries = Array.isArray(overrides)
+    ? overrides.map((override) => [override?.at || override?.sticker || override?.coordinate, override?.color])
+    : Object.entries(overrides || {});
+  return Object.fromEntries(entries.map(([target, color]) => {
+    const coordinate = String(target || "").trim();
+    const stickerId = coordinate.includes("@")
+      ? resolveStickerCoordinate(definition, coordinate).stickerId
+      : coordinate;
+    if (!knownStickerIds.has(stickerId)) {
+      throw new Error(`「${coordinate}」は${definition.dimension}×${definition.dimension}に存在するステッカーではありません。`);
+    }
+    if (typeof color !== "string" || !color.trim()) {
+      throw new Error(`「${coordinate}」のstickerOverridesには色を指定してください。`);
+    }
+    return [stickerId, color];
+  }));
+}
+
+function faceForNormal(normal) {
+  return Object.entries(FACE_NORMALS).find(([_face, candidate]) => (
+    candidate[0] === normal[0] && candidate[1] === normal[1] && candidate[2] === normal[2]
+  ))?.[0] || null;
+}
+
+/**
+ * Return the current slot and outward face of a physical sticker. This is a
+ * state-only helper for tests and teaching pages; it does not depend on the
+ * Three.js renderer.
+ */
+export function stickerPoseFor(state, definition, stickerId) {
+  const separator = String(stickerId || "").lastIndexOf(":");
+  const pieceId = String(stickerId || "").slice(0, separator);
+  const homeFace = String(stickerId || "").slice(separator + 1);
+  const piece = definition.pieces.find((candidate) => candidate.id === pieceId);
+  const pose = state?.pieces?.[pieceId];
+  if (separator < 1 || !piece?.stickers[homeFace] || !pose) {
+    throw new Error(`「${stickerId}」は${definition.dimension}×${definition.dimension}の物理ステッカーではありません。`);
+  }
+  const slot = definition.slotsById[pose.slotId];
+  const orientation = definition.orientations.get(pose.orientationId);
+  const outwardFace = faceForNormal(transformVector(orientation, FACE_NORMALS[homeFace]));
+  if (!slot || !outwardFace) throw new Error("ステッカーの現在位置を特定できませんでした。");
+  return {
+    stickerId,
+    pieceId,
+    homeFace,
+    slotId: slot.id,
+    position: [...slot.position],
+    face: outwardFace,
+  };
+}
+
 function createSlotsAndPieces() {
   const slots = [];
   const pieces = [];
@@ -195,6 +364,7 @@ export function createCube3Definition() {
   const slotByPosition = new Map(slots.map((slot) => [slot.position.join(","), slot.id]));
   return {
     id: "cube-3x3", dimension: 3, cubieSize: 1, renderScale: THREE_BY_THREE_SLOT_SPACING,
+    coordinateValues: [-1, 0, 1],
     columnWidths: columnWidthsFor(3), columnSizeReference: CUBE_COLUMN_SIZE_REFERENCE[3],
     slots, slotsById, slotByPosition, pieces, orientations, baseMoves: BASE_MOVES,
   };
@@ -680,10 +850,15 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
   resize();
 
   function applyTheme(theme) {
+    const overrideInput = Array.isArray(theme?.stickerOverrides)
+      ? theme.stickerOverrides
+      : { ...DEFAULT_THEME.stickerOverrides, ...(theme?.stickerOverrides || {}) };
+    const stickerOverrides = resolveStickerOverrides(definition, overrideInput);
     currentTheme = {
       ...DEFAULT_THEME,
       ...theme,
       stickerColors: { ...DEFAULT_THEME.stickerColors, ...(theme.stickerColors || {}) },
+      stickerOverrides,
       emphasis: {
         ...DEFAULT_THEME.emphasis,
         ...(theme.emphasis || {}),
@@ -692,9 +867,11 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
     };
     renderer.setClearColor(currentTheme.canvasBackground, 1);
     const emphasisColors = currentTheme.emphasis.colors || {};
+    const overrideStickerIds = Object.keys(currentTheme.stickerOverrides || {});
     const emphasizedStickerIds = new Set([
       ...(currentTheme.emphasis.stickerIds || []),
       ...Object.keys(emphasisColors),
+      ...overrideStickerIds,
     ]);
     const emphasizedFaces = new Set(currentTheme.emphasis.stickerFaces || []);
     const hasEmphasis = emphasizedStickerIds.size > 0 || emphasizedFaces.size > 0;
@@ -708,7 +885,9 @@ export function createCube3Renderer(host, definition, initialTheme = DEFAULT_THE
         || emphasizedStickerIds.has(surface.stickerId)
         || emphasizedFaces.has(surface.stickerFace);
       const color = focus
-        ? emphasisColors[surface.stickerId] || currentTheme.stickerColors[surface.colorKey]
+        ? currentTheme.stickerOverrides[surface.stickerId]
+          || emphasisColors[surface.stickerId]
+          || currentTheme.stickerColors[surface.colorKey]
         : currentTheme.emphasis.inactiveColor;
       surface.material.color.set(color);
       surface.material.roughness = currentTheme.emphasis.dimOthers && !focus ? 0.72 : 0.24;
@@ -1178,6 +1357,11 @@ export function createPuzzleViewer(host, options = {}) {
           colors: { ...(theme.emphasis?.colors || {}), ...(emphasis.colors || {}) },
         },
       };
+      renderer?.applyTheme(currentTeachingTheme());
+      notify();
+    },
+    setStickerOverrides(stickerOverrides = {}) {
+      theme = { ...theme, stickerOverrides };
       renderer?.applyTheme(currentTeachingTheme());
       notify();
     },

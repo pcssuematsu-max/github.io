@@ -1,4 +1,4 @@
-import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260916-11";
+import { DEFAULT_THEME, createPuzzleViewer } from "./cube3-viewer.js?v=20260925-1";
 
 const stage = document.querySelector("#embed-cube-stage");
 const fallback = document.querySelector("#embed-fallback");
@@ -13,45 +13,43 @@ const controls = {
   resetView: document.querySelector("#embed-reset-view"),
 };
 
-const focusedCorner = {
-  stickerIds: ["corner-UFR:U", "corner-UFR:F", "corner-UFR:R"],
-  colors: {
-    "corner-UFR:U": "#ff4fa4",
-    "corner-UFR:F": "#ff4fa4",
-    "corner-UFR:R": "#ff4fa4",
+// 教材ページ側が、公開座標のまま色を渡せる4×4の最小例。
+// ビューア内部では各指定を物理ステッカーIDへ解決するため、回転後も色は追従する。
+const fourByFourTheme = {
+  ...DEFAULT_THEME,
+  canvasBackground: "#fff6fb",
+  cubieColor: "#79726f",
+  stickerOverrides: {
+    "2D/R/2B@R": "#ff4fa3",
   },
-  inactiveColor: "#aab4ba",
-  dimOthers: true,
+  emphasis: {
+    dimOthers: true,
+    inactiveColor: "#aab4ba",
+  },
 };
 
 const teachingSteps = [
   {
     position: 0,
-    text: "ピンクのコーナーを追いながら、右面を回す準備をします。",
-    emphasis: focusedCorner,
+    text: "ピンクの4×4センターステッカーを追いながら、外層と内層の回転を確認します。",
   },
   {
     position: 1,
-    text: "Rで注目コーナーが右層と一緒に移動します。色はページ側のテーマで決めています。",
-    emphasis: focusedCorner,
+    text: "Rで外層と一緒に移動します。色は教材ページ側のテーマで決めています。",
   },
-  { position: 2, text: "Uで上層を合わせます。注目ステッカーは物理パーツに追従します。", emphasis: focusedCorner },
-  { position: 3, text: "R'で右層を戻し、最初に注目したコーナーの変化を確認します。", emphasis: focusedCorner },
-  { position: 4, text: "U'で完了です。教材データは手順の位置ごとに差し替えられます。", emphasis: focusedCorner },
+  { position: 2, text: "Rwでは右の2層が回ります。物理ステッカーは同じ色のまま追従します。" },
+  { position: 3, text: "2Fは前面から2層目だけを回す指定です。" },
+  { position: 4, text: "Dの外層回転を経ても、テーマの色指定は変わりません。" },
+  { position: 5, text: "3Fで前面から3層目を回します。URL形式や編集UIなしでも教材データを渡せます。" },
 ];
 
 let viewer;
 try {
   viewer = createPuzzleViewer(stage, {
-    puzzleId: "cube-3x3",
-    setupAlgorithm: "F R U",
-    algorithm: "R U R' U'",
-    theme: {
-      ...DEFAULT_THEME,
-      canvasBackground: "#fff6fb",
-      cubieColor: "#79726f",
-    },
-    themeId: "embed-example",
+    puzzleId: "cube-4x4",
+    algorithm: "R Rw 2F D 3F",
+    theme: fourByFourTheme,
+    themeId: "embed-4x4-sticker-overrides",
     teachingSteps,
     onChange: render,
   });

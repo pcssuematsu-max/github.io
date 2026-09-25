@@ -167,6 +167,33 @@ const viewerTheme = {
 
 `emphasis.stickerIds`は物理ステッカーを選ぶ配列で、`emphasis.colors`にはページ固有の色を指定する。指定がないステッカーは`inactiveColor`へ寄せられる。外部ページは`createPuzzleViewer()`の`theme`へ渡すか、生成後に`viewer.setEmphasis()`で更新する。既存Web教材のF2L配色（水色＝クロス色、ピンク＝手前、黄緑＝横、グレー＝今回追わないパーツ）は、この形式が扱えることを確認するための仮例である。F2Lを独自ビューアへ移すときは、ケースごとの開始状態・注目ステッカー・配色を改めて組み直し、この仮例を引き継がない。
 
+### NxNの公開ステッカー座標
+
+4×4以上の教材側は内部の`pieceId`を直接指定しない。解かれた状態のキュービー位置を、常に`UD / RL / FB`の順で3軸指定し、最後に`@面名`でステッカー面を選ぶ。
+
+```text
+U/2R/3F@U  # U面、R側から2層目・F側から3層目のセンターのUステッカー
+U/R/2B@U   # URウィング（B側から2層目）のUステッカー
+U/R/2B@R   # 同じウィングのRステッカー
+U/L/F@U    # ULFコーナーのUステッカー
+```
+
+`R`は`1R`と同じで、番号はその面から数える層を表す。奇数キューブの中央層だけは両側から重複して呼べるため、U・R・F側の表記だけを受け付ける（7×7なら`4U` / `4R` / `4F`）。`resolveStickerCoordinate(definition, "U/2R/3F@U")`は、この公開座標を物理ステッカーIDへ変換する。得られた`stickerId`を`emphasis.stickerIds`や`emphasis.colors`へ渡すことで、色指定は手順中も同じ物理ステッカーを追従する。
+
+任意の着色には、テーマの`stickerOverrides`を使う。公開座標と従来の物理IDの両方を受け付け、明示色は通常の面色・`emphasis.colors`より優先される。`stickerOverrides`で色を指定したステッカーは、`dimOthers: true`の場合も自動的に注目対象として扱う。生成後に置き換える場合は`viewer.setStickerOverrides(overrides)`を使う。
+
+`3d-puzzle-viewer-embed-example.html` は4×4の実例とし、公開座標で指定した任意ステッカーを、外層・wide move・内層スライスを含む手順へ直接テーマとして渡す。URL形式や編集UIは、F2L移植で必要な設定が明確になってから検討する。
+
+```js
+const viewerTheme = {
+  stickerOverrides: {
+    "U/2R/2F@U": "#ff4fa3", // 4×4の指定センター
+    "U/R/2B@U": "#76c7ff",  // 7×7のウィング
+  },
+  emphasis: { dimOthers: true, inactiveColor: "#bfbfbf" },
+};
+```
+
 ## 手順・再生の最小API
 
 3×3の手順入力は、外層手`U D R L F B`、中央層`M E S`、全体回転`x y z`、2層wide move`Rw Lw Uw Dw Fw Bw`（小文字の`r l u d f b`も同義）、逆手、2回転を読める。wideと全体回転は個別の置換表ではなく、対象層を同時に回す定義で表す。画面に最初から置くショートカットボタンは`R / U / F`中心でよい。
