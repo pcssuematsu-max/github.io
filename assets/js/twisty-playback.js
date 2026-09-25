@@ -189,6 +189,8 @@ const aiDiscoveryControls = {
 };
 const DISCOVERIES_PER_EFFECT_LIMIT = 3;
 const DISCOVERY_EFFECT_COUNT_LIMIT = 5;
+const COMPACT_DISCOVERY_EFFECT_COUNT_LIMIT = 10;
+const COMPACT_DISCOVERY_MOVE_COUNT_LIMIT = 10;
 const FEATURED_EFFECT_COMPONENT_PATTERNS = [
     ["C2", "CtrCore4", "ME2"],
     ["C2", "CtrCore6", "ME2"],
@@ -411,8 +413,15 @@ function isFeaturedEffect(discovery) {
     return FEATURED_EFFECT_COMPONENT_PATTERNS.includes(pattern);
 }
 
+function isCompactDiscovery(discovery) {
+    return discovery.effectCount <= COMPACT_DISCOVERY_EFFECT_COUNT_LIMIT
+        && discovery.moves.length <= COMPACT_DISCOVERY_MOVE_COUNT_LIMIT;
+}
+
 function isDisplayableDiscovery(discovery) {
-    return discovery.effectCount <= DISCOVERY_EFFECT_COUNT_LIMIT || isFeaturedEffect(discovery);
+    return discovery.effectCount <= DISCOVERY_EFFECT_COUNT_LIMIT
+        || isCompactDiscovery(discovery)
+        || isFeaturedEffect(discovery);
 }
 
 function createOption(value, label) {
