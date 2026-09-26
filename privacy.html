@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="キューブ王国と、その外側。のプライバシーポリシー。">
+        <title>プライバシーポリシー | キューブ王国と、その外側。</title>
+        <link rel="canonical" href="https://pcssuematsu-max.github.io/github.io/privacy.html">
+        <link rel="icon" href="assets/images/site/Logo.png">
+        <link rel="stylesheet" href="assets/css/home.css?v=20260830-3">
+        <link rel="stylesheet" href="assets/css/project.css?v=20260908-1">
+        <script defer src="assets/js/analytics.js?v=20260926-1"></script>
+    </head>
+    <body class="home-page story-page theme-about">
+        <header class="site-header">
+            <a href="index.html" class="site-brand" aria-label="トップページへ"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="brand-name">CUBE KINGDOM <b>/ FIELD NOTES</b></span></a>
+            <nav class="site-nav" aria-label="メインメニュー"><a href="index.html#about">この場所</a><a href="index.html#projects">制作物</a><a href="index.html#guides">キューブ</a><a href="about.html">この人</a></nav>
+        </header>
+        <main class="story-main">
+            <section class="story-hero is-light" aria-labelledby="page-title"><div class="page-width story-hero-inner"><div><p class="story-kicker">PRIVACY</p><h1 id="page-title">プライバシーポリシー</h1><p class="story-lead">このサイトでのアクセス解析と、選択できる設定についてお知らせします。</p></div></div></section>
+            <section class="story-section"><div class="page-width story-prose">
+                <h2>アクセス解析について</h2>
+                <p>このサイトは、利用状況の把握と内容改善のために Google Analytics を利用します。Google Analytics は、Cookie を用いてページ閲覧などの情報を収集します。収集される情報に、当サイトが個人を直接特定するための情報は含めません。</p>
+                <p>Google によるデータの取扱いは、<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer">Google プライバシーポリシー</a>をご確認ください。</p>
+                <h2>Cookie の選択</h2>
+                <p>初回表示時に、アクセス解析用Cookieの利用を許可するか選べます。「許可しない」を選んだ場合、Google Analytics の計測は行いません。</p>
+                <p><button class="button story-action" type="button" id="analytics-settings">アクセス解析の設定を変更する</button></p>
+                <h2>変更について</h2>
+                <p>このポリシーは、必要に応じて内容を更新することがあります。</p>
+            </div></section>
+        </main>
+        <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>CUBE KINGDOM / FIELD NOTES</p><div class="story-actions"><a class="button story-action" href="index.html">トップページへ</a></div></div></footer>
+        <script>
+            document.getElementById("analytics-settings")?.addEventListener("click", () => {
+                window.CubeKingdomAnalytics?.openConsentSettings();
+            });
+        </script>
+    </body>
+</html>
