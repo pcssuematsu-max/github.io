@@ -1,0 +1,28 @@
+name: Test Google Analytics tag
+
+on:
+  pull_request:
+    paths:
+      - "**.html"
+      - "assets/js/analytics.js"
+      - "tests/analytics_tag_test.py"
+      - ".github/workflows/test-analytics-tag.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "**.html"
+      - "assets/js/analytics.js"
+      - "tests/analytics_tag_test.py"
+      - ".github/workflows/test-analytics-tag.yml"
+  workflow_dispatch:
+
+jobs:
+  check-analytics-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tests/analytics_tag_test.py

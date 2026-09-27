@@ -48,3 +48,15 @@
 `main` ブランチのリポジトリ直下をGitHub Pagesで公開します。公開ページのURLを維持するため、HTMLファイルは直下に残し、画像・CSS・JavaScriptなどの素材だけを用途別に整理しています。
 
 公開URLが決まったら、各ページにcanonical URLとOGPの絶対URLを追加すると、SEOとSNS共有の精度をさらに高められます。
+
+## テスト
+
+ページを追加・移動した後は、次のコマンドでGoogle Analyticsの共通タグを確認できます。
+
+```bash
+python3 tests/analytics_tag_test.py
+```
+
+公開対象のHTMLを再帰的に検査し、`<head>` 内に `assets/js/analytics.js` が1回だけ読み込まれていることと、測定IDが設定されていることを確認します。生成物の `output/` と `tmp/` は検査対象外です。
+
+HTMLページ、計測スクリプト、またはテスト自体をGitHubへプッシュしたときも、同じテストが自動実行されます。
