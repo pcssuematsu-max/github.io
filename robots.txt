@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://pcssuematsu-max.github.io/github.io/sitemap.xml

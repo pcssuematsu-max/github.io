@@ -5,7 +5,10 @@ on:
     paths:
       - "**.html"
       - "assets/js/analytics.js"
+      - "robots.txt"
+      - "sitemap.xml"
       - "tests/analytics_tag_test.py"
+      - "tests/sitemap_test.py"
       - ".github/workflows/test-analytics-tag.yml"
   push:
     branches:
@@ -13,7 +16,10 @@ on:
     paths:
       - "**.html"
       - "assets/js/analytics.js"
+      - "robots.txt"
+      - "sitemap.xml"
       - "tests/analytics_tag_test.py"
+      - "tests/sitemap_test.py"
       - ".github/workflows/test-analytics-tag.yml"
   workflow_dispatch:
 
@@ -26,3 +32,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 tests/analytics_tag_test.py
+      - run: python3 tests/sitemap_test.py

@@ -55,8 +55,11 @@
 
 ```bash
 python3 tests/analytics_tag_test.py
+python3 tests/sitemap_test.py
 ```
 
 公開対象のHTMLを再帰的に検査し、`<head>` 内に `assets/js/analytics.js` が1回だけ読み込まれていることと、測定IDが設定されていることを確認します。生成物の `output/` と `tmp/` は検査対象外です。
+
+サイトマップのテストは、正規URLがすべて `sitemap.xml` に登録されていることと、`robots.txt` からサイトマップを案内していることを確認します。
 
 HTMLページ、計測スクリプト、またはテスト自体をGitHubへプッシュしたときも、同じテストが自動実行されます。
