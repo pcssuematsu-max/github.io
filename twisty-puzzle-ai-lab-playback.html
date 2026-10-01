@@ -58,6 +58,7 @@
             <details class="discoveries-guide"><summary>このページの見方</summary><p>「動かしたパーツ数」は、手順の前後で状態が変わるパーツの合計です。数が少ないほど変化を追いやすくなります。「別パターン」は、同じ種類の変化を別の位置で起こす手順です。</p></details>
             <p id="discoveries-status" class="discoveries-status" role="status" aria-live="polite">AIの成果を読み込んでいます。</p>
             <div id="discoveries-picker" class="discoveries-picker" hidden>
+                <div class="discovery-filter"><label for="discovery-puzzle">パズル</label><select id="discovery-puzzle" aria-describedby="discoveries-status"></select></div>
                 <div class="discovery-filter"><label for="discovery-effect-type">変化の種類</label><select id="discovery-effect-type" aria-describedby="discoveries-status"></select></div>
                 <div class="discovery-filter"><label for="discovery-effect-name">同じ変化の別パターン</label><select id="discovery-effect-name" aria-describedby="discoveries-status"></select></div>
             </div>
@@ -82,6 +83,6 @@
         <section class="playback-next"><div class="page-width playback-next-inner"><p class="story-section-label">NEXT</p><h2>「このパターンにはこの手順」を、<br>少しずつ増やしていく。</h2><p>今後は2-swap、parity-fixなども追加し、手順と効果を一覧から選べるようにしていきます。</p></div></section>
     </main>
     <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>PROJECT 01 / TWISTY PUZZLE AI LAB</p><a class="button story-action" href="twisty-puzzle-ai-lab.html">プロジェクト紹介へ戻る</a></div></footer>
-    <script type="module" src="assets/js/twisty-playback.js?v=20260925-1"></script>
+    <script type="module" src="assets/js/twisty-playback.js?v=20261001-1"></script>
 </body>
 </html>

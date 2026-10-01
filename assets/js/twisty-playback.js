@@ -170,6 +170,7 @@ const message = document.querySelector("#algorithm-message");
 const customPlayerHost = document.querySelector("#custom-player");
 const discoveriesStatus = document.querySelector("#discoveries-status");
 const discoveriesPicker = document.querySelector("#discoveries-picker");
+const discoveryPuzzleSelect = document.querySelector("#discovery-puzzle");
 const discoveryEffectTypeSelect = document.querySelector("#discovery-effect-type");
 const discoveryEffectNameSelect = document.querySelector("#discovery-effect-name");
 const discoveriesGrid = document.querySelector("#discoveries-grid");
@@ -441,6 +442,15 @@ function groupDiscoveriesByEffectType(discoveries) {
     return types;
 }
 
+function groupDiscoveriesByPuzzle(discoveries) {
+    const puzzles = new Map();
+    discoveries.forEach((discovery) => {
+        if (!puzzles.has(discovery.puzzle)) puzzles.set(discovery.puzzle, []);
+        puzzles.get(discovery.puzzle).push(discovery);
+    });
+    return puzzles;
+}
+
 function groupDiscoveriesByEffectName(discoveries) {
     const names = new Map();
     discoveries.forEach((discovery) => {
@@ -465,6 +475,12 @@ function sortedGroups(groups) {
 function sortedEffectTypes(groups) {
     return Array.from(groups.entries()).sort(([first], [second]) =>
         first.localeCompare(second, "ja", { numeric: true })
+    );
+}
+
+function sortedPuzzles(groups) {
+    return Array.from(groups.entries()).sort(([first], [second]) =>
+        displayPuzzleName(first).localeCompare(displayPuzzleName(second), "ja", { numeric: true })
     );
 }
 
@@ -523,13 +539,20 @@ async function loadDiscoveries() {
             ? payload.discoveries.filter(isDiscovery)
             : [];
         const discoveries = allDiscoveries.filter(isDisplayableDiscovery);
-        const featuredCount = discoveries.filter(
-            (discovery) => discovery.effectCount > DISCOVERY_EFFECT_COUNT_LIMIT
-        ).length;
-        const effectTypes = groupDiscoveriesByEffectType(discoveries);
-        const typeGroups = sortedEffectTypes(effectTypes);
+        const puzzleGroups = sortedPuzzles(groupDiscoveriesByPuzzle(discoveries));
+        const discoveriesByPuzzle = new Map(puzzleGroups);
+
+        function selectedPuzzleDiscoveries() {
+            return discoveriesByPuzzle.get(discoveryPuzzleSelect.value) || [];
+        }
+
+        function selectedEffectTypes() {
+            return groupDiscoveriesByEffectType(selectedPuzzleDiscoveries());
+        }
 
         function renderSelectedEffect() {
+            const puzzleDiscoveries = selectedPuzzleDiscoveries();
+            const effectTypes = selectedEffectTypes();
             const selectedType = effectTypes.get(discoveryEffectTypeSelect.value) || [];
             const effectNames = groupDiscoveriesByEffectName(selectedType);
             const isAllNames = discoveryEffectNameSelect.value === "__all__";
@@ -541,11 +564,12 @@ async function loadDiscoveries() {
             const selectedScope = isAllNames
                 ? `選んだ変化には${selectedName.length}件あり`
                 : `選んだパターンには${selectedName.length}件あり`;
-            discoveriesStatus.textContent = `${effectTypes.size}種類・${discoveries.length}件の手順から選べます。${selectedScope}、動かしたパーツ数と手数が少ない順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
+            discoveriesStatus.textContent = `${displayPuzzleName(discoveryPuzzleSelect.value)}：${effectTypes.size}種類・${puzzleDiscoveries.length}件の手順から選べます。${selectedScope}、動かしたパーツ数と手数が少ない順に最大${DISCOVERIES_PER_EFFECT_LIMIT}件を表示しています。`;
             if (showcase.length) showAiDiscovery(showcase[0]);
         }
 
         function populateEffectNames() {
+            const effectTypes = selectedEffectTypes();
             const selectedType = effectTypes.get(discoveryEffectTypeSelect.value) || [];
             const effectNames = sortedGroups(groupDiscoveriesByEffectName(selectedType));
             discoveryEffectNameSelect.replaceChildren(
@@ -561,14 +585,24 @@ async function loadDiscoveries() {
             renderSelectedEffect();
         }
 
-        discoveryEffectTypeSelect.replaceChildren(...typeGroups.map(([type, items]) => {
-            const effectNameCount = groupDiscoveriesByEffectName(items).size;
-            return createOption(type, `${type} — ${effectNameCount}通り / ${items.length}件`);
-        }));
+        function populateEffectTypes() {
+            const effectTypes = selectedEffectTypes();
+            const typeGroups = sortedEffectTypes(effectTypes);
+            discoveryEffectTypeSelect.replaceChildren(...typeGroups.map(([type, items]) => {
+                const effectNameCount = groupDiscoveriesByEffectName(items).size;
+                return createOption(type, `${type} — ${effectNameCount}通り / ${items.length}件`);
+            }));
+            populateEffectNames();
+        }
+
+        discoveryPuzzleSelect.replaceChildren(...puzzleGroups.map(([puzzle, items]) =>
+            createOption(puzzle, `${displayPuzzleName(puzzle)} — ${items.length}件`)
+        ));
+        discoveryPuzzleSelect.addEventListener("change", populateEffectTypes);
         discoveryEffectTypeSelect.addEventListener("change", populateEffectNames);
         discoveryEffectNameSelect.addEventListener("change", renderSelectedEffect);
-        discoveriesPicker.hidden = !typeGroups.length;
-        if (typeGroups.length) populateEffectNames();
+        discoveriesPicker.hidden = !puzzleGroups.length;
+        if (puzzleGroups.length) populateEffectTypes();
         else {
             discoveriesGrid.replaceChildren();
             discoveriesStatus.textContent = "まだ公開するAI成果はありません。Pythonアプリで解法が見つかると、ここに追加されます。";
