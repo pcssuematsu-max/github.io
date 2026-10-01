@@ -20,7 +20,7 @@
         <meta name="twitter:image" content="https://pcssuematsu-max.github.io/github.io/assets/images/site/Logo.png">
         <link rel="stylesheet" href="assets/css/style.css?v=20260717-3">
         <link rel="stylesheet" href="assets/css/manual.css?v=20260717-3">
-        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20260925-1">
+        <link rel="stylesheet" href="assets/css/4x4Beginner.css?v=4x4-beginner-20261001-1">
         <script type="importmap">
         {
           "imports": {
@@ -441,11 +441,11 @@
                 </ol>
 
                 <figure class="manual-case-figure manual-edge-case manual-basic-setup">
-                    <div class="manual-case-visual" data-manual-case="edge-basic-setup" data-label="F面を正面に見たエッジペアリングの基本形。ピンクのウイングはFLとFR、黄緑の未完成エッジはUFにある。"></div>
-                    <figcaption>F面を正面にした基本形。ピンクの2個をFLとFRに置き、黄緑のUFエッジは未完成のままにします。</figcaption>
+                    <div class="manual-case-visual" data-manual-case="edge-basic-setup" data-label="F面を正面に見たエッジペアリングの基本形。ピンクのウイングはFLとFR、黄緑と水色の未完成エッジはUFにある。"></div>
+                    <figcaption>F面を正面にした基本形。ピンクの2個をFLとFRに置き、UFエッジは黄緑と水色の未完成の組にします。</figcaption>
                     <div class="diagram-legend" aria-hidden="true">
                         <span><i class="legend-target"></i>ペアにするウイング</span>
-                        <span><i class="legend-reference"></i>未完成のUFエッジ</span>
+                        <span><i class="legend-reference"></i><i class="legend-reference-blue"></i>未完成のUFエッジ</span>
                     </div>
                 </figure>
 
@@ -484,11 +484,8 @@
                         <p>最初と最後の<code>Uw</code>はセンターを崩して戻す動き、括弧内はウイングを反転させる動きです。</p>
                     </div>
                 </div>
-
-                <div class="callout callout-warning">
-                    <strong>「1組だけ揃っていない」はパリティではありません</strong>
-                    <p>3x3フェーズへ進む前に、24個のウイングが12組のペアになっていることを確認してください。</p>
-                </div>
+                <p class="paragraph">下の3DはC手順と同じ初期配置から、最後の2ペア用の<code>Uw'</code>・<code>Uw</code>を含む手順を再生します。</p>
+                <div data-manual-viewer-example="edge-last-two"></div>
 
                 <h2 class="section-title phase-heading" id="three-by-three" data-phase="STEP 03">3x3として揃える</h2>
                 <p class="paragraph">センターと6面と12組のエッジペアが完成したら、4x4を仮想的な3x3として揃えます。</p>
@@ -532,6 +529,8 @@
                         <p>手順の途中でセンターと下2段が大きく崩れますが、最後まで回せば復元します。</p>
                     </div>
                 </div>
+                <p class="paragraph">完成状態からこの手順の逆を適用した状態で始まります。再生すると完成状態へ戻ります。</p>
+                <div data-manual-viewer-example="oll-parity"></div>
 
                 <h3 class="subsection">PLLパリティ</h3>
                 <p class="paragraph">最後にエッジペア2組だけが入れ替わり、3x3のPLLでは解決できない状態です。入れ替える2組を手前と奥に置きます。</p>
@@ -547,6 +546,8 @@
                         <p><code>r</code>は右の内側1層だけの回転です。最後の<code>(U2)</code>は、上段の位置合わせが必要な場合に行います。</p>
                     </div>
                 </div>
+                <p class="paragraph">完成状態から逆手順でセットアップします。この3D見本では、任意の最後の<code>U2</code>も含めて再生します。</p>
+                <div data-manual-viewer-example="pll-parity"></div>
 
                 <h2 class="section-title" id="troubleshooting">困ったとき</h2>
                 <div class="trouble-grid">
@@ -585,9 +586,9 @@
             </main>
         </div>
 
-        <script src="assets/js/manual-case-diagrams.js?v=4x4-beginner-20260920-2"></script>
+        <script src="assets/js/manual-case-diagrams.js?v=4x4-beginner-20261001-2"></script>
         <script src="assets/js/big-cube-diagrams.js?v=4x4-beginner-20260920-1"></script>
         <script src="assets/js/manual-print.js"></script>
-        <script type="module" src="assets/js/puzzle-viewer/4x4-beginner.js?v=20260925-8"></script>
+        <script type="module" src="assets/js/puzzle-viewer/4x4-beginner.js?v=20261001-5"></script>
     </body>
 </html>

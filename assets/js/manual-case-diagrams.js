@@ -6,6 +6,7 @@
         neutral: "#9c9c9c",
         magenta: "#ed00ef",
         lime: "#76f400",
+        cyan: "#007fff",
         blue: "#1487ed",
         amber: "#ffbd10"
     };
@@ -44,7 +45,7 @@
             "left:1": ["magenta", "magenta"],
             "right:2": ["magenta", "magenta"],
             "top:1": ["lime", "lime"],
-            "top:2": ["lime", "lime"]
+            "top:2": ["cyan", "cyan"]
         },
         "edge-pair-a": {
             "left:1": ["magenta", "lime"],
@@ -180,6 +181,10 @@
             renderCenterCase(svg, states);
         } else if (edgeData) {
             renderEdgeCase(svg, edgeData);
+            // The manual's 3D sample reads the same case data as this SVG.
+            // The first color belongs to the adjacent face's outer strip;
+            // the second belongs to the F face of the same physical wing.
+            container.dataset.edgeColors = JSON.stringify(edgeData);
         }
         container.appendChild(svg);
     }

@@ -14,6 +14,7 @@ import {
   validateCube3Definition,
   validateCubeNDefinition,
 } from "../assets/js/puzzle-viewer/cube3-viewer.js";
+import { EDGE_WINGS, centerStickerIds, edgeOverridesFromDiagram } from "../assets/js/puzzle-viewer/4x4-edge-stickers.js";
 
 const definition = createCube3Definition();
 validateCube3Definition(definition);
@@ -76,6 +77,56 @@ if (JSON.stringify(portfolioScrambled) === JSON.stringify(portfolioSolved)) {
 
 const coordinateCube4 = createCubeNDefinition(4);
 const coordinateCube7 = createCubeNDefinition(7);
+const edgeCenterIds = centerStickerIds(coordinateCube4);
+assertEqual(edgeCenterIds.length, 24, "4×4の標準色センターステッカー数");
+assertEqual(new Set(edgeCenterIds).size, 24, "4×4のセンターステッカーIDの一意性");
+for (const face of "UDRLFB") {
+  assertEqual(edgeCenterIds.filter((id) => id.endsWith(`:${face}`)).length, 4, `${face}面のセンター4枚`);
+}
+for (const [position, [outer, front]] of Object.entries(EDGE_WINGS)) {
+  const outerSticker = resolveStickerCoordinate(coordinateCube4, outer);
+  const frontSticker = resolveStickerCoordinate(coordinateCube4, front);
+  assertEqual(outerSticker.pieceId, frontSticker.pieceId, `${position} は同じウイングの2色`);
+  assertEqual(frontSticker.stickerFace, "F", `${position} のF面ステッカー`);
+  if (outerSticker.stickerId === frontSticker.stickerId) {
+    throw new Error(`${position} の2色が同じステッカーを指しています。`);
+  }
+}
+const edgeDiagramOverrides = edgeOverridesFromDiagram({
+  "left:1": ["magenta", "lime"],
+  "top:2": ["blue", "amber"],
+});
+assertEqual(edgeDiagramOverrides["2U/L/F@L"], "#ed00ef", "F面左帯の着色");
+assertEqual(edgeDiagramOverrides["2U/L/F@F"], "#76f400", "F面左ウイングの着色");
+assertEqual(edgeDiagramOverrides["U/2R/F@U"], "#1487ed", "F面上帯の着色");
+assertEqual(edgeDiagramOverrides["U/2R/F@F"], "#ffbd10", "F面上ウイングの着色");
+const basicEdgeOverrides = edgeOverridesFromDiagram({
+  "top:1": ["lime", "lime"],
+  "top:2": ["cyan", "cyan"],
+});
+assertEqual(basicEdgeOverrides["U/2L/F@F"], "#76f400", "未完成UF左ウイング");
+assertEqual(basicEdgeOverrides["U/2R/F@F"], "#007fff", "未完成UF右ウイング");
+assertEqual(basicEdgeOverrides["U/2R/F@U"], "#007fff", "未完成UF右ウイングのU面");
+const lastTwoMoves = parseAlgorithm("Uw' R U R' F R' F' R Uw");
+assertEqual(lastTwoMoves.length, 9, "最後の2ペアのUw手順の手数");
+assertEqual(lastTwoMoves[0].token, "Uw'", "最後の2ペアの開始ワイドターン");
+assertEqual(lastTwoMoves.at(-1).token, "Uw", "最後の2ペアの終了ワイドターン");
+stateAt(createSolvedState(coordinateCube4), lastTwoMoves, lastTwoMoves.length, coordinateCube4);
+const parityAlgorithms = {
+  OLL: "Rw U2 x Rw U2 Rw U2 Rw' U2 Lw U2 Rw' U2 Rw U2 Rw' U2 Rw'",
+  PLL: "2R2 U2 2R2 Uw2 2R2 Uw2 U2",
+};
+for (const [name, algorithm] of Object.entries(parityAlgorithms)) {
+  const moves = parseAlgorithm(algorithm);
+  const inverse = moves.slice().reverse().map(invertMove);
+  const solved4 = createSolvedState(coordinateCube4);
+  const setup = stateAt(solved4, inverse, inverse.length, coordinateCube4);
+  const result = stateAt(setup, moves, moves.length, coordinateCube4);
+  assertSameState(result, solved4, `${name}パリティの逆手順セットアップと再生`);
+  if (JSON.stringify(setup) === JSON.stringify(solved4)) {
+    throw new Error(`${name}パリティの開始状態が完成状態のままです。`);
+  }
+}
 assertEqual(
   resolveStickerCoordinate(coordinateCube4, "U/2R/2F@U").stickerId,
   "center-1,3,1:U",

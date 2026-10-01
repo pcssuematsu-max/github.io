@@ -418,6 +418,8 @@
 
 .legend-target { background: #ef6695; }
 .legend-reference { background: #a6d94b; }
+.manual-basic-setup .legend-reference { background: #76f400; }
+.legend-reference-blue { background: #007fff; }
 .legend-neutral { background: #b8c0c4; }
 
 .step-list {
