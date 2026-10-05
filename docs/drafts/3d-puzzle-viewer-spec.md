@@ -3,8 +3,8 @@
 ## 仕様の原本と読み方
 
 - 原本: [3Dパズルビューア｜作戦会議・設計メモ](https://docs.google.com/document/d/1uf0NTXL1KhB2TbpMo8Dp77016r_kOEDHWyeaPowMTR8/edit)
-- ローカル最終確認日: 2026-09-15
-- 原本の最終確認リビジョン: `ANLCKQnPpCHrV-MQo8kOSHp1_v0jZC6dcl4jWHSyPUI29dZDD6pB1G9KUsoZbJ5zOe5sPtpsHv2m6gacM-e4mii4jlbWoux5kFoAfmNZG7k`
+- ローカル最終確認日: 2026-10-04
+- 原本の最終確認リビジョン: `AHj4eMSjXXwYqzjIgw1W02zWWaENQizKMfTo6P0SXcRSGFDxbK_FpFfBhWsyY7HyZcZPzLesd9E50i0NiujP6YDGDNTW95FIDcrmjLSJ4Ys`
 
 このファイルは、作業開始時に必ず読むためのローカルな設計窓口です。Google Docs が仕様の正本であり、要件に影響する作業を始める際は原本の最新版を確認して、このファイルの「確認情報」と要点を更新します。
 

@@ -570,7 +570,20 @@
     right: 24px;
     bottom: 24px;
     width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--accent-dark);
+}
+
+.manual-page .back-to-the-top-text {
+    position: static;
+    transform: none;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
 }
 
 .manual-end-mark {

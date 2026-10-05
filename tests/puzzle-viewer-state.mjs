@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import {
   applyMove,
   createCube3Definition,
@@ -15,10 +16,89 @@ import {
   validateCubeNDefinition,
 } from "../assets/js/puzzle-viewer/cube3-viewer.js";
 import { EDGE_WINGS, centerStickerIds, edgeOverridesFromDiagram } from "../assets/js/puzzle-viewer/4x4-edge-stickers.js";
+import { inversePllSetup, parsePllAlgorithm } from "../assets/js/puzzle-viewer/pll-algorithm.js";
+import { inverseOllSetup, ollStickerOverrides, parseOllAlgorithm } from "../assets/js/puzzle-viewer/oll-algorithm.js";
 
 const definition = createCube3Definition();
 validateCube3Definition(definition);
 const solved = createSolvedState(definition);
+
+const pllPage = readFileSync(new URL("../PLL.html", import.meta.url), "utf8");
+if (pllPage.includes("assets/js/last-layer-playback.js") || pllPage.includes("assets/vendor/cubing/twisty.js")) {
+  throw new Error("PLLページに旧ビューアの読み込みが残っています。");
+}
+if (!pllPage.includes("puzzle-viewer/manual-last-layer-playback.js")) {
+  throw new Error("PLLページに共通の新ビューアが読み込まれていません。");
+}
+const pllCases = [...pllPage.matchAll(/<h2 class\s*=\s*"section-title" id\s*=\s*"([^"]+)">[^<]+<\/h2>[\s\S]*?<div class\s*=\s*"content">\s*<p>([^<]+)<\/p>/g)];
+if (pllCases.length !== 21 || new Set(pllCases.map((match) => match[1])).size !== 21) {
+  throw new Error(`PLLの21手順を読み取れません: ${pllCases.length}件`);
+}
+for (const [, id, source] of pllCases) {
+  const moves = parsePllAlgorithm(source);
+  if (!moves.length) throw new Error(`${id}: 手順が空です。`);
+  const inverse = parseAlgorithm(inversePllSetup(moves));
+  const setup = stateAt(solved, inverse, inverse.length, definition);
+  const finished = stateAt(setup, moves, moves.length, definition);
+  if (JSON.stringify(setup) === JSON.stringify(solved)) {
+    throw new Error(`${id}: 逆セットアップが完成状態のままです。`);
+  }
+  if (JSON.stringify(finished) !== JSON.stringify(solved)) {
+    throw new Error(`${id}: 再生しても完成状態に戻りません。`);
+  }
+  for (const piece of definition.pieces.filter((candidate) => candidate.id.startsWith("center-"))) {
+    const face = Object.keys(piece.stickers)[0];
+    if (stickerPoseFor(setup, definition, stickerIdFor(piece.id, face)).face !== face) {
+      throw new Error(`${id}: 初期状態の${face}面センター色が変わっています。`);
+    }
+  }
+}
+if (parsePllAlgorithm(pllCases[0][2]).length !== 14) {
+  throw new Error("Tパームの手数が変わりました。");
+}
+const jPermA = parsePllAlgorithm(pllCases.find((match) => match[1] === "J-Perm-a")[2]);
+if (jPermA[1].token !== "R2" || jPermA.at(-1).token !== "x'") {
+  throw new Error("Jパームaの180度回転と向き戻しを解釈できません。");
+}
+
+const ollPage = readFileSync(new URL("../OLL.html", import.meta.url), "utf8");
+if (ollPage.includes("assets/js/last-layer-playback.js") || ollPage.includes("assets/vendor/cubing/twisty.js")) {
+  throw new Error("OLLページに旧ビューアの読み込みが残っています。");
+}
+if (!ollPage.includes("puzzle-viewer/manual-last-layer-playback.js")) {
+  throw new Error("OLLページに共通の新ビューアが読み込まれていません。");
+}
+const ollCases = [...ollPage.matchAll(/<h3 class="subsection" id\s*=\s*"([^"]+)">[^<]+<\/h3>[\s\S]*?<details class\s*=\s*"details">[\s\S]*?<div class\s*=\s*"content">([\s\S]*?)<\/div>/g)];
+const ollFormulas = ollCases.flatMap(([, id, content]) => [...content.matchAll(/<p class\s*=\s*"move-symbol">([^<]+)<\/p>/g)]
+  .map((match) => ({ id, source: match[1] })));
+if (ollCases.length !== 57 || ollFormulas.length !== 67) {
+  throw new Error(`OLLの57ケース・67手順を読み取れません: ${ollCases.length}ケース・${ollFormulas.length}手順`);
+}
+const ollGrayStickers = ollStickerOverrides();
+if (Object.keys(ollGrayStickers).length !== 12) {
+  throw new Error("OLLの上段側面12枚だけをグレーにできません。");
+}
+for (const { id, source } of ollFormulas) {
+  const moves = parseOllAlgorithm(source);
+  const inverse = parseAlgorithm(inverseOllSetup(moves));
+  const setup = stateAt(solved, inverse, inverse.length, definition);
+  const finished = stateAt(setup, moves, moves.length, definition);
+  if (!moves.length || JSON.stringify(finished) !== JSON.stringify(solved)) {
+    throw new Error(`${id}: OLLの逆セットアップと再生に失敗しました。`);
+  }
+  const upperCenter = definition.pieces.find((piece) => piece.id === "center-U");
+  if (stickerPoseFor(setup, definition, stickerIdFor(upperCenter.id, "U")).face !== "U") {
+    throw new Error(`${id}: 初期状態の上面が黄色ではありません。`);
+  }
+  for (const piece of definition.pieces.filter((candidate) => definition.slotsById[candidate.homeSlotId].position[1] < 1)) {
+    for (const face of Object.keys(piece.stickers)) {
+      const pose = stickerPoseFor(setup, definition, stickerIdFor(piece.id, face));
+      if (pose.slotId !== piece.homeSlotId || pose.face !== face) {
+        throw new Error(`${id}: 下二段の${piece.id}:${face}が揃っていません。`);
+      }
+    }
+  }
+}
 
 if (stickerIdFor("corner-DFR", "F") !== "corner-DFR:F") {
   throw new Error("注目ステッカー用の安定IDを生成できません。");
