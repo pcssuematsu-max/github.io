@@ -584,6 +584,72 @@
     text-align: right;
 }
 
+.manual-source {
+    margin: 76px 0 0;
+    padding: 26px 28px;
+    border: 1px solid color-mix(in srgb, var(--accent-card) 66%, white);
+    border-top: 6px solid var(--accent);
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent-soft), #fff 72%);
+    box-shadow: 0 10px 24px rgba(30, 31, 38, 0.08);
+}
+
+.manual-source-heading {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+}
+
+.manual-source-kicker {
+    margin: 0 !important;
+    color: var(--accent-dark);
+    font-family: "SFMono-Regular", Consolas, monospace !important;
+    font-size: 0.65rem !important;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.manual-source-title {
+    margin: 0 !important;
+    color: var(--ink);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.manual-source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 4px;
+    padding: 11px 14px;
+    color: var(--accent-dark) !important;
+    border: 1px solid color-mix(in srgb, var(--accent-card) 78%, white);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.86);
+    font-size: 0.91rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.manual-source-link:hover {
+    color: #fff !important;
+    background: var(--accent-dark);
+}
+
+.manual-source-note {
+    margin-bottom: 0 !important;
+    color: var(--muted);
+    font-size: 0.82rem !important;
+}
+
+.manual-source-note a {
+    color: var(--accent-dark);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 @media screen and (max-width: 860px) {
     .manual-page .container {
         width: min(100% - 20px, 760px);
@@ -605,6 +671,10 @@
     .manual-cover-art {
         width: min(300px, 74vw);
     }
+
+    .manual-source {
+        margin-top: 56px;
+    }
 }
 
 @media screen and (max-width: 540px) {
@@ -621,6 +691,10 @@
 
     .manual-cover-copy h1 {
         font-size: 3.5rem;
+    }
+
+    .manual-source {
+        padding: 22px 20px;
     }
 
     .manual-page .mid-images,
