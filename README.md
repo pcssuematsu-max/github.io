@@ -1,8 +1,8 @@
-# [キューブ王国と、その外側。](https://pcssuematsu-max.github.io/github.io/)
+# [ばかとえーあいのすたじお](https://pcssuematsu-max.github.io/github.io/)
 
-スピードキューブ、パズルAI、数学、旅行などの「好き」を形にして公開するWebサイトです。
+スピードキューブ、パズルAI、数学、旅行などの「好き」を、人とAIで作品・知識・体験にする活動拠点です。
 
-公開サイト: [キューブ王国と、その外側。](https://pcssuematsu-max.github.io/github.io/)
+公開サイト: [ばかとえーあいのすたじお](https://pcssuematsu-max.github.io/github.io/)
 
 ## 主な内容
 

@@ -68,7 +68,6 @@ html {
 .hero-copy h1 span,
 .intro-grid h2,
 .section-heading-row h2,
-.board-card strong,
 .event-visual strong,
 .trip-visual strong,
 .project-body h3,
@@ -79,12 +78,10 @@ html {
 }
 
 .brand-name,
-.brand-name b,
 .site-nav,
 .eyebrow,
 .section-label,
 .project-meta,
-.board-card > span,
 .button,
 .project-number,
 .game-card,
@@ -140,53 +137,35 @@ html {
 .site-brand {
     display: inline-flex;
     align-items: center;
-    gap: 13px;
+    gap: 10px;
+    min-width: 0;
 }
 
-.brand-mark {
-    display: grid;
-    grid-template-columns: repeat(3, 7px);
-    grid-template-rows: repeat(3, 7px);
-    gap: 2px;
-    padding: 5px;
-    background: var(--ink);
-    transform: rotate(-4deg);
-}
-
-.brand-mark i {
-    display: block;
+.brand-emoji {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    padding: 5px 7px;
     background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    font-size: 1.12rem;
+    line-height: 1;
+    box-shadow: 3px 3px 0 var(--yellow);
 }
 
-.brand-mark i:nth-child(1),
-.brand-mark i:nth-child(9) {
-    background: var(--red);
-}
-
-.brand-mark i:nth-child(2) {
-    background: var(--yellow);
-}
-
-.brand-mark i:nth-child(4) {
-    background: var(--green);
-}
-
-.brand-mark i:nth-child(6) {
-    background: var(--orange);
-}
-
-.brand-mark i:nth-child(8) {
-    background: var(--blue);
+.brand-emoji span {
+    color: var(--blue);
+    font-size: 0.78rem;
+    font-weight: 900;
 }
 
 .brand-name {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-}
-
-.brand-name b {
-    color: var(--blue);
+    font-family: var(--font-display) !important;
+    font-size: 0.87rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
 }
 
 .site-nav {
@@ -235,13 +214,13 @@ html {
 
 .world-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(440px, 0.84fr);
+    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr);
     align-items: center;
-    gap: clamp(56px, 7vw, 110px);
+    gap: clamp(48px, 6vw, 88px);
     width: min(1280px, calc(100% - 80px));
-    min-height: 720px;
+    min-height: 650px;
     margin: 0 auto;
-    padding: 84px 0 96px;
+    padding: 72px 0 84px;
 }
 
 .eyebrow,
@@ -305,6 +284,91 @@ html {
     margin-top: 36px;
 }
 
+.hero-identity {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 380px;
+    margin: 0;
+    padding: clamp(25px, 4vw, 45px);
+    overflow: hidden;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 15px 15px 0 var(--yellow), var(--shadow);
+    transform: rotate(1deg);
+}
+
+.hero-identity::before,
+.hero-identity::after {
+    position: absolute;
+    width: 116px;
+    height: 116px;
+    content: "";
+    border: 13px solid var(--blue);
+    border-radius: 50%;
+    opacity: 0.09;
+}
+
+.hero-identity::before { top: -58px; right: -38px; }
+.hero-identity::after { bottom: -65px; left: -38px; border-color: var(--green); }
+
+.hero-identity-heading,
+.hero-identity-tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.hero-identity-heading {
+    color: var(--blue-dark);
+    font-family: var(--font-label);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.hero-identity-heading span:last-child {
+    font-size: 1.1rem;
+    letter-spacing: 0;
+}
+
+.hero-identity img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    margin-block: 38px 24px;
+    object-fit: contain;
+}
+
+.hero-identity figcaption {
+    color: var(--muted);
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.hero-identity-tags {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.hero-identity-tags span {
+    padding: 6px 11px;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    font-size: 0.58rem;
+    font-weight: 700;
+}
+
+.hero-identity-tags span:nth-child(2) { background: #fff1c7; }
+.hero-identity-tags span:nth-child(3) { background: #dceeff; }
+.hero-identity-tags span:nth-child(4) { background: #dcf2e1; }
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -330,129 +394,6 @@ html {
 
 .button-secondary {
     background: var(--yellow);
-}
-
-.hero-board {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(2, minmax(210px, 1fr));
-    gap: 12px;
-    padding: 12px;
-    background: var(--ink);
-    box-shadow: 18px 18px 0 var(--yellow), var(--shadow);
-    transform: rotate(1.2deg);
-}
-
-.board-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 210px;
-    padding: 20px;
-    overflow: hidden;
-    border: 2px solid var(--ink);
-}
-
-.board-card > span {
-    font-size: 0.56rem;
-    font-weight: 700;
-    letter-spacing: 0.13em;
-}
-
-.board-card strong {
-    margin-top: auto;
-    font-size: clamp(1.55rem, 2.8vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1;
-}
-
-.board-card small {
-    margin-top: 9px;
-    font-size: 0.58rem;
-    font-weight: 800;
-    line-height: 1.5;
-}
-
-.board-math {
-    color: var(--white);
-    background: var(--blue);
-}
-
-.board-math::after {
-    position: absolute;
-    top: 45px;
-    right: -12px;
-    content: "∑";
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 7rem;
-    font-weight: 900;
-    line-height: 1;
-    transform: rotate(-8deg);
-}
-
-.board-cube {
-    background: var(--red);
-}
-
-.board-cube img {
-    position: absolute;
-    right: 4px;
-    bottom: 6px;
-    width: 130px;
-    filter: drop-shadow(8px 10px 0 rgba(32, 33, 42, 0.22));
-    transform: rotate(-7deg);
-}
-
-.board-cube strong {
-    z-index: 1;
-    max-width: 70%;
-    color: var(--white);
-}
-
-.board-trip {
-    background: var(--yellow);
-}
-
-.board-trip::before {
-    position: absolute;
-    top: 52px;
-    right: 25px;
-    width: 76px;
-    height: 76px;
-    content: "";
-    border: 9px solid var(--orange);
-    border-radius: 50% 50% 50% 8px;
-    transform: rotate(45deg);
-}
-
-.board-trip::after {
-    position: absolute;
-    top: 73px;
-    right: 46px;
-    width: 34px;
-    height: 34px;
-    content: "";
-    background: var(--paper);
-    border-radius: 50%;
-}
-
-.board-make {
-    color: var(--white);
-    background: var(--green);
-}
-
-.board-make::after {
-    position: absolute;
-    top: 48px;
-    right: 20px;
-    width: 92px;
-    height: 92px;
-    content: "";
-    background:
-        linear-gradient(90deg, transparent 44%, var(--ink) 44%, var(--ink) 56%, transparent 56%),
-        linear-gradient(transparent 44%, var(--ink) 44%, var(--ink) 56%, transparent 56%);
-    opacity: 0.25;
-    transform: rotate(18deg);
 }
 
 .color-rule,
@@ -1305,7 +1246,7 @@ html {
         max-width: 720px;
     }
 
-    .hero-board {
+    .hero-identity {
         width: min(620px, 100%);
         margin-inline: auto;
     }
@@ -1338,10 +1279,6 @@ html {
         padding: 12px 18px;
     }
 
-    .brand-name b {
-        display: none;
-    }
-
     .site-nav {
         gap: 16px;
     }
@@ -1360,27 +1297,18 @@ html {
         padding-block: 58px 76px;
     }
 
+    .hero-identity {
+        min-height: 320px;
+        box-shadow: 10px 10px 0 var(--yellow), var(--shadow);
+        transform: none;
+    }
+
     .hero-copy h1 {
         font-size: clamp(2.25rem, 10vw, 4.2rem);
     }
 
     .hero-lead {
         font-size: 0.85rem;
-    }
-
-    .hero-board {
-        grid-template-rows: repeat(2, minmax(180px, 1fr));
-        box-shadow: 10px 10px 0 var(--yellow), var(--shadow);
-        transform: none;
-    }
-
-    .board-card {
-        min-height: 180px;
-        padding: 16px;
-    }
-
-    .board-cube img {
-        width: 105px;
     }
 
     .intro-section,
@@ -1469,12 +1397,11 @@ html {
     }
 
     .brand-name {
-        font-size: 0.56rem;
+        font-size: 0.72rem;
     }
 
-    .brand-mark {
-        grid-template-columns: repeat(3, 6px);
-        grid-template-rows: repeat(3, 6px);
+    .brand-emoji {
+        display: none;
     }
 
     .hero-actions {
@@ -1484,23 +1411,6 @@ html {
 
     .button {
         width: 100%;
-    }
-
-    .hero-board {
-        grid-template-columns: 1fr;
-        grid-template-rows: none;
-    }
-
-    .board-card {
-        min-height: 150px;
-    }
-
-    .board-card strong {
-        font-size: 1.65rem;
-    }
-
-    .board-cube img {
-        width: 115px;
     }
 
     .project-visual {
