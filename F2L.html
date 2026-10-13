@@ -21,7 +21,15 @@
         <link rel = "stylesheet" href="assets/css/style.css?v=20260717-3">
         <link rel = "stylesheet" href="assets/css/manual.css?v=20260717-3">
         <link rel="stylesheet" href="assets/css/manual-playback.css?v=20260905-2">
-        <script defer src="assets/vendor/cubing/twisty.js?v=0.63.4-classic-1"></script>
+        <link rel="stylesheet" href="assets/css/f2l-playback.css?v=20261013-1">
+        <script type="importmap">
+        {
+          "imports": {
+            "three": "./assets/vendor/three/r162/three.module.js",
+            "three/addons/": "./assets/vendor/three/r162/addons/"
+          }
+        }
+        </script>
     </head>
     <body class="manual-page manual-f2l">
         <header>
@@ -69,7 +77,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U' R'</p>
-                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-i-right-player" data-alg="R U' R'" data-setup="R U R'" data-stickering="picture" data-sprite="f2lRightSlot" data-focus-note="図と同じ配色です。水色＝クロス色、ピンク＝手前、黄緑＝右。グレーは今回追わないパーツです。">3Dで動きを見る</button>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-i-right-player" data-viewer="custom" data-label="I型・右手順" data-slot="right" data-alg="R U' R'" data-setup="R U R'">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-I1.svg" class = "mid-images">
@@ -77,6 +85,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>L' U L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-i-left-player" data-viewer="custom" data-label="I型・左手順" data-slot="left" data-alg="L' U L" data-setup="L' U' L">3Dで動きを見る</button>
                     </div>
                 </details>
                 <h3 class = "subsection">T型</h3>
@@ -85,7 +94,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U R'</p>
-                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-t-right-player" data-alg="R U R'" data-setup="R U' R'" data-stickering="picture" data-sprite="f2lRightSlot" data-focus-note="図と同じ配色です。水色＝クロス色、ピンク＝手前、黄緑＝右。グレーは今回追わないパーツです。">3Dで動きを見る</button>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-t-right-player" data-viewer="custom" data-label="T型・右手順" data-slot="right" data-alg="R U R'" data-setup="R U' R'">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-T2.svg" class = "mid-images">
@@ -93,6 +102,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>L' U' L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-t-left-player" data-viewer="custom" data-label="T型・左手順" data-slot="left" data-alg="L' U' L" data-setup="L' U L">3Dで動きを見る</button>
                     </div>
                 </details>
                 <h3 class = "subsection">その他の基本手順</h3>
@@ -102,6 +112,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>F R' F' R</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-isp1-right-player" data-viewer="custom" data-label="ヘッジスラマー・右手順" data-slot="right" data-alg="F R' F' R">3Dで動きを見る</button>
                         <p class = "border-box">この手順を<span class = "remark">ヘッジスラマー</span>といいます。</p>
                     </div>
                 </details>
@@ -110,6 +121,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>F' L F L'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-isp2-left-player" data-viewer="custom" data-label="ヘッジスラマー・左手順" data-slot="left" data-alg="F' L F L'">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-ISp3.svg" class = "mid-images">
@@ -117,6 +129,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R' F R F'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-isp3-right-player" data-viewer="custom" data-label="スレッジハンマー・右手順" data-slot="right" data-alg="R' F R F'">3Dで動きを見る</button>
                         <p class = "border-box">この手順を<span class = "remark">スレッジハンマー</span>といいます。</p>
                     </div>
                 </details>
@@ -125,6 +138,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>L F' L' F</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-isp4-left-player" data-viewer="custom" data-label="スレッジハンマー・左手順" data-slot="left" data-alg="L F' L' F">3Dで動きを見る</button>
                     </div>
                 </details>
                 <img src = "assets/images/cube/F2L-TSp1.svg" class = "mid-images">
@@ -132,6 +146,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>F' U' F</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-tsp1-right-player" data-viewer="custom" data-label="その他の基本手順・右" data-slot="right" data-alg="F' U' F">3Dで動きを見る</button>
                         <p class = "border-box">回しにくいので、キューブを回転させても構いません。</p>
                     </div>
                 </details>
@@ -140,6 +155,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>F U F'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-tsp2-left-player" data-viewer="custom" data-label="その他の基本手順・左" data-slot="left" data-alg="F U F'">3Dで動きを見る</button>
                         <p class = "border-box">回しにくいので、キューブを回転させても構いません。</p>
                     </div>
                 </details>
@@ -152,6 +168,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U2 (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-q-right-player" data-viewer="custom" data-label="Q型・右手順" data-slot="right" data-alg="R U R' U2 R U' R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U R')によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -160,6 +177,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U' L) U2 (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-q-left-player" data-viewer="custom" data-label="Q型・左手順" data-slot="left" data-alg="L' U' L U2 L' U L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U' L)によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -169,6 +187,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U (R U R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-r-right-player" data-viewer="custom" data-label="R型・右手順" data-slot="right" data-alg="R U R' U R U R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -177,6 +196,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U' L) U' (L' U' L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-r-left-player" data-viewer="custom" data-label="R型・左手順" data-slot="left" data-alg="L' U' L U' L' U' L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U' L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -186,6 +206,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U2 R') U2 (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-s-right-player" data-viewer="custom" data-label="S型・右手順" data-slot="right" data-alg="R U2 R' U2 R U' R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U2 R')によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">Q型とセットで</span>覚えましょう。</p>
                     </div>
                 </details>
@@ -194,6 +215,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U2 L) U2 (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-s-left-player" data-viewer="custom" data-label="S型・左手順" data-slot="left" data-alg="L' U2 L U2 L' U L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U2 L)によってI型に帰着され、U2でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">Q型とセットで</span>覚えましょう。</p>
                     </div>
                 </details>
@@ -203,6 +225,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U2 R') U (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-u-right-player" data-viewer="custom" data-label="U型・右手順" data-slot="right" data-alg="R U2 R' U R U' R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U2 R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -211,6 +234,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U2 L) U' (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-u-left-player" data-viewer="custom" data-label="U型・左手順" data-slot="left" data-alg="L' U2 L U' L' U L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U2 L)によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -220,6 +244,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-v-right-player" data-viewer="custom" data-label="V型・右手順" data-slot="right" data-alg="R U R' U R U' R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">U型とセットで</span>覚えましょう。</p>
                     </div>
                 </details>
@@ -228,6 +253,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U' L) U' (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-v-left-player" data-viewer="custom" data-label="V型・左手順" data-slot="left" data-alg="L' U' L U' L' U L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U' L)によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。<span class = "remark">U型とセットで</span>覚えましょう。</p>
                     </div>
                 </details>
@@ -240,6 +266,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U' R U2 R') U (F' U' F)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-j-right-player" data-viewer="custom" data-label="J型・右手順" data-slot="right" data-alg="U' R U2 R' U F' U' F">3Dで動きを見る</button>
                         <p class = "border-box">(U' R U2 R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -248,6 +275,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U L' U2 L) U' (F U F')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-j-left-player" data-viewer="custom" data-label="J型・左手順" data-slot="left" data-alg="U L' U2 L U' F U F'">3Dで動きを見る</button>
                         <p class = "border-box">(U L' U2 L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -257,6 +285,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U' R') U2 (F' U' F)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-k-right-player" data-viewer="custom" data-label="K型・右手順" data-slot="right" data-alg="R U' R' U2 F' U' F">3Dで動きを見る</button>
                         <p class = "border-box">(R U' R')によってT型に帰着され、U2でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -265,6 +294,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U L) U2 (F U F')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-k-left-player" data-viewer="custom" data-label="K型・左手順" data-slot="left" data-alg="L' U L U2 F U F'">3Dで動きを見る</button>
                         <p class = "border-box">(L' U L)によってT型に帰着され、U2でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -274,6 +304,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U' R U' R') U (R U R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-l-right-player" data-viewer="custom" data-label="L型・右手順" data-slot="right" data-alg="U' R U' R' U R U R'">3Dで動きを見る</button>
                         <p class = "border-box">(U' R U' R')によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -282,6 +313,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U L' U L) U' (L' U' L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-l-left-player" data-viewer="custom" data-label="L型・左手順" data-slot="left" data-alg="U L' U L U' L' U' L">3Dで動きを見る</button>
                         <p class = "border-box">(U L' U L)によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -291,6 +323,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U R U' R' U' R U' R') U (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-m-right-player" data-viewer="custom" data-label="M型・右手順" data-slot="right" data-alg="U R U' R' U' R U' R' U R U' R'">3Dで動きを見る</button>
                         <p class = "border-box">(U R U' R' U' R U' R')によってI型に帰着され、UでI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。F2Lの中では最も覚えにくい手順の一つです。</p>
                     </div>
                 </details>
@@ -299,6 +332,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(U' L' U L U L' U L) U' (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-m-left-player" data-viewer="custom" data-label="M型・左手順" data-slot="left" data-alg="U' L' U L U L' U L U' L' U L">3Dで動きを見る</button>
                         <p class = "border-box">(U' L' U L U L' U L)によってI型に帰着され、U'でI型の基本形に持っていき、最後にI型の手順を行ってスロットに入ります。F2Lの中では最も覚えにくい手順の一つです。</p>
                     </div>
                 </details>
@@ -308,6 +342,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U2 R') U' (R U R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-n-right-player" data-viewer="custom" data-label="N型・右手順" data-slot="right" data-alg="R U2 R' U' R U R'">3Dで動きを見る</button>
                         <p class = "border-box">(R U2 R')によってT型に帰着され、U'でT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -316,6 +351,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U2 L) U (L' U' L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-n-left-player" data-viewer="custom" data-label="N型・左手順" data-slot="left" data-alg="L' U2 L U L' U' L">3Dで動きを見る</button>
                         <p class = "border-box">(L' U2 L)によってT型に帰着され、UでT型の基本形に持っていき、最後にT型の手順を行ってスロットに入ります。</p>
                     </div>
                 </details>
@@ -327,6 +363,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>U R U' R' U R U' R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-b1-player" data-viewer="custom" data-label="B1型" data-slot="right" data-centerless="true" data-alg="U R U' R' U R U' R'" data-setup="D B2 L2 B2 L2 D' U2">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。</p>
                     </div>
                 </details>
@@ -336,6 +373,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U' R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-b2-player" data-viewer="custom" data-label="B2型" data-slot="right" data-centerless="true" data-alg="R U' R'" data-setup="B' R2 B R' U R'">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。組になったパーツを、そのまま上段へ取り出すイメージです。</p>
                     </div>
                 </details>
@@ -345,6 +383,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>U' R U' R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-g-right-player" data-viewer="custom" data-label="G型・右手順" data-slot="right" data-centerless="true" data-alg="U' R U' R'" data-setup="D B U B' D'">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。</p>
                     </div>
                 </details>
@@ -353,6 +392,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>U L' U L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-g-left-player" data-viewer="custom" data-label="G型・左手順" data-slot="left" data-centerless="true" data-alg="U L' U L" data-setup="D' B' U' B D">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。</p>
                     </div>
                 </details>
@@ -362,6 +402,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>U' R U R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-h-right-player" data-viewer="custom" data-label="H型・右手順" data-slot="right" data-centerless="true" data-alg="U' R U R'" data-setup="F' R' F R U F U'">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。</p>
                     </div>
                 </details>
@@ -370,6 +411,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>U L' U' L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-h-left-player" data-viewer="custom" data-label="H型・左手順" data-slot="left" data-centerless="true" data-alg="U L' U' L" data-setup="F L F' L' U' F' U">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。</p>
                     </div>
                 </details>
@@ -381,6 +423,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U' R') U' (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-a1-player" data-viewer="custom" data-label="A1型" data-slot="right" data-centerless="true" data-alg="R U' R' U' R U' R'" data-setup="B' D' R D B">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -390,6 +433,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(L' U L) U (L' U L)</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-a2-player" data-viewer="custom" data-label="A2型" data-slot="left" data-centerless="true" data-alg="L' U L U L' U L" data-setup="B D L' D' B'">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -399,6 +443,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U' R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-e-right-player" data-viewer="custom" data-label="E型・右手順" data-slot="right" data-centerless="true" data-alg="R U' R'" data-setup="F R' F' R2 U R'">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。</p>
                     </div>
                 </details>
@@ -407,6 +452,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>L' U L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-e-left-player" data-viewer="custom" data-label="E型・左手順" data-slot="left" data-centerless="true" data-alg="L' U L" data-setup="F' L F L2 U' L">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。</p>
                     </div>
                 </details>
@@ -416,6 +462,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>R U R'</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-f-right-player" data-viewer="custom" data-label="F型・右手順" data-slot="right" data-centerless="true" data-alg="R U R'" data-setup="R B U2 B' U R' U">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。</p>
                     </div>
                 </details>
@@ -424,6 +471,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>L' U' L</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-f-left-player" data-viewer="custom" data-label="F型・左手順" data-slot="left" data-centerless="true" data-alg="L' U' L" data-setup="L' B' U2 B U' L U'">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。</p>
                     </div>
                 </details>
@@ -435,6 +483,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U2 (R U2 R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-a0-player" data-viewer="custom" data-label="A0型" data-slot="right" data-centerless="true" data-alg="R U R' U2 R U2 R'" data-setup="B' D' R' D' F' D2 B">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">J型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -444,6 +493,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U2 (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-c1-player" data-viewer="custom" data-label="C型・1" data-slot="right" data-centerless="true" data-alg="R U R' U2 R U' R'" data-setup="F' U R' F2 U' R F">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">L型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -452,6 +502,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U' R') U' (R U R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-c2-player" data-viewer="custom" data-label="C型・2" data-slot="right" data-centerless="true" data-alg="R U' R' U' R U R'" data-setup="F' R' U F2 R U' F">3Dで動きを見る</button>
                         <p class = "border-box">I型に帰着されます。前半の3手で<span class="remark">Q型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -461,6 +512,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U R') U' (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-d1-player" data-viewer="custom" data-label="D型・1" data-slot="right" data-centerless="true" data-alg="R U R' U' R U' R'" data-setup="F D' L' D L F L' F2">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">K型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -469,6 +521,7 @@
                     <summary class = "summary">手順はこちらをクリック</summary>
                     <div class = "content">
                         <p>(R U' R') U' (R U' R')</p>
+                        <button class="manual-playback-trigger" type="button" aria-expanded="false" aria-controls="f2l-d2-player" data-viewer="custom" data-label="D型・2" data-slot="right" data-centerless="true" data-alg="R U' R' U' R U' R'" data-setup="F' R' F R' F' R2 U F">3Dで動きを見る</button>
                         <p class = "border-box">T型に帰着されます。前半の3手で<span class="remark">R型</span>に帰着されます。</p>
                     </div>
                 </details>
@@ -477,6 +530,6 @@
         <script src = "assets/js/jquery-3.7.1.min.js"></script>
         <script src = "assets/js/Script.js"></script>
         <script src = "assets/js/manual-print.js"></script>
-    <script defer src="assets/js/manual-playback.js?v=20260910-1"></script>
+    <script type="module" src="assets/js/puzzle-viewer/manual-f2l-playback.js?v=20261013-4"></script>
     </body>
 </html>

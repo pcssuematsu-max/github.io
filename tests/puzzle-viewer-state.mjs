@@ -18,10 +18,138 @@ import {
 import { EDGE_WINGS, centerStickerIds, edgeOverridesFromDiagram } from "../assets/js/puzzle-viewer/4x4-edge-stickers.js";
 import { inversePllSetup, parsePllAlgorithm } from "../assets/js/puzzle-viewer/pll-algorithm.js";
 import { inverseOllSetup, ollStickerOverrides, parseOllAlgorithm } from "../assets/js/puzzle-viewer/oll-algorithm.js";
+import { createF2lSlotTheme, F2L_PALETTE } from "../assets/js/puzzle-viewer/f2l-lesson-theme.js";
 
 const definition = createCube3Definition();
 validateCube3Definition(definition);
 const solved = createSolvedState(definition);
+
+const f2lPage = readFileSync(new URL("../F2L.html", import.meta.url), "utf8");
+const f2lCustomCases = [...f2lPage.matchAll(/<button class="manual-playback-trigger"[^>]*data-viewer="custom"[^>]*>/g)];
+const f2lCasePositions = {
+  "f2l-i-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFL", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UF" },
+  "f2l-i-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFR", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UF" },
+  "f2l-t-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "R", edge: "edge-FR", edgeSlot: "slot-UB" },
+  "f2l-t-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "L", edge: "edge-FL", edgeSlot: "slot-UB" },
+  "f2l-q-right-player": { corner: "corner-DFR", cornerSlot: "slot-UBR", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UL" },
+  "f2l-q-left-player": { corner: "corner-DFL", cornerSlot: "slot-UBL", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UR" },
+  "f2l-r-right-player": { corner: "corner-DFR", cornerSlot: "slot-UBR", upperFace: "R", edge: "edge-FR", edgeSlot: "slot-UF" },
+  "f2l-r-left-player": { corner: "corner-DFL", cornerSlot: "slot-UBL", upperFace: "L", edge: "edge-FL", edgeSlot: "slot-UF" },
+  "f2l-s-right-player": { corner: "corner-DFR", cornerSlot: "slot-UBR", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UF" },
+  "f2l-s-left-player": { corner: "corner-DFL", cornerSlot: "slot-UBL", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UF" },
+  "f2l-u-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFL", upperFace: "D", edge: "edge-FR", edgeSlot: "slot-UR" },
+  "f2l-u-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFR", upperFace: "D", edge: "edge-FL", edgeSlot: "slot-UL" },
+  "f2l-v-right-player": { corner: "corner-DFR", cornerSlot: "slot-UBL", upperFace: "D", edge: "edge-FR", edgeSlot: "slot-UR" },
+  "f2l-v-left-player": { corner: "corner-DFL", cornerSlot: "slot-UBR", upperFace: "D", edge: "edge-FL", edgeSlot: "slot-UL" },
+  "f2l-j-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UR", edgeUpperFace: "R", moves: 8 },
+  "f2l-j-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UL", edgeUpperFace: "L", moves: 8 },
+  "f2l-k-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "R", edge: "edge-FR", edgeSlot: "slot-UR", edgeUpperFace: "R" },
+  "f2l-k-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "L", edge: "edge-FL", edgeSlot: "slot-UL", edgeUpperFace: "L" },
+  "f2l-l-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "R", edge: "edge-FR", edgeSlot: "slot-UR", moves: 8 },
+  "f2l-l-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "L", edge: "edge-FL", edgeSlot: "slot-UL", moves: 8 },
+  "f2l-m-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "D", edge: "edge-FR", edgeSlot: "slot-UF", moves: 12 },
+  "f2l-m-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "D", edge: "edge-FL", edgeSlot: "slot-UF", moves: 12 },
+  "f2l-n-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "D", edge: "edge-FR", edgeSlot: "slot-UR" },
+  "f2l-n-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "D", edge: "edge-FL", edgeSlot: "slot-UL" },
+  "f2l-isp1-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "R", edge: "edge-FR", edgeSlot: "slot-UF", edgeUpperFace: "R", moves: 4 },
+  "f2l-isp2-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "L", edge: "edge-FL", edgeSlot: "slot-UF", edgeUpperFace: "L", moves: 4 },
+  "f2l-isp3-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UR", moves: 4 },
+  "f2l-isp4-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UL", moves: 4 },
+  "f2l-tsp1-right-player": { corner: "corner-DFR", cornerSlot: "slot-UFR", upperFace: "F", edge: "edge-FR", edgeSlot: "slot-UL", edgeUpperFace: "R", moves: 3 },
+  "f2l-tsp2-left-player": { corner: "corner-DFL", cornerSlot: "slot-UFL", upperFace: "F", edge: "edge-FL", edgeSlot: "slot-UR", edgeUpperFace: "L", moves: 3 },
+};
+const f2lCenterlessPositions = {
+  "f2l-b1-player": { cornerSlot: "slot-UFR", cornerFace: "D", cornerFaceAt: "U", edgeSlot: "slot-FR", edgeFaceAt: "F", moves: 8 },
+  "f2l-b2-player": { cornerSlot: "slot-UFR", cornerFace: "D", cornerFaceAt: "U", edgeSlot: "slot-FR", edgeFaceAt: "R", moves: 3 },
+  "f2l-g-right-player": { cornerSlot: "slot-UFR", cornerFace: "F", cornerFaceAt: "U", edgeSlot: "slot-FR", edgeFaceAt: "F", moves: 4 },
+  "f2l-g-left-player": { cornerSlot: "slot-UFL", cornerFace: "F", cornerFaceAt: "U", edgeSlot: "slot-FL", edgeFaceAt: "F", moves: 4 },
+  "f2l-h-right-player": { cornerSlot: "slot-UFR", cornerFace: "F", cornerFaceAt: "U", edgeSlot: "slot-FR", edgeFaceAt: "R", moves: 4 },
+  "f2l-h-left-player": { cornerSlot: "slot-UFL", cornerFace: "F", cornerFaceAt: "U", edgeSlot: "slot-FL", edgeFaceAt: "L", moves: 4 },
+  "f2l-a1-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "D", edgeSlot: "slot-UR", edgeFaceAt: "U", moves: 7 },
+  "f2l-a2-player": { cornerSlot: "slot-DFL", cornerFace: "D", cornerFaceAt: "D", edgeSlot: "slot-UL", edgeFaceAt: "U", moves: 7 },
+  "f2l-e-right-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "F", edgeSlot: "slot-UR", edgeFaceAt: "U", moves: 3 },
+  "f2l-e-left-player": { cornerSlot: "slot-DFL", cornerFace: "D", cornerFaceAt: "F", edgeSlot: "slot-UL", edgeFaceAt: "U", moves: 3 },
+  "f2l-f-right-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "R", edgeSlot: "slot-UR", edgeFaceAt: "U", moves: 3 },
+  "f2l-f-left-player": { cornerSlot: "slot-DFL", cornerFace: "D", cornerFaceAt: "L", edgeSlot: "slot-UL", edgeFaceAt: "U", moves: 3 },
+  "f2l-a0-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "D", edgeSlot: "slot-FR", edgeFaceAt: "R", moves: 7 },
+  "f2l-c1-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "R", edgeSlot: "slot-FR", edgeFaceAt: "F", moves: 7 },
+  "f2l-c2-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "F", edgeSlot: "slot-FR", edgeFaceAt: "F", moves: 7 },
+  "f2l-d1-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "R", edgeSlot: "slot-FR", edgeFaceAt: "R", moves: 7 },
+  "f2l-d2-player": { cornerSlot: "slot-DFR", cornerFace: "D", cornerFaceAt: "F", edgeSlot: "slot-FR", edgeFaceAt: "R", moves: 7 },
+};
+if (f2lCustomCases.length !== 47 || !f2lPage.includes("puzzle-viewer/manual-f2l-playback.js")
+  || f2lPage.includes("assets/js/manual-playback.js") || f2lPage.includes("assets/vendor/cubing/twisty.js")) {
+  throw new Error("F2Lの全47手順が独自ビューアに移行されていません。");
+}
+const seenF2lCases = new Set();
+for (const [index, match] of f2lCustomCases.entries()) {
+  const tag = match[0];
+  const readAttribute = (name) => tag.match(new RegExp(`${name}="([^"]*)"`))?.[1];
+  const id = readAttribute("aria-controls");
+  const centerless = readAttribute("data-centerless") === "true";
+  const expected = centerless ? f2lCenterlessPositions[id] : f2lCasePositions[id];
+  if (!expected || seenF2lCases.has(id)) throw new Error(`F2Lの手順IDが重複または不正です: ${id}`);
+  seenF2lCases.add(id);
+  const algorithm = parseAlgorithm(readAttribute("data-alg"));
+  const sourceAlgorithm = f2lPage.slice(0, match.index).match(/<p>([^<]+)<\/p>\s*$/)?.[1];
+  if (!sourceAlgorithm || algorithm.map((move) => move.token).join(" ")
+    !== parseAlgorithm(sourceAlgorithm.replace(/[()]/g, "")).map((move) => move.token).join(" ")) {
+    throw new Error(`${id}: 本文とビューアの手順が一致しません。`);
+  }
+  const setup = readAttribute("data-setup")
+    ? parseAlgorithm(readAttribute("data-setup"))
+    : algorithm.slice().reverse().map(invertMove);
+  const isBasic = /^f2l-[it]-/.test(id);
+  if (algorithm.length !== (expected.moves || (isBasic ? 3 : 7))
+    || !setup.length || (!centerless && setup.length !== algorithm.length)) {
+    throw new Error(`${id}: 手順または開始状態が不正です。`);
+  }
+  const initial = stateAt(solved, setup, setup.length, definition);
+  const finished = stateAt(initial, algorithm, algorithm.length, definition);
+  if (!centerless && JSON.stringify(finished) !== JSON.stringify(solved)) {
+    throw new Error(`F2L移行ケース${index + 1}が手順後に完成しません。`);
+  }
+  const side = readAttribute("data-slot");
+  const sideFace = side === "left" ? "L" : "R";
+  const crossSide = side === "left" ? "DL" : "DR";
+  const corner = side === "left" ? "corner-DFL" : "corner-DFR";
+  const edge = side === "left" ? "edge-FL" : "edge-FR";
+  const theme = createF2lSlotTheme(side, { showCenters: !centerless });
+  if (Object.keys(theme.stickerOverrides).length !== (centerless ? 7 : 12)
+    || theme.stickerOverrides[`${corner}:D`] !== F2L_PALETTE.cross
+    || theme.stickerOverrides[`${corner}:F`] !== F2L_PALETTE.front
+    || theme.stickerOverrides[`${corner}:${sideFace}`] !== F2L_PALETTE.side
+    || theme.emphasis.inactiveColor !== F2L_PALETTE.inactive) {
+    throw new Error("F2Lのペア・クロス・センターの着色が旧ビューアと一致しません。");
+  }
+  if (centerless && (`center-D:D` in theme.stickerOverrides || `edge-DF:F` in theme.stickerOverrides)) {
+    throw new Error(`${id}: センターと下段エッジの側面はグレーにする必要があります。`);
+  }
+  resolveStickerOverrides(definition, theme.stickerOverrides);
+  for (const stickerId of ["edge-DF:D", `edge-${crossSide}:D`]) {
+    if (stickerPoseFor(initial, definition, stickerId).face !== "D") {
+      throw new Error(`F2L移行ケース${index + 1}のクロスが揃っていません。`);
+    }
+  }
+  if (centerless) {
+    const cornerPose = stickerPoseFor(initial, definition, `${corner}:${expected.cornerFace}`);
+    const edgePose = stickerPoseFor(initial, definition, `${edge}:F`);
+    if (cornerPose.slotId !== expected.cornerSlot || cornerPose.face !== expected.cornerFaceAt
+      || edgePose.slotId !== expected.edgeSlot || edgePose.face !== expected.edgeFaceAt) {
+      throw new Error(`${id}: 図のペア位置・向きと開始状態が一致しません。`);
+    }
+  } else {
+    const cornerOnTop = stickerPoseFor(initial, definition, `${expected.corner}:${expected.upperFace}`);
+    const edgeOnTop = stickerPoseFor(initial, definition, `${expected.edge}:${expected.edgeUpperFace || "F"}`);
+    if (cornerOnTop.face !== "U" || cornerOnTop.slotId !== expected.cornerSlot
+      || edgeOnTop.face !== "U" || edgeOnTop.slotId !== expected.edgeSlot) {
+      throw new Error(`${id}: 図と同じ開始位置・向きになっていません。`);
+    }
+  }
+}
+if (seenF2lCases.size !== Object.keys(f2lCasePositions).length + Object.keys(f2lCenterlessPositions).length) {
+  throw new Error("F2Lの全47手順が揃っていません。");
+}
 
 const pllPage = readFileSync(new URL("../PLL.html", import.meta.url), "utf8");
 if (pllPage.includes("assets/js/last-layer-playback.js") || pllPage.includes("assets/vendor/cubing/twisty.js")) {

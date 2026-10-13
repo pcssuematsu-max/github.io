@@ -115,28 +115,6 @@ function slotFor(moves) {
 // 図から確認できたケースは、図と同じ開始姿勢を明示的に指定する。
 // right / left は、同じ図を左右対称のスロットとして見せるための開始姿勢。
 const diagramSetups = {
-    "F2L-I1.svg": { right: "R U", left: "L' U'" },
-    "F2L-I2.svg": { right: "R U", left: "L' U'" },
-    "F2L-T1.svg": { right: "R2 U2 F B", left: "F U2 R2 F2" },
-    "F2L-T2.svg": { right: "R2 U2 F B", left: "F U2 R2 F2" },
-    "F2L-ISp1.svg": { right: "F'", left: "F" },
-    "F2L-ISp2.svg": { right: "F'", left: "F" },
-    "F2L-ISp3.svg": { right: "R", left: "L'" },
-    "F2L-ISp4.svg": { right: "R", left: "L'" },
-    "F2L-TSp1.svg": { right: "F' U F", left: "F U' F'" },
-    "F2L-TSp2.svg": { right: "F' U F", left: "F U' F'" },
-    "F2L-U1.svg": { right: "R F2 L'", left: "D2 R2 L'" },
-    "F2L-U2.svg": { right: "R F2 L'", left: "D2 R2 L'" },
-    "F2L-J1.svg": { right: "F D F R2 F2", left: "F U B D2 F2" },
-    "F2L-J2.svg": { right: "F D F R2 F2", left: "F U B D2 F2" },
-    "F2L-K1.svg": { right: "R2 U B U F", left: "F U B2 D' F2" },
-    "F2L-K2.svg": { right: "R2 U B U F", left: "F U B2 D' F2" },
-    "F2L-L1.svg": { right: "R F D' F2", left: "D L' D' F" },
-    "F2L-L2.svg": { right: "R F D' F2", left: "D L' D' F" },
-    "F2L-M1.svg": { right: "R F U R", left: "D2 L' B2 U'" },
-    "F2L-M2.svg": { right: "R F U R", left: "D2 L' B2 U'" },
-    "F2L-N1.svg": { right: "D' R F2", left: "D L' F2" },
-    "F2L-N2.svg": { right: "D' R F2", left: "D L' F2" },
     "F2L-B1.svg": { right: "D B2 L2 B2 L2 D' U2", left: "D F R2 F' R2 D' U2" },
     "F2L-B2.svg": { right: "B' R2 B R' U R'", left: "B L2 B' L U' L" },
     "F2L-G1.svg": { right: "D B U B' D'", left: "D' B' U' B D" },
@@ -168,6 +146,8 @@ function addPlaybackButtons() {
     let number = 0;
 
     document.querySelectorAll(".details .content").forEach((content) => {
+        // Migrated lessons own their setup, colors, and controls in the custom viewer.
+        if (content.querySelector('.manual-playback-trigger[data-viewer="custom"]')) return;
         const sourceText = content.querySelector("p")?.textContent || "";
         const baseAlgorithm = algorithmMovesFromText(sourceText);
         if (!baseAlgorithm.length) return;
@@ -368,7 +348,7 @@ function createManualPlayer(trigger) {
 
 document.addEventListener("DOMContentLoaded", () => {
     addPlaybackButtons();
-    document.querySelectorAll(".manual-playback-trigger").forEach((trigger) => {
+    document.querySelectorAll('.manual-playback-trigger:not([data-viewer="custom"])').forEach((trigger) => {
         trigger.addEventListener("click", () => {
             const panelId = trigger.getAttribute("aria-controls");
             const existingPanel = document.getElementById(panelId);
