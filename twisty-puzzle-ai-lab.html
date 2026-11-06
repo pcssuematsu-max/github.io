@@ -34,11 +34,12 @@
                     <div>
                         <p class="story-kicker">PROJECT 01 / AI &amp; PUZZLE</p>
                         <h1 id="story-title">Twisty Puzzle<br>AI Lab</h1>
-                        <p class="story-lead">キューブを解こうとするAIを作っています。正解を出せたかだけでなく、どの手を選び、どこで迷ったのかまで画面で追えるようにしています。</p>
+                        <p class="story-lead">AIに「いい手」を教えるとは何か。探索・学習・モデル構造を変えながら、キューブで人とは違う面白い手順を見つけられるか試しています。</p>
                         <div class="story-meta"><span>PYTHON</span><span>TKINTER</span><span>NUMPY / PYTORCH</span><span>EXPERIMENTAL</span></div>
                         <div class="story-actions">
                             <a class="button story-action" href="https://github.com/pcssuematsu-max/Rubiks_portfolio" target="_blank" rel="noopener noreferrer">GitHubでコードを見る <span aria-hidden="true">↗</span></a>
                             <a class="button story-action story-action-alt" href="twisty-puzzle-ai-lab-playback.html">ブラウザで手順を再生する <span aria-hidden="true">→</span></a>
+                            <a class="button story-action story-action-alt" href="https://note.com/light_honest401/n/nef4f4bae0ddd" target="_blank" rel="noopener noreferrer">解説記事を読む <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                     <div class="story-hero-art ai-story-art"><img src="assets/projects/twisty-puzzle-ai-lab/gui-overview.png?v=20260912-1" alt="Twisty Puzzle AI Labの最新GUI。7×7キューブの状態、Search3の探索候補、自力成功のみを示すSuccess Viewer、実験ログを一画面に表示している"></div>
@@ -47,17 +48,17 @@
 
             <section class="story-section">
                 <div class="page-width story-section-heading">
-                    <div><p class="story-section-label">THE QUESTION</p><h2>AIは、人が知らない手順を<br>見つけられるだろうか。</h2></div>
+                    <div><p class="story-section-label">THE QUESTION</p><h2>AIに「いい手」を教えるって、<br>どういうことだろう。</h2></div>
                     <div class="story-prose">
-                        <p>スピードキューブでさまざまな解法や手順を覚える一方、大学院では群論を中心とした代数学を研究していました。さらにニューラルネットワークを独学で試す中で、三つの興味が一つの疑問につながりました。</p>
-                        <p>人が使う既知手順を教えるだけでなく、AI自身に状態を評価させたら、どのような手順を良いものとして選ぶのか。その過程を自分の目で確かめるために、探索・学習・解析をまとめた実験環境を作り始めました。</p>
+                        <p>スピードキューブで手順を覚え、大学院では群論を中心とした代数学を研究していました。そこにニューラルネットワークの実験が重なって、「キューブを数学やプログラムでいじってみたい」という気持ちが、このプロジェクトの出発点になりました。</p>
+                        <p>目指しているのは、完成だけではありません。人が普段使うものと違う、面白い手順をAIは見つけられるのか。その過程を確かめるために、探索・学習・解析を一つの画面で追える実験環境を作っています。</p>
                         <blockquote class="story-quote">完成した答えを出すAIではなく、試行錯誤している途中を観察できるAIを作る。</blockquote>
                     </div>
                 </div>
                 <div class="page-width fact-grid">
-                    <article class="fact-card"><small>PUZZLES</small><strong>複数のツイストパズル</strong><span>Rubik's Cube系だけでなく、Megaminx、Pyraminx、Skewb、Square-1、FTO、CTOなどを共通の環境で扱います。</span></article>
-                    <article class="fact-card"><small>SEARCH</small><strong>Search2 / Search3</strong><span>「次にどの手を試すか」を決める、二つの方法を比べています。</span></article>
-                    <article class="fact-card"><small>EXPERIMENT LOG</small><strong>結果の種類まで記録</strong><span>AIだけで解けた結果、登録済みの手順で最後を整えた結果、まだ解けなかった結果を分けて残します。</span></article>
+                    <article class="fact-card"><small>SEARCH</small><strong>どこを調べるか</strong><span>独自のSearch2と、PUCT型のSearch3。考え方の違う二つの探索を比べています。</span></article>
+                    <article class="fact-card"><small>LEARNING</small><strong>何を良いと教えるか</strong><span>残り手数や経路上の順番など、Valueに何を持たせるかを試しています。</span></article>
+                    <article class="fact-card"><small>MODEL</small><strong>何から判断を作るか</strong><span>Linear系とTransformer系を比べ、局面の読み取り方を変えています。</span></article>
                 </div>
             </section>
 
@@ -178,6 +179,7 @@
                         <div class="story-actions">
                             <a class="button story-action" href="twisty-puzzle-ai-lab-playback.html">AIの手順を立体で見る <span aria-hidden="true">→</span></a>
                             <a class="button story-action" href="https://github.com/pcssuematsu-max/Rubiks_portfolio" target="_blank" rel="noopener noreferrer">GitHubでコードを見る <span aria-hidden="true">↗</span></a>
+                            <a class="button story-action story-action-alt" href="https://note.com/light_honest401/n/nef4f4bae0ddd" target="_blank" rel="noopener noreferrer">解説記事を読む <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </div>
