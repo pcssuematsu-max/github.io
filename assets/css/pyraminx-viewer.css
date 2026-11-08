@@ -1,0 +1,4 @@
+.pyraminx-stage { background: radial-gradient(circle at 50% 38%, #fff 0%, #f1f6f7 58%, #d7e7e9 100%); }
+.pyraminx-settings { grid-template-columns: minmax(0, 190px); }
+.pyraminx-stage canvas { display: block; }
+@media (max-width: 520px) { .pyraminx-settings { grid-template-columns: 1fr; } }

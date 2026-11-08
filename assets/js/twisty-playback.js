@@ -1,4 +1,6 @@
 import { DEFAULT_THEME, createPuzzleViewer } from "./puzzle-viewer/cube3-viewer.js?v=20260916-11";
+import { createPyraminxViewer, DEFAULT_PYRAMINX_THEME } from "./puzzle-viewer/pyraminx-viewer.js";
+import { parsePyraminxAlgorithm } from "./puzzle-viewer/pyraminx-state.js";
 
 const examples = [
     {
@@ -34,6 +36,15 @@ const examples = [
         label: "BASIC MOVE",
         title: "セクシームーブ",
         description: "R U R' U' の基本4手。完成状態から、手の動きとパーツの変化を観察できます。",
+        moves: ["R", "U", "R'", "U'"],
+        setup: "",
+    },
+    {
+        id: "pyraminx-basic",
+        puzzle: "pyraminx",
+        label: "PYRAMINX EXAMPLE",
+        title: "ピラミンクスの基本4手",
+        description: "自作3Dビューアで R U R' U' を確認できます。",
         moves: ["R", "U", "R'", "U'"],
         setup: "",
     },
@@ -154,6 +165,68 @@ function createPlayerCard(example) {
     return { card, stopPlayback };
 }
 
+function createPyraminxPlayerCard(example) {
+    const card = document.createElement("article");
+    card.className = "puzzle-player-card";
+    const copy = document.createElement("div");
+    copy.className = "puzzle-player-copy";
+    const label = document.createElement("small");
+    label.textContent = example.label;
+    const title = document.createElement("h2");
+    title.textContent = example.title;
+    const description = document.createElement("p");
+    description.textContent = example.description;
+    copy.append(label, title, description);
+    const stage = document.createElement("div");
+    stage.className = "puzzle-player-stage pyraminx-player-stage";
+    const controls = document.createElement("div");
+    controls.className = "puzzle-player-controls";
+    const progress = document.createElement("div");
+    progress.className = "puzzle-player-progress";
+    const status = document.createElement("span");
+    status.className = "puzzle-player-status";
+    const moveList = document.createElement("div");
+    moveList.className = "puzzle-player-moves";
+    const moveNodes = example.moves.map((move) => {
+        const node = document.createElement("span");
+        node.className = "puzzle-player-move";
+        node.textContent = move;
+        moveList.appendChild(node);
+        return node;
+    });
+    let viewer = null;
+    const invoke = (action) => {
+        Promise.resolve(action()).catch((error) => { status.textContent = error.message; });
+    };
+    controls.append(
+        makeButton("← 戻る", "", () => invoke(() => viewer.stepPrevious())),
+        makeButton("再生", "play", () => invoke(() => viewer.getSnapshot().isPlaying ? viewer.pause() : viewer.play())),
+        makeButton("進む →", "", () => invoke(() => viewer.stepNext())),
+        makeButton("最初から", "", () => invoke(() => viewer.seek(0)))
+    );
+    progress.append(status, moveList);
+    card.append(copy, stage, controls, progress);
+    return {
+        card,
+        mount() {
+            viewer = createPyraminxViewer(stage, {
+                puzzleId: "pyraminx",
+                setupAlgorithm: example.setup,
+                algorithm: example.moves.join(" "),
+                theme: DEFAULT_PYRAMINX_THEME,
+                onChange(snapshot) {
+                    status.textContent = `${snapshot.position} / ${snapshot.totalMoves} 手`;
+                    moveNodes.forEach((node, index) => node.classList.toggle("is-active", index === snapshot.position - 1));
+                    controls.querySelector(".play").textContent = snapshot.isPlaying ? "停止" : "再生";
+                },
+            });
+            if (!viewer.available) status.textContent = "この端末では3D表示を利用できません。";
+        },
+        stopPlayback() { viewer?.pause(); },
+        destroy() { viewer?.destroy(); },
+    };
+}
+
 function normaliseMoves(value) {
     return value.trim().split(/\s+/).filter(Boolean);
 }
@@ -225,7 +298,19 @@ function showCustomPlayer() {
         return;
     }
 
-    if (customPlayback) customPlayback.stopPlayback();
+    if (puzzleSelect.value === "pyraminx") {
+        try {
+            parsePyraminxAlgorithm(moves.join(" "));
+            parsePyraminxAlgorithm(setupInput.value.trim());
+        } catch (error) {
+            message.textContent = error.message;
+            return;
+        }
+    }
+    if (customPlayback) {
+        customPlayback.stopPlayback();
+        customPlayback.destroy?.();
+    }
     customPlayerHost.replaceChildren();
     const customExample = {
         puzzle: puzzleSelect.value,
@@ -237,8 +322,17 @@ function showCustomPlayer() {
         moves,
         setup: setupInput.value.trim(),
     };
-    customPlayback = createPlayerCard(customExample);
+    customPlayback = customExample.puzzle === "pyraminx"
+        ? createPyraminxPlayerCard(customExample)
+        : createPlayerCard(customExample);
     customPlayerHost.appendChild(customPlayback.card);
+    try { customPlayback.mount?.(); }
+    catch (error) {
+        customPlayerHost.replaceChildren();
+        customPlayback = null;
+        message.textContent = `3Dビューアを起動できませんでした: ${error.message}`;
+        return;
+    }
     message.textContent = `${moves.length}手の再生を用意しました。パズルをドラッグして見やすい向きにできます。`;
 }
 
@@ -277,7 +371,7 @@ function renderAiDiscovery(snapshot) {
     aiDiscoveryControls.start.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
     aiDiscoveryControls.previous.disabled = !snapshot.available || snapshot.isBusy || snapshot.position === 0;
     aiDiscoveryControls.next.disabled = !snapshot.available || snapshot.isBusy || snapshot.position >= snapshot.totalMoves;
-    aiDiscoveryControls.play.disabled = !snapshot.available || snapshot.isBusy || snapshot.totalMoves === 0;
+    aiDiscoveryControls.play.disabled = !snapshot.available || (snapshot.isBusy && !snapshot.isPlaying) || snapshot.totalMoves === 0;
     aiDiscoveryControls.play.textContent = snapshot.isPlaying ? "停止" : "再生";
     aiDiscoveryTokens.replaceChildren(...snapshot.algorithm.split(" ").filter(Boolean).map((move, index) => {
         const token = document.createElement("button");
@@ -323,15 +417,15 @@ function showAiDiscovery(discovery) {
     aiDiscoveryFallback.hidden = true;
     aiDiscoveryStage.replaceChildren(aiDiscoveryFallback);
     try {
-        aiDiscoveryViewer = createPuzzleViewer(aiDiscoveryStage, {
+        const createViewer = discovery.puzzle === "pyraminx" ? createPyraminxViewer : createPuzzleViewer;
+        aiDiscoveryStage.setAttribute("aria-label", `AIが発見した手順を再生する${displayPuzzleName(discovery.puzzle)}の3D表示。ドラッグで視点を回せます。`);
+        aiDiscoveryViewer = createViewer(aiDiscoveryStage, {
             puzzleId: discovery.puzzle,
             setupAlgorithm: discovery.setup.join(" "),
             algorithm: discovery.moves.join(" "),
-            theme: {
-                ...DEFAULT_THEME,
-                canvasBackground: "#f4f8fa",
-                cubieColor: "#77766f",
-            },
+            theme: discovery.puzzle === "pyraminx"
+                ? { ...DEFAULT_PYRAMINX_THEME, canvasBackground: "#f4f8fa" }
+                : { ...DEFAULT_THEME, canvasBackground: "#f4f8fa", cubieColor: "#77766f" },
             themeId: "ai-discovery",
             onChange: renderAiDiscovery,
         });
