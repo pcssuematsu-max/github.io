@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "puzzleId": "skewb",
+      "caseId": "S型トリガー",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "U",
+        "oB'",
+        "U'",
+        "oB"
+      ],
+      "algorithm": [
+        "oB'",
+        "U",
+        "oB",
+        "U'"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    },
+    {
+      "puzzleId": "skewb",
+      "caseId": "H型トリガー",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "U'",
+        "oB",
+        "U",
+        "oB'"
+      ],
+      "algorithm": [
+        "oB",
+        "U'",
+        "oB'",
+        "U"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    },
+    {
+      "puzzleId": "skewb",
+      "caseId": "中心3-cycle A",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "oB'",
+        "oR",
+        "oB",
+        "oR'",
+        "U'",
+        "oL",
+        "U",
+        "oL'"
+      ],
+      "algorithm": [
+        "oL",
+        "U'",
+        "oL'",
+        "U",
+        "oR",
+        "oB'",
+        "oR'",
+        "oB"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    },
+    {
+      "puzzleId": "skewb",
+      "caseId": "中心3-cycle B",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "oL",
+        "oB'",
+        "oR",
+        "oB",
+        "oR'",
+        "U'",
+        "oL",
+        "U",
+        "oL"
+      ],
+      "algorithm": [
+        "oL'",
+        "U'",
+        "oL'",
+        "U",
+        "oR",
+        "oB'",
+        "oR'",
+        "oB",
+        "oL'"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    },
+    {
+      "puzzleId": "skewb",
+      "caseId": "コーナー3-cycle",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "U'",
+        "oR",
+        "U",
+        "oL",
+        "U'",
+        "oL",
+        "U",
+        "oB",
+        "oR'",
+        "U",
+        "B",
+        "R"
+      ],
+      "algorithm": [
+        "R'",
+        "B'",
+        "U'",
+        "oR",
+        "oB'",
+        "U'",
+        "oL'",
+        "U",
+        "oL'",
+        "U'",
+        "oR'",
+        "U"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    },
+    {
+      "puzzleId": "skewb",
+      "caseId": "コーナー4-cycle",
+      "notation": "wca-opposite-v1",
+      "setup": [
+        "U'",
+        "oL",
+        "U'",
+        "oL",
+        "U",
+        "oL'",
+        "U",
+        "oL'"
+      ],
+      "algorithm": [
+        "oL",
+        "U'",
+        "oL",
+        "U'",
+        "oL'",
+        "U",
+        "oL'",
+        "U"
+      ],
+      "recognitionFamily": "verified-state-exercise",
+      "focusPieces": [],
+      "source": "portfolio:skewb/cube.py"
+    }
+  ]
+}

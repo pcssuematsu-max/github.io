@@ -1,0 +1,4 @@
+.skewb-stage { background: radial-gradient(circle at 50% 38%, #c4d8de 0%, #afcbd2 58%, #96b8c2 100%); }
+.skewb-settings { grid-template-columns: minmax(0, 190px); }
+.skewb-stage canvas { display: block; }
+@media (max-width: 520px) { .skewb-settings { grid-template-columns: 1fr; } }

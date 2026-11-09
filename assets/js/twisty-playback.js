@@ -1,6 +1,8 @@
 import { DEFAULT_THEME, createPuzzleViewer } from "./puzzle-viewer/cube3-viewer.js?v=20260916-11";
 import { createPyraminxViewer, DEFAULT_PYRAMINX_THEME } from "./puzzle-viewer/pyraminx-viewer.js";
 import { parsePyraminxAlgorithm } from "./puzzle-viewer/pyraminx-state.js";
+import { createSkewbViewer, DEFAULT_SKEWB_THEME } from "./puzzle-viewer/skewb-viewer.js?v=20261109-3";
+import { parseSkewbAlgorithm } from "./puzzle-viewer/skewb-state.js?v=20261109-3";
 
 const examples = [
     {
@@ -45,6 +47,15 @@ const examples = [
         label: "PYRAMINX EXAMPLE",
         title: "ピラミンクスの基本4手",
         description: "自作3Dビューアで R U R' U' を確認できます。",
+        moves: ["R", "U", "R'", "U'"],
+        setup: "",
+    },
+    {
+        id: "skewb-basic",
+        puzzle: "skewb",
+        label: "SKEWB EXAMPLE",
+        title: "スキューブの基本4手",
+        description: "WCA方式の R U R' U' を自作3Dビューアで確認できます。",
         moves: ["R", "U", "R'", "U'"],
         setup: "",
     },
@@ -165,7 +176,7 @@ function createPlayerCard(example) {
     return { card, stopPlayback };
 }
 
-function createPyraminxPlayerCard(example) {
+function createNonCubePlayerCard(example) {
     const card = document.createElement("article");
     card.className = "puzzle-player-card";
     const copy = document.createElement("div");
@@ -178,7 +189,7 @@ function createPyraminxPlayerCard(example) {
     description.textContent = example.description;
     copy.append(label, title, description);
     const stage = document.createElement("div");
-    stage.className = "puzzle-player-stage pyraminx-player-stage";
+    stage.className = `puzzle-player-stage noncube-player-stage${example.puzzle === "skewb" ? " skewb-player-stage" : ""}`;
     const controls = document.createElement("div");
     controls.className = "puzzle-player-controls";
     const progress = document.createElement("div");
@@ -209,11 +220,12 @@ function createPyraminxPlayerCard(example) {
     return {
         card,
         mount() {
-            viewer = createPyraminxViewer(stage, {
-                puzzleId: "pyraminx",
+            const skewb = example.puzzle === "skewb";
+            viewer = (skewb ? createSkewbViewer : createPyraminxViewer)(stage, {
+                puzzleId: example.puzzle,
                 setupAlgorithm: example.setup,
                 algorithm: example.moves.join(" "),
-                theme: DEFAULT_PYRAMINX_THEME,
+                theme: skewb ? DEFAULT_SKEWB_THEME : DEFAULT_PYRAMINX_THEME,
                 onChange(snapshot) {
                     status.textContent = `${snapshot.position} / ${snapshot.totalMoves} 手`;
                     moveNodes.forEach((node, index) => node.classList.toggle("is-active", index === snapshot.position - 1));
@@ -298,10 +310,11 @@ function showCustomPlayer() {
         return;
     }
 
-    if (puzzleSelect.value === "pyraminx") {
+    if (puzzleSelect.value === "pyraminx" || puzzleSelect.value === "skewb") {
         try {
-            parsePyraminxAlgorithm(moves.join(" "));
-            parsePyraminxAlgorithm(setupInput.value.trim());
+            const parse = puzzleSelect.value === "skewb" ? parseSkewbAlgorithm : parsePyraminxAlgorithm;
+            parse(moves.join(" "));
+            parse(setupInput.value.trim());
         } catch (error) {
             message.textContent = error.message;
             return;
@@ -322,8 +335,8 @@ function showCustomPlayer() {
         moves,
         setup: setupInput.value.trim(),
     };
-    customPlayback = customExample.puzzle === "pyraminx"
-        ? createPyraminxPlayerCard(customExample)
+    customPlayback = ["pyraminx", "skewb"].includes(customExample.puzzle)
+        ? createNonCubePlayerCard(customExample)
         : createPlayerCard(customExample);
     customPlayerHost.appendChild(customPlayback.card);
     try { customPlayback.mount?.(); }
@@ -417,13 +430,16 @@ function showAiDiscovery(discovery) {
     aiDiscoveryFallback.hidden = true;
     aiDiscoveryStage.replaceChildren(aiDiscoveryFallback);
     try {
-        const createViewer = discovery.puzzle === "pyraminx" ? createPyraminxViewer : createPuzzleViewer;
+        const createViewer = discovery.puzzle === "skewb" ? createSkewbViewer
+            : discovery.puzzle === "pyraminx" ? createPyraminxViewer : createPuzzleViewer;
         aiDiscoveryStage.setAttribute("aria-label", `AIが発見した手順を再生する${displayPuzzleName(discovery.puzzle)}の3D表示。ドラッグで視点を回せます。`);
         aiDiscoveryViewer = createViewer(aiDiscoveryStage, {
             puzzleId: discovery.puzzle,
             setupAlgorithm: discovery.setup.join(" "),
             algorithm: discovery.moves.join(" "),
-            theme: discovery.puzzle === "pyraminx"
+            theme: discovery.puzzle === "skewb"
+                ? { ...DEFAULT_SKEWB_THEME, canvasBackground: "#f4f8fa" }
+                : discovery.puzzle === "pyraminx"
                 ? { ...DEFAULT_PYRAMINX_THEME, canvasBackground: "#f4f8fa" }
                 : { ...DEFAULT_THEME, canvasBackground: "#f4f8fa", cubieColor: "#77766f" },
             themeId: "ai-discovery",
@@ -630,7 +646,14 @@ async function loadDiscoveries() {
         if (!response.ok) throw new Error("discovery feed unavailable");
         const payload = await response.json();
         const allDiscoveries = Array.isArray(payload.discoveries)
-            ? payload.discoveries.filter(isDiscovery)
+            ? payload.discoveries.filter(isDiscovery).flatMap((discovery) => {
+                if (discovery.puzzle !== "skewb") return [discovery];
+                try {
+                    return [{ ...discovery,
+                        moves: parseSkewbAlgorithm(discovery.moves).map((move) => move.token),
+                        setup: parseSkewbAlgorithm(discovery.setup).map((move) => move.token) }];
+                } catch { return []; }
+            })
             : [];
         const discoveries = allDiscoveries.filter(isDisplayableDiscovery);
         const puzzleGroups = sortedPuzzles(groupDiscoveriesByPuzzle(discoveries));
@@ -692,6 +715,8 @@ async function loadDiscoveries() {
         discoveryPuzzleSelect.replaceChildren(...puzzleGroups.map(([puzzle, items]) =>
             createOption(puzzle, `${displayPuzzleName(puzzle)} — ${items.length}件`)
         ));
+        const requestedPuzzle = new URLSearchParams(window.location.search).get("puzzle");
+        if (discoveriesByPuzzle.has(requestedPuzzle)) discoveryPuzzleSelect.value = requestedPuzzle;
         discoveryPuzzleSelect.addEventListener("change", populateEffectTypes);
         discoveryEffectTypeSelect.addEventListener("change", populateEffectNames);
         discoveryEffectNameSelect.addEventListener("change", renderSelectedEffect);

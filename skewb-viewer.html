@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script defer src="assets/js/analytics.js?v=20260926-1"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="自作Skewb 3Dビューア。コーナー回転と手順を一手ずつ確認できます。">
+    <title>Skewb 3Dビューア | ばかとえーあいのすたじお</title>
+    <link rel="canonical" href="https://pcssuematsu-max.github.io/github.io/skewb-viewer.html">
+    <link rel="icon" href="assets/images/site/Logo.png">
+    <link rel="stylesheet" href="assets/css/home.css?v=20261005-1">
+    <link rel="stylesheet" href="assets/css/project.css?v=20260901-1">
+    <link rel="stylesheet" href="assets/css/puzzle-viewer.css?v=20260916-1">
+    <link rel="stylesheet" href="assets/css/skewb-viewer.css?v=20261109-1">
+    <script type="importmap">{"imports":{"three":"./assets/vendor/three/r162/three.module.js","three/addons/":"./assets/vendor/three/r162/addons/"}}</script>
+</head>
+<body class="home-page story-page theme-ai puzzle-viewer-page">
+    <header class="site-header">
+        <a href="index.html" class="site-brand" aria-label="トップページへ"><span class="brand-emoji" aria-hidden="true">🤪<span>×</span>🤖</span><span class="brand-name">ばかとえーあいのすたじお</span></a>
+        <nav class="site-nav" aria-label="メインメニュー"><a href="index.html#about">この場所</a><a href="index.html#projects">制作物</a><a href="index.html#guides">キューブ</a><a href="about.html">この人</a></nav>
+    </header>
+    <main>
+        <section class="puzzle-viewer-hero" aria-labelledby="page-title"><div class="page-width puzzle-viewer-hero-inner">
+            <p class="story-kicker">EXPERIMENT / 3D SKEWB VIEWER</p>
+            <h1 id="page-title">Skewbを、<br>立体で追う。</h1>
+            <p>パーツの形と回転を自分の描画で組み立てたビューアです。手順を入力して、一手ずつ確かめられます。</p>
+        </div></section>
+        <section class="puzzle-viewer-main" aria-labelledby="demo-title"><div class="page-width">
+            <div class="puzzle-viewer-heading"><div><p class="story-section-label">SKEWB / FIRST MODEL</p><h2 id="demo-title">頂点の回転を確認する。</h2></div><p>白を上、緑を手前、赤を右に配置しています。ドラッグで視点を変えられます。</p></div>
+            <div class="cube3-shell">
+                <div class="cube3-toolbar"><p class="cube3-toolbar-title">SKEWB</p><div class="cube3-toolbar-actions"><button id="skewb-reset-view" class="cube3-button" type="button">視点を戻す</button><button id="skewb-copy-link" class="cube3-button" type="button">この状態をコピー</button></div></div>
+                <div class="cube3-layout">
+                    <div id="skewb-stage" class="cube3-stage skewb-stage" aria-label="Skewbの3D表示。ドラッグで視点を変えられます。"><p id="skewb-fallback" class="cube3-fallback" hidden>このブラウザでは3D表示に必要なWebGLを利用できません。対応ブラウザで開いてください。</p></div>
+                    <div class="cube3-control-panel">
+                        <form id="skewb-form" class="cube3-form">
+                            <label for="skewb-algorithm">手順</label>
+                            <div class="cube3-form-row"><input id="skewb-algorithm" value="R U R' U'" autocomplete="off" spellcheck="false" aria-describedby="skewb-notation-note skewb-error"><button class="cube3-button cube3-submit" type="submit">表示する</button></div>
+                            <p id="skewb-notation-note" class="cube3-notation-note">R / U / L / B はWCA方式。oR / oU / oL / oB はそれぞれ対角線反対側の頂点です（o = opposite）。' は逆回転。旧3面表記の手順も読み込めます。</p>
+                            <p id="skewb-error" class="cube3-error" role="alert"></p>
+                        </form>
+                        <p id="skewb-status" class="cube3-status" aria-live="polite"></p>
+                        <div class="cube3-playback-heading"><p class="cube3-sequence-kicker">SOLUTION</p><p id="skewb-remaining" class="cube3-remaining"></p></div>
+                        <div id="skewb-tokens" class="cube3-tokens" aria-label="手順の現在位置"></div>
+                        <div class="cube3-transport" aria-label="再生操作"><button id="skewb-start" class="cube3-button" type="button">最初へ</button><button id="skewb-previous" class="cube3-button" type="button">戻る</button><button id="skewb-play" class="cube3-button cube3-play" type="button">再生</button><button id="skewb-next" class="cube3-button" type="button">進む</button></div>
+                        <div class="cube3-settings skewb-settings"><label><span class="cube3-control-label">速度</span><select id="skewb-speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label></div>
+                        <div class="cube3-quick"><p>ボタンを押すと現在位置の後ろに一手追加して回します。</p><div id="skewb-quick-moves" class="cube3-quick-moves" aria-label="16種類の回転"><button class="cube3-quick-button" type="button" data-move="R">R</button><button class="cube3-quick-button" type="button" data-move="U">U</button><button class="cube3-quick-button" type="button" data-move="L">L</button><button class="cube3-quick-button" type="button" data-move="B">B</button><button class="cube3-quick-button" type="button" data-move="R'">R'</button><button class="cube3-quick-button" type="button" data-move="U'">U'</button><button class="cube3-quick-button" type="button" data-move="L'">L'</button><button class="cube3-quick-button" type="button" data-move="B'">B'</button><button class="cube3-quick-button" type="button" data-move="oR">oR</button><button class="cube3-quick-button" type="button" data-move="oU">oU</button><button class="cube3-quick-button" type="button" data-move="oL">oL</button><button class="cube3-quick-button" type="button" data-move="oB">oB</button><button class="cube3-quick-button" type="button" data-move="oR'">oR'</button><button class="cube3-quick-button" type="button" data-move="oU'">oU'</button><button class="cube3-quick-button" type="button" data-move="oL'">oL'</button><button class="cube3-quick-button" type="button" data-move="oB'">oB'</button></div></div>
+                    </div>
+                </div>
+            </div>
+            <p id="skewb-share-status" class="cube3-share-status" role="status" aria-live="polite"></p>
+            <p class="puzzle-viewer-note">コーナーの外周角は控えめに、センターに接する内側の角は大きめに丸めています。頂点の対応は R=DRB / oR=UFL、U=ULB / oU=DFR、L=DFL / oL=UBR、B=DBL / oB=URF です。</p>
+        </div></section>
+    </main>
+    <footer class="story-footer-nav"><div class="page-width story-footer-nav-inner"><p>EXPERIMENT / 3D PUZZLE VIEWER</p><div class="puzzle-viewer-footer-links"><a class="button story-action" href="3d-puzzle-viewer.html">キューブのビューアへ</a><a class="button story-action" href="pyraminx-viewer.html">Pyraminxのビューアへ</a></div></div></footer>
+    <script type="module" src="assets/js/puzzle-viewer/skewb-demo.js?v=20261109-3"></script>
+</body>
+</html>

@@ -1,0 +1,917 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Sune",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U'",
+        "B'",
+        "U'",
+        "B",
+        "U'",
+        "B'"
+      ],
+      "algorithm": [
+        "B",
+        "U",
+        "B'",
+        "U",
+        "B",
+        "U",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Antisune",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U",
+        "L'",
+        "U",
+        "L",
+        "U",
+        "L'"
+      ],
+      "algorithm": [
+        "L",
+        "U'",
+        "L'",
+        "U'",
+        "L",
+        "U'",
+        "L'"
+      ],
+      "recognitionFamily": "Down Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "2-flip",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U'",
+        "B'",
+        "U",
+        "B'",
+        "R",
+        "B",
+        "R'"
+      ],
+      "algorithm": [
+        "R",
+        "B'",
+        "R'",
+        "B",
+        "U'",
+        "B",
+        "U",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "R' unsexy R",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L'",
+        "B'",
+        "U'",
+        "B",
+        "U",
+        "L"
+      ],
+      "algorithm": [
+        "L'",
+        "U'",
+        "B'",
+        "U",
+        "B",
+        "L"
+      ],
+      "recognitionFamily": "Down Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "L unsexy L'",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R",
+        "B",
+        "U",
+        "B'",
+        "U'",
+        "R'"
+      ],
+      "algorithm": [
+        "R",
+        "U",
+        "B",
+        "U'",
+        "B'",
+        "R'"
+      ],
+      "recognitionFamily": "Down Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #1",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "L'",
+        "B'",
+        "L",
+        "U'",
+        "B",
+        "L'",
+        "B'",
+        "L",
+        "U'",
+        "B",
+        "L'",
+        "B'",
+        "L"
+      ],
+      "algorithm": [
+        "L'",
+        "B",
+        "L",
+        "B'",
+        "U",
+        "L'",
+        "B",
+        "L",
+        "B'",
+        "U",
+        "L'",
+        "B",
+        "L",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #2",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "R",
+        "B",
+        "R'",
+        "U'",
+        "B'",
+        "R",
+        "B",
+        "R'"
+      ],
+      "algorithm": [
+        "R",
+        "B'",
+        "R'",
+        "B",
+        "U",
+        "R",
+        "B'",
+        "R'",
+        "B"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #3",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "L'",
+        "B'",
+        "L",
+        "U",
+        "B",
+        "L'",
+        "B'",
+        "L"
+      ],
+      "algorithm": [
+        "L'",
+        "B",
+        "L",
+        "B'",
+        "U'",
+        "L'",
+        "B",
+        "L",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #4",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U",
+        "B'",
+        "R",
+        "B'",
+        "R'",
+        "B",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "B'",
+        "R",
+        "B",
+        "R'",
+        "B",
+        "U'",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #5",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "U",
+        "B",
+        "L",
+        "U",
+        "L'",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "L",
+        "U'",
+        "L'",
+        "B'",
+        "U'",
+        "B"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Down Edge Flipped #6",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U'",
+        "B'",
+        "R'",
+        "U'",
+        "R",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "R'",
+        "U",
+        "R",
+        "B",
+        "U",
+        "B'"
+      ],
+      "recognitionFamily": "Down Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #1",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "U",
+        "B",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "B'",
+        "U'",
+        "B"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #2",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U'",
+        "B'",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "B",
+        "U",
+        "B'"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #3",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U'",
+        "L'",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "L",
+        "U",
+        "L'"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #4",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R",
+        "B'",
+        "R'",
+        "B"
+      ],
+      "algorithm": [
+        "B'",
+        "R",
+        "B",
+        "R'"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #5",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "U'",
+        "B'",
+        "L'",
+        "B'",
+        "L"
+      ],
+      "algorithm": [
+        "L'",
+        "B",
+        "L",
+        "B",
+        "U",
+        "B"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #6",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U",
+        "B",
+        "R",
+        "B",
+        "R'"
+      ],
+      "algorithm": [
+        "R",
+        "B'",
+        "R'",
+        "B'",
+        "U'",
+        "B'"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #7",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U",
+        "L'"
+      ],
+      "algorithm": [
+        "L",
+        "U'",
+        "L'"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Solved #8",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R'",
+        "U'",
+        "R"
+      ],
+      "algorithm": [
+        "R'",
+        "U",
+        "R"
+      ],
+      "recognitionFamily": "Upper Edge Solved",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #1",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "L'",
+        "B'",
+        "L",
+        "U'",
+        "L",
+        "U'",
+        "L'"
+      ],
+      "algorithm": [
+        "L",
+        "U",
+        "L'",
+        "U",
+        "L'",
+        "B",
+        "L",
+        "B'"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #2",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "R",
+        "B",
+        "R'",
+        "U",
+        "R'",
+        "U",
+        "R"
+      ],
+      "algorithm": [
+        "R'",
+        "U'",
+        "R",
+        "U'",
+        "R",
+        "B'",
+        "R'",
+        "B"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #3",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U'",
+        "L'",
+        "U",
+        "B'",
+        "U'",
+        "B",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "B'",
+        "U",
+        "B",
+        "U'",
+        "L",
+        "U",
+        "L'"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #4",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R'",
+        "U",
+        "R",
+        "U'",
+        "B",
+        "U",
+        "B'",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "B",
+        "U'",
+        "B'",
+        "U",
+        "R'",
+        "U'",
+        "R"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #5",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "U'",
+        "B",
+        "U'",
+        "L",
+        "U'",
+        "L'"
+      ],
+      "algorithm": [
+        "L",
+        "U",
+        "L'",
+        "U",
+        "B'",
+        "U",
+        "B"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #6",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U",
+        "B'",
+        "U",
+        "R'",
+        "U",
+        "R"
+      ],
+      "algorithm": [
+        "R'",
+        "U'",
+        "R",
+        "U'",
+        "B",
+        "U'",
+        "B'"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #7",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "U'",
+        "B",
+        "U'",
+        "B",
+        "L'",
+        "B'",
+        "L",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "L'",
+        "B",
+        "L",
+        "B'",
+        "U",
+        "B'",
+        "U",
+        "B"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Upper Edge Flipped #8",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "U",
+        "B'",
+        "U",
+        "B'",
+        "R",
+        "B",
+        "R'",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "R",
+        "B'",
+        "R'",
+        "B",
+        "U'",
+        "B",
+        "U'",
+        "B'"
+      ],
+      "recognitionFamily": "Upper Edge Flipped",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #1",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B",
+        "L'",
+        "B'",
+        "L'",
+        "U",
+        "L'",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "L",
+        "U'",
+        "L",
+        "B",
+        "L",
+        "B'"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #2",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "B'",
+        "R",
+        "B",
+        "R",
+        "U'",
+        "R",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "R'",
+        "U",
+        "R'",
+        "B'",
+        "R'",
+        "B"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #3",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U'",
+        "L'",
+        "U'",
+        "B'",
+        "U",
+        "B",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "B'",
+        "U'",
+        "B",
+        "U",
+        "L",
+        "U",
+        "L'"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #4",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R'",
+        "U",
+        "R",
+        "U",
+        "B",
+        "U'",
+        "B'",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "B",
+        "U",
+        "B'",
+        "U'",
+        "R'",
+        "U'",
+        "R"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #5",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U'",
+        "L'",
+        "U",
+        "L",
+        "U",
+        "L'",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "L",
+        "U'",
+        "L'",
+        "U'",
+        "L",
+        "U",
+        "L'"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #6",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R'",
+        "U",
+        "R",
+        "U'",
+        "R'",
+        "U'",
+        "R",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "R'",
+        "U",
+        "R",
+        "U",
+        "R'",
+        "U'",
+        "R"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #7",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "L",
+        "U",
+        "L'",
+        "B'",
+        "U'",
+        "B",
+        "U"
+      ],
+      "algorithm": [
+        "U'",
+        "B'",
+        "U",
+        "B",
+        "L",
+        "U'",
+        "L'"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    },
+    {
+      "puzzleId": "pyraminx",
+      "caseId": "Nothing Placed #8",
+      "notation": "pyraminx-layer-v1",
+      "setup": [
+        "R'",
+        "U'",
+        "R",
+        "B",
+        "U",
+        "B'",
+        "U'"
+      ],
+      "algorithm": [
+        "U",
+        "B",
+        "U'",
+        "B'",
+        "R'",
+        "U",
+        "R"
+      ],
+      "recognitionFamily": "Nothing Placed",
+      "focusPieces": [],
+      "source": "https://cubingapp.com/algorithms/Pyraminx-L4E"
+    }
+  ]
+}

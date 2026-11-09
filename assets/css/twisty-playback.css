@@ -31,10 +31,12 @@
 .algorithm-message { min-height: 1.5em; margin: 13px 0 0; color: #bed3e0; font-size: .9rem; }
 .custom-player { max-width: 720px; margin-top: 18px; }
 .custom-player .puzzle-player-card { border-color: rgba(255,255,255,.18); }
+.custom-player .puzzle-player-copy h2 { color: #172330; }
 .custom-player .puzzle-player-stage { min-height: 360px; }
 .custom-player .puzzle-player-stage twisty-player { height: 360px; }
-.custom-player .pyraminx-player-stage { display: block; height: 360px; overflow: hidden; }
-.custom-player .pyraminx-player-stage canvas { display: block; width: 100%; height: 100%; }
+.custom-player .noncube-player-stage { display: block; height: 360px; overflow: hidden; }
+.custom-player .noncube-player-stage canvas { display: block; width: 100%; height: 100%; }
+.custom-player .skewb-player-stage { background: radial-gradient(circle at 50% 38%, #c4d8de, #96b8c2); }
 .playback-discoveries { padding: 86px 0 96px; background: #f8fbfc; }
 .playback-discoveries-heading { display: grid; grid-template-columns: minmax(220px,.8fr) minmax(0,1.2fr); column-gap: 70px; align-items: end; }
 .playback-discoveries-heading .story-section-label { grid-column: 1; }

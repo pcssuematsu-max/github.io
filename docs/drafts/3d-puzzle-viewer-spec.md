@@ -3,8 +3,8 @@
 ## 仕様の原本と読み方
 
 - 原本: [3Dパズルビューア｜作戦会議・設計メモ](https://docs.google.com/document/d/1uf0NTXL1KhB2TbpMo8Dp77016r_kOEDHWyeaPowMTR8/edit)
-- ローカル最終確認日: 2026-11-07
-- 原本の最終確認リビジョン: `AHj4eMSjXXwYqzjIgw1W02zWWaENQizKMfTo6P0SXcRSGFDxbK_FpFfBhWsyY7HyZcZPzLesd9E50i0NiujP6YDGDNTW95FIDcrmjLSJ4Ys`
+- ローカル最終確認日: 2026-11-09
+- 原本の最終確認リビジョン: `AHj4eMQvovC_SaDOMu12gb2ZDd60HPKHhHJ08SHTlgwS1eI-GSDTuXR1xzVxO9Mytmt423uRRcSo0L5zzvykCm3nja2hm6yYT1enPkMlGEA`
 
 このファイルは、作業開始時に必ず読むためのローカルな設計窓口です。Google Docs が仕様の正本であり、要件に影響する作業を始める際は原本の最新版を確認して、このファイルの「確認情報」と要点を更新します。
 
@@ -64,7 +64,7 @@ Phase 1の実装は3×3用の定義をひとつ用意する。ただし状態エ
 | 2. Phase 1試作 | 3×3の表示、視点、1手のアニメーションを通す | 完了: [`3d-puzzle-viewer.html`](../../3d-puzzle-viewer.html) に状態と描画を分離した最小デモを実装 |
 | 3. Phase 1完成 | 手順入力・再生UI・色設定・モバイル操作を仕上げる | portfolio / 教材で埋め込み可能な初版 |
 | 4. Phase 2 | 2×2〜7×7のNxNへ広げる | 列ごとの幅設定、wide moveを含む定義 |
-| 5. Phase 3 | 異形パズルで一般性を検証する | Pyraminx / Skewbを最初の検証対象にし、120°回転を扱う |
+| 5. Phase 3 | 異形パズルで一般性を検証する | Pyraminxに続いてSkewbの単体ビューアを実装。どちらも120°回転を扱う |
 | 6. 共有 | URLで同じ表示状態を再現する | puzzle、状態、手順、再生位置、視点、色設定のシリアライズ |
 
 ## 次に決めること（段階1）
@@ -92,3 +92,4 @@ UIワイヤーと3×3の生成規約は、[Phase 1 UIと3×3定義](3d-puzzle-vi
 - `4x4Beginner.html`では、記号・センター・エッジペアリングの各章に独自ビューアの3D見本を置く。本文固有の小文字`r` / `u`（内層1層）は、そのページ境界でビューアの公開記法`2R` / `2U`へ変換し、本文の意味を保つ。初期配置まで平面図と完全に一致させる専用教材データは、各ケースを移植する段階で改めて作る。
 - 背景ドラッグによる視点回転は有効に保つ。ステッカー上のスワイプ回転だけは、面・ドラッグ方向・回転対象層の対応を再設計するまで無効化する。FRUコーナーのF面を上へ動かしたときにR面が回るような、物理的に直感的な層選択を再開条件とする。
 - 公式対象は2×2〜7×7、Megaminx、Pyraminx、Master Pyraminx、Skewb、FTO、CTO。GigaminxとSquare-1は後から検討する。
+- Skewbの回転記号はWCA規則12hの`R/U/L/B`（白上・緑手前でそれぞれ`DRB/ULB/DFL/DBL`の頂点）を優先する。Portfolioで扱う対角線反対側の頂点は、面名と混同しないよう`oR/oU/oL/oB`（`UFL/DFR/UBR/URF`、`o`はopposite）で表す。回転方向は各頂点を外から見た時計回りで、`oR`は`R'`と同義ではない。逆回転と合わせて16手を維持する。旧3面表記は読み込み時に変換し、表示と新規保存ではこの8頂点名を使う。AI手順とアプリの手順練習・スクランブル表示は同じ状態・記号解釈でSkewbビューアへ渡す。
