@@ -561,6 +561,11 @@ html {
     box-shadow: 9px 9px 0 var(--yellow);
 }
 
+.project-cubelog {
+    grid-column: span 7;
+    box-shadow: 9px 9px 0 var(--purple);
+}
+
 .project-wide {
     box-shadow: 9px 9px 0 var(--orange);
 }
@@ -677,6 +682,52 @@ html {
     width: 190px;
     filter: drop-shadow(12px 18px 0 rgba(32, 33, 42, 0.18));
     transform: rotate(-4deg);
+}
+
+.cubelog-visual {
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 18px;
+    background:
+        radial-gradient(circle at 15% 16%, rgba(188, 116, 255, 0.36), transparent 25%),
+        linear-gradient(135deg, #101015 20%, #282135 100%);
+}
+
+.cubelog-visual::before {
+    position: absolute;
+    inset: 12px;
+    z-index: 1;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    pointer-events: none;
+}
+
+.cubelog-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    border: 3px solid #f5f2fb;
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.55);
+}
+
+.cubelog-visual-label {
+    position: absolute;
+    bottom: 19px;
+    left: 23px;
+    z-index: 2;
+    padding: 7px 9px;
+    color: #251a36;
+    background: #dcb7ff;
+    border: 2px solid var(--ink);
+    font-family: var(--font-label);
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.cubelog-visual .project-number {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .game-visual {

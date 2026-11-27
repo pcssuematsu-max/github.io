@@ -7,6 +7,7 @@
 ## 主な内容
 
 - **キューブ王国** — 3×3・4×4の初心者向け手順、回転記号、F2L・OLL・PLLの解説
+- **CubeLog** — タイム計測・練習記録・分析・大会モードをひとつにまとめたキューブ活動ログ（[紹介ページ](https://pcssuematsu-max.github.io/github.io/cubelog.html) / [アプリを開く](https://cube-practice-log-2026.huedfern2.chatgpt.site/)）
 - **パズルとAI** — 自作3Dパズルビューア、探索アルゴリズムの実験、カードゲーム
 - **数学と旅の記録** — キューブを題材にした数学記事と、各地を訪ねた旅の記録
 
