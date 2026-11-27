@@ -69,9 +69,15 @@
     letter-spacing: -0.065em;
 }
 
-.cubelog-hero h1 em {
+.cubelog-hero-accent {
+    display: inline-block;
     color: #d3a8ff;
-    font-style: normal;
+    font-family: var(--font-display) !important;
+    font-size: 1.12em;
+    font-weight: 800;
+    letter-spacing: -0.075em;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 .cubelog-hero-copy > p:not(.cubelog-kicker) {
@@ -136,8 +142,10 @@
     background: rgba(255, 255, 255, 0.09);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 99px;
-    font-size: 0.66rem;
+    font-family: var(--font-body) !important;
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .cubelog-hero-shot {
